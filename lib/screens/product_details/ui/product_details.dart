@@ -39,8 +39,9 @@ class ProductDetailsScreen extends StatelessWidget {
               ),
             ),
           ),
-          bottomNavigationBar: Padding(
-            padding: const EdgeInsets.all(10.0),
+          bottomNavigationBar: Container(
+            color: Colors.grey[200],
+            padding: EdgeInsets.all(10.0),
             child: Row(
               children: [
                 CustomCounter(
