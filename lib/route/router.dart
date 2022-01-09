@@ -4,13 +4,13 @@ import 'package:udemy_flutter/screens/home/model/home_model.dart';
 import 'package:udemy_flutter/screens/home/ui/home.dart';
 import 'package:udemy_flutter/screens/login/ui/login.dart';
 import 'package:udemy_flutter/screens/my_bag/ui/my_bag_screen.dart';
-import 'package:udemy_flutter/screens/my_orders/ui/my_orders.dart';
+import 'package:udemy_flutter/screens/end_orders/ui/my_orders.dart';
 import 'package:udemy_flutter/screens/notifications/ui/notifications_screen.dart';
 import 'package:udemy_flutter/screens/on_boarding/ui/on_boarding.dart';
 import 'package:udemy_flutter/screens/payment/ui/payment.dart';
 import 'package:udemy_flutter/screens/product_details/ui/product_details.dart';
 import 'package:udemy_flutter/screens/profile/ui/profile.dart';
-import 'package:udemy_flutter/screens/register/register.dart';
+import 'package:udemy_flutter/screens/register/ui/register.dart';
 import 'package:udemy_flutter/screens/search/ui/search.dart';
 import 'route_constants.dart';
 

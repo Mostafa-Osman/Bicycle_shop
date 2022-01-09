@@ -17,7 +17,7 @@ import 'package:udemy_flutter/my_bloc_observer.dart';
 import 'package:udemy_flutter/screens/favourites/favourite_cubit/favourite_cubit.dart';
 import 'package:udemy_flutter/screens/home/home_cubit/home_cubit.dart';
 import 'package:udemy_flutter/screens/my_bag/bag_cubit/bag_cubit.dart';
-import 'package:udemy_flutter/screens/my_orders/my_orders_cubit/my_orders_cubit.dart';
+import 'package:udemy_flutter/screens/end_orders/my_orders_cubit/my_orders_cubit.dart';
 import 'package:udemy_flutter/screens/notifications/notification_cubit/notification_cubit.dart';
 import 'package:udemy_flutter/screens/profile/cubit/profile_cubit.dart';
 import 'package:udemy_flutter/screens/search/cubit/cubit.dart';

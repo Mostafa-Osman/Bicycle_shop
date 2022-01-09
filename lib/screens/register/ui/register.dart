@@ -9,8 +9,8 @@ import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/components/custom_text_from_field.dart';
 import 'package:udemy_flutter/shared/components/navigate.dart';
 
-import 'cubit/recubit.dart';
-import 'cubit/restates.dart';
+import '../cubit/recubit.dart';
+import '../cubit/restates.dart';
 
 class RegisterScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();

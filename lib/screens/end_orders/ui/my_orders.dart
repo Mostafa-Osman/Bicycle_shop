@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:udemy_flutter/screens/my_orders/my_orders_cubit/my_orders_cubit.dart';
-import 'package:udemy_flutter/screens/my_orders/my_orders_cubit/states.dart';
+import 'package:udemy_flutter/screens/end_orders/my_orders_cubit/my_orders_cubit.dart';
+import 'package:udemy_flutter/screens/end_orders/my_orders_cubit/states.dart';
 import 'package:udemy_flutter/shared/components/component.dart';
 import 'package:udemy_flutter/shared/components/custom_divider.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';

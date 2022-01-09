@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:udemy_flutter/screens/my_orders/model/my_orders.dart';
-import 'package:udemy_flutter/screens/my_orders/my_orders_cubit/states.dart';
+import 'package:udemy_flutter/screens/end_orders/model/my_orders.dart';
+import 'package:udemy_flutter/screens/end_orders/my_orders_cubit/states.dart';
 import 'package:udemy_flutter/shared/components/constants.dart';
 import 'package:udemy_flutter/shared/network/end_points.dart';
 import 'package:udemy_flutter/shared/network/remote/dio_helper.dart';
