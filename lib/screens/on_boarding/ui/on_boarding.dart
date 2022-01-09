@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
 import 'package:udemy_flutter/screens/on_boarding/on_boarding_cubit/cubit.dart';
 import 'package:udemy_flutter/screens/on_boarding/on_boarding_cubit/states.dart';
 import 'package:udemy_flutter/shared/components/component.dart';
+import 'package:udemy_flutter/shared/components/custom_text.dart';
+import 'package:udemy_flutter/shared/components/navigate.dart';
 
 class OnBoardingScreen extends StatelessWidget {
   final boardingController = PageController();
@@ -40,19 +43,15 @@ class OnBoardingScreen extends StatelessWidget {
                           ? cubit.isLast = true
                           : cubit.isLast = false;
                     },
-                  )
-                  ),
+                  )),
                   SizedBox(
                     height: 15,
                   ),
-                  defaultSmoothPageIndicator(
-                      count: cubit.model.length,
-                      controller: boardingController),
-                  // SmoothPageIndicator(
-                  //   count: model.length,
-                  //   controller: boardingController,
-                  //   effect: WormEffect(activeDotColor: Colors.purpleAccent),
-                  // ),
+                  SmoothPageIndicator(
+                    count: cubit.model.length,
+                    controller: boardingController,
+                    effect: WormEffect(activeDotColor: Colors.purpleAccent),
+                  ),
                   SizedBox(
                     height: 10,
                   ),
@@ -81,8 +80,8 @@ Widget buildBoardingItem(OnBoardingModel model) => Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Image(image: AssetImage(model.image)),
-        defaultText(text: model.title, textColor: Colors.black),
+        CustomText(text: model.title, textColor: Colors.black),
         SizedBox(height: 20),
-        defaultText(text: model.body, textColor: Colors.black),
+        CustomText(text: model.body, textColor: Colors.black),
       ],
     );

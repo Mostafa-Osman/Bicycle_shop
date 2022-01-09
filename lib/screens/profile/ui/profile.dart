@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/screens/profile/cubit/profile_cubit.dart';
 import 'package:udemy_flutter/screens/profile/cubit/states.dart';
+import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -91,89 +92,6 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
           ),
-          //    SingleChildScrollView(
-          //   child: Padding(
-          //     padding: const EdgeInsets.all(20.0),
-          //     child: Form(
-          //       key: formKey,
-          //       child: Column(
-          //         children: [
-          //           if (state is UpdateProfileLoadingState)
-          //             LinearProgressIndicator(),
-          //           SizedBox(
-          //             height: 20.0,
-          //           ),
-          //           TextFormField(
-          //             controller: nameController,
-          //             keyboardType: TextInputType.name,
-          //             validator: (String? value) {
-          //               if (value!.isEmpty) {
-          //                 return 'name must not be empty';
-          //               }
-          //               return null;
-          //             },
-          //             // label: 'Name',
-          //             // prefix: Icons.person,
-          //           ),
-          //           SizedBox(
-          //             height: 20,
-          //           ),
-          //           TextFormField(
-          //             controller: emailController,
-          //             keyboardType: TextInputType.emailAddress,
-          //             validator: (String? value) {
-          //               if (value!.isEmpty) {
-          //                 return 'email must not be empty';
-          //               }
-          //               return null;
-          //             },
-          //
-          //             // label: 'Email Address',
-          //             // prefix: Icons.email,
-          //           ),
-          //           SizedBox(
-          //             height: 20.0,
-          //           ),
-          //           TextFormField(
-          //             controller: phoneController,
-          //             keyboardType: TextInputType.phone,
-          //             validator: (String? value) {
-          //               if (value!.isEmpty) {
-          //                 return 'phone must not be empty';
-          //               }
-          //
-          //               return null;
-          //             },
-          //             // label: 'Phone',
-          //             // prefix: Icons.phone,
-          //           ),
-          //           SizedBox(
-          //             height: 20.0,
-          //           ),
-          //           CustomButton(
-          //               onPressed: () {
-          //                 if (formKey.currentState!.validate()) {
-          //                   ProfileCubit.get(context).updateUserData(
-          //                     name: nameController.text,
-          //                     email: emailController.text,
-          //                     phone: phoneController.text,
-          //                   );
-          //                 }
-          //               },
-          //               text: 'update'),
-          //           SizedBox(
-          //             height: 20.0,
-          //           ),
-          //           // defaultButton(
-          //           //     function: () {
-          //           //       signOut(context);
-          //           //     },
-          //           //     text: 'Logout'),
-          //         ],
-          //       ),
-          //     ),
-          //   ),
-          // ),
           fallback: (context) => Center(
               child: CircularProgressIndicator(
             color: Colors.red,
@@ -221,11 +139,9 @@ class AccountTextFormField extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 7.0),
-                    child: Text(
-                      text,
-                      style: TextStyle(
-                        fontSize: size.width >= 500 ? 18 : size.width / 22,
-                      ),
+                    child: CustomText(
+                      text: text,
+                      fontSize: size.width >= 500 ? 18 : size.width / 22,
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),

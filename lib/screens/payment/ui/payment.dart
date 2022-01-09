@@ -9,6 +9,8 @@ import 'package:udemy_flutter/screens/payment/ui/credit_card.dart';
 import 'package:udemy_flutter/shared/components/component.dart';
 import 'package:udemy_flutter/shared/components/custom%20_card.dart';
 import 'package:udemy_flutter/shared/components/custom_button.dart';
+import 'package:udemy_flutter/shared/components/custom_text.dart';
+import 'package:udemy_flutter/shared/components/custom_text_from_field.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 
 class PaymentScreen extends StatelessWidget {
@@ -24,7 +26,7 @@ class PaymentScreen extends StatelessWidget {
           var cubit = PaymentCubit.get(context);
           return Scaffold(
             appBar: AppBar(
-              title: defaultText(text: 'Payment'),
+              title: CustomText(text: 'Payment'),
               elevation: 0,
               leading: IconButton(
                 onPressed: () {
@@ -88,10 +90,11 @@ class PaymentScreen extends StatelessWidget {
                         height: 100,
                         child: Column(
                           children: [
-                            Text('Write your address please',
-                                style: TextStyle(fontSize: 18)),
+                            CustomText(
+                                text: 'Write your address please',
+                                fontSize: 18),
                             SizedBox(height: 10),
-                            defaultTextFromField(
+                            CustomTextFromField(
                                 key: _formKey,
                                 controller: addressControl,
                                 textHint: 'Add new address',
@@ -120,7 +123,7 @@ class PaymentScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  defaultText(
+                  CustomText(
                     text:
                         ' Total: ${BagCubit.get(context).myBag!.data!.total} EGP',
                     fontSize: 18.0,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:udemy_flutter/shared/components/component.dart';
+import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 
 class CustomCounter extends StatelessWidget {
@@ -29,7 +30,7 @@ class CustomCounter extends StatelessWidget {
             backgroundColor: mainColor,
           ),
         ),
-        defaultText(text: '${textCount}'),
+        CustomText(text: '${textCount}'),
         SizedBox(
           height: 40.0,
           child: FloatingActionButton(

@@ -15,13 +15,14 @@ class HomeBannerSuccessState extends HomeStates {}
 class HomeBannerErrorState extends HomeStates {}
 
 class CounterPlusState extends HomeStates {
-  final int plusCounter;
 
-  CounterPlusState(this.plusCounter);
+
 }
 
 class CounterMinusState extends HomeStates {
-  final int minusCounter;
 
-  CounterMinusState(this.minusCounter);
+}
+
+class ChangePhotoIndexState extends HomeStates {
+
 }

@@ -5,9 +5,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
 import 'package:udemy_flutter/screens/login/login_cubit/login_cubit.dart';
 import 'package:udemy_flutter/screens/login/login_cubit/states.dart';
+import 'package:udemy_flutter/shared/components/custom_text_button.dart';
 import 'package:udemy_flutter/shared/components/component.dart';
 import 'package:udemy_flutter/shared/components/constants.dart';
 import 'package:udemy_flutter/shared/components/custom_button.dart';
+import 'package:udemy_flutter/shared/components/custom_text.dart';
+import 'package:udemy_flutter/shared/components/custom_text_from_field.dart';
+import 'package:udemy_flutter/shared/components/navigate.dart';
 import 'package:udemy_flutter/shared/network/locial/cache_helper.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -72,7 +76,7 @@ class LoginScreen extends StatelessWidget {
                         height: size.height * 0.45,
                       ),
 
-                      defaultTextFromField(
+                      CustomTextFromField(
                         controller: emailController,
                         backgroundColor: Colors.purpleAccent,
                         textHint: "Your Email",
@@ -92,7 +96,7 @@ class LoginScreen extends StatelessWidget {
                         height: size.height * 0.01,
                       ),
                       // TextFieldContainer to take password from user
-                      defaultTextFromField(
+                      CustomTextFromField(
                           controller: passwordController,
                           backgroundColor: Colors.purpleAccent,
                           validator: (value) {
@@ -117,7 +121,7 @@ class LoginScreen extends StatelessWidget {
                       //GestureDetector action when click in text forget password ?
                       Align(
                         alignment: Alignment.centerRight,
-                        child: defaultTextButton(
+                        child: CustomTextButton(
                           text: 'forget password ?',
                           onPress: () {},
                           //    textAlign: TextAlign.right
@@ -150,9 +154,9 @@ class LoginScreen extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          defaultText(
+                          CustomText(
                               text: "Don't have an Account?", fontSize: 15),
-                          defaultTextButton(
+                          CustomTextButton(
                               text: 'Sign Up',
                               textColor: Colors.blue,
                               fontSize: 20,

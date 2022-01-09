@@ -5,10 +5,12 @@ import 'package:udemy_flutter/screens/favourites/favourite_cubit/favourite_cubit
 import 'package:udemy_flutter/screens/home/home_cubit/home_cubit.dart';
 import 'package:udemy_flutter/screens/my_bag/bag_cubit/bag_cubit.dart';
 import 'package:udemy_flutter/screens/my_bag/bag_cubit/states.dart';
-import 'package:udemy_flutter/shared/components/Custom_favourite-icon.dart';
+import 'package:udemy_flutter/shared/components/custom_favourite-icon.dart';
 import 'package:udemy_flutter/shared/components/component.dart';
 import 'package:udemy_flutter/shared/components/custom%20_card.dart';
 import 'package:udemy_flutter/shared/components/custom_button.dart';
+import 'package:udemy_flutter/shared/components/custom_text.dart';
+import 'package:udemy_flutter/shared/components/navigate.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 
 class MyBagScreen extends StatelessWidget {
@@ -19,7 +21,7 @@ class MyBagScreen extends StatelessWidget {
           return Scaffold(
             appBar: AppBar(
               elevation: 0.0,
-              title: defaultText(text: 'My Bag'),
+              title: CustomText(text: 'My Bag'),
               leading: IconButton(
                 onPressed: () {
                   Navigator.pop(context);
@@ -66,7 +68,7 @@ class MyBagScreen extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            defaultText(
+                            CustomText(
                               text:
                                   ' Total: ${BagCubit.get(context).myBag!.data!.total} EGP',
                               fontSize: 18.0,
@@ -149,26 +151,22 @@ class BuildItem extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          Text(
-                            'EGP ${model.product.price.toString()}',
-                            style: TextStyle(
+                          CustomText(
+                          text:  'EGP ${model.product.price.toString()}',
                                 fontSize: 15.0,
                                 height: 1.0,
                                 fontWeight: FontWeight.bold,
-                                color: mainColor),
-                          ),
+                                textColor: mainColor),
                           SizedBox(
                             width: 5.0,
                           ),
                           if (model.product.discount != 0)
-                            Text(
-                              'EGP ${model.product.oldPrice.toInt().toString()}',
-                              style: TextStyle(
+                            CustomText(
+                             text: 'EGP ${model.product.oldPrice.toInt().toString()}',
                                   fontSize: 13.0,
                                   height: 1.0,
-                                  color: grey,
+                                  textColor: grey,
                                   decoration: TextDecoration.lineThrough),
-                            ),
                           Spacer(),
                           CustomFavouriteIcon(
                               onPressed: () => FavouriteCubit.get(context)
@@ -180,15 +178,13 @@ class BuildItem extends StatelessWidget {
                       SizedBox(
                         height: 5.0,
                       ),
-                      Text(
-                        model.product.name,
+                      CustomText(
+                      text:  model.product.name,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
                             fontSize: 13.0,
                             height: 1.3,
                             fontWeight: FontWeight.bold),
-                      ),
                       SizedBox(
                         height: 10.0,
                       ),
@@ -228,13 +224,13 @@ class BuildItem extends StatelessWidget {
                                       backgroundColor: Colors.grey[200],
                                       insetPadding:
                                           EdgeInsets.symmetric(vertical: 50),
-                                      title: defaultText(text: 'Delete my_bag'),
+                                      title: CustomText(text: 'Delete my_bag'),
                                       content: Container(
                                         height: 90.0,
                                         width: double.infinity,
                                         child: Column(
                                           children: [
-                                            defaultText(
+                                            CustomText(
                                                 text: 'Are You Sure ?',
                                                 fontSize: 20.0),
                                             SizedBox(

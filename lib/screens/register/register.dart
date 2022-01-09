@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
+import 'package:udemy_flutter/shared/components/custom_text_button.dart';
 import 'package:udemy_flutter/shared/components/component.dart';
 import 'package:udemy_flutter/shared/components/custom_button.dart';
+import 'package:udemy_flutter/shared/components/custom_text.dart';
+import 'package:udemy_flutter/shared/components/custom_text_from_field.dart';
+import 'package:udemy_flutter/shared/components/navigate.dart';
 
 import 'cubit/recubit.dart';
 import 'cubit/restates.dart';
@@ -47,12 +51,12 @@ class RegisterScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     // text sign up
-                    defaultText(text: 'Sign UP!', textColor: Colors.purple),
+                    CustomText(text: 'Sign UP!', textColor: Colors.purple),
 
                     SizedBox(height: 36),
 
                     // object of textFieldRegister to make text field (take name of user)
-                    defaultTextFromField(
+                    CustomTextFromField(
                         controller: registerNameControl,
                         textHint: 'Name',
                         hintColor: Colors.grey,
@@ -68,7 +72,7 @@ class RegisterScreen extends StatelessWidget {
                     SizedBox(height: 10),
 
                     //another text field for email
-                    defaultTextFromField(
+                    CustomTextFromField(
                         controller: registerEmailControl,
                         textHint: 'Email',
                         hintColor: Colors.grey,
@@ -84,7 +88,7 @@ class RegisterScreen extends StatelessWidget {
 
                     SizedBox(height: 10),
 
-                    defaultTextFromField(
+                    CustomTextFromField(
                         controller: registerPasswordControl,
                         validator: (value) {
                           if (value!.isEmpty)
@@ -111,7 +115,7 @@ class RegisterScreen extends StatelessWidget {
                     SizedBox(height: 10),
 
                     //phone Number
-                    defaultTextFromField(
+                    CustomTextFromField(
                         controller: registerPhoneControl,
                         keyboardType: TextInputType.phone,
                         textHint: 'Your Phone Number',
@@ -152,9 +156,9 @@ class RegisterScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        defaultText(
+                        CustomText(
                             text: "Already have an Account ?", fontSize: 13),
-                        defaultTextButton(
+                        CustomTextButton(
                             text: ' Sign In',
                             textColor: Colors.purple,
                             fontSize: 20,

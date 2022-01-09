@@ -4,6 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/layout/layout_cubit/cubit.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
 import 'package:udemy_flutter/shared/components/component.dart';
+import 'package:udemy_flutter/shared/components/custom_text.dart';
+import 'package:udemy_flutter/shared/components/navigate.dart';
+import 'package:udemy_flutter/shared/styles/color.dart';
 
 import 'layout_cubit/states.dart';
 
@@ -18,7 +21,7 @@ class ShopLayout extends StatelessWidget {
           appBar: AppBar(
             elevation: 0,
             backgroundColor: Color(0xFFFFD580),
-            title: defaultText(
+            title: CustomText(
               text: 'Home Page',
               // backgroundColor: Color(0xFFFFD580)
             ),
@@ -47,7 +50,7 @@ class ShopLayout extends StatelessWidget {
             height: 50,
             backgroundColor: Color(0xFFFFFFFF),
             color: Color(0xFFFFD580),
-            buttonBackgroundColor: Colors.deepOrange,
+            buttonBackgroundColor: mainColor,
             items:cubit.bottomNavIcons,
             onTap: (index) =>
               cubit.changeCurrentIndex(index),

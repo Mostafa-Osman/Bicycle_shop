@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_toggle_tab/flutter_toggle_tab.dart';
 import 'package:udemy_flutter/shared/components/custom%20_card.dart';
+import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 
 class CardItem extends StatelessWidget {
@@ -24,9 +25,9 @@ class CardItem extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Text(
-              title,
-              style: TextStyle(fontSize: 18),
+            CustomText(
+            text:  title,
+             fontSize: 18
             ),
             SizedBox(height: 15),
             FlutterToggleTab(

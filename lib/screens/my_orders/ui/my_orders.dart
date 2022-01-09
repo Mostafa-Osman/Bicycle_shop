@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/screens/my_orders/my_orders_cubit/my_orders_cubit.dart';
 import 'package:udemy_flutter/screens/my_orders/my_orders_cubit/states.dart';
 import 'package:udemy_flutter/shared/components/component.dart';
+import 'package:udemy_flutter/shared/components/custom_divider.dart';
+import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 
 class MyOrderScreen extends StatelessWidget {
@@ -17,7 +19,7 @@ class MyOrderScreen extends StatelessWidget {
                     color: red,
                   ))
                 : state is ShopMyOrderErrorState
-                    ? Text('error 404')
+                    ? CustomText(text:'error 404')
                     : ListView.separated(
                         itemBuilder: (context, index) => buildListOrders(
                             MyOrdersCubit.get(context)
@@ -25,7 +27,7 @@ class MyOrderScreen extends StatelessWidget {
                                 .data!
                                 .allOrders[index]),
                         separatorBuilder: (context, index) =>
-                            myDivider(color: mainColor),
+                            CustomDivider(color: mainColor),
                         itemCount: MyOrdersCubit.get(context)
                             .orders!
                             .data!
@@ -61,22 +63,22 @@ class MyOrderScreen extends StatelessWidget {
           children: [
             Row(
               children: [
-                defaultText(text: 'Order no: ${order.id}', fontSize: 15),
+                CustomText(text: 'Order no: ${order.id}', fontSize: 15),
                 // SizedBox(width: 50),
                 Spacer(),
-                defaultText(text: 'Date:${order.date}', fontSize: 12),
+                CustomText(text: 'Date:${order.date}', fontSize: 12),
               ],
             ),
             Row(
               children: [
-                defaultText(text: 'Status:${order.status}', fontSize: 15),
+                CustomText(text: 'Status:${order.status}', fontSize: 15),
                 Spacer(),
                 IconButton(
                     onPressed: () {},
                     icon: Icon(Icons.arrow_forward_ios_outlined)),
               ],
             ),
-            defaultText(text: 'Total: ${order.total}', fontSize: 15),
+            CustomText(text: 'Total: ${order.total}', fontSize: 15),
           ],
         ),
       ),

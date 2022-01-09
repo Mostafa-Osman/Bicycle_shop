@@ -28,7 +28,9 @@ class FavouriteCubit extends Cubit<FavouriteStates> {
         HomeCubit.get(context).favourites[productId] = !HomeCubit.get(context).favourites[productId];
       else
         getFavouritesData();
+
       emit(ChangeFavoritesSuccessState(changeFavouritesModel));
+      emit(GetFavoritesSuccessState());
     }).catchError((onError) {
       HomeCubit.get(context).favourites[productId] = !HomeCubit.get(context).favourites[productId];
       emit(ChangeFavoritesErrorState());

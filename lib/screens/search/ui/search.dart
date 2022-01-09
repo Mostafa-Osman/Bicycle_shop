@@ -4,7 +4,11 @@ import 'package:udemy_flutter/screens/favourites/favourite_cubit/favourite_cubit
 import 'package:udemy_flutter/screens/home/home_cubit/home_cubit.dart';
 import 'package:udemy_flutter/screens/search/cubit/cubit.dart';
 import 'package:udemy_flutter/screens/search/cubit/states.dart';
+import 'package:udemy_flutter/shared/components/Custom_favourite-icon.dart';
 import 'package:udemy_flutter/shared/components/component.dart';
+import 'package:udemy_flutter/shared/components/custom_divider.dart';
+import 'package:udemy_flutter/shared/components/custom_text.dart';
+import 'package:udemy_flutter/shared/styles/color.dart';
 
 class SearchScreen extends StatelessWidget {
   final searchController = TextEditingController();
@@ -51,12 +55,12 @@ class SearchScreen extends StatelessWidget {
                     )
                   : (state is SearchErrorState)
                       ? Center(
-                          child: Text('error 404'),
+                          child: CustomText(text:'error 404'),
                         )
                       : ListView.separated(
                           itemBuilder: (context, index) => ListOfSearchProduct(
                               model: model!.data!.data[index]),
-                          separatorBuilder: (context, index) => myDivider(),
+                          separatorBuilder: (context, index) => CustomDivider(),
                           itemCount: model!.data!.data.length),
         );
       },
@@ -103,58 +107,34 @@ class ListOfSearchProduct extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    model.name,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                        fontSize: 14, height: 1.3, fontWeight: FontWeight.bold),
+                  CustomText(
+                  text:  model.name,
+                        fontSize: 14, fontWeight: FontWeight.bold,
                   ),
                   Spacer(),
                   Row(
                     children: [
-                      Text(
-                        'EGP ${model.price.toString()}',
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            fontSize: 15,
-                            height: 1.3,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.deepOrange),
+                      CustomText(
+                        text: 'EGP ${model.price.toString()}',
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        textColor: mainColor,
                       ),
                       SizedBox(
                         width: 5,
                       ),
                       if (model.discount != 0)
-                        Text(
-                          'EGP ${model.oldPrice.toString()}',
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              fontSize: 13,
-                              height: 1.3,
-                              color: Colors.grey,
-                              decoration: TextDecoration.lineThrough),
-                        ),
+                        CustomText(
+                            text: 'EGP ${model.oldPrice.toString()}',
+                            fontSize: 13,
+                            textColor: grey,
+                            decoration: TextDecoration.lineThrough),
                       Spacer(),
-                      IconButton(
-                        padding: EdgeInsets.zero,
-                        onPressed: () {
-                          FavouriteCubit.get(context)
-                              .changeFavorites(model.id!, context);
-                        },
-                        icon: HomeCubit.get(context).favourites[model.id]
-                            ? Icon(
-                                Icons.favorite,
-                                size: 25.0,
-                                color: Colors.red,
-                              )
-                            : Icon(
-                                Icons.favorite_border,
-                                size: 25.0,
-                              ),
-                      ),
+                      CustomFavouriteIcon(
+                          onPressed: () => FavouriteCubit.get(context)
+                              .changeFavorites(model.id!, context),
+                          checkFavourite:
+                              HomeCubit.get(context).favourites[model.id])
                     ],
                   ),
                 ],

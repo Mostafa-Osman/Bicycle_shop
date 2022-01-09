@@ -9,6 +9,7 @@ import 'package:udemy_flutter/screens/product_details/ui/body.dart';
 import 'package:udemy_flutter/shared/components/component.dart';
 import 'package:udemy_flutter/shared/components/counter.dart';
 import 'package:udemy_flutter/shared/components/custom_button.dart';
+import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
@@ -35,12 +36,12 @@ class ProductDetailsScreen extends StatelessWidget {
               builder: (context) => Body(productDetails: productDetails),
               fallback: (context) => Center(
                 child:
-                    defaultText(text: 'Empty !', fontSize: 15, textColor: grey),
+                CustomText(text: 'Empty !', fontSize: 15, textColor: grey),
               ),
             ),
           ),
           bottomNavigationBar: Container(
-            color: Colors.grey[200],
+            color: Color(0xFFFFF8DC),
             padding: EdgeInsets.all(10.0),
             child: Row(
               children: [

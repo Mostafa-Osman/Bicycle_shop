@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/screens/categories/category_cubit/category_cubit.dart';
 import 'package:udemy_flutter/screens/categories/category_cubit/states.dart';
 import 'package:udemy_flutter/shared/components/custom%20_card.dart';
+import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 
 class CategoriesScreen extends StatelessWidget {
@@ -50,9 +51,10 @@ class Body extends StatelessWidget {
           SizedBox(
             width: 20,
           ),
-          Text(
-            '${model.name}',
-            style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+          CustomText(
+            text: '${model.name}',
+            fontSize: 20.0,
+            fontWeight: FontWeight.bold,
           ),
           Spacer(),
           Icon(Icons.arrow_forward_ios_outlined),
