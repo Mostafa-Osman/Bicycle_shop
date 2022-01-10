@@ -1,7 +1,6 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/avd.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
 import 'package:udemy_flutter/screens/login/login_cubit/login_cubit.dart';
@@ -11,7 +10,7 @@ import 'package:udemy_flutter/shared/components/component.dart';
 import 'package:udemy_flutter/shared/components/constants.dart';
 import 'package:udemy_flutter/shared/components/custom_button.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
-import 'package:udemy_flutter/shared/components/custom_text_from_field.dart';
+import 'package:udemy_flutter/shared/components/custom_text_form_field.dart';
 import 'package:udemy_flutter/shared/components/navigate.dart';
 import 'package:udemy_flutter/shared/network/locial/cache_helper.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
@@ -55,7 +54,8 @@ class LoginScreen extends StatelessWidget {
             child: Stack(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 100.0,right: 60,left: 60),
+                  padding:
+                      const EdgeInsets.only(top: 100.0, right: 60, left: 60),
                   child: Image.asset(
                     "assets/images/logo.png",
                   ),
@@ -71,15 +71,16 @@ class LoginScreen extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            CustomTextFromField(
+                            CustomTextFormField(
                               controller: emailController,
                               backgroundColor: HexColor("#f2f2f2"),
                               textHint: "Your Email",
-                              validator: (value) {
+                              validator:(value) {
                                 if (value!.isEmpty)
                                   return 'Please Enter Your Email';
                                 else if (!value.contains('@'))
-                                  return 'Please Enter valid Email';
+                                  return 'Please Enter Valid Email';
+                                return null;
                               },
                               prefix: Icon(
                                 Icons.account_circle,
@@ -89,7 +90,7 @@ class LoginScreen extends StatelessWidget {
                             SizedBox(height: 20),
 
                             // TextFieldContainer to take password from user
-                            CustomTextFromField(
+                            CustomTextFormField(
                                 controller: passwordController,
                                 backgroundColor: HexColor("#f2f2f2"),
                                 validator: (value) {
@@ -123,7 +124,7 @@ class LoginScreen extends StatelessWidget {
                             //button login
                             Padding(
                               padding: const EdgeInsets.only(
-                                  top: 20.0, bottom: 50.0),
+                                  top: 20.0, bottom: 15.0),
                               child: ConditionalBuilder(
                                 condition: state is! LoginLoadingState,
                                 builder: (context) => CustomButton(
@@ -145,19 +146,21 @@ class LoginScreen extends StatelessWidget {
                               ),
                             ),
 
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                CustomText(
-                                    text: "Don't have an Account?",
-                                    fontSize: 15),
-                                CustomTextButton(
-                                    text: 'Sign Up',
-                                    textColor: HexColor('#AF4537'),
-                                    fontSize: 20,
-                                    onPress: () => navigateTo(
-                                        context, RouteConstant.registerRoute))
-                              ],
+                            Expanded(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  CustomText(
+                                      text: "Don't have an Account?",
+                                      fontSize: 15),
+                                  CustomTextButton(
+                                      text: 'Sign Up',
+                                      textColor: HexColor('#AF4537'),
+                                      fontSize: 20,
+                                      onPress: () => navigateTo(
+                                          context, RouteConstant.registerRoute))
+                                ],
+                              ),
                             ),
                           ],
                         ),

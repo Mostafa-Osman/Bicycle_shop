@@ -6,12 +6,12 @@ import 'package:udemy_flutter/screens/favourites/ui/favourites.dart';
 import 'package:udemy_flutter/screens/home/ui/home.dart';
 import 'package:udemy_flutter/screens/notifications/ui/notifications_screen.dart';
 import 'package:udemy_flutter/screens/profile/ui/profile.dart';
+import 'package:udemy_flutter/shared/styles/color.dart';
 
 class LayoutCubit extends Cubit<LayoutStates> {
   LayoutCubit() : super(LayoutInitialState());
 
   static LayoutCubit get(context) => BlocProvider.of(context);
-
 
   int currentIndex = 2;
   List<Widget> bottomNavScreen = [
@@ -22,12 +22,13 @@ class LayoutCubit extends Cubit<LayoutStates> {
     NotificationsScreen(),
   ];
   List<Icon> bottomNavIcons = [
-  Icon(Icons.favorite),
-  Icon(Icons.apps),
-  Icon(Icons.home),
-  Icon(Icons.person),
-  Icon(Icons.notifications),
+    Icon(Icons.favorite, color: Colors.grey[200]),
+    Icon(Icons.apps, color: Colors.grey[200]),
+    Icon(Icons.home, color: Colors.grey[200]),
+    Icon(Icons.person, color: Colors.grey[200]),
+    Icon(Icons.notifications, color: Colors.grey[200]),
   ];
+
   void changeCurrentIndex(index) {
     currentIndex = index;
     emit(ChangeBottomNavState());

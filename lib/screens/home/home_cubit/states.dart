@@ -14,15 +14,8 @@ class HomeBannerSuccessState extends HomeStates {}
 
 class HomeBannerErrorState extends HomeStates {}
 
-class CounterPlusState extends HomeStates {
+class CounterPlusState extends HomeStates {}
 
+class CounterMinusState extends HomeStates {}
 
-}
-
-class CounterMinusState extends HomeStates {
-
-}
-
-class ChangePhotoIndexState extends HomeStates {
-
-}
+class ChangePhotoIndexState extends HomeStates {}

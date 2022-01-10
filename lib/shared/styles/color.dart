@@ -1,10 +1,9 @@
-
 import 'package:flutter/material.dart';
 
-const Color mainColor=Colors.deepOrange;
-const Color white =Colors.white;
-const Color black =Colors.black;
-const Color grey =Colors.grey;
-const Color red =Colors.red;
-const Color orange=Colors.orange;
-const Color amber=Colors.amber;
+const mainColor = const Color(0xffaf4537); // Second `const` is optional in assignments.
+const Color white = Colors.white;
+const Color black = Colors.black;
+const Color grey = Colors.grey;
+const Color red = Colors.red;
+const Color orange = Colors.orange;
+const Color amber = Colors.amber;

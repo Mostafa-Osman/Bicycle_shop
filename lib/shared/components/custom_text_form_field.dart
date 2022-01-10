@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 
-class CustomTextFromField extends StatelessWidget {
+class CustomTextFormField extends StatelessWidget {
   final TextEditingController controller;
   final FormFieldValidator<String>? validator;
   final String? textHint;
@@ -21,7 +21,7 @@ class CustomTextFromField extends StatelessWidget {
   final String? label;
   final Key? key;
 
-  CustomTextFromField(
+  CustomTextFormField(
       {required this.controller,
       this.validator,
       this.textHint,

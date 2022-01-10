@@ -1,22 +1,23 @@
 
 import 'package:udemy_flutter/screens/login/model/login_model.dart';
 
-abstract class ShopRegisterStates {}
+abstract class RegisterStates {}
 
-class ShopRegisterInitialState extends ShopRegisterStates {}
+class ShopRegisterInitialState extends RegisterStates {}
 
-class ShopRegisterLoadingState extends ShopRegisterStates {}
+class ShopRegisterLoadingState extends RegisterStates {}
 
-class ShopRegisterSuccessState extends ShopRegisterStates {
+class ShopRegisterSuccessState extends RegisterStates {
   final ShopLoginModel loginModel;
 
   ShopRegisterSuccessState(this.loginModel);
 }
 
-class ShopRegisterErrorState extends ShopRegisterStates {
+class ShopRegisterErrorState extends RegisterStates {
   final String error;
 
   ShopRegisterErrorState(this.error);
 }
 
-class ShopRegisterVisibilityPasswordState extends ShopRegisterStates {}
+class ShopRegisterVisibilityPasswordState extends RegisterStates {}
+class ConfirmRegisterVisibilityPasswordState extends RegisterStates {}

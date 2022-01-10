@@ -68,6 +68,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(create: (context) => registerBloc),
         BlocProvider(create: (context) => loginBloc),
         BlocProvider(create: (context) => searchBloc),
         BlocProvider(create: (context) => favouriteBloc..getFavouritesData()),

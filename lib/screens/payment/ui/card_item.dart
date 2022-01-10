@@ -32,6 +32,7 @@ class CardItem extends StatelessWidget {
             SizedBox(height: 15),
             FlutterToggleTab(
                 width: 50,
+                selectedBackgroundColors: [mainColor],
                 borderRadius: 15,
                 selectedTextStyle: TextStyle(
                     color: white, fontSize: 18, fontWeight: FontWeight.w600),

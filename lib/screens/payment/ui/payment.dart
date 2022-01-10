@@ -10,7 +10,7 @@ import 'package:udemy_flutter/shared/components/component.dart';
 import 'package:udemy_flutter/shared/components/custom%20_card.dart';
 import 'package:udemy_flutter/shared/components/custom_button.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
-import 'package:udemy_flutter/shared/components/custom_text_from_field.dart';
+import 'package:udemy_flutter/shared/components/custom_text_form_field.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 
 class PaymentScreen extends StatelessWidget {
@@ -94,7 +94,7 @@ class PaymentScreen extends StatelessWidget {
                                 text: 'Write your address please',
                                 fontSize: 18),
                             SizedBox(height: 10),
-                            CustomTextFromField(
+                            CustomTextFormField(
                                 key: _formKey,
                                 controller: addressControl,
                                 textHint: 'Add new address',

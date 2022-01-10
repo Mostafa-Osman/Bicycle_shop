@@ -1,9 +1,9 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:udemy_flutter/layout/layout_cubit/cubit.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
-import 'package:udemy_flutter/shared/components/component.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/components/navigate.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
@@ -20,7 +20,7 @@ class ShopLayout extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             elevation: 0,
-            backgroundColor: Color(0xFFFFD580),
+            backgroundColor: HexColor('#af4537'),
             title: CustomText(
               text: 'Home Page',
               // backgroundColor: Color(0xFFFFD580)
@@ -30,16 +30,15 @@ class ShopLayout extends StatelessWidget {
                 icon: Icon(
                   Icons.menu,
                   size: 30,
-                  color: Colors.black,
+                  color: Colors.grey[200],
                 )),
             actions: [
               IconButton(
-                onPressed: ()=>
-                  navigateTo(context, RouteConstant.myBagRoute),
+                onPressed: () => navigateTo(context, RouteConstant.myBagRoute),
                 icon: Icon(
                   Icons.add_shopping_cart,
                   size: 30,
-                  color: Colors.black,
+                  color: Colors.grey[200],
                 ),
               ),
             ],
@@ -49,12 +48,10 @@ class ShopLayout extends StatelessWidget {
             index: 2,
             height: 50,
             backgroundColor: Color(0xFFFFFFFF),
-            color: Color(0xFFFFD580),
+            color: HexColor('#af4537'),
             buttonBackgroundColor: mainColor,
-            items:cubit.bottomNavIcons,
-            onTap: (index) =>
-              cubit.changeCurrentIndex(index),
-
+            items: cubit.bottomNavIcons,
+            onTap: (index) => cubit.changeCurrentIndex(index),
           ),
         );
       },

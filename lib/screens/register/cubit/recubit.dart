@@ -4,7 +4,7 @@ import 'package:udemy_flutter/screens/register/cubit/restates.dart';
 import 'package:udemy_flutter/shared/network/end_points.dart';
 import 'package:udemy_flutter/shared/network/remote/dio_helper.dart';
 
-class RegisterCubit extends Cubit<ShopRegisterStates> {
+class RegisterCubit extends Cubit<RegisterStates> {
   RegisterCubit() : super(ShopRegisterInitialState());
 
   ShopLoginModel? loginModel;
@@ -36,5 +36,13 @@ class RegisterCubit extends Cubit<ShopRegisterStates> {
   void visibilityPassword() {
     isVisibility = !isVisibility;
     emit(ShopRegisterVisibilityPasswordState());
+  }
+
+  // variable bool to change visibility in (confirm field)
+  bool confirmNotVisible = true;
+  // method to switch icon visibility (in confirm password field )
+  void confirmVisibilityPassword() {
+    confirmNotVisible = !confirmNotVisible;
+    emit(ConfirmRegisterVisibilityPasswordState());
   }
 }

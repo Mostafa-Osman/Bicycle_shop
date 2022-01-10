@@ -30,7 +30,7 @@ class Body extends StatelessWidget {
             itemExtent: 400.0,
             itemCount: productDetails!.images.length,
             itemBuilder: (context, index) {
-              HomeCubit.get(context).changePhotoIndex(index);
+              HomeCubit.get(context).changePhotoIndex(index-1);
               return Image(
                 image: NetworkImage(productDetails!.images[index]),
                 fit: BoxFit.fitHeight,

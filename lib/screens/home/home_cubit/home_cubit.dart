@@ -12,7 +12,6 @@ class HomeCubit extends Cubit<HomeStates> {
   HomeModel? homeModel;
   var favourites = {};
 
-
   void getHomeData() {
     DioHelper.getData(
       url: PRODUCT_DETAILS,
@@ -47,11 +46,15 @@ class HomeCubit extends Cubit<HomeStates> {
   //   });
   // }
 
-  int photoIndex=-1;
+
+  int photoIndex = 0;
+
   changePhotoIndex(index) {
-    photoIndex=index;
+    photoIndex = index;
     emit(ChangePhotoIndexState());
   }
+
+
 
   int quantityOrder = 1;
 
@@ -64,6 +67,4 @@ class HomeCubit extends Cubit<HomeStates> {
     if (quantityOrder != 1) quantityOrder--;
     emit(CounterMinusState());
   }
-
-
 }
