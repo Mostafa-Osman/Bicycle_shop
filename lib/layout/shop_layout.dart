@@ -23,7 +23,6 @@ class ShopLayout extends StatelessWidget {
             backgroundColor: HexColor('#af4537'),
             title: CustomText(
               text: 'Home Page',
-              // backgroundColor: Color(0xFFFFD580)
             ),
             leading: IconButton(
                 onPressed: () {},

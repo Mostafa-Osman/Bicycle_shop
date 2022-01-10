@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
 import 'package:udemy_flutter/screens/on_boarding/on_boarding_cubit/cubit.dart';
 import 'package:udemy_flutter/screens/on_boarding/on_boarding_cubit/states.dart';
-import 'package:udemy_flutter/shared/components/component.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/components/navigate.dart';
+import 'package:udemy_flutter/shared/styles/color.dart';
 
 class OnBoardingScreen extends StatelessWidget {
-  final boardingController = PageController();
+  final PageController boardingController = PageController();
 
   @override
   Widget build(BuildContext context) {
@@ -18,70 +19,106 @@ class OnBoardingScreen extends StatelessWidget {
       builder: (context, state) {
         var cubit = OnBoardingCubit.get(context);
         return Scaffold(
-            appBar: AppBar(
-              elevation: 0,
-              actions: [
-                TextButton(
-                  child: Text('SKIP'),
-                  onPressed: () =>
-                      navigatorAndFinish(context, RouteConstant.loginRoute),
-                ),
-              ],
-            ),
-            body: Padding(
-              padding: const EdgeInsets.all(30.0),
-              child: Column(
-                children: [
-                  Expanded(
+            body: Container(
+              width: 500,
+              child: Padding(
+                padding: const EdgeInsets.all(30.0),
+                child: Column(
+                  children: [
+                    Flexible(
                       child: PageView.builder(
-                    itemCount: cubit.model.length,
-                    itemBuilder: (context, index) =>
-                        buildBoardingItem(cubit.model[index]),
-                    controller: boardingController,
-                    onPageChanged: (index) {
-                      (index == cubit.model.length - 1)
-                          ? cubit.isLast = true
-                          : cubit.isLast = false;
-                    },
-                  )),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  SmoothPageIndicator(
-                    count: cubit.model.length,
-                    controller: boardingController,
-                    effect: WormEffect(activeDotColor: Colors.purpleAccent),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                ],
+                        itemCount: cubit.items.length,
+                        itemBuilder: (context, index) => BuildBoardingItem(
+                            model: cubit.items[index],
+                            splashLength: cubit.items.length,
+                            controller: boardingController),
+                        controller: boardingController,
+                        onPageChanged: (index) {
+                          (index == cubit.items.length - 1)
+                              ? cubit.isLast = true
+                              : cubit.isLast = false;
+                        },
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             floatingActionButton: FloatingActionButton(
-                backgroundColor: Colors.purpleAccent,
-                onPressed: () {
-                  (cubit.isLast)
-                      ? navigatorAndFinish(context, RouteConstant.loginRoute)
-                      : boardingController.nextPage(
-                          duration: Duration(microseconds: 700),
-                          curve: Curves.easeIn);
-                },
-                child: Icon(
-                  Icons.arrow_forward_ios_outlined,
-                  color: Colors.white,
-                )));
+              backgroundColor: mainColor,
+              onPressed: () {
+                (cubit.isLast)
+                    ? navigatorAndFinish(context, RouteConstant.loginRoute)
+                    : boardingController.nextPage(
+                        duration: Duration(microseconds: 700),
+                        curve: Curves.easeIn);
+              },
+              child: Icon(
+                Icons.arrow_forward_ios_outlined,
+                color: Colors.white,
+              ),
+            ));
       },
     );
   }
 }
 
-Widget buildBoardingItem(OnBoardingModel model) => Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Image(image: AssetImage(model.image)),
-        CustomText(text: model.title, textColor: Colors.black),
-        SizedBox(height: 20),
-        CustomText(text: model.body, textColor: Colors.black),
-      ],
+class BuildBoardingItem extends StatelessWidget {
+  final model;
+  final splashLength;
+  final controller;
+
+  const BuildBoardingItem(
+      {required this.model,
+      required this.splashLength,
+      required this.controller});
+
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
+    return SingleChildScrollView(
+      child: Padding(
+        padding:
+            const EdgeInsets.only(top: 40.0, right: 20, left: 20, bottom: 20),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              child: SvgPicture.asset(
+                model.image,
+                fit: BoxFit.fitWidth,
+              ),
+            ),
+            SmoothPageIndicator(
+              count: 3,
+              controller: controller,
+              effect: WormEffect(
+                dotHeight: 16,
+                dotWidth: 20,
+                type: WormType.normal,
+                activeDotColor: mainColor,
+                dotColor: const Color(0xffE4C6A9),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 30.0, bottom: 50.0),
+              child: CustomText(
+                text: model.title,
+                fontSize: size.width >= 500 ? 25 : size.width / 18,
+                fontWeight: FontWeight.normal,
+              ),
+            ),
+            CustomText(
+              text: model.body,
+              textAlign: TextAlign.center,
+              fontSize: size.width >= 500 ? 18 : size.width / 22,
+              textColor: grey,
+            ),
+          ],
+        ),
+      ),
     );
+  }
+}
