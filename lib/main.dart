@@ -9,7 +9,7 @@ import 'package:udemy_flutter/screens/on_boarding/on_boarding_cubit/cubit.dart';
 import 'package:udemy_flutter/screens/on_boarding/ui/on_boarding.dart';
 import 'package:udemy_flutter/screens/register/cubit/recubit.dart';
 import 'package:udemy_flutter/shared/components/constants.dart';
-import 'package:udemy_flutter/shared/network/locial/cache_helper.dart';
+import 'package:udemy_flutter/shared/network/local/cache_helper.dart';
 import 'package:udemy_flutter/shared/network/remote/dio_helper.dart';
 import 'package:udemy_flutter/shared/styles/themes.dart';
 import 'package:udemy_flutter/screens/categories/category_cubit/category_cubit.dart';
@@ -17,7 +17,7 @@ import 'package:udemy_flutter/my_bloc_observer.dart';
 import 'package:udemy_flutter/screens/favourites/favourite_cubit/favourite_cubit.dart';
 import 'package:udemy_flutter/screens/home/home_cubit/home_cubit.dart';
 import 'package:udemy_flutter/screens/my_bag/bag_cubit/bag_cubit.dart';
-import 'package:udemy_flutter/screens/end_orders/my_orders_cubit/my_orders_cubit.dart';
+import 'package:udemy_flutter/screens/last_orders/my_orders_cubit/my_orders_cubit.dart';
 import 'package:udemy_flutter/screens/notifications/notification_cubit/notification_cubit.dart';
 import 'package:udemy_flutter/screens/profile/cubit/profile_cubit.dart';
 import 'package:udemy_flutter/screens/search/cubit/cubit.dart';
@@ -57,7 +57,7 @@ class MyApp extends StatelessWidget {
   final homeBloc = HomeCubit();
   final favouriteBloc = FavouriteCubit();
   final categoryBloc = CategoryCubit();
-  final bagBloc = BagCubit();
+  final basketBloc = BasketCubit();
   final myOrdersBloc = MyOrdersCubit();
   final notificationBloc = NotificationCubit();
   final layoutBloc = LayoutCubit();
@@ -74,7 +74,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => favouriteBloc..getFavouritesData()),
         BlocProvider(create: (context) => homeBloc..getHomeData()),
         BlocProvider(create: (context) => categoryBloc..getCategoriesData()),
-        BlocProvider(create: (context) => bagBloc..getMyBagData()),
+        BlocProvider(create: (context) => basketBloc..getMyBagData()),
         BlocProvider(create: (context) => myOrdersBloc..getOrders()),
         BlocProvider(create: (context) => notificationBloc..getNotifications()),
         BlocProvider(create: (context) => profileBloc..getUserData()),

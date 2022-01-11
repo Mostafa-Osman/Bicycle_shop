@@ -10,3 +10,6 @@ void navigatorAndFinish(context, route) => Navigator.of(context)
 
 void navigateWithArgument(context, route, argument) =>
     Navigator.pushNamed(context, route, arguments: argument);
+
+
+void  navigateReplacement(context,page)=>   Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => page));

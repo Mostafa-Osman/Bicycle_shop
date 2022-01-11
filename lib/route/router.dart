@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:udemy_flutter/layout/shop_layout.dart';
+import 'package:udemy_flutter/screens/favourites/ui/favourites.dart';
 import 'package:udemy_flutter/screens/home/model/home_model.dart';
 import 'package:udemy_flutter/screens/home/ui/home.dart';
 import 'package:udemy_flutter/screens/login/ui/login.dart';
 import 'package:udemy_flutter/screens/my_bag/ui/my_bag_screen.dart';
-import 'package:udemy_flutter/screens/end_orders/ui/my_orders.dart';
+import 'package:udemy_flutter/screens/last_orders/ui/my_orders.dart';
 import 'package:udemy_flutter/screens/notifications/ui/notifications_screen.dart';
 import 'package:udemy_flutter/screens/on_boarding/ui/on_boarding.dart';
 import 'package:udemy_flutter/screens/payment/ui/payment.dart';
@@ -35,8 +36,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => SearchScreen());
       case RouteConstant.profileRoute:
         return MaterialPageRoute(builder: (_) => ProfileScreen());
-      case RouteConstant.myBagRoute:
-        return MaterialPageRoute(builder: (_) => MyBagScreen());
+      case RouteConstant.basketRoute:
+        return MaterialPageRoute(builder: (_) => BasketScreen());
       case RouteConstant.myOrderRoute:
         return MaterialPageRoute(builder: (_) => MyOrderScreen());
       case RouteConstant.productDetailsRoute:
@@ -49,6 +50,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => ShopLayout());
       case RouteConstant.paymentRoute:
         return MaterialPageRoute(builder: (_) => PaymentScreen());
+      case RouteConstant.favouriteRoute:
+        return MaterialPageRoute(builder: (_) => FavouritesScreen());
       // case RouteConstant.verifyRoute:
       //   return MaterialPageRoute(builder: (_) {
       //     final bool arguments = settings.arguments as bool;

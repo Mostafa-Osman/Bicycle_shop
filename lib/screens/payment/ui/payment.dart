@@ -125,7 +125,7 @@ class PaymentScreen extends StatelessWidget {
                 children: [
                   CustomText(
                     text:
-                        ' Total: ${BagCubit.get(context).myBag!.data!.total} EGP',
+                        ' Total: ${BasketCubit.get(context).myBag!.data!.total} EGP',
                     fontSize: 18.0,
                     textColor: mainColor,
                     // backgroundColor: Colors.orangeAccent[100],

@@ -7,14 +7,15 @@ import 'package:udemy_flutter/shared/components/constants.dart';
 import 'package:udemy_flutter/shared/network/end_points.dart';
 import 'package:udemy_flutter/shared/network/remote/dio_helper.dart';
 
-class BagCubit extends Cubit<BagStates> {
-  BagCubit() : super(BagInitialState());
+class BasketCubit extends Cubit<BasketStates> {
+  BasketCubit() : super(BasketInitialState());
 
-  static BagCubit get(context) => BlocProvider.of(context);
+  static BasketCubit get(context) => BlocProvider.of(context);
   // int quantityOrder = 1;
   //add order to my bag
-  void addToBagOrders(int productId) {
-    emit(AddToBagLoadingState());
+
+  void addToBasketOrders(int productId) {
+    emit(AddToBasketLoadingState());
     DioHelper.postData(
       url: ADD_TO_BAG_ORDER,
       data: {
@@ -22,20 +23,20 @@ class BagCubit extends Cubit<BagStates> {
       },
       token: token,
     ).then((value) {
-      emit(AddToBagSuccessState());
+      emit(AddToBasketSuccessState());
     }).catchError((error) {
       print(error.toString());
-      emit(AddToBagErrorState());
+      emit(AddToBasketErrorState());
     });
   }
 
   //get orders to bag
-  AddToBagModel? myBag;
+  BasketModel? myBag;
 
   void getMyBagData() {
     emit(ShopGetOrderLoadingState());
     DioHelper.getData(url: ADD_TO_BAG_ORDER, token: token).then((value) {
-      myBag = AddToBagModel.fromJson(value.data);
+      myBag = BasketModel.fromJson(value.data);
 
       emit(ShopGetOrderSuccessState(myBag!));
     }).catchError((error) {
@@ -47,31 +48,31 @@ class BagCubit extends Cubit<BagStates> {
   //update quantity of orders in bag
 
   void updateOrderData({required quantity, required int cartId}) {
-    emit(BagUpdateQuantityLoadingState());
+    emit(BasketUpdateQuantityLoadingState());
     DioHelper.putData(
         url: UPDATE_QUANTITY_ORDERS + '$cartId',
         token: token,
         data: {'quantity': quantity}).then((value) {
-      myBag = AddToBagModel.fromJson(value.data);
+      myBag = BasketModel.fromJson(value.data);
       emit(ShopGetOrderSuccessState(myBag!));
       getMyBagData();
     }).catchError((error) {
       print(error.toString());
-      emit(BagUpdateQuantityErrorState());
+      emit(BasketUpdateQuantityErrorState());
     });
   }
 
   //delete orders from bag
   void deleteOrderData({required int cartId}) {
-    emit(BagUpdateQuantityLoadingState());
+    emit(BasketUpdateQuantityLoadingState());
     DioHelper.deleteData(
       url: DELETE_ORDERS + '$cartId',
       token: token,
     ).then((value) {
-      emit(DeleteFromBagSuccessState());
+      emit(DeleteFromBasketSuccessState());
     }).catchError((error) {
       print(error.toString());
-      emit(DeleteFromBagErrorState());
+      emit(DeleteFromBasketErrorState());
     });
   }
 

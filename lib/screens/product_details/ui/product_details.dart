@@ -6,7 +6,6 @@ import 'package:udemy_flutter/screens/home/home_cubit/states.dart';
 import 'package:udemy_flutter/screens/home/model/home_model.dart';
 import 'package:udemy_flutter/screens/my_bag/bag_cubit/bag_cubit.dart';
 import 'package:udemy_flutter/screens/product_details/ui/body.dart';
-import 'package:udemy_flutter/shared/components/component.dart';
 import 'package:udemy_flutter/shared/components/counter.dart';
 import 'package:udemy_flutter/shared/components/custom_button.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
@@ -58,8 +57,8 @@ class ProductDetailsScreen extends StatelessWidget {
                         // BagCubit.get(context).updateOrderData(
                         //     quantity: HomeCubit.get(context).quantityOrder,
                         //     cartId: productDetails.id!);
-                        BagCubit.get(context)
-                            .addToBagOrders(productDetails.id!);
+                        BasketCubit.get(context)
+                            .addToBasketOrders(productDetails.id!);
                       }),
                 ),
               ],

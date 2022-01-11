@@ -54,7 +54,7 @@ class Product {
   int? id;
   dynamic price;
   dynamic oldPrice;
-  int? discount;
+  dynamic discount;
   String? image;
   String? name;
   String? description;

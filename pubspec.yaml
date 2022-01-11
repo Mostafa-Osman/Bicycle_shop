@@ -36,13 +36,11 @@ dependencies:
   conditional_builder_null_safety:
   shared_preferences:
   streaming_shared_preferences: ^2.0.0
-  hexcolor: ^2.0.5
   smooth_page_indicator:
   rflutter_alert: ^2.0.4
   fluttertoast: ^8.0.8
   dio: ^4.0.0
   flutter_svg: ^1.0.0
-  carousel_slider: ^4.0.0
   curved_navigation_bar: ^1.0.1
   flutter_rating_bar: ^4.0.0
   flutter_staggered_grid_view: ^0.4.1

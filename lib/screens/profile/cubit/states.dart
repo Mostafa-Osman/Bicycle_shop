@@ -1,6 +1,4 @@
 
-
-import 'package:udemy_flutter/screens/login/model/login_model.dart';
 import 'package:udemy_flutter/screens/profile/model/profile_model.dart';
 
 abstract class ProfileStates {}

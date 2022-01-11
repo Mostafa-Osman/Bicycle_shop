@@ -1,7 +1,6 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
 import 'package:udemy_flutter/screens/login/login_cubit/login_cubit.dart';
 import 'package:udemy_flutter/screens/login/login_cubit/states.dart';
@@ -12,7 +11,7 @@ import 'package:udemy_flutter/shared/components/custom_button.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/components/custom_text_form_field.dart';
 import 'package:udemy_flutter/shared/components/navigate.dart';
-import 'package:udemy_flutter/shared/network/locial/cache_helper.dart';
+import 'package:udemy_flutter/shared/network/local/cache_helper.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -73,9 +72,9 @@ class LoginScreen extends StatelessWidget {
                           children: [
                             CustomTextFormField(
                               controller: emailController,
-                              backgroundColor: HexColor("#f2f2f2"),
+                              backgroundColor: Color(0xfff2f2f2),
                               textHint: "Your Email",
-                              validator:(value) {
+                              validator: (value) {
                                 if (value!.isEmpty)
                                   return 'Please Enter Your Email';
                                 else if (!value.contains('@'))
@@ -84,7 +83,7 @@ class LoginScreen extends StatelessWidget {
                               },
                               prefix: Icon(
                                 Icons.account_circle,
-                                color: HexColor('#AF4537'),
+                                color: Color(0xffAF4537),
                               ),
                             ),
                             SizedBox(height: 20),
@@ -92,7 +91,7 @@ class LoginScreen extends StatelessWidget {
                             // TextFieldContainer to take password from user
                             CustomTextFormField(
                                 controller: passwordController,
-                                backgroundColor: HexColor("#f2f2f2"),
+                                backgroundColor: Color(0xfff2f2f2),
                                 validator: (value) {
                                   if (value!.isEmpty)
                                     return 'Please Enter Your password';
@@ -102,7 +101,7 @@ class LoginScreen extends StatelessWidget {
                                 textHint: "Your password",
                                 prefix: Icon(
                                   Icons.lock,
-                                  color: HexColor('#AF4537'),
+                                  color: Color(0xffAF4537),
                                 ),
                                 suffixIcon: IconButton(
                                     onPressed: () => LoginCubit.get(context)
@@ -137,11 +136,11 @@ class LoginScreen extends StatelessWidget {
                                           email: emailController.text,
                                           password: passwordController.text);
                                   },
-                                  buttonColor: HexColor('#AF4537'),
+                                  buttonColor: Color(0xffAF4537),
                                 ),
                                 fallback: (context) => Center(
                                   child: CircularProgressIndicator(
-                                      color: HexColor('#AF4537')),
+                                      color: Color(0xffAF4537)),
                                 ),
                               ),
                             ),
@@ -155,7 +154,7 @@ class LoginScreen extends StatelessWidget {
                                       fontSize: 15),
                                   CustomTextButton(
                                       text: 'Sign Up',
-                                      textColor: HexColor('#AF4537'),
+                                      textColor: Color(0xffAF4537),
                                       fontSize: 20,
                                       onPress: () => navigateTo(
                                           context, RouteConstant.registerRoute))

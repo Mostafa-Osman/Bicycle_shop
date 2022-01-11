@@ -2,40 +2,40 @@
 
 import 'package:udemy_flutter/screens/my_bag/model/add_to_bag_model.dart';
 
-abstract class BagStates {}
+abstract class BasketStates {}
 
-class BagInitialState extends BagStates {}
+class BasketInitialState extends BasketStates {}
 
-class AddToBagLoadingState extends BagStates {}
+class AddToBasketLoadingState extends BasketStates {}
 
-class AddToBagSuccessState extends BagStates {}
+class AddToBasketSuccessState extends BasketStates {}
 
-class AddToBagErrorState extends BagStates {}
+class AddToBasketErrorState extends BasketStates {}
 
-class BagUpdateQuantityLoadingState extends BagStates {}
+class BasketUpdateQuantityLoadingState extends BasketStates {}
 
-class BagUpdateQuantitySuccessState extends BagStates {
-  final AddToBagModel updateQuantityModel;
+class BasketUpdateQuantitySuccessState extends BasketStates {
+  final BasketModel updateQuantityModel;
 
-  BagUpdateQuantitySuccessState(this.updateQuantityModel);
+  BasketUpdateQuantitySuccessState(this.updateQuantityModel);
 }
 
-class BagUpdateQuantityErrorState extends BagStates {}
+class BasketUpdateQuantityErrorState extends BasketStates {}
 
-class DeleteFromBagLoadingState extends BagStates {}
+class DeleteFromBasketLoadingState extends BasketStates {}
 
-class DeleteFromBagSuccessState extends BagStates {}
+class DeleteFromBasketSuccessState extends BasketStates {}
 
-class DeleteFromBagErrorState extends BagStates {}
+class DeleteFromBasketErrorState extends BasketStates {}
 
-class ShopGetOrderLoadingState extends BagStates {}
+class ShopGetOrderLoadingState extends BasketStates {}
 
 
-class ShopGetOrderSuccessState extends BagStates {
-  final AddToBagModel model;
+class ShopGetOrderSuccessState extends BasketStates {
+  final BasketModel model;
 
   ShopGetOrderSuccessState(this.model);
 }
 
-class ShopGetOrderErrorState extends BagStates {}
-class BagCountState extends BagStates {}
+class ShopGetOrderErrorState extends BasketStates {}
+class BasketCountState extends BasketStates {}

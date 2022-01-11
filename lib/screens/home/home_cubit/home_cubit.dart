@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/screens/home/home_cubit/states.dart';
+import 'package:udemy_flutter/screens/home/model/banner_model.dart';
 import 'package:udemy_flutter/screens/home/model/home_model.dart';
 import 'package:udemy_flutter/shared/components/constants.dart';
 import 'package:udemy_flutter/shared/network/end_points.dart';
@@ -30,21 +31,21 @@ class HomeCubit extends Cubit<HomeStates> {
     });
   }
 
-  // BannerModel? banner;
-  //
-  // void getBannerData() {
-  //   emit(HomeBannerLoadingState());
-  //   DioHelper.getData(
-  //     url: BANNER,
-  //     token: token,
-  //   ).then((value) {
-  //     banner = BannerModel.fromJson(value.data);
-  //     emit(HomeBannerSuccessState());
-  //   }).catchError((error) {
-  //     print(error.toString());
-  //     emit(HomeBannerErrorState());
-  //   });
-  // }
+  BannerModel? banner;
+
+  void getBannerData() {
+    emit(HomeBannerLoadingState());
+    DioHelper.getData(
+      url: BANNER,
+      token: token,
+    ).then((value) {
+      banner = BannerModel.fromJson(value.data);
+      emit(HomeBannerSuccessState());
+    }).catchError((error) {
+      print(error.toString());
+      emit(HomeBannerErrorState());
+    });
+  }
 
 
   int photoIndex = 0;

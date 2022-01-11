@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
 import 'package:udemy_flutter/shared/components/custom_text_button.dart';
 import 'package:udemy_flutter/shared/components/custom_button.dart';
@@ -59,10 +58,10 @@ class RegisterScreen extends StatelessWidget {
                               controller: registerNameControl,
                               textHint: 'Enter your Name',
                               hintColor: grey,
-                              backgroundColor: HexColor("#f2f2f2"),
+                              backgroundColor: Color(0xfff2f2f2),
                               prefix: Icon(
                                 Icons.account_circle_outlined,
-                                color: HexColor('#AF4537'),
+                                color: mainColor,
                               ),
                               validator: (value) => (value!.isEmpty)
                                   ? 'Please Enter Your Name'
@@ -80,9 +79,9 @@ class RegisterScreen extends StatelessWidget {
                               keyboardType: TextInputType.phone,
                               textHint: 'Enter your Phone Number',
                               hintColor: grey,
-                              backgroundColor: HexColor("#f2f2f2"),
-                              prefix: Icon(Icons.phone_android,
-                                  color: HexColor('#AF4537')),
+                              backgroundColor: Color(0xfff2f2f2),
+                              prefix:
+                                  Icon(Icons.phone_android, color: mainColor),
                               validator: (value) => value!.isEmpty
                                   ? 'Please enter your phone number'
                                   : (value.length != 9)
@@ -99,7 +98,7 @@ class RegisterScreen extends StatelessWidget {
                             //another text field for email
                             CustomTextFormField(
                               controller: registerEmailControl,
-                              backgroundColor: HexColor("#f2f2f2"),
+                              backgroundColor: Color(0xfff2f2f2),
                               textHint: "Enter your Email",
                               validator: (value) {
                                 if (value!.isEmpty)
@@ -110,7 +109,7 @@ class RegisterScreen extends StatelessWidget {
                               },
                               prefix: Icon(
                                 Icons.email,
-                                color: HexColor('#AF4537'),
+                                color: mainColor,
                               ),
                             ),
 
@@ -122,7 +121,7 @@ class RegisterScreen extends StatelessWidget {
                                     CustomText(text: 'password', fontSize: 20)),
                             // Text form field to enter password
                             CustomTextFormField(
-                                backgroundColor: HexColor("#f2f2f2"),
+                                backgroundColor: Color(0xfff2f2f2),
                                 controller: registerPasswordControl,
                                 validator: (value) => (value!.isEmpty)
                                     ? 'Please Enter Your password'
@@ -133,7 +132,7 @@ class RegisterScreen extends StatelessWidget {
                                 hintColor: grey,
                                 prefix: Icon(
                                   Icons.lock,
-                                  color: HexColor('#AF4537'),
+                                  color: mainColor,
                                 ),
                                 suffixIcon: IconButton(
                                     onPressed: () => RegisterCubit.get(context)
@@ -156,10 +155,10 @@ class RegisterScreen extends StatelessWidget {
                               textHint: ' Rewrite password',
                               controller: registerConfirmPasswordControl,
                               obscureText: cubit.confirmNotVisible,
-                              backgroundColor: HexColor("#f2f2f2"),
+                              backgroundColor: Color(0xfff2f2f2),
                               prefix: Icon(
                                 Icons.lock,
-                                color: HexColor('#AF4537'),
+                                color: mainColor,
                               ),
                               suffixIcon: IconButton(
                                   onPressed: () =>
@@ -178,7 +177,7 @@ class RegisterScreen extends StatelessWidget {
                             // button to submit register
                             CustomButton(
                               text: 'submit',
-                              buttonColor: HexColor('#AF4537'),
+                              buttonColor: mainColor,
                               onPressed: () {
                                 if (_formKey.currentState!.validate()) {
                                   RegisterCubit.get(context).userRegister(
@@ -201,7 +200,7 @@ class RegisterScreen extends StatelessWidget {
                                     fontSize: 13),
                                 CustomTextButton(
                                     text: ' Sign In',
-                                    textColor: HexColor('#AF4537'),
+                                    textColor: mainColor,
                                     fontSize: 20,
                                     onPress: () => navigateTo(
                                         context, RouteConstant.loginRoute))

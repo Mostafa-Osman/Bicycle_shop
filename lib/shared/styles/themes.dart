@@ -1,30 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:hexcolor/hexcolor.dart';
+import 'package:udemy_flutter/shared/styles/color.dart';
 
 ThemeData darkTheme = ThemeData(
   primarySwatch: Colors.deepOrange,
-  scaffoldBackgroundColor: HexColor('333739'),
+  scaffoldBackgroundColor: Color(0xff333739),
   appBarTheme: AppBarTheme(
-    color: Colors.white,
+    color: white,
     titleSpacing: 20.0,
     backwardsCompatibility: false,
     systemOverlayStyle: SystemUiOverlayStyle(
-      statusBarColor: HexColor('333739'),
+      statusBarColor: Color(0xff333739),
       statusBarBrightness: Brightness.light,
     ),
   ),
 );
 ThemeData lightTheme = ThemeData(
   primarySwatch: Colors.deepOrange,
-  scaffoldBackgroundColor: Colors.white,
-  backgroundColor: Colors.white,
+  scaffoldBackgroundColor: white,
+  backgroundColor: white,
   appBarTheme: AppBarTheme(
-    color: Colors.white,
+    color: white,
     titleSpacing: 100.0,
     backwardsCompatibility: false,
     systemOverlayStyle: SystemUiOverlayStyle(
-      statusBarColor: Colors.black,
+      statusBarColor: black,
     statusBarBrightness: Brightness.dark,
     ),
 

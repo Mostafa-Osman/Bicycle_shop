@@ -16,7 +16,7 @@ class HomeScreen extends StatelessWidget {
                   child: CircularProgressIndicator(
                   color: red,
                 ))
-              : HomeBody(model:HomeCubit.get(context).homeModel);
+              :  HomeBody(model:HomeCubit.get(context).homeModel);
         });
   }
 }

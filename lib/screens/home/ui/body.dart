@@ -3,9 +3,11 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
 import 'package:udemy_flutter/screens/favourites/favourite_cubit/favourite_cubit.dart';
 import 'package:udemy_flutter/screens/home/home_cubit/home_cubit.dart';
+import 'package:udemy_flutter/screens/search/cubit/cubit.dart';
 import 'package:udemy_flutter/shared/components/custom_favourite-icon.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/components/navigate.dart';
+import 'package:udemy_flutter/shared/components/search__appbar.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 
 class HomeBody extends StatelessWidget {
@@ -15,80 +17,92 @@ class HomeBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      physics: BouncingScrollPhysics(),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 15.0, left: 10.0, right: 10.0),
-            child: TextFormField(
-              readOnly: true,
-              onTap: () => navigateTo(context, RouteConstant.searchRoute),
-              decoration: InputDecoration(
-                fillColor: Colors.grey[100],
-                filled: true,
-                contentPadding: EdgeInsets.all(10),
-                prefixIcon: Icon(Icons.search),
-                hintText: 'Search...',
-                hintStyle: TextStyle(
-                    fontSize: 18, fontWeight: FontWeight.bold, color: grey),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(25),
+    return Stack(
+      children: [
+
+        Container(
+          margin: EdgeInsets.only(top: 10.0,left:10.0),
+          width: double.infinity,
+          child: Row(
+            children: [
+              Expanded(
+                child: TextFormField(
+                  readOnly: true,
+                  onTap: () => navigateTo(context, RouteConstant.searchRoute),
+                  decoration: InputDecoration(
+                    fillColor: Colors.grey[100],
+                    filled: true,
+                    contentPadding: EdgeInsets.all(10),
+                    prefixIcon: Icon(Icons.search),
+                    hintText: 'Search...',
+                    hintStyle: TextStyle(
+                        fontSize: 18, fontWeight: FontWeight.bold, color: grey),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                  ),
                 ),
               ),
+              Padding(
+                padding: const EdgeInsets.only(right: 10.0),
+                child: IconButton(
+                  onPressed: () =>
+                      navigateTo(context, RouteConstant.favouriteRoute),
+                  icon: Icon(Icons.favorite, color: red, size: 40),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 70.0),
+          child: SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                //banner
+                // Container(
+                //   height: 250.0,
+                //   width: double.infinity,
+                //   child: ListView.builder(
+                //     scrollDirection: Axis.horizontal,
+                //     physics: PageScrollPhysics(),
+                //     shrinkWrap: true,
+                //     itemExtent: 400.0,
+                //     itemCount: HomeCubit.get(context).banner!.data.length,
+                //     itemBuilder: (context, index) {
+                //       HomeCubit.get(context).changePhotoIndex(index - 1);
+                //       return Image(
+                //         image: NetworkImage(
+                //             HomeCubit.get(context).banner!.data[index].image!),
+                //         fit: BoxFit.fitHeight,
+                //       );
+                //     },
+                //   ),
+                // ),
+                SizedBox(
+                  height: 20,
+                ),
+                StaggeredGridView.countBuilder(
+                  staggeredTileBuilder: (int index) => new StaggeredTile.fit(1),
+                  //direction of scrolling
+                  scrollDirection: Axis.vertical,
+                  //to make products in home page scrolling
+                  physics: ScrollPhysics(),
+                  mainAxisSpacing: 8.0,
+                  crossAxisSpacing: 8.0,
+                  shrinkWrap: true,
+                  crossAxisCount: 2,
+                  itemCount: model.data!.detailsData.length,
+                  itemBuilder: (BuildContext context, int index) =>
+                      Item(data: model.data!.detailsData[index]),
+                ),
+              ],
             ),
           ),
-
-          //banner
-          //  CarouselSlider(
-          //    items: model.banner.data
-          //        .map((e) => Padding(
-          //              padding: const EdgeInsets.all(10.0),
-          //              child: Container(
-          //                decoration: BoxDecoration(
-          //                    borderRadius: BorderRadius.circular(20)),
-          //                clipBehavior: Clip.antiAliasWithSaveLayer,
-          //                child: Image(
-          //                  image: NetworkImage(e.image),
-          //                  width: double.infinity,
-          //                  fit: BoxFit.cover,
-          //                ),
-          //              ),
-          //            ))
-          //        .toList(),
-          //    options: CarouselOptions(
-          //        height: 200.0,
-          //        initialPage: 1,
-          //        enableInfiniteScroll: true,
-          //        reverse: false,
-          //        autoPlay: false,
-          //        autoPlayInterval: Duration(seconds: 3),
-          //        autoPlayAnimationDuration: Duration(seconds: 3),
-          //        autoPlayCurve: Curves.fastOutSlowIn,
-          //        viewportFraction: 1.0,
-          //        scrollDirection: Axis.horizontal),
-          //  ),
-
-          SizedBox(
-            height: 20,
-          ),
-          StaggeredGridView.countBuilder(
-            staggeredTileBuilder: (int index) => new StaggeredTile.fit(1),
-            //direction of scrolling
-            scrollDirection: Axis.vertical,
-            //to make products in home page scrolling
-            physics: ScrollPhysics(),
-            mainAxisSpacing: 8.0,
-            crossAxisSpacing: 8.0,
-            shrinkWrap: true,
-            crossAxisCount: 2,
-            itemCount: model.data!.detailsData.length,
-            itemBuilder: (BuildContext context, int index) =>
-                Item(data: model.data!.detailsData[index]),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

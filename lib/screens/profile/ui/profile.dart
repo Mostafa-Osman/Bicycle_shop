@@ -18,12 +18,14 @@ class ProfileScreen extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         var model = ProfileCubit.get(context).userModel!.data;
-        // nameController.text = model!.name!;
-        // emailController.text = model.email!;
-        // phoneController.text = model.phone!;
+
         return ConditionalBuilder(
-          condition: (state is ProfileSuccessState),
-          builder: (context) => SingleChildScrollView(
+          condition: (state is ProfileLoadingState||state is ProfileInitialState),
+          builder:(context) => Center(
+              child: CircularProgressIndicator(
+                color: red,
+              )),
+          fallback: (context) => SingleChildScrollView(
             child: Align(
               //alignment: Alignment.topCenter,
               child: Container(
@@ -51,11 +53,11 @@ class ProfileScreen extends StatelessWidget {
                                 fit: BoxFit.fitWidth,
                                 child: ClipOval(
                                     child: Image.network(
-                                  model!.image!,
-                                  height: 180,
-                                  width: 180,
-                                  fit: BoxFit.cover,
-                                )),
+                                      model!.image!,
+                                      height: 180,
+                                      width: 180,
+                                      fit: BoxFit.cover,
+                                    )),
                               ),
                             ),
                             SizedBox(height: 30),
@@ -92,10 +94,6 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
           ),
-          fallback: (context) => Center(
-              child: CircularProgressIndicator(
-            color: Colors.red,
-          )),
         );
       },
     );
@@ -116,7 +114,7 @@ class AccountTextFormField extends StatelessWidget {
       child: Container(
         height: 45,
         decoration: BoxDecoration(
-          color: Colors.orangeAccent,
+          color:lightMainColor,
           borderRadius: BorderRadius.all(
             Radius.circular(10),
           ),
@@ -135,6 +133,7 @@ class AccountTextFormField extends StatelessWidget {
                     iconSize: size.width >= 500 ? 25 : size.width / 20,
                     padding: const EdgeInsets.all(0.0),
                     icon: Icon(icon),
+                    color: mainColor,
                     onPressed: () {},
                   ),
                   Padding(

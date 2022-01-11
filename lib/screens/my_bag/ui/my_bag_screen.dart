@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
+import 'package:udemy_flutter/screens/last_orders/my_orders_cubit/states.dart';
 import 'package:udemy_flutter/screens/favourites/favourite_cubit/favourite_cubit.dart';
 import 'package:udemy_flutter/screens/home/home_cubit/home_cubit.dart';
 import 'package:udemy_flutter/screens/my_bag/bag_cubit/bag_cubit.dart';
 import 'package:udemy_flutter/screens/my_bag/bag_cubit/states.dart';
 import 'package:udemy_flutter/shared/components/custom_favourite-icon.dart';
-import 'package:udemy_flutter/shared/components/component.dart';
 import 'package:udemy_flutter/shared/components/custom%20_card.dart';
 import 'package:udemy_flutter/shared/components/custom_button.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/components/navigate.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 
-class MyBagScreen extends StatelessWidget {
+class BasketScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<BagCubit, BagStates>(
+    return BlocConsumer<BasketCubit, BasketStates>(
         builder: (context, state) {
+          //  print(lastPageIndex);
           return Scaffold(
             appBar: AppBar(
               elevation: 0.0,
@@ -25,14 +26,22 @@ class MyBagScreen extends StatelessWidget {
               leading: IconButton(
                 onPressed: () {
                   Navigator.pop(context);
+                  // متمسحش التعليق ده مهم جدا جدا جدا
+                  // navigateReplacement(context,
+                  //    LayoutCubit.get(context).bottomNavScreen[lastPageIndex]
+                  // );
                 },
                 icon: Icon(Icons.arrow_back_ios_sharp, color: orange),
               ),
             ),
-            body: (state is AddToBagLoadingState ||
-                    state is BagUpdateQuantityLoadingState ||
-                    state is AddToBagErrorState ||
-                    state is BagUpdateQuantityErrorState)
+            body: (state is AddToBasketLoadingState ||
+                    state is BasketInitialState ||
+                    // state is BasketUpdateQuantityLoadingState ||
+                    state is AddToBasketErrorState ||
+                    state is ShopMyOrderLoadingState ||
+                    state is ShopGetOrderLoadingState
+                //|| state is BasketUpdateQuantityErrorState
+                )
                 ? Center(
                     child: CircularProgressIndicator(),
                   )
@@ -43,13 +52,13 @@ class MyBagScreen extends StatelessWidget {
                           height: MediaQuery.of(context).size.height,
                           child: ListView.builder(
                               shrinkWrap: true,
-                              itemBuilder: (context, index) => BuildItem(
-                                    model: BagCubit.get(context)
+                              itemBuilder: (context, index) => BasketItem(
+                                    model: BasketCubit.get(context)
                                         .myBag!
                                         .data!
                                         .cartItems[index],
                                   ),
-                              itemCount: BagCubit.get(context)
+                              itemCount: BasketCubit.get(context)
                                   .myBag!
                                   .data!
                                   .cartItems
@@ -70,7 +79,7 @@ class MyBagScreen extends StatelessWidget {
                           children: [
                             CustomText(
                               text:
-                                  ' Total: ${BagCubit.get(context).myBag!.data!.total} EGP',
+                                  ' Total: ${BasketCubit.get(context).myBag!.data!.total} EGP',
                               fontSize: 18.0,
                               textColor: mainColor,
                               // backgroundColor: Colors.orangeAccent[100],
@@ -103,11 +112,11 @@ class MyBagScreen extends StatelessWidget {
   }
 }
 
-class BuildItem extends StatelessWidget {
+class BasketItem extends StatelessWidget {
   final model;
   int count = 1;
 
-  BuildItem({required this.model});
+  BasketItem({required this.model});
 
   @override
   Widget build(BuildContext context) {
@@ -152,21 +161,22 @@ class BuildItem extends StatelessWidget {
                       Row(
                         children: [
                           CustomText(
-                          text:  'EGP ${model.product.price.toString()}',
-                                fontSize: 15.0,
-                                height: 1.0,
-                                fontWeight: FontWeight.bold,
-                                textColor: mainColor),
+                              text: 'EGP ${model.product.price.toString()}',
+                              fontSize: 15.0,
+                              height: 1.0,
+                              fontWeight: FontWeight.bold,
+                              textColor: mainColor),
                           SizedBox(
                             width: 5.0,
                           ),
                           if (model.product.discount != 0)
                             CustomText(
-                             text: 'EGP ${model.product.oldPrice.toInt().toString()}',
-                                  fontSize: 13.0,
-                                  height: 1.0,
-                                  textColor: grey,
-                                  decoration: TextDecoration.lineThrough),
+                                text:
+                                    'EGP ${model.product.oldPrice.toInt().toString()}',
+                                fontSize: 13.0,
+                                height: 1.0,
+                                textColor: grey,
+                                decoration: TextDecoration.lineThrough),
                           Spacer(),
                           CustomFavouriteIcon(
                               onPressed: () => FavouriteCubit.get(context)
@@ -179,12 +189,12 @@ class BuildItem extends StatelessWidget {
                         height: 5.0,
                       ),
                       CustomText(
-                      text:  model.product.name,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                            fontSize: 13.0,
-                            height: 1.3,
-                            fontWeight: FontWeight.bold),
+                          text: model.product.name,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          fontSize: 13.0,
+                          height: 1.3,
+                          fontWeight: FontWeight.bold),
                       SizedBox(
                         height: 10.0,
                       ),
@@ -193,25 +203,25 @@ class BuildItem extends StatelessWidget {
                           children: [
                             // CustomCounter(
                             //   increment: () {
-                            //     BagCubit.get(context).quantityOrder = BagCubit.get(context)
+                            //     BasketCubit.get(context).quantityOrder = BagCubit.get(context)
                             //         .myBag!
                             //         .data!
                             //         .cartItems[0]
                             //         .quantity!;
-                            //     BagCubit.get(context).incrementOrder();
+                            //     BasketCubit.get(context).incrementOrder();
                             //
-                            //     BagCubit.get(context).updateOrderData(
+                            //     BasketCubit.get(context).updateOrderData(
                             //         quantity: count, cartId: model.id!);
                             //   },
-                            //   textCount:   BagCubit.get(context).quantityOrder,
+                            //   textCount:   BasketCubit.get(context).quantityOrder,
                             //   decrement: () {
-                            //     BagCubit.get(context).quantityOrder = BagCubit.get(context)
+                            //     BasketCubit.get(context).quantityOrder = BasketCubit.get(context)
                             //         .myBag!
                             //         .data!
                             //         .cartItems[0]
                             //         .quantity!;
-                            //     BagCubit.get(context).decrementOrder();
-                            //     BagCubit.get(context).updateOrderData(
+                            //     BasketCubit.get(context).decrementOrder();
+                            //     BasketCubit.get(context).updateOrderData(
                             //         quantity: count, cartId: model.id!);
                             //   },
                             // ),
@@ -240,10 +250,10 @@ class BuildItem extends StatelessWidget {
                                               Expanded(
                                                 child: CustomButton(
                                                   onPressed: () {
-                                                    BagCubit.get(context)
+                                                    BasketCubit.get(context)
                                                         .deleteOrderData(
                                                             cartId: model.id);
-                                                    BagCubit.get(context)
+                                                    BasketCubit.get(context)
                                                         .getMyBagData();
                                                     Navigator.of(context).pop();
                                                   },

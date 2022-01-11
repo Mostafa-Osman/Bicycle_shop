@@ -8,8 +8,10 @@ class RouteConstant {
   static const String homeRoute = '/home';
   static const String notificationsRoute = '/notifications';
   static const String searchRoute = '/search';
+  static const String favouriteRoute = '/favourite';
+
   static const String profileRoute = '/profile';
-  static const String myBagRoute = '/myBag';
+  static const String basketRoute = '/myBag';
   static const String myOrderRoute ='/myOrder';
   static const String productDetailsRoute = '/productDetails';
   static const String shopLayoutRoute = '/shopLayout';

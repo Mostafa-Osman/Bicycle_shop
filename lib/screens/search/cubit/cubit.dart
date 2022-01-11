@@ -24,4 +24,5 @@ class SearchCubit extends Cubit<SearchStates> {
       emit(SearchErrorState());
     });
   }
+
 }
