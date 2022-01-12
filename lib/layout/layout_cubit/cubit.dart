@@ -21,7 +21,7 @@ class LayoutCubit extends Cubit<LayoutStates> {
   List<Widget> bottomNavScreen = [
     HomeScreen(),
     NotificationsScreen(),
-   BasketScreen(),
+    BasketScreen(),
     MyOrderScreen(),
     ProfileScreen(),
   ];

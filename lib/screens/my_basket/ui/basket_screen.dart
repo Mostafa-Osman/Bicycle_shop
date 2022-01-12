@@ -11,6 +11,8 @@ import 'package:udemy_flutter/shared/components/custom%20_card.dart';
 import 'package:udemy_flutter/shared/components/custom_button.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/components/navigate.dart';
+import 'package:udemy_flutter/shared/components/counter.dart';
+
 import 'package:udemy_flutter/shared/styles/color.dart';
 
 class BasketScreen extends StatelessWidget {
@@ -31,7 +33,7 @@ class BasketScreen extends StatelessWidget {
                   //    LayoutCubit.get(context).bottomNavScreen[lastPageIndex]
                   // );
                 },
-                icon: Icon(Icons.arrow_back_ios_sharp, color: orange),
+                icon: Icon(Icons.arrow_back_ios_sharp, color: mainColor),
               ),
             ),
             body: (state is AddToBasketLoadingState ||
@@ -201,30 +203,17 @@ class BasketItem extends StatelessWidget {
                       Expanded(
                         child: Row(
                           children: [
-                            // CustomCounter(
-                            //   increment: () {
-                            //     BasketCubit.get(context).quantityOrder = BagCubit.get(context)
-                            //         .myBag!
-                            //         .data!
-                            //         .cartItems[0]
-                            //         .quantity!;
-                            //     BasketCubit.get(context).incrementOrder();
-                            //
-                            //     BasketCubit.get(context).updateOrderData(
-                            //         quantity: count, cartId: model.id!);
-                            //   },
-                            //   textCount:   BasketCubit.get(context).quantityOrder,
-                            //   decrement: () {
-                            //     BasketCubit.get(context).quantityOrder = BasketCubit.get(context)
-                            //         .myBag!
-                            //         .data!
-                            //         .cartItems[0]
-                            //         .quantity!;
-                            //     BasketCubit.get(context).decrementOrder();
-                            //     BasketCubit.get(context).updateOrderData(
-                            //         quantity: count, cartId: model.id!);
-                            //   },
-                            // ),
+                            CustomCounter(
+                              increment: () => BasketCubit.get(context)
+                                  .updateOrderData(
+                                      quantity: ++model.quantity,
+                                      cartId: model.id!),
+                              textCount: model.quantity,
+                              decrement: () => BasketCubit.get(context)
+                                  .updateOrderData(
+                                      quantity: ++model.quantity,
+                                      cartId: model.id!),
+                            ),
                             Spacer(),
                             IconButton(
                               onPressed: () => showDialog(
@@ -234,7 +223,8 @@ class BasketItem extends StatelessWidget {
                                       backgroundColor: Colors.grey[200],
                                       insetPadding:
                                           EdgeInsets.symmetric(vertical: 50),
-                                      title: CustomText(text: 'Delete my_basket'),
+                                      title:
+                                          CustomText(text: 'Delete my_basket'),
                                       content: Container(
                                         height: 90.0,
                                         width: double.infinity,

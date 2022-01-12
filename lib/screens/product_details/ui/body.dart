@@ -21,9 +21,6 @@ class Body extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         //photo
-
-
-
         Container(
           height: 250.0,
           width: double.infinity,

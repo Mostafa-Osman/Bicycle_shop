@@ -14,8 +14,11 @@ class BannerSuccessState extends HomeStates {}
 
 class BannerErrorState extends HomeStates {}
 
+class BasketCountState extends HomeStates {}
+
 class CounterPlusState extends HomeStates {}
 
 class CounterMinusState extends HomeStates {}
+
 
 class ChangePhotoIndexState extends HomeStates {}

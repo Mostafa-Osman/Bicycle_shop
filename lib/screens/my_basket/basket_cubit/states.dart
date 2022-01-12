@@ -1,6 +1,3 @@
-
-
-
 import 'package:udemy_flutter/screens/my_basket/model/basket_model.dart';
 
 abstract class BasketStates {}
@@ -31,7 +28,6 @@ class DeleteFromBasketErrorState extends BasketStates {}
 
 class ShopGetOrderLoadingState extends BasketStates {}
 
-
 class ShopGetOrderSuccessState extends BasketStates {
   final BasketModel model;
 
@@ -39,4 +35,4 @@ class ShopGetOrderSuccessState extends BasketStates {
 }
 
 class ShopGetOrderErrorState extends BasketStates {}
-class BasketCountState extends BasketStates {}
+

@@ -54,15 +54,17 @@ class HomeCubit extends Cubit<HomeStates> {
     emit(ChangePhotoIndexState());
   }
 
-  int quantityOrder = 1;
+
+  int quantityProduct = 1;
 
   incrementOrder() {
-    quantityOrder++;
+    quantityProduct++;
     emit(CounterPlusState());
   }
 
   decrementOrder() {
-    if (quantityOrder != 1) quantityOrder--;
+    if (quantityProduct != 1) quantityProduct--;
     emit(CounterMinusState());
   }
+
 }

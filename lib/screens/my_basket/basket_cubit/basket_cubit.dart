@@ -11,7 +11,6 @@ class BasketCubit extends Cubit<BasketStates> {
   BasketCubit() : super(BasketInitialState());
 
   static BasketCubit get(context) => BlocProvider.of(context);
-  // int quantityOrder = 1;
   //add order to my bag
 
   void addToBasketOrders(int productId) {
@@ -54,7 +53,7 @@ class BasketCubit extends Cubit<BasketStates> {
         token: token,
         data: {'quantity': quantity}).then((value) {
       myBag = BasketModel.fromJson(value.data);
-      emit(ShopGetOrderSuccessState(myBag!));
+      emit(BasketUpdateQuantitySuccessState(myBag!));
       getMyBagData();
     }).catchError((error) {
       print(error.toString());
@@ -64,7 +63,7 @@ class BasketCubit extends Cubit<BasketStates> {
 
   //delete orders from bag
   void deleteOrderData({required int cartId}) {
-    emit(BasketUpdateQuantityLoadingState());
+    emit(DeleteFromBasketLoadingState());
     DioHelper.deleteData(
       url: DELETE_ORDERS + '$cartId',
       token: token,
@@ -75,6 +74,7 @@ class BasketCubit extends Cubit<BasketStates> {
       emit(DeleteFromBasketErrorState());
     });
   }
+
 
 
 

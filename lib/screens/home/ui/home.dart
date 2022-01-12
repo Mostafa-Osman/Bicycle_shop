@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/screens/home/home_cubit/home_cubit.dart';
-import 'package:udemy_flutter/screens/home/ui/body.dart';
+import 'package:udemy_flutter/screens/home/ui/home_body.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 import '../home_cubit/states.dart';
 

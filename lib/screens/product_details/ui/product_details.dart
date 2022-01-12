@@ -9,6 +9,9 @@ import 'package:udemy_flutter/screens/product_details/ui/body.dart';
 import 'package:udemy_flutter/shared/components/counter.dart';
 import 'package:udemy_flutter/shared/components/custom_button.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
+import 'package:udemy_flutter/route/route_constants.dart';
+import 'package:udemy_flutter/shared/components/navigate.dart';
+
 import 'package:udemy_flutter/shared/styles/color.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
@@ -26,8 +29,14 @@ class ProductDetailsScreen extends StatelessWidget {
             elevation: 0.0,
             leading: IconButton(
               onPressed: () => Navigator.pop(context),
-              icon: Icon(Icons.arrow_back_ios_sharp, color: orange),
+              icon: Icon(Icons.arrow_back_ios_sharp, color: mainColor),
             ),
+            actions: [
+              IconButton(
+                onPressed: () => navigateTo(context, RouteConstant.basketRoute),
+                icon: Icon(Icons.add_shopping_cart_rounded, color: mainColor),
+              ),
+            ],
           ),
           body: SingleChildScrollView(
             child: ConditionalBuilder(
@@ -35,7 +44,7 @@ class ProductDetailsScreen extends StatelessWidget {
               builder: (context) => Body(productDetails: productDetails),
               fallback: (context) => Center(
                 child:
-                CustomText(text: 'Empty !', fontSize: 15, textColor: grey),
+                    CustomText(text: 'Empty !', fontSize: 15, textColor: grey),
               ),
             ),
           ),
@@ -46,7 +55,7 @@ class ProductDetailsScreen extends StatelessWidget {
               children: [
                 CustomCounter(
                   increment: () => HomeCubit.get(context).incrementOrder(),
-                  textCount: HomeCubit.get(context).quantityOrder,
+                  textCount: HomeCubit.get(context).quantityProduct,
                   decrement: () => HomeCubit.get(context).decrementOrder(),
                 ),
                 SizedBox(width: 10),
@@ -54,9 +63,9 @@ class ProductDetailsScreen extends StatelessWidget {
                   child: CustomButton(
                       text: 'Add to bag',
                       onPressed: () {
-                        // BagCubit.get(context).updateOrderData(
-                        //     quantity: HomeCubit.get(context).quantityOrder,
-                        //     cartId: productDetails.id!);
+                        BasketCubit.get(context).updateOrderData(
+                            quantity: HomeCubit.get(context).quantityProduct,
+                            cartId: productDetails.id!);
                         BasketCubit.get(context)
                             .addToBasketOrders(productDetails.id!);
                       }),
