@@ -3,12 +3,11 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
 import 'package:udemy_flutter/screens/favourites/favourite_cubit/favourite_cubit.dart';
 import 'package:udemy_flutter/screens/home/home_cubit/home_cubit.dart';
-import 'package:udemy_flutter/screens/search/cubit/cubit.dart';
 import 'package:udemy_flutter/shared/components/custom_favourite-icon.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/components/navigate.dart';
-import 'package:udemy_flutter/shared/components/search__appbar.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 class HomeBody extends StatelessWidget {
   final model;
@@ -19,9 +18,8 @@ class HomeBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-
         Container(
-          margin: EdgeInsets.only(top: 10.0,left:10.0),
+          margin: EdgeInsets.only(top: 10.0, left: 10.0),
           width: double.infinity,
           child: Row(
             children: [
@@ -62,25 +60,37 @@ class HomeBody extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 //banner
-                // Container(
-                //   height: 250.0,
-                //   width: double.infinity,
-                //   child: ListView.builder(
-                //     scrollDirection: Axis.horizontal,
-                //     physics: PageScrollPhysics(),
-                //     shrinkWrap: true,
-                //     itemExtent: 400.0,
-                //     itemCount: HomeCubit.get(context).banner!.data.length,
-                //     itemBuilder: (context, index) {
-                //       HomeCubit.get(context).changePhotoIndex(index - 1);
-                //       return Image(
-                //         image: NetworkImage(
-                //             HomeCubit.get(context).banner!.data[index].image!),
-                //         fit: BoxFit.fitHeight,
-                //       );
-                //     },
-                //   ),
-                // ),
+                CarouselSlider(
+                  items: HomeCubit.get(context)
+                      .banner!
+                      .data
+                      .map((e) => Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20)),
+                              clipBehavior: Clip.antiAliasWithSaveLayer,
+                              child: Image(
+                                image: NetworkImage('${e.image}'),
+                                width: double.infinity,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ))
+                      .toList(),
+                  options: CarouselOptions(
+                      height: 200.0,
+                      initialPage: 1,
+                      autoPlay: false,
+                      enableInfiniteScroll: true,
+                      reverse: false,
+                      // autoPlayInterval: Duration(seconds: 10),
+                      // autoPlayAnimationDuration: Duration(seconds: 4),
+                      autoPlayCurve: Curves.fastOutSlowIn,
+                      viewportFraction: 1.0,
+                      scrollDirection: Axis.horizontal),
+                ),
+
                 SizedBox(
                   height: 20,
                 ),
@@ -90,6 +100,7 @@ class HomeBody extends StatelessWidget {
                   scrollDirection: Axis.vertical,
                   //to make products in home page scrolling
                   physics: ScrollPhysics(),
+
                   mainAxisSpacing: 8.0,
                   crossAxisSpacing: 8.0,
                   shrinkWrap: true,

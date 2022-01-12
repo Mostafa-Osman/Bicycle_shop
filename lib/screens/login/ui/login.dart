@@ -34,7 +34,7 @@ class LoginScreen extends StatelessWidget {
           } else {
             print(state.loginModel.message);
             showToast(
-                state: ToastStates.ERROR, message: state.loginModel.message);
+                state: ToastStates.ERROR, message: state.loginModel.message,);
           }
         }
       },

@@ -4,8 +4,8 @@ import 'package:udemy_flutter/route/route_constants.dart';
 import 'package:udemy_flutter/screens/last_orders/my_orders_cubit/states.dart';
 import 'package:udemy_flutter/screens/favourites/favourite_cubit/favourite_cubit.dart';
 import 'package:udemy_flutter/screens/home/home_cubit/home_cubit.dart';
-import 'package:udemy_flutter/screens/my_bag/bag_cubit/bag_cubit.dart';
-import 'package:udemy_flutter/screens/my_bag/bag_cubit/states.dart';
+import 'package:udemy_flutter/screens/my_basket/basket_cubit/basket_cubit.dart';
+import 'package:udemy_flutter/screens/my_basket/basket_cubit/states.dart';
 import 'package:udemy_flutter/shared/components/custom_favourite-icon.dart';
 import 'package:udemy_flutter/shared/components/custom%20_card.dart';
 import 'package:udemy_flutter/shared/components/custom_button.dart';
@@ -234,7 +234,7 @@ class BasketItem extends StatelessWidget {
                                       backgroundColor: Colors.grey[200],
                                       insetPadding:
                                           EdgeInsets.symmetric(vertical: 50),
-                                      title: CustomText(text: 'Delete my_bag'),
+                                      title: CustomText(text: 'Delete my_basket'),
                                       content: Container(
                                         height: 90.0,
                                         width: double.infinity,

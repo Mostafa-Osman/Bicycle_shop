@@ -34,19 +34,18 @@ class HomeCubit extends Cubit<HomeStates> {
   BannerModel? banner;
 
   void getBannerData() {
-    emit(HomeBannerLoadingState());
+    emit(BannerLoadingState());
     DioHelper.getData(
       url: BANNER,
       token: token,
     ).then((value) {
       banner = BannerModel.fromJson(value.data);
-      emit(HomeBannerSuccessState());
+      emit(BannerSuccessState());
     }).catchError((error) {
       print(error.toString());
-      emit(HomeBannerErrorState());
+      emit(BannerErrorState());
     });
   }
-
 
   int photoIndex = 0;
 
@@ -54,8 +53,6 @@ class HomeCubit extends Cubit<HomeStates> {
     photoIndex = index;
     emit(ChangePhotoIndexState());
   }
-
-
 
   int quantityOrder = 1;
 

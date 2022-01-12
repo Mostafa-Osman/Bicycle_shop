@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -20,6 +21,9 @@ class Body extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         //photo
+
+
+
         Container(
           height: 250.0,
           width: double.infinity,
@@ -30,7 +34,7 @@ class Body extends StatelessWidget {
             itemExtent: 400.0,
             itemCount: productDetails!.images.length,
             itemBuilder: (context, index) {
-              HomeCubit.get(context).changePhotoIndex(index-1);
+              HomeCubit.get(context).changePhotoIndex(index - 1);
               return Image(
                 image: NetworkImage(productDetails!.images[index]),
                 fit: BoxFit.fitHeight,

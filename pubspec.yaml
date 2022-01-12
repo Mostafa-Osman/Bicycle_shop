@@ -49,6 +49,8 @@ dependencies:
   checkbox_grouped: ^1.7.1
   flutter_toggle_tab: ^1.1.7
   flutter_credit_card:
+  carousel_slider: ^4.0.0
+
 
 
 dev_dependencies:

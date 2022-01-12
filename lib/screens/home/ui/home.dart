@@ -11,12 +11,18 @@ class HomeScreen extends StatelessWidget {
     return BlocConsumer<HomeCubit, HomeStates>(
         listener: (context, state) {},
         builder: (context, state) {
-          return (state is! HomeSuccessState)
+          return (state is HomeLoadingState ||
+                  state is BannerLoadingState ||
+                  state is HomeInitialState)
               ? const Center(
                   child: CircularProgressIndicator(
                   color: red,
                 ))
-              :  HomeBody(model:HomeCubit.get(context).homeModel);
+              : (state is HomeErrorState || state is BannerErrorState)
+                  ? const Center(
+                      child: Text('Error 404 !',
+                          style: TextStyle(fontSize: 30, color: red)))
+                  : HomeBody(model: HomeCubit.get(context).homeModel);
         });
   }
 }

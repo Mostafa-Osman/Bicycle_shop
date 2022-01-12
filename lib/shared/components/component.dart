@@ -8,8 +8,9 @@ void showToast({required String message, required ToastStates state}) =>
         toastLength: Toast.LENGTH_LONG,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 5,
+
         backgroundColor: chooseToastColor(state),
-        textColor: Colors.red,
+        textColor: Colors.black,
         fontSize: 16.0);
 enum ToastStates { SUCCESS, ERROR, WARNING }
 

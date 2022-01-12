@@ -1,7 +1,7 @@
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:udemy_flutter/screens/my_bag/model/add_to_bag_model.dart';
-import 'package:udemy_flutter/screens/my_bag/bag_cubit/states.dart';
+import 'package:udemy_flutter/screens/my_basket/model/basket_model.dart';
+import 'package:udemy_flutter/screens/my_basket/basket_cubit/states.dart';
 
 import 'package:udemy_flutter/shared/components/constants.dart';
 import 'package:udemy_flutter/shared/network/end_points.dart';

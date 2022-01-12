@@ -1,7 +1,7 @@
 import 'package:checkbox_grouped/checkbox_grouped.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:udemy_flutter/screens/my_bag/bag_cubit/bag_cubit.dart';
+import 'package:udemy_flutter/screens/my_basket/basket_cubit/basket_cubit.dart';
 import 'package:udemy_flutter/screens/payment/payment_cubit/payment_cubit.dart';
 import 'package:udemy_flutter/screens/payment/payment_cubit/states.dart';
 import 'package:udemy_flutter/screens/payment/ui/card_item.dart';

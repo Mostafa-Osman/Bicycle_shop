@@ -1,6 +1,7 @@
 
 
-import 'package:udemy_flutter/screens/my_bag/model/add_to_bag_model.dart';
+
+import 'package:udemy_flutter/screens/my_basket/model/basket_model.dart';
 
 abstract class BasketStates {}
 

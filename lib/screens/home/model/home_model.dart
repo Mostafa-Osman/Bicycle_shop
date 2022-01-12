@@ -34,9 +34,6 @@ class DetailsData {
   List<dynamic>? images;
   bool? inFavorites;
   bool? inCart;
-
-
-
   DetailsData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     price = json['price'];

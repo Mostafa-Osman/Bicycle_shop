@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/screens/home/home_cubit/home_cubit.dart';
 import 'package:udemy_flutter/screens/home/home_cubit/states.dart';
 import 'package:udemy_flutter/screens/home/model/home_model.dart';
-import 'package:udemy_flutter/screens/my_bag/bag_cubit/bag_cubit.dart';
+import 'package:udemy_flutter/screens/my_basket/basket_cubit/basket_cubit.dart';
 import 'package:udemy_flutter/screens/product_details/ui/body.dart';
 import 'package:udemy_flutter/shared/components/counter.dart';
 import 'package:udemy_flutter/shared/components/custom_button.dart';

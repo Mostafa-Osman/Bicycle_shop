@@ -1,6 +1,6 @@
 class BannerModel {
   bool? status;
- String? message;
+  String? message;
   List<Data> data=[];
 
   BannerModel({this.status, this.message, required this.data});
@@ -15,22 +15,16 @@ class BannerModel {
       });
     }
   }
-
 }
 
 class Data {
   int? id;
   String? image;
-  Null category;
-  Null product;
 
-  Data({this.id, this.image, this.category, this.product});
+  Data({this.id, this.image});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     image = json['image'];
-    category = json['category'];
-    product = json['product'];
   }
-
 }

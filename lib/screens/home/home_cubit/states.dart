@@ -8,11 +8,11 @@ class HomeSuccessState extends HomeStates {}
 
 class HomeErrorState extends HomeStates {}
 
-class HomeBannerLoadingState extends HomeStates {}
+class BannerLoadingState extends HomeStates {}
 
-class HomeBannerSuccessState extends HomeStates {}
+class BannerSuccessState extends HomeStates {}
 
-class HomeBannerErrorState extends HomeStates {}
+class BannerErrorState extends HomeStates {}
 
 class CounterPlusState extends HomeStates {}
 

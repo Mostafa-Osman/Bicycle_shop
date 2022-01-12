@@ -4,7 +4,7 @@ import 'package:udemy_flutter/screens/favourites/ui/favourites.dart';
 import 'package:udemy_flutter/screens/home/model/home_model.dart';
 import 'package:udemy_flutter/screens/home/ui/home.dart';
 import 'package:udemy_flutter/screens/login/ui/login.dart';
-import 'package:udemy_flutter/screens/my_bag/ui/my_bag_screen.dart';
+import 'package:udemy_flutter/screens/my_basket/ui/basket_screen.dart';
 import 'package:udemy_flutter/screens/last_orders/ui/my_orders.dart';
 import 'package:udemy_flutter/screens/notifications/ui/notifications_screen.dart';
 import 'package:udemy_flutter/screens/on_boarding/ui/on_boarding.dart';

@@ -2,16 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/screens/last_orders/my_orders_cubit/my_orders_cubit.dart';
 import 'package:udemy_flutter/screens/last_orders/my_orders_cubit/states.dart';
-import 'package:udemy_flutter/shared/components/custom_divider.dart';
-import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
+import 'package:udemy_flutter/shared/components/custom_text.dart';
+import 'package:udemy_flutter/shared/components/custom_divider.dart';
+
 
 class MyOrderScreen extends StatelessWidget {
+
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<MyOrdersCubit, MyOrdersStates>(
         builder: (context, state) {
-          return Scaffold(
+          return
+            Scaffold(
             body: state is ShopMyOrderLoadingState
                 ? Center(
                     child: CircularProgressIndicator(
