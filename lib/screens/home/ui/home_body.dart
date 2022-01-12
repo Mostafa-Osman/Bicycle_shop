@@ -100,7 +100,6 @@ class HomeBody extends StatelessWidget {
                   scrollDirection: Axis.vertical,
                   //to make products in home page scrolling
                   physics: ScrollPhysics(),
-
                   mainAxisSpacing: 8.0,
                   crossAxisSpacing: 8.0,
                   shrinkWrap: true,
@@ -148,10 +147,12 @@ class Item extends StatelessWidget {
             children: [
               Stack(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
+                  Container(
+                    margin: EdgeInsets.all(10.0),
+                    height: 200.0,
                     child: Image(
                       image: NetworkImage(data.image),
+                      fit: BoxFit.contain,
                     ),
                   ),
                   if (data.discount != 0)

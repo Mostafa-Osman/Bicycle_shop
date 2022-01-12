@@ -82,8 +82,10 @@ class PaymentScreen extends StatelessWidget {
                             title: "Do you want to use discount voucher?",
                             labels: cubit.labelText,
                             selectedIndex: cubit.voucherTabTextIndexSelected,
-                            selectedLabelIndex: (index) =>
-                                cubit.changeVoucher(index)),
+                            selectedLabelIndex: (index) {
+
+                              return cubit.changeVoucher(index);
+                            }),
                       ),
                       CustomCard(
                           widget: SizedBox(
