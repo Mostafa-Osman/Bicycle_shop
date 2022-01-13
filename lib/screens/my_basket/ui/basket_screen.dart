@@ -90,17 +90,8 @@ class BasketScreen extends StatelessWidget {
                             ),
                             CustomButton(
                               text: 'Complete orders now',
-                              onPressed: () {
-                                // AddOrderCubit.get(context).addOrders(
-                                //     BagCubit.get(context)
-                                //         .myBag!
-                                //         .data!
-                                //         .cartItems[0]
-                                //         .id,
-                                //     1,
-                                //     false);
-                                navigateTo(context, RouteConstant.paymentRoute);
-                              },
+                              onPressed: () => navigateTo(
+                                  context, RouteConstant.paymentRoute),
                             )
                           ],
                         ),
@@ -204,12 +195,12 @@ class BasketItem extends StatelessWidget {
                           children: [
                             CustomCounter(
                               increment: () => BasketCubit.get(context)
-                                  .updateOrderData(
+                                  .updateBasketOrderData(
                                       quantity: ++model.quantity,
                                       cartId: model.id!),
                               textCount: model.quantity,
                               decrement: () => BasketCubit.get(context)
-                                  .updateOrderData(
+                                  .updateBasketOrderData(
                                       quantity: ++model.quantity,
                                       cartId: model.id!),
                             ),
@@ -240,10 +231,10 @@ class BasketItem extends StatelessWidget {
                                                 child: CustomButton(
                                                   onPressed: () {
                                                     BasketCubit.get(context)
-                                                        .deleteOrderData(
+                                                        .deleteOrderFromBasketData(
                                                             cartId: model.id);
                                                     BasketCubit.get(context)
-                                                        .getMyBagData();
+                                                        .getMyBasketData();
                                                     Navigator.of(context).pop();
                                                   },
                                                   text: 'Delete',

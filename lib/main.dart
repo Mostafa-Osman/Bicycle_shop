@@ -74,7 +74,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => favouriteBloc..getFavouritesData()),
         BlocProvider(create: (context) => homeBloc..getHomeData()..getBannerData()),
         BlocProvider(create: (context) => categoryBloc..getCategoriesData()),
-        BlocProvider(create: (context) => basketBloc..getMyBagData()),
+        BlocProvider(create: (context) => basketBloc..getMyBasketData()),
         BlocProvider(create: (context) => myOrdersBloc..getOrders()),
         BlocProvider(create: (context) => notificationBloc..getNotifications()),
         BlocProvider(create: (context) => profileBloc..getUserData()),

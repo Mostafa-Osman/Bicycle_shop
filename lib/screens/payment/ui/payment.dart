@@ -6,7 +6,6 @@ import 'package:udemy_flutter/screens/payment/payment_cubit/payment_cubit.dart';
 import 'package:udemy_flutter/screens/payment/payment_cubit/states.dart';
 import 'package:udemy_flutter/screens/payment/ui/card_item.dart';
 import 'package:udemy_flutter/screens/payment/ui/credit_card.dart';
-import 'package:udemy_flutter/shared/components/component.dart';
 import 'package:udemy_flutter/shared/components/custom%20_card.dart';
 import 'package:udemy_flutter/shared/components/custom_button.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
@@ -16,7 +15,7 @@ import 'package:udemy_flutter/shared/styles/color.dart';
 class PaymentScreen extends StatelessWidget {
   final controller = GroupController();
   final addressControl = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
+  final _key = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -26,13 +25,13 @@ class PaymentScreen extends StatelessWidget {
           var cubit = PaymentCubit.get(context);
           return Scaffold(
             appBar: AppBar(
-              title: CustomText(text: 'Payment'),
+              title: CustomText(text: 'Payment', textColor: mainColor),
               elevation: 0,
               leading: IconButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                icon: Icon(Icons.arrow_back_ios_sharp, color: orange),
+                icon: Icon(Icons.arrow_back_ios_sharp, color: mainColor),
               ),
             ),
             body: SingleChildScrollView(
@@ -40,6 +39,7 @@ class PaymentScreen extends StatelessWidget {
                 padding:
                     const EdgeInsets.only(top: 40.0, right: 20.0, left: 20.0),
                 child: Container(
+                  height: MediaQuery.of(context).size.height,
                   width: double.infinity,
                   child: Column(
                     children: [
@@ -83,7 +83,6 @@ class PaymentScreen extends StatelessWidget {
                             labels: cubit.labelText,
                             selectedIndex: cubit.voucherTabTextIndexSelected,
                             selectedLabelIndex: (index) {
-
                               return cubit.changeVoucher(index);
                             }),
                       ),
@@ -97,7 +96,7 @@ class PaymentScreen extends StatelessWidget {
                                 fontSize: 18),
                             SizedBox(height: 10),
                             CustomTextFormField(
-                                key: _formKey,
+                                key: _key,
                                 controller: addressControl,
                                 textHint: 'Add new address',
                                 hintColor: grey,
@@ -138,7 +137,28 @@ class PaymentScreen extends StatelessWidget {
                   CustomButton(
                     text: 'Complete orders now',
                     onPressed: () {
-                      if (_formKey.currentState!.validate()) print('ok');
+                      if (_key.currentState!.validate())
+                        BasketCubit.get(context).makeOrderData(
+                          BasketCubit.get(context)
+                              .myBag!
+                              .data!
+                              .cartItems[0]
+                              .product!
+                              .id,
+                          //points you must change it
+                          100,
+                          PaymentCubit.get(context).isOnline ? 0 : 1,
+                          PaymentCubit.get(context)
+                                      .discountTabTextIndexSelected ==
+                                  1
+                              ? true
+                              : false,
+                          PaymentCubit.get(context)
+                                      .voucherTabTextIndexSelected ==
+                                  1
+                              ? true
+                              : false,
+                        );
                     },
                   )
                 ],

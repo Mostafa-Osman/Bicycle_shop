@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:udemy_flutter/route/route_constants.dart';
 import 'package:udemy_flutter/screens/last_orders/my_orders_cubit/my_orders_cubit.dart';
 import 'package:udemy_flutter/screens/last_orders/my_orders_cubit/states.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
-import 'package:udemy_flutter/shared/components/custom_divider.dart';
 import 'package:udemy_flutter/shared/components/custom%20_card.dart';
+import 'package:udemy_flutter/shared/components/navigate.dart';
 
 class MyOrderScreen extends StatelessWidget {
   @override
@@ -18,13 +19,14 @@ class MyOrderScreen extends StatelessWidget {
                   color: red,
                 ))
               : state is MyOrderErrorState
-                  ? CustomText(text: 'error 404')
+                  ? Center(child: CustomText(text: 'error 404'))
                   : ListView.builder(
                       itemBuilder: (context, index) => OrdersBody(
                           order: MyOrdersCubit.get(context)
                               .orders!
                               .data!
-                              .listDoneOrders[index]),
+                              .listDoneOrders[index],
+                          index: index),
                       itemCount: MyOrdersCubit.get(context)
                           .orders!
                           .data!
@@ -38,8 +40,9 @@ class MyOrderScreen extends StatelessWidget {
 
 class OrdersBody extends StatelessWidget {
   final order;
+  final index;
 
-  const OrdersBody({required this.order});
+  const OrdersBody({required this.order, required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +51,12 @@ class OrdersBody extends StatelessWidget {
           top: 30.0, bottom: 10.0, right: 10.0, left: 10.0),
       child: CustomCard(
         widget: InkWell(
-          onTap: (){},
+          onTap: () {
+            MyOrdersCubit.get(context).getOrderDet(order.id);
+            navigateWithArgument(
+                context, RouteConstant.orderDetailsRoute, index);
+            print(order.id);
+          },
           child: Container(
             height: 90,
             width: double.infinity,

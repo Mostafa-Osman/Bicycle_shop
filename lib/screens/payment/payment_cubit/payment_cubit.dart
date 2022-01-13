@@ -7,8 +7,8 @@ class PaymentCubit extends Cubit<PaymentStates> {
 
   static PaymentCubit get(context) => BlocProvider.of(context);
   bool isOnline = false;
-  int discountTabTextIndexSelected = 0;
-  int voucherTabTextIndexSelected = 0;
+  int discountTabTextIndexSelected = 1;
+  int voucherTabTextIndexSelected = 1;
   String cardNumber = '';
   String expiryDate = '';
   String cardHolderName = '';
@@ -36,7 +36,6 @@ class PaymentCubit extends Cubit<PaymentStates> {
   changeDiscount(index) {
     emit(SwitchDiscountState());
     discountTabTextIndexSelected =index;
-
 
   }
 

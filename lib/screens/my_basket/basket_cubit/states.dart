@@ -36,3 +36,14 @@ class ShopGetOrderSuccessState extends BasketStates {
 
 class ShopGetOrderErrorState extends BasketStates {}
 
+
+class MakeOrderLoadingState extends BasketStates {}
+
+class  MakeOrderSuccessState extends BasketStates {
+  final BasketModel model;
+
+  MakeOrderSuccessState(this.model);
+}
+
+class  MakeOrderErrorState extends BasketStates {}
+

@@ -63,7 +63,7 @@ class ProductDetailsScreen extends StatelessWidget {
                   child: CustomButton(
                       text: 'Add to bag',
                       onPressed: () {
-                        BasketCubit.get(context).updateOrderData(
+                        BasketCubit.get(context).updateBasketOrderData(
                             quantity: HomeCubit.get(context).quantityProduct,
                             cartId: productDetails.id!);
                         BasketCubit.get(context)

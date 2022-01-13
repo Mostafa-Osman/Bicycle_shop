@@ -1,5 +1,5 @@
-
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:udemy_flutter/screens/my_basket/model/add_order_model.dart';
 import 'package:udemy_flutter/screens/my_basket/model/basket_model.dart';
 import 'package:udemy_flutter/screens/my_basket/basket_cubit/states.dart';
 
@@ -11,12 +11,13 @@ class BasketCubit extends Cubit<BasketStates> {
   BasketCubit() : super(BasketInitialState());
 
   static BasketCubit get(context) => BlocProvider.of(context);
-  //add order to my bag
+
+  //add order to my basket
 
   void addToBasketOrders(int productId) {
     emit(AddToBasketLoadingState());
     DioHelper.postData(
-      url: ADD_TO_BAG_ORDER,
+      url: ADD_TO_BASKET_ORDER,
       data: {
         'product_id': productId,
       },
@@ -29,12 +30,12 @@ class BasketCubit extends Cubit<BasketStates> {
     });
   }
 
-  //get orders to bag
+  //get orders to basket
   BasketModel? myBag;
 
-  void getMyBagData() {
+  void getMyBasketData() {
     emit(ShopGetOrderLoadingState());
-    DioHelper.getData(url: ADD_TO_BAG_ORDER, token: token).then((value) {
+    DioHelper.getData(url: ADD_TO_BASKET_ORDER, token: token).then((value) {
       myBag = BasketModel.fromJson(value.data);
 
       emit(ShopGetOrderSuccessState(myBag!));
@@ -44,9 +45,9 @@ class BasketCubit extends Cubit<BasketStates> {
     });
   }
 
-  //update quantity of orders in bag
+  //update quantity of orders in basket
 
-  void updateOrderData({required quantity, required int cartId}) {
+  void updateBasketOrderData({required quantity, required int cartId}) {
     emit(BasketUpdateQuantityLoadingState());
     DioHelper.putData(
         url: UPDATE_QUANTITY_ORDERS + '$cartId',
@@ -54,15 +55,15 @@ class BasketCubit extends Cubit<BasketStates> {
         data: {'quantity': quantity}).then((value) {
       myBag = BasketModel.fromJson(value.data);
       emit(BasketUpdateQuantitySuccessState(myBag!));
-      getMyBagData();
+      getMyBasketData();
     }).catchError((error) {
       print(error.toString());
       emit(BasketUpdateQuantityErrorState());
     });
   }
 
-  //delete orders from bag
-  void deleteOrderData({required int cartId}) {
+  //delete orders from basket
+  void deleteOrderFromBasketData({required int cartId}) {
     emit(DeleteFromBasketLoadingState());
     DioHelper.deleteData(
       url: DELETE_ORDERS + '$cartId',
@@ -75,7 +76,24 @@ class BasketCubit extends Cubit<BasketStates> {
     });
   }
 
+  //complete make order and add to get it
 
+  AddOrderModel? makeOrders;
 
-
+  void makeOrderData(addressId, paymentMethod, usePoints, discount, vat) {
+    emit(MakeOrderLoadingState());
+    DioHelper.postData(url: ADD_ORDER, token: token, data: {
+      'address_id': addressId,
+      'payment_method': paymentMethod,
+      'discount': discount,
+      'use_points': usePoints,
+      'vat': vat,
+    }).then((value) {
+      makeOrders = AddOrderModel.fromJson(value.data);
+      emit(MakeOrderSuccessState(myBag!));
+    }).catchError((error) {
+      print(error.toString());
+      emit(MakeOrderErrorState());
+    });
+  }
 }

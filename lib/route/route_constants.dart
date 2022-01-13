@@ -16,5 +16,6 @@ class RouteConstant {
   static const String productDetailsRoute = '/productDetails';
   static const String shopLayoutRoute = '/shopLayout';
   static const String paymentRoute = '/payment';
+  static const String orderDetailsRoute = '/orderDetails';
   // static const String verifyRoute = '/verify';
 }

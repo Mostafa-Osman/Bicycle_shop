@@ -3,6 +3,7 @@ import 'package:udemy_flutter/layout/shop_layout.dart';
 import 'package:udemy_flutter/screens/favourites/ui/favourites.dart';
 import 'package:udemy_flutter/screens/home/model/home_model.dart';
 import 'package:udemy_flutter/screens/home/ui/home.dart';
+import 'package:udemy_flutter/screens/last_orders/ui/detail_order.dart';
 import 'package:udemy_flutter/screens/login/ui/login.dart';
 import 'package:udemy_flutter/screens/my_basket/ui/basket_screen.dart';
 import 'package:udemy_flutter/screens/last_orders/ui/my_orders.dart';
@@ -52,6 +53,10 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => PaymentScreen());
       case RouteConstant.favouriteRoute:
         return MaterialPageRoute(builder: (_) => FavouritesScreen());
+      case RouteConstant.orderDetailsRoute:
+        final int arguments = settings.arguments as int;
+        var index = arguments;
+        return MaterialPageRoute(builder: (_) => DetailsOrder(index: index));
       // case RouteConstant.verifyRoute:
       //   return MaterialPageRoute(builder: (_) {
       //     final bool arguments = settings.arguments as bool;
