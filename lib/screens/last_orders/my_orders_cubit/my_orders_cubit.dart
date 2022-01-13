@@ -10,19 +10,17 @@ class MyOrdersCubit extends Cubit<MyOrdersStates> {
 
   static MyOrdersCubit get(context) => BlocProvider.of(context);
 
-
   //get orders
   MyOrderModel? orders;
 
   void getOrders() {
-    emit(ShopMyOrderLoadingState());
+    emit(MyOrderLoadingState());
     DioHelper.getData(url: MAKE_ORDER, token: token).then((value) {
       orders = MyOrderModel.fromJson(value.data);
-      emit(ShopMyOrderSuccessState());
+      emit(MyOrderSuccessState());
     }).catchError((error) {
       print(error.toString());
-      emit(ShopMyOrderErrorState());
+      emit(MyOrderErrorState());
     });
   }
-
 }

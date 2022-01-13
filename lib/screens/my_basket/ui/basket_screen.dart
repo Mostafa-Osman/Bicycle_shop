@@ -40,7 +40,6 @@ class BasketScreen extends StatelessWidget {
                     state is BasketInitialState ||
                     // state is BasketUpdateQuantityLoadingState ||
                     state is AddToBasketErrorState ||
-                    state is ShopMyOrderLoadingState ||
                     state is ShopGetOrderLoadingState
                 //|| state is BasketUpdateQuantityErrorState
                 )

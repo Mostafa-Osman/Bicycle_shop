@@ -150,7 +150,8 @@ class Item extends StatelessWidget {
                   Container(
                     margin: EdgeInsets.all(10.0),
                     height: 200.0,
-                    child: Image(
+                    child:
+                    Image(
                       image: NetworkImage(data.image),
                       fit: BoxFit.contain,
                     ),

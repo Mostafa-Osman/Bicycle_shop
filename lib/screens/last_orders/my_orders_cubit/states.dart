@@ -2,8 +2,8 @@ abstract class MyOrdersStates {}
 
 class MyOrdersInitialState extends MyOrdersStates {}
 
-class ShopMyOrderLoadingState extends MyOrdersStates {}
+class MyOrderLoadingState extends MyOrdersStates {}
 
-class ShopMyOrderSuccessState extends MyOrdersStates {}
+class MyOrderSuccessState extends MyOrdersStates {}
 
-class ShopMyOrderErrorState extends MyOrdersStates {}
+class MyOrderErrorState extends MyOrdersStates {}

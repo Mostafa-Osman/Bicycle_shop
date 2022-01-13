@@ -13,8 +13,8 @@ class ShopLoginModel {
 
 class UserData {
   int? id;
-  int? points;
-  int? credit;
+  dynamic points;
+  dynamic credit;
   String? name;
   String? email;
   String? phone;
