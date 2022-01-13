@@ -15,3 +15,9 @@ class OrderDetailsSuccessState extends MyOrdersStates {}
 class OrderDetailsErrorState extends MyOrdersStates {}
 
 class ChangeAddressVisibilityState extends MyOrdersStates {}
+
+class OrderCancelLoadingState extends MyOrdersStates {}
+
+class OrderCancelSuccessState extends MyOrdersStates {}
+
+class OrderCancelErrorState extends MyOrdersStates {}

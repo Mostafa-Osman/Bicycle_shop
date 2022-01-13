@@ -29,7 +29,7 @@ class MyOrdersCubit extends Cubit<MyOrdersStates> {
   //order details
   OrderDetailsModel? orderDetails;
 
-  void getOrderDet(productId) {
+  void getOrderDetails(productId) {
     emit(OrderDetailsLoadingState());
     DioHelper.getData(url: ORDER_DETAILS + '$productId', token: token)
         .then((value) {
@@ -45,5 +45,17 @@ class MyOrdersCubit extends Cubit<MyOrdersStates> {
     emit(ChangeAddressVisibilityState());
 
     addressIsVisible = !addressIsVisible;
+  }
+
+  //cancel order
+  void getCancelOrder(index) {
+    emit(OrderCancelLoadingState());
+    DioHelper.getData(url: 'orders/' + '${index}' + '/cancel', token: token)
+        .then((value) {
+      emit(OrderCancelSuccessState());
+    }).catchError((error) {
+      print(error.toString());
+      emit(OrderCancelErrorState());
+    });
   }
 }

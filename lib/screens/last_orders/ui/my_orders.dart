@@ -48,42 +48,50 @@ class OrdersBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(
-          top: 30.0, bottom: 10.0, right: 10.0, left: 10.0),
-      child: CustomCard(
-        widget: InkWell(
-          onTap: () {
-            MyOrdersCubit.get(context).getOrderDet(order.id);
-            navigateWithArgument(
-                context, RouteConstant.orderDetailsRoute, index);
-            print(order.id);
-          },
-          child: Container(
-            height: 90,
-            width: double.infinity,
-            margin: EdgeInsets.all(10.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
+          bottom: 10.0, right: 10.0, left: 10.0, top: 30.0),
+      child: Column(
+        children: [
+          CustomCard(
+            widget: InkWell(
+              onTap: () {
+                print(index);
+
+                MyOrdersCubit.get(context).getOrderDetails(order.id);
+                navigateWithArgument(
+                    context, RouteConstant.orderDetailsRoute, index);
+                print(order.id);
+              },
+              child: Container(
+                height: 90,
+                width: double.infinity,
+                margin: EdgeInsets.all(10.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    CustomText(text: 'Order number: ${order.id}', fontSize: 15),
-                    SizedBox(width: 50),
-                    CustomText(text: 'Date:${order.date}', fontSize: 12),
+                    Row(
+                      children: [
+                        CustomText(
+                            text: 'Order number: ${order.id}', fontSize: 15),
+                        SizedBox(width: 50),
+                        CustomText(text: 'Date:${order.date}', fontSize: 12),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        CustomText(
+                            text: 'Status: ${order.status}', fontSize: 15),
+                        Spacer(),
+                        Icon(Icons.arrow_forward_ios_outlined),
+                      ],
+                    ),
+                    CustomText(text: 'Total: ${order.total} EGP', fontSize: 15),
                   ],
                 ),
-                Row(
-                  children: [
-                    CustomText(text: 'Status: ${order.status}', fontSize: 15),
-                    Spacer(),
-                    Icon(Icons.arrow_forward_ios_outlined),
-                  ],
-                ),
-                CustomText(text: 'Total: ${order.total} EGP', fontSize: 15),
-              ],
+              ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }
