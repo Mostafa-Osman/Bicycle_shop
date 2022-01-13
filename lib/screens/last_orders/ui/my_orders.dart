@@ -1,3 +1,4 @@
+import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
@@ -15,24 +16,27 @@ class MyOrderScreen extends StatelessWidget {
         builder: (context, state) {
           return state is MyOrderLoadingState
               ? Center(
-                  child: CircularProgressIndicator(
-                  color: red,
-                ))
+              child: CircularProgressIndicator(
+                color: red,
+              ))
               : state is MyOrderErrorState
-                  ? Center(child: CustomText(text: 'error 404'))
-                  : ListView.builder(
-                      itemBuilder: (context, index) => OrdersBody(
-                          order: MyOrdersCubit.get(context)
-                              .orders!
-                              .data!
-                              .listDoneOrders[index],
-                          index: index),
-                      itemCount: MyOrdersCubit.get(context)
-                          .orders!
-                          .data!
-                          .listDoneOrders
-                          .length,
-                    );
+              ? Center(child: CustomText(text: 'error 404'))
+              : ListView.builder(
+            itemBuilder: (context, index) =>
+                OrdersBody(
+                    order: MyOrdersCubit
+                        .get(context)
+                        .orders!
+                        .data!
+                        .listDoneOrders[index],
+                    index: index),
+            itemCount: MyOrdersCubit
+                .get(context)
+                .orders!
+                .data!
+                .listDoneOrders
+                .length,
+          );
         },
         listener: (context, state) {});
   }
@@ -48,7 +52,7 @@ class OrdersBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(
-          bottom: 10.0, right: 10.0, left: 10.0, top: 30.0),
+          bottom: 15.0, right: 10.0, left: 10.0, top: 30.0),
       child: Column(
         children: [
           CustomCard(
@@ -85,7 +89,24 @@ class OrdersBody extends StatelessWidget {
                         Icon(Icons.arrow_forward_ios_outlined),
                       ],
                     ),
-                    CustomText(text: 'Total: ${order.total} EGP', fontSize: 15),
+                    SizedBox(height: 10),
+                    DottedLine(
+                      dashLength: 10,
+                      dashGapLength: 5,
+                      lineThickness: 1.5,
+                      dashColor: lightMainColor,
+                      dashGapColor: white,
+                    ),
+                    SizedBox(height: 10),
+                    Row(
+                      children: [
+                        CustomText(
+                            text: 'Total : ', textColor: mainColor ,fontSize:
+                            20),
+                        Spacer(),
+                        CustomText(text: '${order.total} EGP', fontSize: 15),
+                      ],
+                    ),
                   ],
                 ),
               ),
