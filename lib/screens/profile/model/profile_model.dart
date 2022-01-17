@@ -8,9 +8,8 @@ class ProfileModel {
   ProfileModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+    data = new Data.fromJson(json['data']);
   }
-
 }
 
 class Data {
@@ -20,19 +19,18 @@ class Data {
   String? phone;
   String? image;
   int? points;
-  int? credit;
+  dynamic credit;
   String? token;
 
   Data(
       {this.id,
-        this.name,
-        this.email,
-        this.phone,
-        this.image,
-        this.points,
-        this.credit,
-        this.token
-      });
+      this.name,
+      this.email,
+      this.phone,
+      this.image,
+      this.points,
+      this.credit,
+      this.token});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -44,5 +42,4 @@ class Data {
     credit = json['credit'];
     token = json['token'];
   }
-
 }

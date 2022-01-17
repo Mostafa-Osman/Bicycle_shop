@@ -8,7 +8,7 @@ class OrderDetailsResponse {
   OrderDetailsResponse.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
-    orderDetails =  new OrderDetailsModel.fromJson(json['data']) ;
+    orderDetails =  new OrderDetailsModel.fromJson(json['data']);
   }
 
 }
@@ -20,8 +20,6 @@ class OrderDetailsModel {
   dynamic points;
   dynamic vat;
   dynamic total;
-  int? pointsCommission;
-  String? promoCode;
   String? paymentMethod;
   String? date;
   String? status;
@@ -35,8 +33,6 @@ class OrderDetailsModel {
         this.points,
         this.vat,
         this.total,
-        this.pointsCommission,
-        this.promoCode,
         this.paymentMethod,
         this.date,
         this.status,
@@ -50,8 +46,6 @@ class OrderDetailsModel {
     points = json['points'];
     vat = json['vat'];
     total = json['total'];
-    pointsCommission = json['points_commission'];
-    promoCode = json['promo_code'];
     paymentMethod = json['payment_method'];
     date = json['date'];
     status = json['status'];
@@ -73,7 +67,6 @@ class Address {
   String? city;
   String? region;
   String? details;
-  String? notes;
 
 
   Address(
@@ -82,7 +75,6 @@ class Address {
         this.city,
         this.region,
         this.details,
-        this.notes,
      });
 
   Address.fromJson(Map<String, dynamic> json) {
@@ -91,7 +83,6 @@ class Address {
     city = json['city'];
     region = json['region'];
     details = json['details'];
-    notes = json['notes'];
 
   }
 

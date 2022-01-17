@@ -12,22 +12,17 @@ class ShopLayout extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         var cubit = LayoutCubit.get(context);
-
         return Scaffold(
-            body:
-                SafeArea(child: cubit.bottomNavScreen[cubit.currentPageIndex]),
+          appBar:cubit.currentPageIndex!=0? cubit.appBarScreen[cubit.currentPageIndex]:null,
+            body: cubit.bottomNavScreen[cubit.currentPageIndex],
             bottomNavigationBar: CurvedNavigationBar(
-              index: 0,
-              height: 50,
-              backgroundColor: white,
-              color: mainColor,
-              buttonBackgroundColor: mainColor,
-              items: cubit.bottomNavIcons,
-              onTap: (index) =>
-                cubit.changeCurrentIndex(index)
-
-
-            ));
+                index: 0,
+                height: 50,
+                backgroundColor: white,
+                color: mainColor,
+                buttonBackgroundColor: mainColor,
+                items: cubit.bottomNavIcons,
+                onTap: (index) => cubit.changeCurrentIndex(index)));
       },
     );
   }

@@ -6,6 +6,7 @@ abstract class OrderDetailsState {}
 class OrderDetailsInitial extends OrderDetailsState {}
 
 class OrderDetailsLoading extends OrderDetailsState {}
+
 class OrderDetailsRefreshUi extends OrderDetailsState {}
 
 class OrderDetailsSuccess extends OrderDetailsState {
@@ -19,3 +20,11 @@ class OrderDetailsError extends OrderDetailsState {
 
   OrderDetailsError({required this.errorMessage});
 }
+
+class ChangeAddressVisibility extends OrderDetailsState {}
+
+class OrderCancelLoading extends OrderDetailsState {}
+
+class OrderCancelSuccess extends OrderDetailsState {}
+
+class OrderCancelError extends OrderDetailsState {}

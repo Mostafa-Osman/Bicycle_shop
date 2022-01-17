@@ -1,3 +1,4 @@
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,111 +10,104 @@ import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/components/custom%20_card.dart';
 import 'package:udemy_flutter/shared/components/navigate.dart';
 
-class MyOrderScreen extends StatelessWidget {
+class MyOrdersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<MyOrdersCubit, MyOrdersStates>(
+        listener: (context, state) {},
         builder: (context, state) {
-          return state is MyOrderLoadingState
-              ? Center(
-              child: CircularProgressIndicator(
-                color: red,
-              ))
-              : state is MyOrderErrorState
-              ? Center(child: CustomText(text: 'error 404'))
-              : ListView.builder(
-            itemBuilder: (context, index) =>
-                OrdersBody(
-                    order: MyOrdersCubit
-                        .get(context)
-                        .order!
-                        .data!
-                        .listDoneOrders[index],
-                    index: index),
-            itemCount: MyOrdersCubit
-                .get(context)
-                .order!
-                .data!
-                .listDoneOrders
-                .length,
-          );
-        },
-        listener: (context, state) {});
+          return ConditionalBuilder(
+              condition: state is! MyOrderLoadingState,
+              builder: (context) {
+                return Container(
+                    height: MediaQuery.of(context).size.height,
+                    padding:EdgeInsets.only(
+                        bottom: 15.0, right: 10.0, left: 10.0) ,
+                    child: ListView.builder(
+                      itemBuilder: (context, index) => OrdersBody(
+                          order: MyOrdersCubit.get(context)
+                              .order!
+                              .data!
+                              .listDoneOrders[index]),
+                      itemCount: MyOrdersCubit.get(context)
+                          .order!
+                          .data!
+                          .listDoneOrders
+                          .length,
+                    ),
+
+                );
+              },
+              fallback: (context) {
+                return Center(
+                    child: CircularProgressIndicator(
+                  color: red,
+                ));
+              });
+        });
   }
 }
 
 class OrdersBody extends StatelessWidget {
   final order;
-  int index;
 
-   OrdersBody({required this.order, required this.index});
+  OrdersBody({required this.order});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-          bottom: 15.0, right: 10.0, left: 10.0, top: 30.0),
-      child: Column(
-        children: [
-          CustomCard(
-            widget: InkWell(
-              onTap: () {
-                print(index);
-
-                // MyOrdersCubit.get(context).getOrderDetails(order.id);
-                navigateWithArgument(
-                    context, RouteConstant.orderDetailsRoute, order.id);
-                print(order.id);
-              },
-              child: Container(
-                height: 90,
-                width: double.infinity,
-                margin: EdgeInsets.all(10.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        CustomText(
-                            text: 'Order number: ${order.id}', fontSize: 15),
-                        SizedBox(width: 50),
-                        CustomText(text: 'Date:${order.date}', fontSize: 12),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        CustomText(
-                            text: 'Status: ${order.status}', fontSize: 15),
-                        Spacer(),
-                        Icon(Icons.arrow_forward_ios_outlined),
-                      ],
-                    ),
-                    SizedBox(height: 10),
-                    DottedLine(
-                      dashLength: 10,
-                      dashGapLength: 5,
-                      lineThickness: 1.5,
-                      dashColor: lightMainColor,
-                      dashGapColor: white,
-                    ),
-                    SizedBox(height: 10),
-                    Row(
-                      children: [
-                        CustomText(
-                            text: 'Total : ', textColor: mainColor ,fontSize:
-                            20),
-                        Spacer(),
-                        CustomText(text: '${order.total} EGP', fontSize: 15),
-                      ],
-                    ),
-                  ],
-                ),
+    return Column(
+      children: [
+        CustomCard(
+          widget: InkWell(
+            onTap: () => navigateWithArgument(
+                context, RouteConstant.orderDetailsRoute, order.id),
+            child: Container(
+              height: 90,
+              width: double.infinity,
+              margin: EdgeInsets.all(10.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      CustomText(
+                          text: 'Order number : ${order.id}', fontSize: 15),
+                      SizedBox(width: 50),
+                      CustomText(text: 'Date :${order.date}', fontSize: 12),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      CustomText(text: 'Status : ${order.status}', fontSize: 15),
+                      Spacer(),
+                      Icon(Icons.arrow_forward_ios_outlined,color: mainColor),
+                    ],
+                  ),
+                  SizedBox(height: 10),
+                  DottedLine(
+                    dashLength: 10,
+                    dashGapLength: 5,
+                    lineThickness: 1.5,
+                    dashColor: lightMainColor,
+                    dashGapColor: white,
+                  ),
+                  SizedBox(height: 10),
+                  Row(
+                    children: [
+                      CustomText(
+                          text: 'Total : ', textColor: mainColor, fontSize: 20),
+                      Spacer(),
+                      CustomText(text: '${order.total} EGP', fontSize: 15),
+                    ],
+                  ),
+                ],
               ),
             ),
           ),
-        ],
-      ),
+        ),
+        SizedBox(height: 10),
+      ],
     );
   }
 }

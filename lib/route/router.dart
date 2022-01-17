@@ -14,6 +14,7 @@ import 'package:udemy_flutter/screens/product_details/ui/product_details.dart';
 import 'package:udemy_flutter/screens/profile/ui/profile.dart';
 import 'package:udemy_flutter/screens/register/ui/register.dart';
 import 'package:udemy_flutter/screens/search/ui/search.dart';
+import 'package:udemy_flutter/screens/update_profile/update_profile.dart';
 import 'route_constants.dart';
 
 class AppRouter {
@@ -40,7 +41,7 @@ class AppRouter {
       case RouteConstant.basketRoute:
         return MaterialPageRoute(builder: (_) => BasketScreen());
       case RouteConstant.myOrderRoute:
-        return MaterialPageRoute(builder: (_) => MyOrderScreen());
+        return MaterialPageRoute(builder: (_) => MyOrdersScreen());
       case RouteConstant.productDetailsRoute:
         return MaterialPageRoute(builder: (_) {
           final DetailsData arguments = settings.arguments as DetailsData;
@@ -58,6 +59,8 @@ class AppRouter {
         var orderId = arguments;
         return MaterialPageRoute(
             builder: (_) => OrderDetailsScreen(orderId: orderId));
+      case RouteConstant.updateProfileRoute:
+        return MaterialPageRoute(builder: (_) => UpdateProfileScreen());
       // case RouteConstant.verifyRoute:
       //   return MaterialPageRoute(builder: (_) {
       //     final bool arguments = settings.arguments as bool;

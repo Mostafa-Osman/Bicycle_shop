@@ -16,103 +16,105 @@ class HomeBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          margin: EdgeInsets.only(top: 10.0, left: 10.0),
-          width: double.infinity,
-          child: Row(
-            children: [
-              Expanded(
-                child: TextFormField(
-                  readOnly: true,
-                  onTap: () => navigateTo(context, RouteConstant.searchRoute),
-                  decoration: InputDecoration(
-                    fillColor: Colors.grey[100],
-                    filled: true,
-                    contentPadding: EdgeInsets.all(10),
-                    prefixIcon: Icon(Icons.search),
-                    hintText: 'Search...',
-                    hintStyle: TextStyle(
-                        fontSize: 18, fontWeight: FontWeight.bold, color: grey),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(25),
+    return SafeArea(
+      child: Stack(
+        children: [
+          Container(
+            margin: EdgeInsets.only(top: 10.0, left: 10.0),
+            width: double.infinity,
+            child: Row(
+              children: [
+                Expanded(
+                  child: TextFormField(
+                    readOnly: true,
+                    onTap: () => navigateTo(context, RouteConstant.searchRoute),
+                    decoration: InputDecoration(
+                      fillColor: Colors.grey[100],
+                      filled: true,
+                      contentPadding: EdgeInsets.all(10),
+                      prefixIcon: Icon(Icons.search),
+                      hintText: 'Search...',
+                      hintStyle: TextStyle(
+                          fontSize: 18, fontWeight: FontWeight.bold, color: grey),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(25),
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 10.0),
-                child: IconButton(
-                  onPressed: () =>
-                      navigateTo(context, RouteConstant.favouriteRoute),
-                  icon: Icon(Icons.favorite, color: red, size: 40),
-                ),
-              ),
-            ],
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 70.0),
-          child: SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                //banner
-                CarouselSlider(
-                  items: HomeCubit.get(context)
-                      .banner!
-                      .data
-                      .map((e) => Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20)),
-                              clipBehavior: Clip.antiAliasWithSaveLayer,
-                              child: Image(
-                                image: NetworkImage('${e.image}'),
-                                width: double.infinity,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ))
-                      .toList(),
-                  options: CarouselOptions(
-                      height: 200.0,
-                      initialPage: 1,
-                      autoPlay: false,
-                      enableInfiniteScroll: true,
-                      reverse: false,
-                      // autoPlayInterval: Duration(seconds: 10),
-                      // autoPlayAnimationDuration: Duration(seconds: 4),
-                      autoPlayCurve: Curves.fastOutSlowIn,
-                      viewportFraction: 1.0,
-                      scrollDirection: Axis.horizontal),
-                ),
-
-                SizedBox(
-                  height: 20,
-                ),
-                StaggeredGridView.countBuilder(
-                  staggeredTileBuilder: (int index) => new StaggeredTile.fit(1),
-                  //direction of scrolling
-                  scrollDirection: Axis.vertical,
-                  //to make products in home page scrolling
-                  physics: ScrollPhysics(),
-                  mainAxisSpacing: 8.0,
-                  crossAxisSpacing: 8.0,
-                  shrinkWrap: true,
-                  crossAxisCount: 2,
-                  itemCount: model.orderDetails!.detailsData.length,
-                  itemBuilder: (BuildContext context, int index) =>
-                      Item(data: model.orderDetails!.detailsData[index]),
+                Padding(
+                  padding: const EdgeInsets.only(right: 10.0),
+                  child: IconButton(
+                    onPressed: () =>
+                        navigateTo(context, RouteConstant.favouriteRoute),
+                    icon: Icon(Icons.favorite, color: red, size: 40),
+                  ),
                 ),
               ],
             ),
           ),
-        ),
-      ],
+          Padding(
+            padding: const EdgeInsets.only(top: 70.0),
+            child: SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  //banner
+                  CarouselSlider(
+                    items: HomeCubit.get(context)
+                        .banner!
+                        .data
+                        .map((e) => Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20)),
+                                clipBehavior: Clip.antiAliasWithSaveLayer,
+                                child: Image(
+                                  image: NetworkImage('${e.image}'),
+                                  width: double.infinity,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ))
+                        .toList(),
+                    options: CarouselOptions(
+                        height: 200.0,
+                        initialPage: 1,
+                        autoPlay: false,
+                        enableInfiniteScroll: true,
+                        reverse: false,
+                        // autoPlayInterval: Duration(seconds: 10),
+                        // autoPlayAnimationDuration: Duration(seconds: 4),
+                        autoPlayCurve: Curves.fastOutSlowIn,
+                        viewportFraction: 1.0,
+                        scrollDirection: Axis.horizontal),
+                  ),
+
+                  SizedBox(
+                    height: 20,
+                  ),
+                  StaggeredGridView.countBuilder(
+                    staggeredTileBuilder: (int index) => new StaggeredTile.fit(1),
+                    //direction of scrolling
+                    scrollDirection: Axis.vertical,
+                    //to make products in home page scrolling
+                    physics: ScrollPhysics(),
+                    mainAxisSpacing: 8.0,
+                    crossAxisSpacing: 8.0,
+                    shrinkWrap: true,
+                    crossAxisCount: 2,
+                    itemCount: model.data!.detailsData.length,
+                    itemBuilder: (BuildContext context, int index) =>
+                        Item(data: model.data!.detailsData[index]),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

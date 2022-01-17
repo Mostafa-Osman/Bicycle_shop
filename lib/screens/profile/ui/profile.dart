@@ -7,25 +7,18 @@ import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 
 class ProfileScreen extends StatelessWidget {
-  var formKey = GlobalKey<FormState>();
+  final formKey = GlobalKey<FormState>();
 
-  // var nameController = TextEditingController();
-  // var emailController = TextEditingController();
-  // var phoneController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ProfileCubit, ProfileStates>(
       listener: (context, state) {},
       builder: (context, state) {
-        var model = ProfileCubit.get(context).userModel!.data;
-
+        var userData = ProfileCubit.get(context).userData!.data;
         return ConditionalBuilder(
-          condition: (state is ProfileLoadingState||state is ProfileInitialState),
-          builder:(context) => Center(
-              child: CircularProgressIndicator(
-                color: red,
-              )),
-          fallback: (context) => SingleChildScrollView(
+          condition: (ProfileCubit.get(context).userData != null),
+          builder: (context) => SingleChildScrollView(
             child: Align(
               //alignment: Alignment.topCenter,
               child: Container(
@@ -53,36 +46,36 @@ class ProfileScreen extends StatelessWidget {
                                 fit: BoxFit.fitWidth,
                                 child: ClipOval(
                                     child: Image.network(
-                                      model!.image!,
-                                      height: 180,
-                                      width: 180,
-                                      fit: BoxFit.cover,
-                                    )),
+                                  userData!.image!,
+                                  height: 180,
+                                  width: 180,
+                                  fit: BoxFit.cover,
+                                )),
                               ),
                             ),
                             SizedBox(height: 30),
                             Text(
-                              model.name!,
+                              userData.name!,
                               style: TextStyle(
                                   fontSize: 25, fontWeight: FontWeight.bold),
                               overflow: TextOverflow.clip,
                             ),
                             SizedBox(height: 20),
                             AccountTextFormField(
-                              text: model.phone!,
+                              text: userData.phone!,
                               icon: Icons.phone,
                             ),
                             SizedBox(height: 3),
                             AccountTextFormField(
-                              text: model.email!,
+                              text: userData.email!,
                               icon: Icons.email,
                             ),
                             AccountTextFormField(
-                              text: model.points.toString(),
+                              text: userData.points.toString(),
                               icon: Icons.account_balance_wallet,
                             ),
                             AccountTextFormField(
-                              text: model.credit.toString(),
+                              text: userData.credit.toString(),
                               icon: Icons.view_compact_outlined,
                             ),
                           ],
@@ -94,6 +87,10 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
           ),
+          fallback: (context) => Center(
+              child: CircularProgressIndicator(
+            color: red,
+          )),
         );
       },
     );
@@ -113,41 +110,34 @@ class AccountTextFormField extends StatelessWidget {
       padding: const EdgeInsets.all(10.0),
       child: Container(
         height: 45,
+        margin: EdgeInsets.only(right: 10),
         decoration: BoxDecoration(
-          color:lightMainColor,
+          color: lightMainColor,
           borderRadius: BorderRadius.all(
             Radius.circular(10),
           ),
           shape: BoxShape.rectangle,
         ),
-        child: Container(
-          margin: EdgeInsets.only(right: 10),
-          child: ListView(
-            scrollDirection: Axis.horizontal,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  IconButton(
-                    iconSize: size.width >= 500 ? 25 : size.width / 20,
-                    padding: const EdgeInsets.all(0.0),
-                    icon: Icon(icon),
-                    color: mainColor,
-                    onPressed: () {},
+        child: ListView(
+          scrollDirection: Axis.horizontal,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(width: 10),
+                Icon(icon, color: mainColor),
+                Padding(
+                  padding: const EdgeInsets.only(top: 5.0, left: 10.0),
+                  child: CustomText(
+                    text: text,
+                    fontSize: size.width >= 500 ? 18 : size.width / 22,
+                    overflow: TextOverflow.ellipsis,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 7.0),
-                    child: CustomText(
-                      text: text,
-                      fontSize: size.width >= 500 ? 18 : size.width / 22,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );

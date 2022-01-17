@@ -2,8 +2,10 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:udemy_flutter/data/remote/dio_helper.dart';
 import 'package:udemy_flutter/data/repository/orders_repo/orders_repo.dart';
-import 'package:udemy_flutter/screens/orders/model/order_detail.dart';
+import 'package:udemy_flutter/screens/orders_details/model/order_detail.dart';
+import 'package:udemy_flutter/shared/components/constants.dart';
 
 part 'order_details_state.dart';
 
@@ -34,15 +36,15 @@ class OrderDetailsCubit extends Cubit<OrderDetailsState> {
     isAddressVisible = !isAddressVisible;
   }
 
-  // //cancel order
-  // void getCancelOrder(index) {
-  //   emit(OrderCancelLoadingState());
-  //   DioHelper.getData(url: 'orders/' + '${index}' + '/cancel', token: token)
-  //       .then((value) {
-  //     emit(OrderCancelSuccessState());
-  //   }).catchError((error) {
-  //     print(error.toString());
-  //     emit(OrderCancelErrorState());
-  //   });
-  // }
+  //cancel order
+  void getCancelOrder(orderId) {
+    emit(OrderCancelLoading());
+    DioHelper.getData(url: 'orders/' + '${orderId}' + '/cancel', token: token)
+        .then((value) {
+      emit(OrderCancelSuccess());
+    }).catchError((error) {
+      print(error.toString());
+      emit(OrderCancelError());
+    });
+  }
 }

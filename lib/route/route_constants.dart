@@ -9,7 +9,6 @@ class RouteConstant {
   static const String notificationsRoute = '/notifications';
   static const String searchRoute = '/search';
   static const String favouriteRoute = '/favourite';
-
   static const String profileRoute = '/profile';
   static const String basketRoute = '/myBag';
   static const String myOrderRoute ='/myOrder';
@@ -17,5 +16,7 @@ class RouteConstant {
   static const String shopLayoutRoute = '/shopLayout';
   static const String paymentRoute = '/payment';
   static const String orderDetailsRoute = '/orderDetails';
-  // static const String verifyRoute = '/verify';
+  static const String updateProfileRoute = '/updateProfile';
+
+// static const String verifyRoute = '/verify';
 }

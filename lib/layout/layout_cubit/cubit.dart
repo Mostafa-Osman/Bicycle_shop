@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:udemy_flutter/layout/app_bar.dart';
 import 'package:udemy_flutter/layout/layout_cubit/states.dart';
 import 'package:udemy_flutter/screens/home/ui/home.dart';
 import 'package:udemy_flutter/screens/my_basket/ui/basket_screen.dart';
@@ -15,11 +16,19 @@ class LayoutCubit extends Cubit<LayoutStates> {
 
   int currentPageIndex = 0;
   int lastPageIndex = 0;
+
+  List<PreferredSizeWidget> appBarScreen = [
+    NotificationsAppBar(),
+    BasketAppBar(),
+    OrdersAppBar(),
+    ProfileAppBar(),
+  ];
+
   List<Widget> bottomNavScreen = [
     HomeScreen(),
     NotificationsScreen(),
     BasketScreen(),
-    MyOrderScreen(),
+    MyOrdersScreen(),
     ProfileScreen(),
   ];
   List<Widget> bottomNavIcons = [
@@ -33,9 +42,6 @@ class LayoutCubit extends Cubit<LayoutStates> {
           'assets/icons/bag.png',
           color: lightMainColor,
         )),
-
-    // Icon(Icons.apps, color: Colors.grey[200]),
-
     Icon(Icons.person, color: lightMainColor, size: 30.0),
   ];
 

@@ -21,20 +21,7 @@ class BasketScreen extends StatelessWidget {
         builder: (context, state) {
           //  print(lastPageIndex);
           return Scaffold(
-            appBar: AppBar(
-              elevation: 0.0,
-              title: CustomText(text: 'My Bag'),
-              leading: IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  // متمسحش التعليق ده مهم جدا جدا جدا
-                  // navigateReplacement(context,
-                  //    LayoutCubit.get(context).bottomNavScreen[lastPageIndex]
-                  // );
-                },
-                icon: Icon(Icons.arrow_back_ios_sharp, color: mainColor),
-              ),
-            ),
+
             body: (state is AddToBasketLoadingState ||
                     state is BasketInitialState ||
                     // state is BasketUpdateQuantityLoadingState ||

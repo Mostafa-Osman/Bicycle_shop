@@ -333,10 +333,10 @@ class OrderDetailsScreen extends StatelessWidget {
                         ),
                         // cancel order
                         SizedBox(height: 10),
+                        if(orderDetails.status=='New')
                         InkWell(
-                          onTap: () {}
-                          // orderDetailsCubit.getCancelOrder(orderDetails.id)
-                          ,
+                          onTap: () =>
+                              orderDetailsCubit.getCancelOrder(orderDetails.id),
                           child: CustomCard(
                             widget: Padding(
                               padding: EdgeInsets.only(
