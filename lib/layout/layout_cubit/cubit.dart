@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:udemy_flutter/layout/app_bar.dart';
 import 'package:udemy_flutter/layout/layout_cubit/states.dart';
 import 'package:udemy_flutter/screens/home/ui/home.dart';
@@ -34,7 +35,14 @@ class LayoutCubit extends Cubit<LayoutStates> {
   List<Widget> bottomNavIcons = [
     Icon(Icons.home, color: lightMainColor, size: 30.0),
     Icon(Icons.notifications, color: lightMainColor, size: 30.0),
-    Icon(Icons.add_shopping_cart_rounded, size: 30.0, color: lightMainColor),
+    SizedBox(
+      height: 30.0,
+      width: 30.0,
+      child: SvgPicture.asset(
+        'assets/icons/basket.svg',
+        fit: BoxFit.fitWidth,
+      ),
+    ),
     SizedBox(
         height: 30.0,
         width: 30.0,
