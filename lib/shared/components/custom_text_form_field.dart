@@ -13,9 +13,7 @@ class CustomTextFormField extends StatelessWidget {
 
   final Icon? prefix;
   final double? roundedRectangleBorder;
-
   final bool obscureText;
-
   final Widget? suffixIcon;
   final TextInputType? keyboardType;
   final String? label;

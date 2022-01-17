@@ -10,6 +10,7 @@ import 'package:udemy_flutter/screens/on_boarding/ui/on_boarding.dart';
 import 'package:udemy_flutter/screens/orders/my_orders_cubit/my_orders_cubit.dart';
 import 'package:udemy_flutter/screens/orders_details/cubit/order_details_cubit.dart';
 import 'package:udemy_flutter/screens/register/cubit/recubit.dart';
+import 'package:udemy_flutter/screens/update_profile/edit_profile_cubit/update_profile_cubit.dart';
 import 'package:udemy_flutter/shared/components/constants.dart';
 import 'package:udemy_flutter/shared/styles/themes.dart';
 import 'package:udemy_flutter/screens/categories/category_cubit/category_cubit.dart';
@@ -64,6 +65,7 @@ class MyApp extends StatelessWidget {
   final layoutBloc = LayoutCubit();
   final onBoardingBloc = OnBoardingCubit();
   final paymentBloc = PaymentCubit();
+  final updateProfileBloc = UpdateProfileCubit();
   final orderDetailsBloc = OrderDetailsCubit();
 
   @override
@@ -86,6 +88,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => layoutBloc),
         BlocProvider(create: (context) => onBoardingBloc),
         BlocProvider(create: (context) => paymentBloc),
+        BlocProvider(create: (context) => updateProfileBloc),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

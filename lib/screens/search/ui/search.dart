@@ -7,7 +7,6 @@ import 'package:udemy_flutter/shared/components/build_item.dart';
 import 'package:udemy_flutter/shared/components/custom_divider.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/components/navigate.dart';
-import 'package:udemy_flutter/shared/components/search__appbar.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 
 class SearchScreen extends StatelessWidget {

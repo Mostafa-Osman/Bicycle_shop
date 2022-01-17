@@ -8,8 +8,6 @@ import 'package:udemy_flutter/shared/styles/color.dart';
 
 class ProfileScreen extends StatelessWidget {
   final formKey = GlobalKey<FormState>();
-
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ProfileCubit, ProfileStates>(

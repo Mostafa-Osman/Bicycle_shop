@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/screens/profile/cubit/profile_cubit.dart';
-import 'package:udemy_flutter/screens/profile/cubit/states.dart';
+import 'package:udemy_flutter/screens/update_profile/edit_profile_cubit/update_profile_cubit.dart';
+import 'package:udemy_flutter/shared/components/component.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/components/custom_text_form_field.dart';
@@ -10,10 +11,12 @@ import 'package:udemy_flutter/shared/components/custom_button.dart';
 class UpdateProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    // cubit.setEditPageController();
-    return BlocConsumer<ProfileCubit, ProfileStates>(
-      listener: (context, state) {},
+    return BlocConsumer<UpdateProfileCubit, UpdateProfileState>(
+      listener: (context, state) {
+        // if (state is UpdateProfileSuccess)
+        //   showToast(
+        //       message: 'update profile success', state: ToastStates.SUCCESS);
+      },
       builder: (context, state) {
         return Scaffold(
             appBar: AppBar(
@@ -39,16 +42,17 @@ class UpdateProfileScreen extends StatelessWidget {
 
 class BodyEditProfile extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
-  final nameController = TextEditingController();
-  final emailController = TextEditingController();
-  final phoneController = TextEditingController();
-  final numberController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     var userData = ProfileCubit.get(context).userData!.data;
+    final nameController = TextEditingController(text: userData!.name);
+    final emailController = TextEditingController(text: userData.email);
+    final phoneController = TextEditingController(text: userData.phone);
+
     return SingleChildScrollView(
       child: Container(
+        height: MediaQuery.of(context).size.height,
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
@@ -65,7 +69,7 @@ class BodyEditProfile extends StatelessWidget {
                   fit: BoxFit.fitWidth,
                   child: ClipOval(
                       child: Image.network(
-                    userData!.image!,
+                    userData.image!,
                     height: 180,
                     width: 180,
                     fit: BoxFit.cover,
@@ -79,7 +83,7 @@ class BodyEditProfile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomText(
-                      text: ' Name : ',
+                      text: ' Name',
                       fontSize: 20.0,
                       textColor: mainColor,
                     ),
@@ -96,13 +100,13 @@ class BodyEditProfile extends StatelessWidget {
                     ),
                     SizedBox(height: 20),
                     CustomText(
-                      text: ' phone number : ',
+                      text: ' phone number',
                       textColor: mainColor,
                       fontSize: 20.0,
                     ),
                     SizedBox(height: 5.0),
                     CustomTextFormField(
-                      controller: numberController,
+                      controller: phoneController,
                       prefix: Icon(
                         Icons.phone,
                         color: mainColor,
@@ -110,13 +114,13 @@ class BodyEditProfile extends StatelessWidget {
                       keyboardType: TextInputType.phone,
                       validator: (value) => value!.isEmpty
                           ? 'من فضلك ادخل رقم هاتفك'
-                          : (value.length != 11)
+                          : (value.length != 9)
                               ? 'رقم الهاتف غير صحيح'
                               : null,
                     ),
                     SizedBox(height: 20),
                     CustomText(
-                      text: ' E-mail ',
+                      text: ' E-mail',
                       textColor: mainColor,
                       fontSize: 20.0,
                     ),
@@ -140,8 +144,11 @@ class BodyEditProfile extends StatelessWidget {
               CustomButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    // cubit.setEditPageDetails();
-                    // Navigator.pop(context);
+                    UpdateProfileCubit.get(context).updateUserData(
+                        name: nameController.text,
+                        email: emailController.text,
+                        phone: phoneController.text);
+                    Navigator.pop(context);
                   }
                 },
                 text: 'save change',
