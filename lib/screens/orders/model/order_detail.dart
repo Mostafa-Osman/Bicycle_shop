@@ -1,19 +1,19 @@
-class OrderDetailsModel {
+class OrderDetailsResponse {
   bool? status;
   String? message;
-  Data? data;
+  OrderDetailsModel? orderDetails;
 
-  OrderDetailsModel({this.status, this.message, this.data});
+  OrderDetailsResponse({this.status, this.message, this.orderDetails});
 
-  OrderDetailsModel.fromJson(Map<String, dynamic> json) {
+  OrderDetailsResponse.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+    orderDetails =  new OrderDetailsModel.fromJson(json['data']) ;
   }
 
 }
 
-class Data {
+class OrderDetailsModel {
   int? id;
   dynamic cost;
   dynamic discount;
@@ -28,7 +28,7 @@ class Data {
   Address? address;
   List<Products>? products;
 
-  Data(
+  OrderDetailsModel(
       {this.id,
         this.cost,
         this.discount,
@@ -43,7 +43,7 @@ class Data {
         this.address,
         this.products});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  OrderDetailsModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     cost = json['cost'];
     discount = json['discount'];
@@ -74,8 +74,7 @@ class Address {
   String? region;
   String? details;
   String? notes;
-  double? latitude;
-  double? longitude;
+
 
   Address(
       {this.id,
@@ -84,8 +83,7 @@ class Address {
         this.region,
         this.details,
         this.notes,
-        this.latitude,
-        this.longitude});
+     });
 
   Address.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -94,8 +92,7 @@ class Address {
     region = json['region'];
     details = json['details'];
     notes = json['notes'];
-    latitude = json['latitude'];
-    longitude = json['longitude'];
+
   }
 
 }

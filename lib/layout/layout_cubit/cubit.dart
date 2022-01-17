@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/layout/layout_cubit/states.dart';
-import 'package:udemy_flutter/route/route_constants.dart';
-import 'package:udemy_flutter/screens/categories/ui/categories.dart';
-import 'package:udemy_flutter/screens/last_orders/ui/my_orders.dart';
-import 'package:udemy_flutter/screens/favourites/ui/favourites.dart';
 import 'package:udemy_flutter/screens/home/ui/home.dart';
 import 'package:udemy_flutter/screens/my_basket/ui/basket_screen.dart';
 import 'package:udemy_flutter/screens/notifications/ui/notifications_screen.dart';
+import 'package:udemy_flutter/screens/orders/ui/my_orders.dart';
 import 'package:udemy_flutter/screens/profile/ui/profile.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 

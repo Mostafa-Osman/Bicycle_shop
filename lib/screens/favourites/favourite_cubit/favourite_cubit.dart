@@ -1,11 +1,11 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:udemy_flutter/data/remote/dio_helper.dart';
 import 'package:udemy_flutter/screens/favourites/model/change_favourites_model.dart';
 import 'package:udemy_flutter/screens/favourites/model/favourites_model.dart';
 import 'package:udemy_flutter/screens/favourites/favourite_cubit/states.dart';
 import 'package:udemy_flutter/screens/home/home_cubit/home_cubit.dart';
 import 'package:udemy_flutter/shared/components/constants.dart';
-import 'package:udemy_flutter/shared/network/end_points.dart';
-import 'package:udemy_flutter/shared/network/remote/dio_helper.dart';
+import 'package:udemy_flutter/data/remote/end_points.dart';
 
 class FavouriteCubit extends Cubit<FavouriteStates> {
   FavouriteCubit() : super(FavouritesInitialState());

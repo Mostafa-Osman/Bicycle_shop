@@ -2,8 +2,8 @@ import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
-import 'package:udemy_flutter/screens/last_orders/my_orders_cubit/my_orders_cubit.dart';
-import 'package:udemy_flutter/screens/last_orders/my_orders_cubit/states.dart';
+import 'package:udemy_flutter/screens/orders/my_orders_cubit/my_orders_cubit.dart';
+import 'package:udemy_flutter/screens/orders/my_orders_cubit/states.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/components/custom%20_card.dart';
@@ -26,13 +26,13 @@ class MyOrderScreen extends StatelessWidget {
                 OrdersBody(
                     order: MyOrdersCubit
                         .get(context)
-                        .orders!
+                        .order!
                         .data!
                         .listDoneOrders[index],
                     index: index),
             itemCount: MyOrdersCubit
                 .get(context)
-                .orders!
+                .order!
                 .data!
                 .listDoneOrders
                 .length,
@@ -44,9 +44,9 @@ class MyOrderScreen extends StatelessWidget {
 
 class OrdersBody extends StatelessWidget {
   final order;
-  final index;
+  int index;
 
-  const OrdersBody({required this.order, required this.index});
+   OrdersBody({required this.order, required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -60,9 +60,9 @@ class OrdersBody extends StatelessWidget {
               onTap: () {
                 print(index);
 
-                MyOrdersCubit.get(context).getOrderDetails(order.id);
+                // MyOrdersCubit.get(context).getOrderDetails(order.id);
                 navigateWithArgument(
-                    context, RouteConstant.orderDetailsRoute, index);
+                    context, RouteConstant.orderDetailsRoute, order.id);
                 print(order.id);
               },
               child: Container(

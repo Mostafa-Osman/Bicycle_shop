@@ -1,11 +1,11 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:udemy_flutter/data/remote/dio_helper.dart';
 import 'package:udemy_flutter/screens/my_basket/model/add_order_model.dart';
 import 'package:udemy_flutter/screens/my_basket/model/basket_model.dart';
 import 'package:udemy_flutter/screens/my_basket/basket_cubit/states.dart';
 
 import 'package:udemy_flutter/shared/components/constants.dart';
-import 'package:udemy_flutter/shared/network/end_points.dart';
-import 'package:udemy_flutter/shared/network/remote/dio_helper.dart';
+import 'package:udemy_flutter/data/remote/end_points.dart';
 
 class BasketCubit extends Cubit<BasketStates> {
   BasketCubit() : super(BasketInitialState());

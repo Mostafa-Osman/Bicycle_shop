@@ -104,9 +104,9 @@ class HomeBody extends StatelessWidget {
                   crossAxisSpacing: 8.0,
                   shrinkWrap: true,
                   crossAxisCount: 2,
-                  itemCount: model.data!.detailsData.length,
+                  itemCount: model.orderDetails!.detailsData.length,
                   itemBuilder: (BuildContext context, int index) =>
-                      Item(data: model.data!.detailsData[index]),
+                      Item(data: model.orderDetails!.detailsData[index]),
                 ),
               ],
             ),

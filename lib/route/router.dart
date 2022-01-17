@@ -3,12 +3,12 @@ import 'package:udemy_flutter/layout/shop_layout.dart';
 import 'package:udemy_flutter/screens/favourites/ui/favourites.dart';
 import 'package:udemy_flutter/screens/home/model/home_model.dart';
 import 'package:udemy_flutter/screens/home/ui/home.dart';
-import 'package:udemy_flutter/screens/last_orders/ui/detail_order.dart';
 import 'package:udemy_flutter/screens/login/ui/login.dart';
 import 'package:udemy_flutter/screens/my_basket/ui/basket_screen.dart';
-import 'package:udemy_flutter/screens/last_orders/ui/my_orders.dart';
 import 'package:udemy_flutter/screens/notifications/ui/notifications_screen.dart';
 import 'package:udemy_flutter/screens/on_boarding/ui/on_boarding.dart';
+import 'package:udemy_flutter/screens/orders/ui/my_orders.dart';
+import 'package:udemy_flutter/screens/orders_details/order_detail_screen.dart';
 import 'package:udemy_flutter/screens/payment/ui/payment.dart';
 import 'package:udemy_flutter/screens/product_details/ui/product_details.dart';
 import 'package:udemy_flutter/screens/profile/ui/profile.dart';
@@ -55,8 +55,9 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => FavouritesScreen());
       case RouteConstant.orderDetailsRoute:
         final int arguments = settings.arguments as int;
-        var index = arguments;
-        return MaterialPageRoute(builder: (_) => DetailsOrder(index: index));
+        var orderId = arguments;
+        return MaterialPageRoute(
+            builder: (_) => OrderDetailsScreen(orderId: orderId));
       // case RouteConstant.verifyRoute:
       //   return MaterialPageRoute(builder: (_) {
       //     final bool arguments = settings.arguments as bool;

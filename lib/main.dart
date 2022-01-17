@@ -7,28 +7,29 @@ import 'package:udemy_flutter/screens/login/login_cubit/login_cubit.dart';
 import 'package:udemy_flutter/screens/login/ui/login.dart';
 import 'package:udemy_flutter/screens/on_boarding/on_boarding_cubit/cubit.dart';
 import 'package:udemy_flutter/screens/on_boarding/ui/on_boarding.dart';
+import 'package:udemy_flutter/screens/orders/my_orders_cubit/my_orders_cubit.dart';
+import 'package:udemy_flutter/screens/orders_details/cubit/order_details_cubit.dart';
 import 'package:udemy_flutter/screens/register/cubit/recubit.dart';
 import 'package:udemy_flutter/shared/components/constants.dart';
-import 'package:udemy_flutter/shared/network/local/cache_helper.dart';
-import 'package:udemy_flutter/shared/network/remote/dio_helper.dart';
 import 'package:udemy_flutter/shared/styles/themes.dart';
 import 'package:udemy_flutter/screens/categories/category_cubit/category_cubit.dart';
 import 'package:udemy_flutter/my_bloc_observer.dart';
 import 'package:udemy_flutter/screens/favourites/favourite_cubit/favourite_cubit.dart';
 import 'package:udemy_flutter/screens/home/home_cubit/home_cubit.dart';
 import 'package:udemy_flutter/screens/my_basket/basket_cubit/basket_cubit.dart';
-import 'package:udemy_flutter/screens/last_orders/my_orders_cubit/my_orders_cubit.dart';
 import 'package:udemy_flutter/screens/notifications/notification_cubit/notification_cubit.dart';
 import 'package:udemy_flutter/screens/profile/cubit/profile_cubit.dart';
 import 'package:udemy_flutter/screens/search/cubit/cubit.dart';
 
+import 'data/local/cache_helper.dart';
+import 'data/remote/dio_helper.dart';
 import 'screens/payment/payment_cubit/payment_cubit.dart';
 
 void main() async {
   // to ensure that all method  in project finish loading then open app
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = MyBlocObserver();
-  DioHelper.inti();
+  DioHelper.int();
   await CacheHelper.init();
   Widget widget;
   var onBoarding = CacheHelper.getData(key: 'onBoarding');
@@ -63,6 +64,7 @@ class MyApp extends StatelessWidget {
   final layoutBloc = LayoutCubit();
   final onBoardingBloc = OnBoardingCubit();
   final paymentBloc = PaymentCubit();
+  final orderDetailsBloc = OrderDetailsCubit();
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +74,10 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => loginBloc),
         BlocProvider(create: (context) => searchBloc),
         BlocProvider(create: (context) => favouriteBloc..getFavouritesData()),
-        BlocProvider(create: (context) => homeBloc..getHomeData()..getBannerData()),
+        BlocProvider(
+            create: (context) => homeBloc
+              ..getHomeData()
+              ..getBannerData()),
         BlocProvider(create: (context) => categoryBloc..getCategoriesData()),
         BlocProvider(create: (context) => basketBloc..getMyBasketData()),
         BlocProvider(create: (context) => myOrdersBloc..getOrders()),
@@ -88,7 +93,7 @@ class MyApp extends StatelessWidget {
         theme: lightTheme,
         darkTheme: darkTheme,
         //themeMode: isDark ? ThemeMode.dark : ThemeMode.light,
-        themeMode:ThemeMode.light,
+        themeMode: ThemeMode.light,
         home: widget,
         // home: ProductDetails(),
       ),

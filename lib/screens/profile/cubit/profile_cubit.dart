@@ -1,10 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:udemy_flutter/screens/login/model/login_model.dart';
+import 'package:udemy_flutter/data/remote/dio_helper.dart';
 import 'package:udemy_flutter/screens/profile/cubit/states.dart';
 import 'package:udemy_flutter/screens/profile/model/profile_model.dart';
 import 'package:udemy_flutter/shared/components/constants.dart';
-import 'package:udemy_flutter/shared/network/end_points.dart';
-import 'package:udemy_flutter/shared/network/remote/dio_helper.dart';
+import 'package:udemy_flutter/data/remote/end_points.dart';
 
 class ProfileCubit extends Cubit<ProfileStates> {
   ProfileCubit() : super(ProfileInitialState());
