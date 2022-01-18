@@ -2,17 +2,16 @@ import 'package:udemy_flutter/screens/favourites/model/change_favourites_model.d
 
 abstract class FavouriteStates {}
 
-class FavouritesInitialState extends FavouriteStates {}
-class ChangeFavoritesState extends FavouriteStates {}
+class FavouritesInitial extends FavouriteStates {}
 
-class ChangeFavoritesSuccessState extends FavouriteStates {
+class ChangeFavorites extends FavouriteStates {}
 
-}
+class ChangeFavoritesSuccess extends FavouriteStates {}
 
-class ChangeFavoritesErrorState extends FavouriteStates {}
+class ChangeFavoritesError extends FavouriteStates {}
 
-class GetFavoritesLoadingState extends FavouriteStates {}
+class GetFavoritesLoading extends FavouriteStates {}
 
-class GetFavoritesSuccessState extends FavouriteStates {}
+class GetFavoritesSuccess extends FavouriteStates {}
 
-class GetFavoritesErrorState extends FavouriteStates {}
+class GetFavoritesError extends FavouriteStates {}

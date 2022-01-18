@@ -21,7 +21,6 @@ class BasketScreen extends StatelessWidget {
         builder: (context, state) {
           //  print(lastPageIndex);
           return Scaffold(
-
             body: (state is AddToBasketLoadingState ||
                     state is BasketInitialState ||
                     // state is BasketUpdateQuantityLoadingState ||

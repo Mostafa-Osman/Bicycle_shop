@@ -9,7 +9,7 @@ import 'package:udemy_flutter/shared/components/constants.dart';
 import 'package:udemy_flutter/data/remote/end_points.dart';
 
 class FavouriteCubit extends Cubit<FavouriteStates> {
-  FavouriteCubit() : super(FavouritesInitialState());
+  FavouriteCubit() : super(FavouritesInitial());
 
   static FavouriteCubit get(context) => BlocProvider.of(context);
   var changeFavouritesModel;
@@ -17,25 +17,25 @@ class FavouriteCubit extends Cubit<FavouriteStates> {
   FavouritesModel? favouritesModel;
 
   Future<void> getFavouritesData() async {
-    emit(GetFavoritesLoadingState());
+    emit(GetFavoritesLoading());
     try {
       favouritesModel = await favouritesRepo.getFavouritesData();
-      emit(GetFavoritesSuccessState());
+      emit(GetFavoritesSuccess());
     } catch (e, s) {
       print(s.toString());
-      emit(GetFavoritesErrorState());
+      emit(GetFavoritesError());
     }
   }
 
   void changeFavorites(int productId, context) async {
-    emit(ChangeFavoritesState());
+    emit(ChangeFavorites());
     try {
       changeFavouritesModel = await favouritesRepo.changeFavorites(productId);
       HomeCubit.get(context).favourites[productId] = !HomeCubit.get(context).favourites[productId];
-      emit(ChangeFavoritesSuccessState());
+      emit(ChangeFavoritesSuccess());
       getFavouritesData();
     } catch (onError) {
-      emit(ChangeFavoritesErrorState());
+      emit(ChangeFavoritesError());
     }
   }
 }

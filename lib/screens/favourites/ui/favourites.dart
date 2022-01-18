@@ -18,11 +18,11 @@ class FavouritesScreen extends StatelessWidget {
               title: CustomText(text: 'Favourites', textColor: mainColor),
               leading: IconButton(
                 onPressed: () => Navigator.pop(context),
-                icon: Icon(Icons.arrow_back_ios_sharp, color: orange),
+                icon: Icon(Icons.arrow_back_ios_sharp, color: mainColor),
               ),
             ),
             body: ConditionalBuilder(
-              condition: (state is GetFavoritesLoadingState),
+              condition: (state is GetFavoritesLoading),
               builder: (context) => Center(
                   child: CircularProgressIndicator(
                 color: red,

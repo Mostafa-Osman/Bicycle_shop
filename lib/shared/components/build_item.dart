@@ -64,26 +64,20 @@ class BuildItem extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                             textColor: mainColor,
                           ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          if (model.discount != 0)
-                            CustomText(
-                                text: 'EGP ${model.oldPrice.toString()}',
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                fontSize: 13,
-                                height: 1.3,
-                                textColor: grey,
-                                decoration: TextDecoration.lineThrough),
                           Spacer(),
-                          CustomFavouriteIcon(
+                            CustomFavouriteIcon(
                               checkFavourite:
                               HomeCubit.get(context).favourites[model.id],
                               onPressed: () => FavouriteCubit.get(context)
                                   .changeFavorites(model.id!, context))
                         ],
                       ),
+                      if (model.discount != 0)
+                        CustomText(
+                            text: 'EGP ${model.oldPrice.toString()}',
+                            fontSize: 13,
+                            textColor: grey,
+                            decoration: TextDecoration.lineThrough),
                     ],
                   ),
                 ),
