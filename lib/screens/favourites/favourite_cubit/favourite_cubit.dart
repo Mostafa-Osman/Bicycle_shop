@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/data/remote/dio_helper.dart';
+import 'package:udemy_flutter/data/repository/favourite_repo/favourite_repo.dart';
 import 'package:udemy_flutter/screens/favourites/model/change_favourites_model.dart';
 import 'package:udemy_flutter/screens/favourites/model/favourites_model.dart';
 import 'package:udemy_flutter/screens/favourites/favourite_cubit/states.dart';
@@ -12,42 +13,29 @@ class FavouriteCubit extends Cubit<FavouriteStates> {
 
   static FavouriteCubit get(context) => BlocProvider.of(context);
   var changeFavouritesModel;
-
-  void changeFavorites(int productId,context) {
-    HomeCubit.get(context).favourites[productId] = !HomeCubit.get(context).favourites[productId];
-    emit(ChangeFavoritesState());
-    DioHelper.postData(
-      url: FAVORITES,
-      data: {
-        'product_id': productId,
-      },
-      token: token,
-    ).then((value) {
-      changeFavouritesModel = ChangeFavouritesModel.fromJson(value.data);
-      if (!changeFavouritesModel.status)
-        HomeCubit.get(context).favourites[productId] = !HomeCubit.get(context).favourites[productId];
-      else
-        getFavouritesData();
-
-      emit(ChangeFavoritesSuccessState(changeFavouritesModel));
-      emit(GetFavoritesSuccessState());
-    }).catchError((onError) {
-      HomeCubit.get(context).favourites[productId] = !HomeCubit.get(context).favourites[productId];
-      emit(ChangeFavoritesErrorState());
-    });
-  }
-
+  final favouritesRepo = FavouriteRepo();
   FavouritesModel? favouritesModel;
 
-  void getFavouritesData() {
+  Future<void> getFavouritesData() async {
     emit(GetFavoritesLoadingState());
-    DioHelper.getData(url: FAVORITES, token: token).then((value) {
-      favouritesModel = FavouritesModel.fromJson(value.data);
+    try {
+      favouritesModel = await favouritesRepo.getFavouritesData();
       emit(GetFavoritesSuccessState());
-    }).catchError((error) {
-      print(error.toString());
+    } catch (e, s) {
+      print(s.toString());
       emit(GetFavoritesErrorState());
-    });
+    }
   }
 
+  void changeFavorites(int productId, context) async {
+    emit(ChangeFavoritesState());
+    try {
+      changeFavouritesModel = await favouritesRepo.changeFavorites(productId);
+      HomeCubit.get(context).favourites[productId] = !HomeCubit.get(context).favourites[productId];
+      emit(ChangeFavoritesSuccessState());
+      getFavouritesData();
+    } catch (onError) {
+      emit(ChangeFavoritesErrorState());
+    }
+  }
 }

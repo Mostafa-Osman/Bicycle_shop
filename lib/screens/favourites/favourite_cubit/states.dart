@@ -6,9 +6,7 @@ class FavouritesInitialState extends FavouriteStates {}
 class ChangeFavoritesState extends FavouriteStates {}
 
 class ChangeFavoritesSuccessState extends FavouriteStates {
-  final ChangeFavouritesModel model;
 
-  ChangeFavoritesSuccessState(this.model);
 }
 
 class ChangeFavoritesErrorState extends FavouriteStates {}
