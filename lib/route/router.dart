@@ -14,7 +14,7 @@ import 'package:udemy_flutter/screens/product_details/ui/product_details.dart';
 import 'package:udemy_flutter/screens/profile/ui/profile.dart';
 import 'package:udemy_flutter/screens/register/ui/register.dart';
 import 'package:udemy_flutter/screens/search/ui/search.dart';
-import 'package:udemy_flutter/screens/update_profile/update_profile.dart';
+import 'package:udemy_flutter/screens/update_profile/ui/update_profile.dart';
 import 'route_constants.dart';
 
 class AppRouter {

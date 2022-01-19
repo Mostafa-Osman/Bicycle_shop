@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/screens/profile/cubit/profile_cubit.dart';
 import 'package:udemy_flutter/screens/update_profile/edit_profile_cubit/update_profile_cubit.dart';
-import 'package:udemy_flutter/shared/components/component.dart';
+import 'package:udemy_flutter/screens/update_profile/ui/upload_pictures.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/components/custom_text_form_field.dart';
@@ -57,25 +57,7 @@ class BodyEditProfile extends StatelessWidget {
           padding: const EdgeInsets.all(20.0),
           child: Column(
             children: [
-              Container(
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: black,
-                    width: 1.3,
-                  ),
-                  shape: BoxShape.circle,
-                ),
-                child: FittedBox(
-                  fit: BoxFit.fitWidth,
-                  child: ClipOval(
-                      child: Image.network(
-                    userData.image!,
-                    height: 180,
-                    width: 180,
-                    fit: BoxFit.cover,
-                  )),
-                ),
-              ),
+              UploadPictures(),
               SizedBox(height: 30),
               Form(
                 key: _formKey,

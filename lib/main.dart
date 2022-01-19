@@ -41,6 +41,7 @@ void main() async {
       widget = LoginScreen();
   } else
     widget = OnBoardingScreen();
+
   print(token.toString());
 
   runApp(MyApp(widget: widget));

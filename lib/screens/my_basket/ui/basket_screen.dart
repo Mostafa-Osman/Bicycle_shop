@@ -11,8 +11,11 @@ import 'package:udemy_flutter/shared/components/custom_favourite-icon.dart';
 import 'package:udemy_flutter/shared/components/custom%20_card.dart';
 import 'package:udemy_flutter/shared/components/custom_button.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
+import 'package:udemy_flutter/shared/components/custom_text_button.dart';
 import 'package:udemy_flutter/shared/components/navigate.dart';
 import 'package:udemy_flutter/shared/components/counter.dart';
+import 'package:udemy_flutter/shared/components/custom_divider.dart';
+import 'package:udemy_flutter/shared/components/custom_text.dart';
 
 import 'package:udemy_flutter/shared/styles/color.dart';
 
@@ -75,9 +78,10 @@ class BasketScreen extends StatelessWidget {
                                     CustomButton(
                                       text: 'Shop now',
                                       onPressed: () {
-                                        LayoutCubit.get(context).changeCurrentIndex(2);
-                                        navigateTo(
-                                            context, RouteConstant.shopLayoutRoute);
+                                        LayoutCubit.get(context)
+                                            .changeCurrentIndex(2);
+                                        navigateTo(context,
+                                            RouteConstant.shopLayoutRoute);
                                       },
                                     ),
                                     SizedBox(height: 20),
@@ -253,54 +257,7 @@ class BasketItem extends StatelessWidget {
                               onPressed: () => showDialog(
                                   context: context,
                                   builder: (BuildContext context) {
-                                    return AlertDialog(
-                                      backgroundColor: Colors.grey[200],
-                                      insetPadding:
-                                          EdgeInsets.symmetric(vertical: 50),
-                                      title:
-                                          CustomText(text: 'Delete my_basket'),
-                                      content: Container(
-                                        height: 90.0,
-                                        width: double.infinity,
-                                        child: Column(
-                                          children: [
-                                            CustomText(
-                                                text: 'Are You Sure ?',
-                                                fontSize: 20.0),
-                                            SizedBox(
-                                              height: 20.0,
-                                            ),
-                                            Row(children: [
-                                              Expanded(
-                                                child: CustomButton(
-                                                  onPressed: () {
-                                                    BasketCubit.get(context)
-                                                        .deleteOrderFromBasketData(
-                                                            productId:
-                                                                model.id);
-                                                    BasketCubit.get(context)
-                                                        .getMyBasketData();
-                                                    Navigator.of(context).pop();
-                                                  },
-                                                  text: 'Delete',
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 5.0,
-                                              ),
-                                              Expanded(
-                                                child: CustomButton(
-                                                  onPressed: () =>
-                                                      Navigator.of(context)
-                                                          .pop(),
-                                                  text: 'Cancel',
-                                                ),
-                                              ),
-                                            ]),
-                                          ],
-                                        ),
-                                      ),
-                                    );
+                                    return MyDialog(model: model);
                                   }),
                               icon: Icon(Icons.delete),
                             ),
@@ -313,6 +270,77 @@ class BasketItem extends StatelessWidget {
               ],
             ),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class MyDialog extends StatelessWidget {
+  final model;
+
+  const MyDialog({required this.model});
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      content: Container(
+        height: 150,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          shape: BoxShape.rectangle,
+          borderRadius: new BorderRadius.all(new Radius.circular(50.0)),
+        ),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
+              child: CustomText(
+                text: 'Are You Sure ?',
+                fontSize: 20.0,
+                textColor: red,
+              ),
+            ),
+            Center(
+              child: CustomDivider(
+                thickness: 1,
+                color: lightMainColor,
+              ),
+            ),
+            Expanded(
+              child: Container(
+                width: double.infinity,
+                child: Row(children: [
+                  Expanded(
+                    child: CustomTextButton(
+                      onPress: () {
+                        BasketCubit.get(context)
+                            .deleteOrderFromBasketData(productId: model.id);
+                        BasketCubit.get(context).getMyBasketData();
+                        Navigator.of(context).pop();
+                      },
+                      text: 'Delete',
+                      fontSize: 20,
+                      textColor: mainColor,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 5.0,
+                  ),
+                  Expanded(
+                    child: CustomTextButton(
+                      onPress: () {
+                        Navigator.of(context).pop();
+                      },
+                      text: 'Cancel',
+                      fontSize: 20,
+                      textColor: mainColor,
+                    ),
+                  ),
+                ]),
+              ),
+            )
+          ],
         ),
       ),
     );

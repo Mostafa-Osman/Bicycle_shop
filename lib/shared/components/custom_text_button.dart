@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:udemy_flutter/shared/components/custom_text.dart';
 
 class CustomTextButton extends StatelessWidget {
   final String text;
