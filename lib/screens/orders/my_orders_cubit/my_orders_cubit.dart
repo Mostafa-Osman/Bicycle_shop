@@ -1,12 +1,7 @@
-import 'dart:developer';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:udemy_flutter/data/remote/dio_helper.dart';
+import 'package:udemy_flutter/data/repository/orders_repo/orders_repo.dart';
 import 'package:udemy_flutter/screens/orders/model/my_orders.dart';
 import 'package:udemy_flutter/screens/orders/my_orders_cubit/states.dart';
-
-import 'package:udemy_flutter/shared/components/constants.dart';
-import 'package:udemy_flutter/data/remote/end_points.dart';
 
 class MyOrdersCubit extends Cubit<MyOrdersStates> {
   MyOrdersCubit() : super(MyOrdersInitialState());
@@ -15,18 +10,17 @@ class MyOrdersCubit extends Cubit<MyOrdersStates> {
 
   //get orders
   MyOrderModel? order;
+  final ordersRepo = OrdersRepo();
 
-  void getOrders() {
+  Future<void> getOrders() async {
     emit(MyOrderLoadingState());
-    DioHelper.getData(url: MY_ORDERS, token: token).then((value) {
-      order = MyOrderModel.fromJson(value.data);
+    try {
+      order = await ordersRepo.getOrder();
       emit(MyOrderSuccessState());
-    }).catchError((error, s) {
-      log(s);
-      print(error.toString());
+    } catch (e) {
       emit(MyOrderErrorState());
-    });
+
+      rethrow;
+    }
   }
-
-
 }

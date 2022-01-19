@@ -8,7 +8,7 @@ class CustomFavouriteIcon extends StatelessWidget {
 
   CustomFavouriteIcon(
       {required this.onPressed,
-      required this.checkFavourite,
+        required this.checkFavourite,
       this.iconSize = 25.0});
 
   @override

@@ -11,12 +11,13 @@ part 'order_details_state.dart';
 
 class OrderDetailsCubit extends Cubit<OrderDetailsState> {
   OrderDetailsCubit() : super(OrderDetailsInitial());
+
   //pass order repo  by get it == di
 
   final ordersRepo = OrdersRepo();
 
   //order details
-   OrderDetailsModel? orderDetails;
+  OrderDetailsModel? orderDetails;
   bool isAddressVisible = false;
 
   Future<void> getOrderDetails(int orderId) async {
@@ -37,14 +38,14 @@ class OrderDetailsCubit extends Cubit<OrderDetailsState> {
   }
 
   //cancel order
-  void getCancelOrder(orderId) {
+  Future<void> cancelOrder(orderId) async {
     emit(OrderCancelLoading());
-    DioHelper.getData(url: 'orders/' + '${orderId}' + '/cancel', token: token)
-        .then((value) {
+    try {
+      ordersRepo.cancelOrder(orderId);
       emit(OrderCancelSuccess());
-    }).catchError((error) {
-      print(error.toString());
+    } catch (e) {
       emit(OrderCancelError());
-    });
+      rethrow;
+    }
   }
 }

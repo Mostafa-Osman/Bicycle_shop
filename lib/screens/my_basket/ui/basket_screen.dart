@@ -19,7 +19,6 @@ class BasketScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<BasketCubit, BasketStates>(
         builder: (context, state) {
-          //  print(lastPageIndex);
           return Scaffold(
             appBar: AppBar(
               elevation: 0.0,
@@ -29,19 +28,15 @@ class BasketScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               leading: IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
+                onPressed: () => Navigator.pop(context),
                 icon: Icon(Icons.arrow_back_ios_sharp, color: mainColor),
               ),
             ),
-            body: (state is AddToBasketLoadingState ||
+            body: (
+                state is AddToBasketLoadingState ||
                     state is BasketInitialState ||
-                    // state is BasketUpdateQuantityLoadingState ||
                     state is AddToBasketErrorState ||
-                    state is ShopGetOrderLoadingState
-                //|| state is BasketUpdateQuantityErrorState
-                )
+                    state is ShopGetOrderLoadingState)
                 ? Center(
                     child: CircularProgressIndicator(),
                   )
@@ -82,15 +77,16 @@ class BasketScreen extends StatelessWidget {
                                   ' Total: ${BasketCubit.get(context).myBag!.data!.total} EGP',
                               fontSize: 18.0,
                               textColor: mainColor,
-                              // backgroundColor: Colors.orangeAccent[100],
                             ),
                             SizedBox(
                               height: 10.0,
                             ),
                             CustomButton(
                               text: 'Complete orders now',
-                              onPressed: () => navigateTo(
-                                  context, RouteConstant.paymentRoute),
+                              onPressed: () {
+                                navigateTo(
+                                  context, RouteConstant.paymentRoute);
+                              },
                             )
                           ],
                         ),
@@ -105,7 +101,6 @@ class BasketScreen extends StatelessWidget {
 
 class BasketItem extends StatelessWidget {
   final model;
-  int count = 1;
 
   BasketItem({required this.model});
 
@@ -196,12 +191,12 @@ class BasketItem extends StatelessWidget {
                               increment: () => BasketCubit.get(context)
                                   .updateBasketOrderData(
                                       quantity: ++model.quantity,
-                                      cartId: model.id!),
+                                      productId: model.id!),
                               textCount: model.quantity,
                               decrement: () => BasketCubit.get(context)
                                   .updateBasketOrderData(
-                                      quantity: ++model.quantity,
-                                      cartId: model.id!),
+                                      quantity: --model.quantity,
+                                      productId: model.id!),
                             ),
                             Spacer(),
                             IconButton(
@@ -231,7 +226,8 @@ class BasketItem extends StatelessWidget {
                                                   onPressed: () {
                                                     BasketCubit.get(context)
                                                         .deleteOrderFromBasketData(
-                                                            cartId: model.id);
+                                                            productId:
+                                                                model.id);
                                                     BasketCubit.get(context)
                                                         .getMyBasketData();
                                                     Navigator.of(context).pop();

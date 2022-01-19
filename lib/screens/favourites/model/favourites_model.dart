@@ -7,14 +7,12 @@ class FavouritesModel {
   FavouritesModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+    data = new Data.fromJson(json['data']) ;
   }
 }
 
 class Data {
   List<FavouritesData> data=[];
-
-
 
   Data.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {

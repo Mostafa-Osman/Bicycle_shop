@@ -15,7 +15,7 @@ class ProfileScreen extends StatelessWidget {
       builder: (context, state) {
         var userData = ProfileCubit.get(context).userData!.data;
         return ConditionalBuilder(
-          condition: (ProfileCubit.get(context).userData != null),
+          condition: (state is ProfileSuccess),
           builder: (context) => SingleChildScrollView(
             child: Align(
               //alignment: Alignment.topCenter,

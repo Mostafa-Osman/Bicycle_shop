@@ -6,8 +6,7 @@ class BasketModel {
   BasketModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
-    data = json['data'] != null ? Data.fromJson(json['data']) : null;
-
+    data = Data.fromJson(json['data']);
   }
 }
 

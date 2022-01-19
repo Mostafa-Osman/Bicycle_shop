@@ -8,9 +8,8 @@ class OrderDetailsResponse {
   OrderDetailsResponse.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
-    orderDetails =  new OrderDetailsModel.fromJson(json['data']);
+    orderDetails = new OrderDetailsModel.fromJson(json['data']);
   }
-
 }
 
 class OrderDetailsModel {
@@ -28,16 +27,16 @@ class OrderDetailsModel {
 
   OrderDetailsModel(
       {this.id,
-        this.cost,
-        this.discount,
-        this.points,
-        this.vat,
-        this.total,
-        this.paymentMethod,
-        this.date,
-        this.status,
-        this.address,
-        this.products});
+      this.cost,
+      this.discount,
+      this.points,
+      this.vat,
+      this.total,
+      this.paymentMethod,
+      this.date,
+      this.status,
+      this.address,
+      this.products});
 
   OrderDetailsModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -50,7 +49,7 @@ class OrderDetailsModel {
     date = json['date'];
     status = json['status'];
     address =
-    json['address'] != null ? new Address.fromJson(json['address']) : null;
+        json['address'] != null ? new Address.fromJson(json['address']) : null;
     if (json['products'] != null) {
       products = <Products>[];
       json['products'].forEach((v) {
@@ -58,7 +57,6 @@ class OrderDetailsModel {
       });
     }
   }
-
 }
 
 class Address {
@@ -68,14 +66,13 @@ class Address {
   String? region;
   String? details;
 
-
-  Address(
-      {this.id,
-        this.name,
-        this.city,
-        this.region,
-        this.details,
-     });
+  Address({
+    this.id,
+    this.name,
+    this.city,
+    this.region,
+    this.details,
+  });
 
   Address.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -83,9 +80,7 @@ class Address {
     city = json['city'];
     region = json['region'];
     details = json['details'];
-
   }
-
 }
 
 class Products {
@@ -104,5 +99,4 @@ class Products {
     name = json['name'];
     image = json['image'];
   }
-
 }

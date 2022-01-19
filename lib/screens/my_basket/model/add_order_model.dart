@@ -8,7 +8,7 @@ class AddOrderModel {
   AddOrderModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+    data =  new Data.fromJson(json['data']) ;
   }
 }
 

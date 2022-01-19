@@ -1,6 +1,7 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:udemy_flutter/screens/home/home_cubit/home_cubit.dart';
 import 'package:udemy_flutter/screens/home/home_cubit/states.dart';
 import 'package:udemy_flutter/screens/home/model/home_model.dart';
@@ -11,7 +12,6 @@ import 'package:udemy_flutter/shared/components/custom_button.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
 import 'package:udemy_flutter/shared/components/navigate.dart';
-
 import 'package:udemy_flutter/shared/styles/color.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
@@ -28,13 +28,20 @@ class ProductDetailsScreen extends StatelessWidget {
           appBar: AppBar(
             elevation: 0.0,
             leading: IconButton(
-              onPressed: () => Navigator.pop(context),
+              onPressed: () {
+                HomeCubit.get(context).quantityProduct = 1;
+                Navigator.pop(context);
+              },
               icon: Icon(Icons.arrow_back_ios_sharp, color: mainColor),
             ),
             actions: [
               IconButton(
                 onPressed: () => navigateTo(context, RouteConstant.basketRoute),
-                icon: Icon(Icons.add_shopping_cart_rounded, color: mainColor),
+                icon: SvgPicture.asset(
+                  'assets/icons/basket.svg',
+                  fit: BoxFit.fitWidth,
+                  color: mainColor,
+                ),
               ),
             ],
           ),
@@ -63,9 +70,6 @@ class ProductDetailsScreen extends StatelessWidget {
                   child: CustomButton(
                       text: 'Add to bag',
                       onPressed: () {
-                        BasketCubit.get(context).updateBasketOrderData(
-                            quantity: HomeCubit.get(context).quantityProduct,
-                            cartId: productDetails.id!);
                         BasketCubit.get(context)
                             .addToBasketOrders(productDetails.id!);
                       }),

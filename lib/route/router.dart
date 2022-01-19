@@ -8,7 +8,7 @@ import 'package:udemy_flutter/screens/my_basket/ui/basket_screen.dart';
 import 'package:udemy_flutter/screens/notifications/ui/notifications_screen.dart';
 import 'package:udemy_flutter/screens/on_boarding/ui/on_boarding.dart';
 import 'package:udemy_flutter/screens/orders/ui/my_orders.dart';
-import 'package:udemy_flutter/screens/orders_details/order_detail_screen.dart';
+import 'package:udemy_flutter/screens/orders_details/ui/order_detail_screen.dart';
 import 'package:udemy_flutter/screens/payment/ui/payment.dart';
 import 'package:udemy_flutter/screens/product_details/ui/product_details.dart';
 import 'package:udemy_flutter/screens/profile/ui/profile.dart';

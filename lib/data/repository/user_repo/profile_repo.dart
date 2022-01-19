@@ -8,7 +8,6 @@ class ProfileRepo {
   // pass it to constructor
   // use get it lib for dependency injection
 
-
   //get user data
   Future<ProfileModel> getUserData() async {
     try {
@@ -23,4 +22,21 @@ class ProfileRepo {
   }
 
   // update user data
+  Future<ProfileModel> updateUserData(
+      {required name, required email, required phone}) async {
+    try {
+      final response =
+          await DioHelper.putData(url: UPDATE_PROFILE, token: token, data: {
+        'name': name,
+        'email': email,
+        'phone': phone,
+      });
+      if (response.data['status'] == true) {
+        return ProfileModel.fromJson(response.data);
+      }
+      throw response.data['message'] ?? 'server error';
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

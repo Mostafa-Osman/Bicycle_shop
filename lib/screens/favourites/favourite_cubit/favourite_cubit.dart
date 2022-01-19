@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/data/remote/dio_helper.dart';
 import 'package:udemy_flutter/data/repository/favourite_repo/favourite_repo.dart';
@@ -20,6 +22,7 @@ class FavouriteCubit extends Cubit<FavouriteStates> {
     emit(GetFavoritesLoading());
     try {
       favouritesModel = await favouritesRepo.getFavouritesData();
+
       emit(GetFavoritesSuccess());
     } catch (e, s) {
       print(s.toString());
@@ -31,10 +34,12 @@ class FavouriteCubit extends Cubit<FavouriteStates> {
     emit(ChangeFavorites());
     try {
       changeFavouritesModel = await favouritesRepo.changeFavorites(productId);
-      HomeCubit.get(context).favourites[productId] = !HomeCubit.get(context).favourites[productId];
+      HomeCubit.get(context).getHomeData();
       emit(ChangeFavoritesSuccess());
       getFavouritesData();
     } catch (onError) {
+      log(onError.toString());
+
       emit(ChangeFavoritesError());
     }
   }
