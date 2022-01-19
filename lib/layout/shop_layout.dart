@@ -13,10 +13,11 @@ class ShopLayout extends StatelessWidget {
       builder: (context, state) {
         var cubit = LayoutCubit.get(context);
         return Scaffold(
-          appBar:cubit.currentPageIndex!=0? cubit.appBarScreen[cubit.currentPageIndex-1]:null,
+            appBar: cubit.appBarScreen[cubit.currentPageIndex],
+
             body: cubit.bottomNavScreen[cubit.currentPageIndex],
             bottomNavigationBar: CurvedNavigationBar(
-                index: 0,
+                index: 2,
                 height: 50,
                 backgroundColor: white,
                 color: mainColor,

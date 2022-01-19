@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/screens/favourites/favourite_cubit/favourite_cubit.dart';
 import 'package:udemy_flutter/screens/favourites/favourite_cubit/states.dart';
 import 'package:udemy_flutter/shared/components/build_item.dart';
-import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 
 class FavouritesScreen extends StatelessWidget {
@@ -13,14 +12,6 @@ class FavouritesScreen extends StatelessWidget {
     return BlocConsumer<FavouriteCubit, FavouriteStates>(
         builder: (context, state) {
           return Scaffold(
-            appBar: AppBar(
-              elevation: 0.0,
-              title: CustomText(text: 'Favourites', textColor: mainColor),
-              leading: IconButton(
-                onPressed: () => Navigator.pop(context),
-                icon: Icon(Icons.arrow_back_ios_sharp, color: mainColor),
-              ),
-            ),
             body: ConditionalBuilder(
               condition: (state is GetFavoritesLoading),
               builder: (context) => Center(

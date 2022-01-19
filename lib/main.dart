@@ -13,7 +13,6 @@ import 'package:udemy_flutter/screens/register/cubit/recubit.dart';
 import 'package:udemy_flutter/screens/update_profile/edit_profile_cubit/update_profile_cubit.dart';
 import 'package:udemy_flutter/shared/components/constants.dart';
 import 'package:udemy_flutter/shared/styles/themes.dart';
-import 'package:udemy_flutter/screens/categories/category_cubit/category_cubit.dart';
 import 'package:udemy_flutter/my_bloc_observer.dart';
 import 'package:udemy_flutter/screens/favourites/favourite_cubit/favourite_cubit.dart';
 import 'package:udemy_flutter/screens/home/home_cubit/home_cubit.dart';
@@ -58,7 +57,7 @@ class MyApp extends StatelessWidget {
   final profileBloc = ProfileCubit();
   final homeBloc = HomeCubit();
   final favouriteBloc = FavouriteCubit();
-  final categoryBloc = CategoryCubit();
+  // final categoryBloc = CategoryCubit();
   final basketBloc = BasketCubit();
   final myOrdersBloc = MyOrdersCubit();
   final notificationBloc = NotificationCubit();
@@ -80,7 +79,7 @@ class MyApp extends StatelessWidget {
             create: (context) => homeBloc
               ..getHomeData()
               ..getBannerData()),
-        BlocProvider(create: (context) => categoryBloc..getCategoriesData()),
+        // BlocProvider(create: (context) => categoryBloc..getCategoriesData()),
         BlocProvider(create: (context) => basketBloc..getMyBasketData()),
         BlocProvider(create: (context) => myOrdersBloc..getOrders()),
         BlocProvider(create: (context) => notificationBloc..getNotifications()),

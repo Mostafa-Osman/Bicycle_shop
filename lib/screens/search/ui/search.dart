@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
 import 'package:udemy_flutter/screens/search/cubit/cubit.dart';
 import 'package:udemy_flutter/screens/search/cubit/states.dart';
@@ -51,8 +52,16 @@ class SearchScreen extends StatelessWidget {
                       padding: const EdgeInsets.only(right: 10.0),
                       child: IconButton(
                         onPressed: () =>
-                            navigateTo(context, RouteConstant.favouriteRoute),
-                        icon: Icon(Icons.favorite, color: red, size: 40),
+                            navigateTo(context, RouteConstant.basketRoute),
+                        icon: SizedBox(
+                          height: 40.0,
+                          width: 40.0,
+                          child: SvgPicture.asset(
+                            'assets/icons/basket.svg',
+                            fit: BoxFit.fitWidth,
+                            color: mainColor,
+                          ),
+                        ),
                       ),
                     ),
                   ],
