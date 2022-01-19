@@ -38,36 +38,36 @@ class Body extends StatelessWidget {
             },
           ),
         ),
-        //small photo
-        // Padding(
-        //   padding: const EdgeInsets.only(top: 10.0, bottom: 40.0),
-        //   child: Container(
-        //     height: 40,
-        //     width: double.infinity,
-        //     alignment: Alignment.center,
-        //     child: ListView.builder(
-        //       scrollDirection: Axis.horizontal,
-        //       shrinkWrap: true,
-        //       itemCount: productDetails!.images.length,
-        //       itemBuilder: (context, index) {
-        //         return (index == HomeCubit.get(context).photoIndex)
-        //             ? Container(
-        //                 decoration: BoxDecoration(
-        //                     borderRadius: BorderRadius.all(Radius.circular(10)),
-        //                     border: Border.all(color: Colors.green, width: 2)),
-        //                 child: Image(
-        //                   image: NetworkImage(productDetails!.images[index]),
-        //                   fit: BoxFit.fitWidth,
-        //                 ),
-        //               )
-        //             : Image(
-        //                 image: NetworkImage(productDetails!.images[index]),
-        //                 fit: BoxFit.cover,
-        //               );
-        //       },
-        //     ),
-        //   ),
-        // ),
+        // small photo
+        Padding(
+          padding: const EdgeInsets.only(top: 10.0, bottom: 40.0),
+          child: Container(
+            height: 40,
+            width: double.infinity,
+            alignment: Alignment.center,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              shrinkWrap: true,
+              itemCount: productDetails!.images.length,
+              itemBuilder: (context, index) {
+                return (index == HomeCubit.get(context).photoIndex)
+                    ? Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            border: Border.all(color: Colors.green, width: 2)),
+                        child: Image(
+                          image: NetworkImage(productDetails!.images[index]),
+                          fit: BoxFit.fitWidth,
+                        ),
+                      )
+                    : Image(
+                        image: NetworkImage(productDetails!.images[index]),
+                        fit: BoxFit.cover,
+                      );
+              },
+            ),
+          ),
+        ),
 
         Container(
           padding: EdgeInsets.all(10),

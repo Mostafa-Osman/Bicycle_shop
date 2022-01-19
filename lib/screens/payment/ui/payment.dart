@@ -39,7 +39,6 @@ class PaymentScreen extends StatelessWidget {
                 padding:
                     const EdgeInsets.only(top: 40.0, right: 20.0, left: 20.0),
                 child: Container(
-                  height: MediaQuery.of(context).size.height,
                   width: double.infinity,
                   child: Column(
                     children: [
@@ -87,26 +86,26 @@ class PaymentScreen extends StatelessWidget {
                             }),
                       ),
                       CustomCard(
-                          widget: SizedBox(
-                        height: 100,
-                        child: Column(
-                          children: [
-                            CustomText(
-                                text: 'Write your address please',
-                                fontSize: 18),
-                            SizedBox(height: 10),
-                            CustomTextFormField(
-                                key: _key,
-                                controller: addressControl,
-                                textHint: 'Add new address',
-                                hintColor: grey,
-                                roundedRectangleBorder: 15.0,
-                                validator: (value) => value!.isEmpty
-                                    ? 'please Enter your address'
-                                    : null),
-                          ],
+                        widget: SizedBox(
+                          height: 100,
+                          child: Column(
+                            children: [
+                              CustomText(
+                                  text: 'Write your address please',
+                                  fontSize: 18),
+                              SizedBox(height: 10),
+                              CustomTextFormField(
+                                  controller: addressControl,
+                                  textHint: 'Add new address',
+                                  hintColor: grey,
+                                  roundedRectangleBorder: 15.0,
+                                  validator: (value) => value!.isEmpty
+                                      ? 'please Enter your address'
+                                      : null),
+                            ],
+                          ),
                         ),
-                      )),
+                      ),
                     ],
                   ),
                 ),

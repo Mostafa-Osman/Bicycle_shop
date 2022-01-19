@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:udemy_flutter/layout/layout_cubit/cubit.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
 import 'package:udemy_flutter/screens/favourites/favourite_cubit/favourite_cubit.dart';
 import 'package:udemy_flutter/screens/home/home_cubit/home_cubit.dart';
@@ -32,35 +34,86 @@ class BasketScreen extends StatelessWidget {
                 icon: Icon(Icons.arrow_back_ios_sharp, color: mainColor),
               ),
             ),
-            body: (
-                state is AddToBasketLoadingState ||
+            body: (state is AddToBasketLoadingState ||
                     state is BasketInitialState ||
                     state is AddToBasketErrorState ||
                     state is ShopGetOrderLoadingState)
                 ? Center(
                     child: CircularProgressIndicator(),
                   )
-                : Column(
-                    children: [
-                      Expanded(
+                : BasketCubit.get(context).myBag!.data!.cartItems.isEmpty
+                    ? Padding(
+                        padding: const EdgeInsets.all(30.0),
                         child: Container(
-                          height: MediaQuery.of(context).size.height,
-                          child: ListView.builder(
-                              shrinkWrap: true,
-                              itemBuilder: (context, index) => BasketItem(
-                                    model: BasketCubit.get(context)
-                                        .myBag!
-                                        .data!
-                                        .cartItems[index],
-                                  ),
-                              itemCount: BasketCubit.get(context)
-                                  .myBag!
-                                  .data!
-                                  .cartItems
-                                  .length),
+                          width: double.infinity,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 100.0, bottom: 50.0),
+                                child: SvgPicture.asset(
+                                    'assets/images/empty.svg',
+                                    fit: BoxFit.fitWidth,
+                                    height: 250),
+                              ),
+                              CustomCard(
+                                widget: Column(
+                                  children: [
+                                    CustomText(
+                                        text: 'Basket is Empty!',
+                                        textColor: red),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 10.0, bottom: 20.0),
+                                      child: CustomText(
+                                          text:
+                                              'Looks like you haven\'t add any item yet.',
+                                          fontSize: 18,
+                                          textColor: grey),
+                                    ),
+                                    CustomButton(
+                                      text: 'Shop now',
+                                      onPressed: () {
+                                        LayoutCubit.get(context).changeCurrentIndex(2);
+                                        navigateTo(
+                                            context, RouteConstant.shopLayoutRoute);
+                                      },
+                                    ),
+                                    SizedBox(height: 20),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
+                      )
+                    : Column(
+                        children: [
+                          Expanded(
+                            child: Container(
+                              height: MediaQuery.of(context).size.height,
+                              child: ListView.builder(
+                                  shrinkWrap: true,
+                                  itemBuilder: (context, index) => BasketItem(
+                                        model: BasketCubit.get(context)
+                                            .myBag!
+                                            .data!
+                                            .cartItems[index],
+                                      ),
+                                  itemCount: BasketCubit.get(context)
+                                      .myBag!
+                                      .data!
+                                      .cartItems
+                                      .length),
+                            ),
+                          ),
+                        ],
                       ),
-                      Container(
+            bottomNavigationBar:
+                BasketCubit.get(context).myBag!.data!.cartItems.isEmpty
+                    ? null
+                    : Container(
                         padding: EdgeInsets.all(10),
                         height: 110.0,
                         decoration: BoxDecoration(
@@ -84,15 +137,12 @@ class BasketScreen extends StatelessWidget {
                             CustomButton(
                               text: 'Complete orders now',
                               onPressed: () {
-                                navigateTo(
-                                  context, RouteConstant.paymentRoute);
+                                navigateTo(context, RouteConstant.paymentRoute);
                               },
                             )
                           ],
                         ),
                       ),
-                    ],
-                  ),
           );
         },
         listener: (context, state) {});
