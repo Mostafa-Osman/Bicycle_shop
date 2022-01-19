@@ -1,14 +1,9 @@
 import 'dart:developer';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:udemy_flutter/data/remote/dio_helper.dart';
 import 'package:udemy_flutter/data/repository/favourite_repo/favourite_repo.dart';
-import 'package:udemy_flutter/screens/favourites/model/change_favourites_model.dart';
 import 'package:udemy_flutter/screens/favourites/model/favourites_model.dart';
 import 'package:udemy_flutter/screens/favourites/favourite_cubit/states.dart';
 import 'package:udemy_flutter/screens/home/home_cubit/home_cubit.dart';
-import 'package:udemy_flutter/shared/components/constants.dart';
-import 'package:udemy_flutter/data/remote/end_points.dart';
 
 class FavouriteCubit extends Cubit<FavouriteStates> {
   FavouriteCubit() : super(FavouritesInitial());
@@ -22,7 +17,6 @@ class FavouriteCubit extends Cubit<FavouriteStates> {
     emit(GetFavoritesLoading());
     try {
       favouritesModel = await favouritesRepo.getFavouritesData();
-
       emit(GetFavoritesSuccess());
     } catch (e, s) {
       print(s.toString());
@@ -35,6 +29,7 @@ class FavouriteCubit extends Cubit<FavouriteStates> {
     try {
       changeFavouritesModel = await favouritesRepo.changeFavorites(productId);
       HomeCubit.get(context).getHomeData();
+      // HomeCubit.get(context).favourites[productId]=! HomeCubit.get(context).favourites[productId];
       emit(ChangeFavoritesSuccess());
       getFavouritesData();
     } catch (onError) {

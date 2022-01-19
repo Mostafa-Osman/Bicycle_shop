@@ -37,8 +37,9 @@ class UploadPictures extends StatelessWidget {
               height: 50,
               width: 50,
               child: InkWell(
-                  child: SvgPicture.asset('assets/icons/add_icon.svg',
-                      color: mainColor),
+                  child: SvgPicture.asset(
+                    'assets/icons/add_icon.svg',
+                  ),
                   onTap: () => showDialog(
                       context: context,
                       builder: (BuildContext context) {

@@ -30,3 +30,5 @@ class GetGalleryImageLoading extends UpdateProfileState {}
 class GetGalleryImageSuccess extends UpdateProfileState {}
 
 class GetGalleryImageError extends UpdateProfileState {}
+class VisibilityPassword extends UpdateProfileState {}
+class ConfirmVisibilityPassword extends UpdateProfileState {}

@@ -1,13 +1,12 @@
 class ShopLoginModel {
-  bool status=false;
-  String message="";
+  bool status = false;
+  String message = "";
   UserData? data;
-
 
   ShopLoginModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
-    data =  UserData.fromJson(json['data']) ;
+    data = UserData.fromJson(json['data']);
   }
 }
 
@@ -19,7 +18,7 @@ class UserData {
   String? email;
   String? phone;
   String? image;
- String? token;
+  String? token;
 
   UserData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -32,4 +31,3 @@ class UserData {
     token = json['token'];
   }
 }
-

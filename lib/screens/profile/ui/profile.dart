@@ -18,7 +18,6 @@ class ProfileScreen extends StatelessWidget {
           condition: (ProfileCubit.get(context).userData!=null),
           builder: (context) => SingleChildScrollView(
             child: Align(
-              //alignment: Alignment.topCenter,
               child: Container(
                 width: 500,
                 color: white,
