@@ -6,7 +6,11 @@ class BasketInitialState extends BasketStates {}
 
 class AddToBasketLoadingState extends BasketStates {}
 
-class AddToBasketSuccessState extends BasketStates {}
+class AddToBasketSuccessState extends BasketStates {
+  final myBag;
+
+  AddToBasketSuccessState(this.myBag);
+}
 
 class AddToBasketErrorState extends BasketStates {}
 

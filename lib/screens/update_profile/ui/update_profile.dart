@@ -99,7 +99,7 @@ class BodyEditProfile extends StatelessWidget {
                       keyboardType: TextInputType.phone,
                       validator: (value) => value!.isEmpty
                           ? 'من فضلك ادخل رقم هاتفك'
-                          : (value.length != 9)
+                          : (value.length != 11)
                               ? 'رقم الهاتف غير صحيح'
                               : null,
                     ),

@@ -1,4 +1,3 @@
-
 import 'package:udemy_flutter/screens/login/model/login_model.dart';
 
 abstract class RegisterStates {}
@@ -14,10 +13,11 @@ class ShopRegisterSuccessState extends RegisterStates {
 }
 
 class ShopRegisterErrorState extends RegisterStates {
-  final String error;
+  final  error;
 
   ShopRegisterErrorState(this.error);
 }
 
 class ShopRegisterVisibilityPasswordState extends RegisterStates {}
+
 class ConfirmRegisterVisibilityPasswordState extends RegisterStates {}

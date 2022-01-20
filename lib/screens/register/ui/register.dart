@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
+import 'package:udemy_flutter/shared/components/component.dart';
 import 'package:udemy_flutter/shared/components/custom_text_button.dart';
 import 'package:udemy_flutter/shared/components/custom_button.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
@@ -22,7 +23,14 @@ class RegisterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var cubit = RegisterCubit.get(context);
     return BlocConsumer<RegisterCubit, RegisterStates>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if (state is ShopRegisterErrorState) {
+          showToast(state: ToastStates.ERROR, message: state.error);
+        } else if (state is ShopRegisterSuccessState) {
+          showToast(state: ToastStates.SUCCESS, message: 'Register success');
+          navigateTo(context, RouteConstant.loginRoute);
+        }
+      },
       builder: (context, state) => Scaffold(
         body: Container(
           height: MediaQuery.of(context).size.height,
@@ -84,7 +92,7 @@ class RegisterScreen extends StatelessWidget {
                                   Icon(Icons.phone_android, color: mainColor),
                               validator: (value) => value!.isEmpty
                                   ? 'Please enter your phone number'
-                                  : (value.length != 9)
+                                  : (value.length != 11)
                                       ? 'your number invalid enter valid number'
                                       : null,
                             ),
@@ -185,7 +193,6 @@ class RegisterScreen extends StatelessWidget {
                                       email: registerEmailControl.text,
                                       password: registerPasswordControl.text,
                                       phone: registerPhoneControl.text);
-                                  navigateTo(context, RouteConstant.loginRoute);
                                 }
                               },
                             ),

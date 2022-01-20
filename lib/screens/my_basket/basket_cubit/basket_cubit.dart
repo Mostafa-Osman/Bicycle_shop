@@ -23,7 +23,7 @@ class BasketCubit extends Cubit<BasketStates> {
     emit(AddToBasketLoadingState());
     try {
       myBag = await basketRepo.addToBasketOrders(productId);
-      emit(AddToBasketSuccessState());
+      emit(AddToBasketSuccessState(myBag));
       getMyBasketData();
     } catch (error) {
       print(error.toString());
