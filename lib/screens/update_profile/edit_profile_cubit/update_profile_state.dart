@@ -15,8 +15,6 @@ class UpdateProfileSuccess extends UpdateProfileState {
 
 class UpdateProfileError extends UpdateProfileState {}
 
-
-
 class PictureState extends UpdateProfileState {}
 
 class GetCameraImageLoading extends UpdateProfileState {}
@@ -30,5 +28,7 @@ class GetGalleryImageLoading extends UpdateProfileState {}
 class GetGalleryImageSuccess extends UpdateProfileState {}
 
 class GetGalleryImageError extends UpdateProfileState {}
+
 class VisibilityPassword extends UpdateProfileState {}
+
 class ConfirmVisibilityPassword extends UpdateProfileState {}

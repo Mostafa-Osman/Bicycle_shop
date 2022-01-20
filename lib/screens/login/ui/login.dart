@@ -31,11 +31,12 @@ class LoginScreen extends StatelessWidget {
               token = state.loginModel.data!.token;
               navigatorAndFinish(context, RouteConstant.shopLayoutRoute);
             });
-          } else {
-            print(state.loginModel.message);
-            showToast(
-                state: ToastStates.ERROR, message: state.loginModel.message,);
           }
+        }
+        else if (state  is LoginErrorState)
+        {
+          showToast(
+              state: ToastStates.ERROR, message:state.error );
         }
       },
       builder: (context, state) => Scaffold(

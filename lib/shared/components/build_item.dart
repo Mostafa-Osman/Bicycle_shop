@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:udemy_flutter/screens/favourites/favourite_cubit/favourite_cubit.dart';
 import 'package:udemy_flutter/screens/home/home_cubit/home_cubit.dart';
 import 'package:udemy_flutter/shared/components/custom%20_card.dart';
@@ -31,8 +32,12 @@ class BuildItem extends StatelessWidget {
                     height: 120,
                   ),
                   if (model.discount != 0)
-                    Image.asset(
-                      "assets/icons/discount.png",
+                    Positioned(
+                      top: 0,
+                      left: 0,
+                        child: SvgPicture.asset('assets/icons/discount.svg',
+                            fit: BoxFit.cover, height: 30, width: 30),
+
                     ),
                 ],
               ),

@@ -1,6 +1,7 @@
 import 'package:udemy_flutter/data/remote/dio_helper.dart';
 import 'package:udemy_flutter/data/remote/end_points.dart';
 import 'package:udemy_flutter/screens/profile/model/profile_model.dart';
+import 'package:udemy_flutter/shared/components/component.dart';
 import 'package:udemy_flutter/shared/components/constants.dart';
 
 class ProfileRepo {
@@ -22,13 +23,13 @@ class ProfileRepo {
   }
 
   // update user data
-  Future<ProfileModel> updateUserData(
-      {required name,
-      required email,
-      required phone,
-      required image,
-      //required password
-      }) async {
+  Future<ProfileModel> updateUserData({
+    required name,
+    required email,
+    required phone,
+    required image,
+    //required password
+  }) async {
     try {
       final response =
           await DioHelper.putData(url: UPDATE_PROFILE, token: token, data: {
@@ -39,6 +40,7 @@ class ProfileRepo {
         //'password': password
       });
       if (response.data['status'] == true) {
+        showToast(state: ToastStates.SUCCESS, message: 'update data success');
         return ProfileModel.fromJson(response.data);
       }
       throw response.data['message'] ?? 'server error';

@@ -8,82 +8,85 @@ import 'package:udemy_flutter/shared/styles/color.dart';
 
 class ProfileScreen extends StatelessWidget {
   final formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ProfileCubit, ProfileStates>(
       listener: (context, state) {},
       builder: (context, state) {
-        var userData = ProfileCubit.get(context).userData!.data;
         return ConditionalBuilder(
-          condition: (ProfileCubit.get(context).userData!=null),
-          builder: (context) => SingleChildScrollView(
-            child: Align(
-              child: Container(
-                width: 500,
-                color: white,
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Container(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            SizedBox(height: 30),
-                            Container(
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: black,
-                                  width: 1.3,
+          condition: (state is ProfileSuccess),
+          builder: (context) {
+            var userData = ProfileCubit.get(context).userData!.data;
+            return SingleChildScrollView(
+              child: Align(
+                child: Container(
+                  width: 500,
+                  color: white,
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Container(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              SizedBox(height: 30),
+                              Container(
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: black,
+                                    width: 1.3,
+                                  ),
+                                  shape: BoxShape.circle,
                                 ),
-                                shape: BoxShape.circle,
+                                child: FittedBox(
+                                  fit: BoxFit.fitWidth,
+                                  child: ClipOval(
+                                      child: Image.network(
+                                    userData!.image!,
+                                    height: 180,
+                                    width: 180,
+                                    fit: BoxFit.cover,
+                                  )),
+                                ),
                               ),
-                              child: FittedBox(
-                                fit: BoxFit.fitWidth,
-                                child: ClipOval(
-                                    child: Image.network(
-                                  userData!.image!,
-                                  height: 180,
-                                  width: 180,
-                                  fit: BoxFit.cover,
-                                )),
+                              SizedBox(height: 30),
+                              Text(
+                                userData.name!,
+                                style: TextStyle(
+                                    fontSize: 25, fontWeight: FontWeight.bold),
+                                overflow: TextOverflow.clip,
                               ),
-                            ),
-                            SizedBox(height: 30),
-                            Text(
-                              userData.name!,
-                              style: TextStyle(
-                                  fontSize: 25, fontWeight: FontWeight.bold),
-                              overflow: TextOverflow.clip,
-                            ),
-                            SizedBox(height: 20),
-                            AccountTextFormField(
-                              text: userData.phone!,
-                              icon: Icons.phone,
-                            ),
-                            SizedBox(height: 3),
-                            AccountTextFormField(
-                              text: userData.email!,
-                              icon: Icons.email,
-                            ),
-                            AccountTextFormField(
-                              text: userData.points.toString(),
-                              icon: Icons.account_balance_wallet,
-                            ),
-                            AccountTextFormField(
-                              text: userData.credit.toString(),
-                              icon: Icons.view_compact_outlined,
-                            ),
-                          ],
+                              SizedBox(height: 20),
+                              AccountTextFormField(
+                                text: userData.phone!,
+                                icon: Icons.phone,
+                              ),
+                              SizedBox(height: 3),
+                              AccountTextFormField(
+                                text: userData.email!,
+                                icon: Icons.email,
+                              ),
+                              AccountTextFormField(
+                                text: userData.points.toString()+' points',
+                                icon: Icons.account_balance_wallet,
+                              ),
+                              AccountTextFormField(
+                                text:   userData.credit.toString()+' \$',
+                                icon: Icons.view_compact_outlined,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ),
+            );
+          },
           fallback: (context) => Center(
               child: CircularProgressIndicator(
             color: red,

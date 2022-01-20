@@ -24,7 +24,6 @@ class LoginCubit extends Cubit<LoginStates> {
       emit(LoginSuccessState(loginModel!));
     } catch (e) {
       emit(LoginErrorState(e));
-      rethrow;
     }
   }
 

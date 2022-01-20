@@ -28,7 +28,8 @@ import 'screens/payment/payment_cubit/payment_cubit.dart';
 void main() async {
   // to ensure that all method  in project finish loading then open app
   WidgetsFlutterBinding.ensureInitialized();
-  Bloc.observer = MyBlocObserver();
+
+  // Bloc.observer = MyBlocObserver();
   DioHelper.int();
   await CacheHelper.init();
   Widget widget;
@@ -43,8 +44,11 @@ void main() async {
     widget = OnBoardingScreen();
 
   print(token.toString());
+  BlocOverrides.runZoned(() => runApp(MyApp(widget: widget)),
+      blocObserver: MyBlocObserver()
+  );
 
-  runApp(MyApp(widget: widget));
+
 }
 
 class MyApp extends StatelessWidget {
@@ -52,43 +56,28 @@ class MyApp extends StatelessWidget {
 
   MyApp({required this.widget});
 
-  final registerBloc = RegisterCubit();
-  final loginBloc = LoginCubit();
-  final searchBloc = SearchCubit();
-  final profileBloc = ProfileCubit();
-  final homeBloc = HomeCubit();
-  final favouriteBloc = FavouriteCubit();
-  // final categoryBloc = CategoryCubit();
-  final basketBloc = BasketCubit();
-  final myOrdersBloc = MyOrdersCubit();
-  final notificationBloc = NotificationCubit();
-  final layoutBloc = LayoutCubit();
-  final onBoardingBloc = OnBoardingCubit();
-  final paymentBloc = PaymentCubit();
-  final updateProfileBloc = UpdateProfileCubit();
-  final orderDetailsBloc = OrderDetailsCubit();
-
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => registerBloc),
-        BlocProvider(create: (context) => loginBloc),
-        BlocProvider(create: (context) => searchBloc),
-        BlocProvider(create: (context) => favouriteBloc..getFavouritesData()),
+        BlocProvider(create: (context) => RegisterCubit()),
+        BlocProvider(create: (context) => LoginCubit()),
+        BlocProvider(create: (context) => SearchCubit()),
         BlocProvider(
-            create: (context) => homeBloc
+            create: (context) => FavouriteCubit()..getFavouritesData()),
+        BlocProvider(
+            create: (context) => HomeCubit()
               ..getHomeData()
               ..getBannerData()),
-        // BlocProvider(create: (context) => categoryBloc..getCategoriesData()),
-        BlocProvider(create: (context) => basketBloc..getMyBasketData()),
-        BlocProvider(create: (context) => myOrdersBloc..getOrders()),
-        BlocProvider(create: (context) => notificationBloc..getNotifications()),
-        BlocProvider(create: (context) => profileBloc..getUserData()),
-        BlocProvider(create: (context) => layoutBloc),
-        BlocProvider(create: (context) => onBoardingBloc),
-        BlocProvider(create: (context) => paymentBloc),
-        BlocProvider(create: (context) => updateProfileBloc),
+        BlocProvider(create: (context) => BasketCubit()..getMyBasketData()),
+        BlocProvider(create: (context) => MyOrdersCubit()..getOrders()),
+        BlocProvider(
+            create: (context) => NotificationCubit()..getNotifications()),
+        BlocProvider(create: (context) => ProfileCubit()..getUserData()),
+        BlocProvider(create: (context) => LayoutCubit()),
+        BlocProvider(create: (context) => OnBoardingCubit()),
+        BlocProvider(create: (context) => PaymentCubit()),
+        BlocProvider(create: (context) => UpdateProfileCubit()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
