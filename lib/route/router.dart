@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:udemy_flutter/layout/shop_layout.dart';
+import 'package:udemy_flutter/screens/about/about.dart';
+import 'package:udemy_flutter/screens/contacts/contacts.dart';
 import 'package:udemy_flutter/screens/favourites/ui/favourites.dart';
 import 'package:udemy_flutter/screens/home/model/home_model.dart';
 import 'package:udemy_flutter/screens/home/ui/home.dart';
+import 'package:udemy_flutter/screens/language/language.dart';
 import 'package:udemy_flutter/screens/login/ui/login.dart';
 import 'package:udemy_flutter/screens/my_basket/ui/basket_screen.dart';
 import 'package:udemy_flutter/screens/notifications/ui/notifications_screen.dart';
@@ -12,6 +15,7 @@ import 'package:udemy_flutter/screens/orders_details/ui/order_detail_screen.dart
 import 'package:udemy_flutter/screens/payment/ui/payment.dart';
 import 'package:udemy_flutter/screens/product_details/ui/product_details.dart';
 import 'package:udemy_flutter/screens/profile/ui/profile.dart';
+import 'package:udemy_flutter/screens/questions/questions.dart';
 import 'package:udemy_flutter/screens/register/ui/register.dart';
 import 'package:udemy_flutter/screens/search/ui/search.dart';
 import 'package:udemy_flutter/screens/update_profile/ui/update_profile.dart';
@@ -61,6 +65,14 @@ class AppRouter {
             builder: (_) => OrderDetailsScreen(orderId: orderId));
       case RouteConstant.updateProfileRoute:
         return MaterialPageRoute(builder: (_) => UpdateProfileScreen());
+      case RouteConstant.contactsRoute:
+        return MaterialPageRoute(builder: (_) => ContactsScreen());
+      case RouteConstant.aboutRoute:
+        return MaterialPageRoute(builder: (_) => AboutScreen());
+      case RouteConstant.questionsRoute:
+        return MaterialPageRoute(builder: (_) => QuestionsScreen());
+      case RouteConstant.languageRoute:
+        return MaterialPageRoute(builder: (_) => LanguageScreen());
       // case RouteConstant.verifyRoute:
       //   return MaterialPageRoute(builder: (_) {
       //     final bool arguments = settings.arguments as bool;

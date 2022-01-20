@@ -3,6 +3,7 @@ import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/screens/orders_details/cubit/order_details_cubit.dart';
+import 'package:udemy_flutter/shared/components/Dotted_line.dart';
 import 'package:udemy_flutter/shared/components/component.dart';
 import 'package:udemy_flutter/shared/components/custom%20_card.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
@@ -141,13 +142,7 @@ class OrderDetailsScreen extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                                DottedLine(
-                                  dashLength: 10,
-                                  dashGapLength: 5,
-                                  lineThickness: 1.5,
-                                  dashColor: lightMainColor,
-                                  dashGapColor: white,
-                                ),
+                                CustomDotedLine(dashColor: lightMainColor),
                                 Padding(
                                   padding: const EdgeInsets.only(
                                       top: 10.0, bottom: 10),
@@ -333,30 +328,30 @@ class OrderDetailsScreen extends StatelessWidget {
                         ),
                         // cancel order
                         SizedBox(height: 10),
-                        if(orderDetails.status=='New')
-                        InkWell(
-                          onTap: () =>
-                              orderDetailsCubit.cancelOrder(orderDetails.id),
-                          child: CustomCard(
-                            widget: Padding(
-                              padding: EdgeInsets.only(
-                                  top: 5.0, right: 10.0, bottom: 15.0),
-                              child: Row(
-                                children: [
-                                  CustomText(
-                                      text: 'Cancel order',
-                                      fontSize: 20,
-                                      textColor: red),
-                                  Spacer(),
-                                  Icon(
-                                    Icons.cancel,
-                                    color: red,
-                                  )
-                                ],
+                        if (orderDetails.status == 'New')
+                          InkWell(
+                            onTap: () =>
+                                orderDetailsCubit.cancelOrder(orderDetails.id),
+                            child: CustomCard(
+                              widget: Padding(
+                                padding: EdgeInsets.only(
+                                    top: 5.0, right: 10.0, bottom: 15.0),
+                                child: Row(
+                                  children: [
+                                    CustomText(
+                                        text: 'Cancel order',
+                                        fontSize: 20,
+                                        textColor: red),
+                                    Spacer(),
+                                    Icon(
+                                      Icons.cancel,
+                                      color: red,
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
                           ),
-                        ),
                       ],
                     ),
                   ),

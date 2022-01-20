@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:udemy_flutter/shared/components/custom_divider.dart';
+
 
 class CustomAlertDialog extends StatelessWidget {
   final Widget? content;

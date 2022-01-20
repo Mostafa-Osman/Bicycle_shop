@@ -1,10 +1,10 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
-import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
 import 'package:udemy_flutter/screens/orders/my_orders_cubit/my_orders_cubit.dart';
 import 'package:udemy_flutter/screens/orders/my_orders_cubit/states.dart';
+import 'package:udemy_flutter/shared/components/Dotted_line.dart';
 import 'package:udemy_flutter/shared/components/empty_screen.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
@@ -92,13 +92,8 @@ class OrdersBody extends StatelessWidget {
                     ],
                   ),
                   SizedBox(height: 10),
-                  DottedLine(
-                    dashLength: 10,
-                    dashGapLength: 5,
-                    lineThickness: 1.5,
-                    dashColor: lightMainColor,
-                    dashGapColor: white,
-                  ),
+                  CustomDotedLine(dashColor:lightMainColor),
+
                   SizedBox(height: 10),
                   Row(
                     children: [

@@ -15,3 +15,4 @@ const NOTIFICATIONS='notifications';
 const MY_ORDERS='orders';
 const ADD_ORDER='orders';
 const ORDER_DETAILS='orders/';
+const CONTACTS='contacts';

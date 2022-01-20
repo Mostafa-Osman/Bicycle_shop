@@ -9,12 +9,12 @@ class CustomCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-        elevation: 10,
+        elevation: 10.0,
           shape: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(20.0),
               borderSide: BorderSide(color:mainColor, width: 1)),
         child:Padding(
-          padding: const EdgeInsets.only(left: 10,right: 10,top:10),
+          padding: const EdgeInsets.only(left: 10.0,right: 10.0,top:10.0),
           child:  widget,
       ),
     );
