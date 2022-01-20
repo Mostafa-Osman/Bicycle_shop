@@ -12,11 +12,10 @@ import 'package:udemy_flutter/shared/components/custom%20_card.dart';
 import 'package:udemy_flutter/shared/components/custom_button.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/components/custom_text_button.dart';
+import 'package:udemy_flutter/shared/components/empty_screen.dart';
 import 'package:udemy_flutter/shared/components/navigate.dart';
 import 'package:udemy_flutter/shared/components/counter.dart';
 import 'package:udemy_flutter/shared/components/custom_divider.dart';
-import 'package:udemy_flutter/shared/components/custom_text.dart';
-
 import 'package:udemy_flutter/shared/styles/color.dart';
 
 class BasketScreen extends StatelessWidget {
@@ -45,53 +44,7 @@ class BasketScreen extends StatelessWidget {
                     child: CircularProgressIndicator(),
                   )
                 : BasketCubit.get(context).myBag!.data!.cartItems.isEmpty
-                    ? Padding(
-                        padding: const EdgeInsets.all(30.0),
-                        child: Container(
-                          width: double.infinity,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 100.0, bottom: 50.0),
-                                child: SvgPicture.asset(
-                                    'assets/images/empty.svg',
-                                    fit: BoxFit.fitWidth,
-                                    height: 250),
-                              ),
-                              CustomCard(
-                                widget: Column(
-                                  children: [
-                                    CustomText(
-                                        text: 'Basket is Empty!',
-                                        textColor: red),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 10.0, bottom: 20.0),
-                                      child: CustomText(
-                                          text:
-                                              'Looks like you haven\'t add any item yet.',
-                                          fontSize: 18,
-                                          textColor: grey),
-                                    ),
-                                    CustomButton(
-                                      text: 'Shop now',
-                                      onPressed: () {
-                                        LayoutCubit.get(context)
-                                            .changeCurrentIndex(2);
-                                        navigateTo(context,
-                                            RouteConstant.shopLayoutRoute);
-                                      },
-                                    ),
-                                    SizedBox(height: 20),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      )
+                    ? EmptyScreen()
                     : Column(
                         children: [
                           Expanded(
@@ -139,7 +92,7 @@ class BasketScreen extends StatelessWidget {
                               height: 10.0,
                             ),
                             CustomButton(
-                              text: 'Complete orders now',
+                              text: 'Pay now',
                               onPressed: () {
                                 navigateTo(context, RouteConstant.paymentRoute);
                               },

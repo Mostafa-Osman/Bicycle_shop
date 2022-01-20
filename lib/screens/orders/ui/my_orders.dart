@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
 import 'package:udemy_flutter/screens/orders/my_orders_cubit/my_orders_cubit.dart';
 import 'package:udemy_flutter/screens/orders/my_orders_cubit/states.dart';
+import 'package:udemy_flutter/shared/components/empty_screen.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/components/custom%20_card.dart';
@@ -19,24 +20,29 @@ class MyOrdersScreen extends StatelessWidget {
           return ConditionalBuilder(
               condition: state is! MyOrderLoadingState,
               builder: (context) {
-                return Container(
-                    height: MediaQuery.of(context).size.height,
-                    padding:EdgeInsets.only(
-                        bottom: 15.0, right: 10.0, left: 10.0) ,
-                    child: ListView.builder(
-                      itemBuilder: (context, index) => OrdersBody(
-                          order: MyOrdersCubit.get(context)
+                return MyOrdersCubit.get(context)
+                        .order!
+                        .data!
+                        .listDoneOrders
+                        .isEmpty
+                    ? EmptyScreen()
+                    : Container(
+                        height: MediaQuery.of(context).size.height,
+                        padding: EdgeInsets.only(
+                            bottom: 15.0, right: 10.0, left: 10.0),
+                        child: ListView.builder(
+                          itemBuilder: (context, index) => OrdersBody(
+                              order: MyOrdersCubit.get(context)
+                                  .order!
+                                  .data!
+                                  .listDoneOrders[index]),
+                          itemCount: MyOrdersCubit.get(context)
                               .order!
                               .data!
-                              .listDoneOrders[index]),
-                      itemCount: MyOrdersCubit.get(context)
-                          .order!
-                          .data!
-                          .listDoneOrders
-                          .length,
-                    ),
-
-                );
+                              .listDoneOrders
+                              .length,
+                        ),
+                      );
               },
               fallback: (context) {
                 return Center(
@@ -79,9 +85,10 @@ class OrdersBody extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      CustomText(text: 'Status : ${order.status}', fontSize: 15),
+                      CustomText(
+                          text: 'Status : ${order.status}', fontSize: 15),
                       Spacer(),
-                      Icon(Icons.arrow_forward_ios_outlined,color: mainColor),
+                      Icon(Icons.arrow_forward_ios_outlined, color: mainColor),
                     ],
                   ),
                   SizedBox(height: 10),

@@ -27,7 +27,8 @@ class ProfileRepo {
       required email,
       required phone,
       required image,
-      required password}) async {
+      //required password
+      }) async {
     try {
       final response =
           await DioHelper.putData(url: UPDATE_PROFILE, token: token, data: {
@@ -35,7 +36,7 @@ class ProfileRepo {
         'email': email,
         'phone': phone,
         'image': image,
-        'password': password
+        //'password': password
       });
       if (response.data['status'] == true) {
         return ProfileModel.fromJson(response.data);

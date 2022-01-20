@@ -124,70 +124,70 @@ class BodyEditProfile extends StatelessWidget {
                       keyboardType: TextInputType.emailAddress,
                     ),
                     //  text to display password
-                    Padding(
-                        padding: const EdgeInsets.only(
-                            top: 20.0, left: 10.0, bottom: 5.0),
-                        child: CustomText(
-                          text: 'New password',
-                          textColor: mainColor,
-                          fontSize: 20.0,
-                        )),
-                    // Text form field to enter password
-                    CustomTextFormField(
-                        backgroundColor: Color(0xfff2f2f2),
-                        controller: passwordController,
-                        validator: (value) =>
-
-                        (value!.isNotEmpty&&value.length < 6)
-                                ? 'Please Enter valid password'
-                                : null,
-                        textHint: "New password",
-                        hintColor: grey,
-                        prefix: Icon(
-                          Icons.lock,
-                          color: mainColor,
-                        ),
-                        suffixIcon: IconButton(
-                            onPressed: () => UpdateProfileCubit.get(context)
-                                .visibilityPassword(),
-                            icon: Icon(
-                                (UpdateProfileCubit.get(context).isVisibility)
-                                    ? Icons.visibility
-                                    : Icons.visibility_off)),
-                        obscureText:
-                            UpdateProfileCubit.get(context).isVisibility),
-
-                    //  Text to  confirm password
-                    Padding(
-                        padding: const EdgeInsets.only(
-                            top: 20.0, left: 10.0, bottom: 5.0),
-                        child: CustomText(
-                          text: 'Confirm password',
-                          textColor: mainColor,
-                          fontSize: 20.0,
-                        )),
-                    //  Text form field to confirm password
-                    CustomTextFormField(
-                      textHint: ' confirm password',
-                      controller: confirmPasswordController,
-                      obscureText:
-                          UpdateProfileCubit.get(context).confirmNotVisible,
-                      backgroundColor: Color(0xfff2f2f2),
-                      prefix: Icon(
-                        Icons.lock,
-                        color: mainColor,
-                      ),
-                      suffixIcon: IconButton(
-                          onPressed: () => UpdateProfileCubit.get(context)
-                              .confirmVisibilityPassword(),
-                          icon:
-                              UpdateProfileCubit.get(context).confirmNotVisible
-                                  ? Icon(Icons.visibility)
-                                  : Icon(Icons.visibility_off)),
-                      validator: (value) =>  (value != passwordController.text)
-                              ? 'Password does not match'
-                              : null,
-                    ),
+                    // Padding(
+                    //     padding: const EdgeInsets.only(
+                    //         top: 20.0, left: 10.0, bottom: 5.0),
+                    //     child: CustomText(
+                    //       text: 'New password',
+                    //       textColor: mainColor,
+                    //       fontSize: 20.0,
+                    //     )),
+                    // // Text form field to enter password
+                    // CustomTextFormField(
+                    //     backgroundColor: Color(0xfff2f2f2),
+                    //     controller: passwordController,
+                    //     validator: (value) =>
+                    //
+                    //     (value!.isNotEmpty&&value.length < 6)
+                    //             ? 'Please Enter valid password'
+                    //             : null,
+                    //     textHint: "New password",
+                    //     hintColor: grey,
+                    //     prefix: Icon(
+                    //       Icons.lock,
+                    //       color: mainColor,
+                    //     ),
+                    //     suffixIcon: IconButton(
+                    //         onPressed: () => UpdateProfileCubit.get(context)
+                    //             .visibilityPassword(),
+                    //         icon: Icon(
+                    //             (UpdateProfileCubit.get(context).isVisibility)
+                    //                 ? Icons.visibility
+                    //                 : Icons.visibility_off)),
+                    //     obscureText:
+                    //         UpdateProfileCubit.get(context).isVisibility),
+                    //
+                    // //  Text to  confirm password
+                    // Padding(
+                    //     padding: const EdgeInsets.only(
+                    //         top: 20.0, left: 10.0, bottom: 5.0),
+                    //     child: CustomText(
+                    //       text: 'Confirm password',
+                    //       textColor: mainColor,
+                    //       fontSize: 20.0,
+                    //     )),
+                    // //  Text form field to confirm password
+                    // CustomTextFormField(
+                    //   textHint: ' confirm password',
+                    //   controller: confirmPasswordController,
+                    //   obscureText:
+                    //       UpdateProfileCubit.get(context).confirmNotVisible,
+                    //   backgroundColor: Color(0xfff2f2f2),
+                    //   prefix: Icon(
+                    //     Icons.lock,
+                    //     color: mainColor,
+                    //   ),
+                    //   suffixIcon: IconButton(
+                    //       onPressed: () => UpdateProfileCubit.get(context)
+                    //           .confirmVisibilityPassword(),
+                    //       icon:
+                    //           UpdateProfileCubit.get(context).confirmNotVisible
+                    //               ? Icon(Icons.visibility)
+                    //               : Icon(Icons.visibility_off)),
+                    //   validator: (value) =>  (value != passwordController.text)
+                    //           ? 'Password does not match'
+                    //           : null,
+                    // ),
                   ],
                 ),
               ),
@@ -196,12 +196,12 @@ class BodyEditProfile extends StatelessWidget {
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     UpdateProfileCubit.get(context).updateUserData(
-                        name: nameController.text,
-                        email: emailController.text,
-                        phone: phoneController.text,
-                        image: UpdateProfileCubit.get(context)
-                            .imagePicker,
-                        password: passwordController.text);
+                      name: nameController.text,
+                      email: emailController.text,
+                      phone: phoneController.text,
+                      image: UpdateProfileCubit.get(context).imageProfile,
+                      //password: passwordController.text
+                    );
                     Navigator.pop(context);
                   }
                 },
