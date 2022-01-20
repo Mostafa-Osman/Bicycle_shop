@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/layout/app_bar.dart';
 import 'package:udemy_flutter/layout/layout_cubit/states.dart';
+import 'package:udemy_flutter/screens/account/account_screen.dart';
 import 'package:udemy_flutter/screens/favourites/ui/favourites.dart';
 import 'package:udemy_flutter/screens/home/ui/home.dart';
 import 'package:udemy_flutter/screens/notifications/ui/notifications_screen.dart';
@@ -21,7 +22,7 @@ class LayoutCubit extends Cubit<LayoutStates> {
     FavouriteAppBar(),
     HomeAppBar(),
     OrdersAppBar(),
-    ProfileAppBar(),
+    AccountAppBar(),
   ];
 
   List<Widget> bottomNavScreen = [
@@ -29,7 +30,7 @@ class LayoutCubit extends Cubit<LayoutStates> {
     FavouritesScreen(),
     HomeScreen(),
     MyOrdersScreen(),
-    ProfileScreen(),
+    AccountScreen(),
   ];
   List<Widget> bottomNavIcons = [
     Icon(Icons.notifications, color: lightMainColor, size: 30.0),

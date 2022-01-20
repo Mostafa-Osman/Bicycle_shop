@@ -1,98 +1,104 @@
-import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:udemy_flutter/route/route_constants.dart';
 import 'package:udemy_flutter/screens/profile/cubit/profile_cubit.dart';
-import 'package:udemy_flutter/screens/profile/cubit/states.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
+import 'package:udemy_flutter/shared/components/navigate.dart';
 
 class ProfileScreen extends StatelessWidget {
   final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<ProfileCubit, ProfileStates>(
-      listener: (context, state) {},
-      builder: (context, state) {
-        return ConditionalBuilder(
-          condition: (state is ProfileSuccess),
-          builder: (context) {
-            var userData = ProfileCubit.get(context).userData!.data;
-            return SingleChildScrollView(
-              child: Align(
-                child: Container(
-                  width: 500,
-                  color: white,
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Container(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              SizedBox(height: 30),
-                              Container(
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: black,
-                                    width: 1.3,
-                                  ),
-                                  shape: BoxShape.circle,
-                                ),
-                                child: FittedBox(
-                                  fit: BoxFit.fitWidth,
-                                  child: ClipOval(
-                                      child: Image.network(
-                                    userData!.image!,
-                                    height: 180,
-                                    width: 180,
-                                    fit: BoxFit.cover,
-                                  )),
-                                ),
-                              ),
-                              SizedBox(height: 30),
-                              Text(
-                                userData.name!,
-                                style: TextStyle(
-                                    fontSize: 25, fontWeight: FontWeight.bold),
-                                overflow: TextOverflow.clip,
-                              ),
-                              SizedBox(height: 20),
-                              AccountTextFormField(
-                                text: userData.phone!,
-                                icon: Icons.phone,
-                              ),
-                              SizedBox(height: 3),
-                              AccountTextFormField(
-                                text: userData.email!,
-                                icon: Icons.email,
-                              ),
-                              AccountTextFormField(
-                                text: userData.points.toString()+' points',
-                                icon: Icons.account_balance_wallet,
-                              ),
-                              AccountTextFormField(
-                                text:   userData.credit.toString()+' \$',
-                                icon: Icons.view_compact_outlined,
-                              ),
-                            ],
+    var userData = ProfileCubit.get(context).userData!.data;
+
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0.0,
+        leading: IconButton(
+          onPressed: () => Navigator.pop(context),
+          icon: Icon(Icons.arrow_back_ios_sharp, color: mainColor),
+        ),
+        title: CustomText(
+          text: 'Profile',
+          textColor: mainColor,
+          textAlign: TextAlign.center,
+        ),
+        centerTitle: true,
+        actions: [
+          IconButton(
+            iconSize: 28,
+            color: black,
+            icon: Icon(
+              Icons.settings_rounded,
+              color: mainColor,
+            ),
+            onPressed: () {
+              navigateTo(context, RouteConstant.updateProfileRoute);
+            },
+          ),
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: Align(
+          child: Container(
+            width: 500,
+            color: white,
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Container(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(height: 30),
+                        Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: black,
+                              width: 1.3,
+                            ),
+                            shape: BoxShape.circle,
+                          ),
+                          child: FittedBox(
+                            fit: BoxFit.fitWidth,
+                            child: ClipOval(
+                                child: Image.network(
+                              userData!.image!,
+                              height: 180,
+                              width: 180,
+                              fit: BoxFit.cover,
+                            )),
                           ),
                         ),
-                      ),
-                    ],
+                        SizedBox(height: 30),
+                        Text(
+                          userData.name!,
+                          style: TextStyle(
+                              fontSize: 25, fontWeight: FontWeight.bold),
+                          overflow: TextOverflow.clip,
+                        ),
+                        SizedBox(height: 20),
+                        AccountTextFormField(
+                          text: userData.phone!,
+                          icon: Icons.phone,
+                        ),
+                        SizedBox(height: 3),
+                        AccountTextFormField(
+                          text: userData.email!,
+                          icon: Icons.email,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            );
-          },
-          fallback: (context) => Center(
-              child: CircularProgressIndicator(
-            color: red,
-          )),
-        );
-      },
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

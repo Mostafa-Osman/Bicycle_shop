@@ -121,25 +121,14 @@ class OrdersAppBar extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => new Size.fromHeight(60);
 }
 
-class ProfileAppBar extends StatelessWidget implements PreferredSizeWidget {
+class AccountAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
-        leading: IconButton(
-          iconSize: 28,
-          color: black,
-          icon: Icon(
-            Icons.settings_rounded,
-            color: mainColor,
-          ),
-          onPressed: () {
-            navigateTo(context, RouteConstant.updateProfileRoute);
-          },
-        ),
         title: CustomText(
-          text: 'Profile',
+          text: 'Account',
           textColor: mainColor,
           textAlign: TextAlign.center,
         ),

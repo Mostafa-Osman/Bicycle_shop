@@ -1,0 +1,9 @@
+<svg id="Group_8248" data-name="Group 8248" xmlns="http://www.w3.org/2000/svg" width="490" height="490.001" viewBox="0 0 490 490.001">
+  <path id="Path_12032" data-name="Path 12032" d="M450,0H40A40.046,40.046,0,0,0,0,40V320a40.045,40.045,0,0,0,40,40H275V480a10,10,0,0,0,17.348,6.783L409.378,360H450a40.045,40.045,0,0,0,40-40V40A40.045,40.045,0,0,0,450,0Zm20,320a20.023,20.023,0,0,1-20,20H405a10,10,0,0,0-7.348,3.217L295,454.423V350a10,10,0,0,0-10-10H40a20.023,20.023,0,0,1-20-20V40A20.023,20.023,0,0,1,40,20H450a20.023,20.023,0,0,1,20,20Z" fill="#c53f3f"/>
+  <path id="Path_12033" data-name="Path 12033" d="M215,205V155a80,80,0,0,0-160,0v50a79.935,79.935,0,0,0,129.016,63.158l23.913,23.913,14.143-14.143L198.16,254.015A79.58,79.58,0,0,0,215,205Zm-20,0a59.651,59.651,0,0,1-11.123,34.734l-26.806-26.806-14.143,14.143,26.806,26.806A59.95,59.95,0,0,1,75,205V155a60,60,0,0,1,120,0Z" fill="#c53f3f"/>
+  <rect id="Rectangle_17547" data-name="Rectangle 17547" width="80" height="20" transform="translate(255.001 95)" fill="#c53f3f"/>
+  <rect id="Rectangle_17548" data-name="Rectangle 17548" width="60" height="20" transform="translate(350 95)" fill="#c53f3f"/>
+  <rect id="Rectangle_17549" data-name="Rectangle 17549" width="180" height="20" transform="translate(255.001 145)" fill="#c53f3f"/>
+  <rect id="Rectangle_17550" data-name="Rectangle 17550" width="180" height="20" transform="translate(255.001 195)" fill="#c53f3f"/>
+  <rect id="Rectangle_17551" data-name="Rectangle 17551" width="180" height="20" transform="translate(255.001 245)" fill="#c53f3f"/>
+</svg>
