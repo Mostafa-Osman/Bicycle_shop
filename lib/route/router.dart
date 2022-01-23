@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:udemy_flutter/layout/shop_layout.dart';
-import 'package:udemy_flutter/screens/about/about.dart';
+import 'package:udemy_flutter/screens/about_us/about.dart';
 import 'package:udemy_flutter/screens/contacts/contacts.dart';
 import 'package:udemy_flutter/screens/favourites/ui/favourites.dart';
 import 'package:udemy_flutter/screens/home/model/home_model.dart';
 import 'package:udemy_flutter/screens/home/ui/home.dart';
 import 'package:udemy_flutter/screens/language/language.dart';
 import 'package:udemy_flutter/screens/login/ui/login.dart';
-import 'package:udemy_flutter/screens/my_basket/ui/basket_screen.dart';
+import 'package:udemy_flutter/screens/basket/ui/basket_screen.dart';
 import 'package:udemy_flutter/screens/notifications/ui/notifications_screen.dart';
 import 'package:udemy_flutter/screens/on_boarding/ui/on_boarding.dart';
 import 'package:udemy_flutter/screens/orders/ui/my_orders.dart';
@@ -68,7 +68,7 @@ class AppRouter {
       case RouteConstant.contactsRoute:
         return MaterialPageRoute(builder: (_) => ContactsScreen());
       case RouteConstant.aboutRoute:
-        return MaterialPageRoute(builder: (_) => AboutScreen());
+        return MaterialPageRoute(builder: (_) => AboutUsScreen());
       case RouteConstant.questionsRoute:
         return MaterialPageRoute(builder: (_) => QuestionsScreen());
       case RouteConstant.languageRoute:

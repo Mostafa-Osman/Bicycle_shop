@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:udemy_flutter/screens/my_basket/basket_cubit/basket_cubit.dart';
+import 'package:udemy_flutter/screens/basket/basket_cubit/basket_cubit.dart';
 import 'package:udemy_flutter/shared/components/custom%20_card.dart';
 import 'package:udemy_flutter/shared/components/custom_favourite-icon.dart';
 import 'package:udemy_flutter/screens/favourites/favourite_cubit/favourite_cubit.dart';
@@ -46,18 +46,6 @@ class BasketItem extends StatelessWidget {
                               fit: BoxFit.cover, height: 30, width: 30),
 
                       ),
-                      // Positioned(
-                      //   bottom: 0.0,
-                      //   right: 0.0,
-                      //   child: SvgPicture.asset('assets/icons/discount.svg',
-                      //       fit: BoxFit.cover, width: 30),
-                      //
-                      //   // Image.asset(
-                      //   //   "assets/icons/discount.png",
-                      //   //   fit: BoxFit.cover,
-                      //   // ),
-                      //   width: 30.0,
-                      // ),
                   ],
                 ),
                 SizedBox(

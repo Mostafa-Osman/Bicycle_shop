@@ -28,7 +28,6 @@ class ProfileScreen extends StatelessWidget {
         actions: [
           IconButton(
             iconSize: 28,
-            color: black,
             icon: Icon(
               Icons.settings_rounded,
               color: mainColor,
@@ -50,7 +49,6 @@ class ProfileScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(20.0),
                   child: Container(
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         SizedBox(height: 30),
@@ -74,23 +72,23 @@ class ProfileScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        SizedBox(height: 30),
-                        Text(
-                          userData.name!,
-                          style: TextStyle(
-                              fontSize: 25, fontWeight: FontWeight.bold),
-                          overflow: TextOverflow.clip,
+                        Padding(
+                          padding: const EdgeInsets.only(top: 30.0,bottom: 30.0),
+                          child: CustomText(
+                          text:  userData.name!,
+                            overflow: TextOverflow.clip),
                         ),
-                        SizedBox(height: 20),
+
                         AccountTextFormField(
                           text: userData.phone!,
                           icon: Icons.phone,
                         ),
-                        SizedBox(height: 3),
+
                         AccountTextFormField(
                           text: userData.email!,
                           icon: Icons.email,
                         ),
+
                       ],
                     ),
                   ),

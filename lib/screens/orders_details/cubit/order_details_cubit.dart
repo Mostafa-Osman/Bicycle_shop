@@ -1,12 +1,8 @@
 import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:udemy_flutter/data/remote/dio_helper.dart';
 import 'package:udemy_flutter/data/repository/orders_repo/orders_repo.dart';
 import 'package:udemy_flutter/screens/orders_details/model/order_detail.dart';
-import 'package:udemy_flutter/shared/components/constants.dart';
-
 part 'order_details_state.dart';
 
 class OrderDetailsCubit extends Cubit<OrderDetailsState> {

@@ -1,7 +1,7 @@
 import 'package:checkbox_grouped/checkbox_grouped.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:udemy_flutter/screens/my_basket/basket_cubit/basket_cubit.dart';
+import 'package:udemy_flutter/screens/basket/basket_cubit/basket_cubit.dart';
 import 'package:udemy_flutter/screens/payment/payment_cubit/payment_cubit.dart';
 import 'package:udemy_flutter/screens/payment/payment_cubit/states.dart';
 import 'package:udemy_flutter/screens/payment/ui/card_item.dart';
@@ -38,63 +38,62 @@ class PaymentScreen extends StatelessWidget {
               child: Padding(
                 padding:
                     const EdgeInsets.only(top: 40.0, right: 20.0, left: 20.0),
-                child: Container(
-                  width: double.infinity,
-                  child: Column(
-                    children: [
-                      //select pay
-                      CustomCard(
-                        widget: SizedBox(
-                          height: 170,
-                          child: SimpleGroupedCheckbox(
-                            checkFirstElement: true,
-                            controller: controller,
-                            itemsSubTitle: [
-                              'The delivery staff goes to your door,you give the money according to the value of the application and delivery fees for employees',
-                              'We will call you back to confirm the order,After confirmation,we will proceed to pick up,pack,issue bills and will notify the actual bill for you to transfer'
-                            ],
-                            onItemSelected: (_) => cubit.isOnlinePayment(),
-                            itemsTitle: ["cash", "Online"],
-                            values: ["cash", "Online"],
-                            groupStyle: GroupStyle(
-                                activeColor: red,
-                                itemTitleStyle: TextStyle(fontSize: 18)),
-                          ),
+                child: Column(
+                  children: [
+                    //select pay
+                    CustomCard(
+                      widget: SizedBox(
+                        height: 170,
+                        child: SimpleGroupedCheckbox(
+                          checkFirstElement: true,
+                          controller: controller,
+                          itemsSubTitle: [
+                            'The delivery staff goes to your door,you give the money according to the value of the application and delivery fees for employees',
+                            'We will call you back to confirm the order,After confirmation,we will proceed to pick up,pack,issue bills and will notify the actual bill for you to transfer'
+                          ],
+                          onItemSelected: (_) => cubit.isOnlinePayment(),
+                          itemsTitle: ["cash", "Online"],
+                          values: ["cash", "Online"],
+                          groupStyle: GroupStyle(
+                              activeColor: red,
+                              itemTitleStyle: TextStyle(fontSize: 18)),
                         ),
                       ),
-                      if (cubit.isOnline)
-                        Padding(
-                          padding:
-                              const EdgeInsets.only(top: 10.0, bottom: 10.0),
-                          child: CreditCard(),
-                        ),
-                      CardItem(
-                        title: "Do you want to use discount points?",
-                        labels: cubit.labelText,
-                        selectedIndex: cubit.discountTabTextIndexSelected,
-                        selectedLabelIndex: (index) =>
-                            cubit.changeDiscount(index),
-                      ),
+                    ),
+                    if (cubit.isOnline)
                       Padding(
-                        padding: const EdgeInsets.only(top: 20.0, bottom: 10.0),
-                        child: CardItem(
-                            title: "Do you want to use discount voucher?",
-                            labels: cubit.labelText,
-                            selectedIndex: cubit.voucherTabTextIndexSelected,
-                            selectedLabelIndex: (index) {
-                              return cubit.changeVoucher(index);
-                            }),
+                        padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+                        child: CreditCard(),
                       ),
-                      CustomCard(
-                        widget: SizedBox(
-                          height: 100,
-                          child: Column(
-                            children: [
-                              CustomText(
-                                  text: 'Write your address please',
-                                  fontSize: 18),
-                              SizedBox(height: 10),
-                              CustomTextFormField(
+                    CardItem(
+                      title: "Do you want to use discount points?",
+                      labels: cubit.labelText,
+                      selectedIndex: cubit.discountTabTextIndexSelected,
+                      selectedLabelIndex: (index) =>
+                          cubit.changeDiscount(index),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20.0, bottom: 10.0),
+                      child: CardItem(
+                          title: "Do you want to use discount voucher?",
+                          labels: cubit.labelText,
+                          selectedIndex: cubit.voucherTabTextIndexSelected,
+                          selectedLabelIndex: (index) {
+                            return cubit.changeVoucher(index);
+                          }),
+                    ),
+                    CustomCard(
+                      widget: SizedBox(
+                        height: 120,
+                        child: Column(
+                          children: [
+                            CustomText(
+                                text: 'Write your address please',
+                                fontSize: 18),
+                            SizedBox(height: 10),
+                            Form(
+                              key: _key,
+                              child: CustomTextFormField(
                                   controller: addressControl,
                                   textHint: 'Add new address',
                                   hintColor: grey,
@@ -102,12 +101,12 @@ class PaymentScreen extends StatelessWidget {
                                   validator: (value) => value!.isEmpty
                                       ? 'please Enter your address'
                                       : null),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -137,7 +136,7 @@ class PaymentScreen extends StatelessWidget {
                     text: 'Complete orders now',
                     onPressed: () {
                       if (_key.currentState!.validate())
-                        BasketCubit.get(context).makeOrderData(
+                        PaymentCubit.get(context).makeOrderData(
                           BasketCubit.get(context)
                               .myBag!
                               .data!
@@ -151,7 +150,7 @@ class PaymentScreen extends StatelessWidget {
                                       .discountTabTextIndexSelected ==
                                   1
                               ? true
-                              : false,
+                              : 0.0,
                           PaymentCubit.get(context)
                                       .voucherTabTextIndexSelected ==
                                   1

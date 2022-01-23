@@ -15,11 +15,10 @@ import 'package:udemy_flutter/shared/styles/themes.dart';
 import 'package:udemy_flutter/my_bloc_observer.dart';
 import 'package:udemy_flutter/screens/favourites/favourite_cubit/favourite_cubit.dart';
 import 'package:udemy_flutter/screens/home/home_cubit/home_cubit.dart';
-import 'package:udemy_flutter/screens/my_basket/basket_cubit/basket_cubit.dart';
+import 'package:udemy_flutter/screens/basket/basket_cubit/basket_cubit.dart';
 import 'package:udemy_flutter/screens/notifications/notification_cubit/notification_cubit.dart';
 import 'package:udemy_flutter/screens/profile/cubit/profile_cubit.dart';
 import 'package:udemy_flutter/screens/search/cubit/cubit.dart';
-
 import 'data/local/cache_helper.dart';
 import 'data/remote/dio_helper.dart';
 import 'screens/payment/payment_cubit/payment_cubit.dart';

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:udemy_flutter/data/remote/dio_helper.dart';
+import 'package:udemy_flutter/data/remote/end_points.dart';
+import 'package:udemy_flutter/screens/basket/model/add_order_model.dart';
 import 'package:udemy_flutter/screens/payment/payment_cubit/states.dart';
+import 'package:udemy_flutter/shared/components/constants.dart';
 
 class PaymentCubit extends Cubit<PaymentStates> {
   PaymentCubit() : super(PaymentInitialState());
@@ -43,5 +47,26 @@ class PaymentCubit extends Cubit<PaymentStates> {
     emit(SwitchVoucherState());
     voucherTabTextIndexSelected =index;
 
+  }
+
+  //complete make order and add to get it
+
+  AddOrderModel? makeOrders;
+
+  void makeOrderData(addressId, paymentMethod, usePoints, discount, vat) {
+    emit(MakeOrderLoadingState());
+    DioHelper.postData(url: ADD_ORDER, token: token, data: {
+      'address_id': addressId,
+      'payment_method': paymentMethod,
+      'discount': discount,
+      'use_points': usePoints,
+      'vat': vat,
+    }).then((value) {
+      makeOrders = AddOrderModel.fromJson(value.data);
+      emit(MakeOrderSuccessState());
+    }).catchError((error) {
+      print(error.toString());
+      emit(MakeOrderErrorState());
+    });
   }
 }

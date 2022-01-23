@@ -9,3 +9,9 @@ class SwitchVoucherState extends PaymentStates {}
 class IsOnlineState extends PaymentStates {}
 
 class CreditCardModelChangeSuccess extends PaymentStates {}
+
+class MakeOrderLoadingState extends PaymentStates {}
+
+class MakeOrderSuccessState extends PaymentStates {}
+
+class MakeOrderErrorState extends PaymentStates {}

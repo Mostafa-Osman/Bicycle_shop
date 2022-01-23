@@ -130,7 +130,7 @@ class AccountScreen extends StatelessWidget {
                                   navigateTo(context, RouteConstant.aboutRoute),
                               child: ListTile(
                                 leading: SvgPicture.asset(
-                                    'assets/icons/about us.svg',
+                                    'assets/icons/about_us_icon.svg',
                                     fit: BoxFit.cover,
                                     height: 30,
                                     width: 30),

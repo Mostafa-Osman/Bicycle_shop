@@ -5,10 +5,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:udemy_flutter/screens/home/home_cubit/home_cubit.dart';
 import 'package:udemy_flutter/screens/home/home_cubit/states.dart';
 import 'package:udemy_flutter/screens/home/model/home_model.dart';
-import 'package:udemy_flutter/screens/my_basket/basket_cubit/basket_cubit.dart';
-import 'package:udemy_flutter/screens/my_basket/basket_cubit/states.dart';
+import 'package:udemy_flutter/screens/basket/basket_cubit/basket_cubit.dart';
 import 'package:udemy_flutter/screens/product_details/ui/body.dart';
-import 'package:udemy_flutter/shared/components/component.dart';
 import 'package:udemy_flutter/shared/components/counter.dart';
 import 'package:udemy_flutter/shared/components/custom_button.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
@@ -70,7 +68,7 @@ class ProductDetailsScreen extends StatelessWidget {
                 SizedBox(width: 10),
                 Expanded(
                   child: CustomButton(
-                      text: 'Add to bag',
+                      text: 'Add to basket',
                       onPressed: () {
                         BasketCubit.get(context)
                             .addToBasketOrders(productDetails.id!);
