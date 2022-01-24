@@ -3,8 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:udemy_flutter/screens/basket/basket_cubit/basket_cubit.dart';
 import 'package:udemy_flutter/shared/components/custom%20_card.dart';
 import 'package:udemy_flutter/shared/components/custom_favourite-icon.dart';
-import 'package:udemy_flutter/screens/favourites/favourite_cubit/favourite_cubit.dart';
-import 'package:udemy_flutter/screens/home/home_cubit/home_cubit.dart';
 import 'package:udemy_flutter/shared/components/counter.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/components/custom_text_button.dart';
@@ -43,8 +41,7 @@ class BasketItem extends StatelessWidget {
                         top: 0,
                         left: 0,
                         child: SvgPicture.asset('assets/icons/discount.svg',
-                              fit: BoxFit.cover, height: 30, width: 30),
-
+                            fit: BoxFit.cover, height: 30, width: 30),
                       ),
                   ],
                 ),
@@ -76,10 +73,7 @@ class BasketItem extends StatelessWidget {
                                 decoration: TextDecoration.lineThrough),
                           Spacer(),
                           CustomFavouriteIcon(
-                              onPressed: () => FavouriteCubit.get(context)
-                                  .changeFavorites(model.product.id!, context),
-                              checkFavourite: HomeCubit.get(context)
-                                  .favourites[model.product.id])
+                              productId: model.product.id!, iconSize: 30.0),
                         ],
                       ),
                       SizedBox(

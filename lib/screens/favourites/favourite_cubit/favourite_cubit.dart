@@ -11,6 +11,7 @@ class FavouriteCubit extends Cubit<FavouriteStates> {
   static FavouriteCubit get(context) => BlocProvider.of(context);
   var changeFavouritesModel;
   final favouritesRepo = FavouriteRepo();
+  bool isFavourite=false;
   FavouritesModel? favouritesModel;
 
   Future<void> getFavouritesData() async {
@@ -24,12 +25,10 @@ class FavouriteCubit extends Cubit<FavouriteStates> {
     }
   }
 
-  void changeFavorites(int productId, context) async {
+  Future<void> changeFavorites(int productId, context) async {
     emit(ChangeFavorites());
     try {
       changeFavouritesModel = await favouritesRepo.changeFavorites(productId);
-      HomeCubit.get(context).getHomeData();
-      // HomeCubit.get(context).favourites[productId]=! HomeCubit.get(context).favourites[productId];
       emit(ChangeFavoritesSuccess());
       getFavouritesData();
     } catch (onError) {
@@ -38,4 +37,5 @@ class FavouriteCubit extends Cubit<FavouriteStates> {
       emit(ChangeFavoritesError());
     }
   }
+
 }

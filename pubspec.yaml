@@ -46,7 +46,8 @@ dependencies:
   flutter_bloc:
   image_picker:
   intl: ^0.17.0
-  liquid_progress_indicator: ^0.4.0
+  #liquid_progress_indicator: ^0.4.0
+  like_button: ^2.0.4
   rflutter_alert: ^2.0.4
   readmore: ^2.1.0
   sqflite: ^2.0.0+4

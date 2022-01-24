@@ -55,8 +55,8 @@ class PaymentScreen extends StatelessWidget {
                           itemsTitle: ["cash", "Online"],
                           values: ["cash", "Online"],
                           groupStyle: GroupStyle(
-                              activeColor: red,
-                              itemTitleStyle: TextStyle(fontSize: 18)),
+                              activeColor: Colors.blue,
+                              itemTitleStyle: TextStyle(fontSize: 20.0)),
                         ),
                       ),
                     ),
@@ -145,17 +145,8 @@ class PaymentScreen extends StatelessWidget {
                               .id,
                           //points you must change it
                           100,
-                          PaymentCubit.get(context).isOnline ? 0 : 1,
-                          PaymentCubit.get(context)
-                                      .discountTabTextIndexSelected ==
-                                  1
-                              ? true
-                              : 0.0,
-                          PaymentCubit.get(context)
-                                      .voucherTabTextIndexSelected ==
-                                  1
-                              ? true
-                              : false,
+                          PaymentCubit.get(context).isOnline ? 0 :1,
+                          
                         );
                     },
                   )

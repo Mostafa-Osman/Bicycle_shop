@@ -1,31 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:like_button/like_button.dart';
+import 'package:udemy_flutter/screens/favourites/favourite_cubit/favourite_cubit.dart';
+import 'package:udemy_flutter/screens/home/home_cubit/home_cubit.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 
 class CustomFavouriteIcon extends StatelessWidget {
-  final onPressed;
-  final checkFavourite;
   final iconSize;
+  final productId;
 
   CustomFavouriteIcon(
-      {required this.onPressed,
-        required this.checkFavourite,
-      this.iconSize = 25.0});
+      {this.iconSize = 25.0, required this.productId});
 
-  @override
   Widget build(BuildContext context) {
-    return IconButton(
-      padding: EdgeInsets.zero,
-      onPressed: onPressed,
-      icon: checkFavourite
-          ? Icon(
-              Icons.favorite,
-              size: iconSize,
-              color: red,
-            )
-          : Icon(
-              Icons.favorite_border,
-              size: iconSize,
-            ),
+    return LikeButton(
+      circleColor: CircleColor(start: Colors.redAccent, end: Colors.orange),
+      animationDuration: Duration(seconds: 1),
+      onTap: (bool isLiked) {
+        return onLikeButtonTap(isLiked, context);
+      },
+      likeBuilder: (_) => Icon(
+        Icons.favorite,
+        size: iconSize,
+        color: HomeCubit.get(context).favourites[productId] ? red : grey,
+      ),
     );
+  }
+
+  Future<bool> onLikeButtonTap(bool isLiked, context) async {
+    HomeCubit.get(context).favourites[productId] =
+        !HomeCubit.get(context).favourites[productId];
+    FavouriteCubit.get(context).changeFavorites(productId, context);
+    return !isLiked;
   }
 }

@@ -20,7 +20,7 @@ class PaymentCubit extends Cubit<PaymentStates> {
   bool isCvvFocused = false;
   TabController? tabController;
   ValueNotifier<int> current = ValueNotifier(0);
-  var labelText=["Yes", "No"];
+  var labelText = ["Yes", "No"];
 
   isOnlinePayment() {
     emit(IsOnlineState());
@@ -39,28 +39,24 @@ class PaymentCubit extends Cubit<PaymentStates> {
 
   changeDiscount(index) {
     emit(SwitchDiscountState());
-    discountTabTextIndexSelected =index;
-
+    discountTabTextIndexSelected = index;
   }
 
   changeVoucher(index) {
     emit(SwitchVoucherState());
-    voucherTabTextIndexSelected =index;
-
+    voucherTabTextIndexSelected = index;
   }
 
   //complete make order and add to get it
 
   AddOrderModel? makeOrders;
 
-  void makeOrderData(addressId, paymentMethod, usePoints, discount, vat) {
+  void makeOrderData(addressId, paymentMethod, usePoints) {
     emit(MakeOrderLoadingState());
     DioHelper.postData(url: ADD_ORDER, token: token, data: {
       'address_id': addressId,
       'payment_method': paymentMethod,
-      'discount': discount,
       'use_points': usePoints,
-      'vat': vat,
     }).then((value) {
       makeOrders = AddOrderModel.fromJson(value.data);
       emit(MakeOrderSuccessState());

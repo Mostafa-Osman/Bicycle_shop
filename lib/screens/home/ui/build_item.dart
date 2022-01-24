@@ -7,6 +7,7 @@ import 'package:udemy_flutter/shared/styles/color.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
 import 'package:udemy_flutter/screens/favourites/favourite_cubit/favourite_cubit.dart';
+
 class BuildItem extends StatelessWidget {
   final data;
 
@@ -94,10 +95,7 @@ class BuildItem extends StatelessWidget {
                         ),
                         Spacer(),
                         CustomFavouriteIcon(
-                            onPressed: () => FavouriteCubit.get(context)
-                                .changeFavorites(data.id!, context),
-                            checkFavourite:
-                            HomeCubit.get(context).favourites[data.id]),
+                            productId: data.id!, iconSize: 35.0),
                       ],
                     ),
                   ],

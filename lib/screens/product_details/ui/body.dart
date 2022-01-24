@@ -1,6 +1,7 @@
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:like_button/like_button.dart';
 import 'package:udemy_flutter/screens/favourites/favourite_cubit/favourite_cubit.dart';
 import 'package:udemy_flutter/screens/home/home_cubit/home_cubit.dart';
 import 'package:udemy_flutter/shared/components/custom_favourite-icon.dart';
@@ -84,12 +85,11 @@ class Body extends StatelessWidget {
                       text: 'EGP ${productDetails.price}  ',
                       textColor: mainColor),
                   Spacer(),
-                  CustomFavouriteIcon(
-                      checkFavourite:
-                          HomeCubit.get(context).favourites[productDetails.id],
-                      onPressed: () => FavouriteCubit.get(context)
-                          .changeFavorites(productDetails.id!, context),
-                      iconSize: 40.0),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 10.0),
+                    child: CustomFavouriteIcon(
+                        productId: productDetails.id!, iconSize: 40.0),
+                  ),
                 ],
               ),
               //name

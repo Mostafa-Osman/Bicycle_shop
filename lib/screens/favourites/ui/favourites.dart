@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/screens/favourites/favourite_cubit/favourite_cubit.dart';
 import 'package:udemy_flutter/screens/favourites/favourite_cubit/states.dart';
 import 'package:udemy_flutter/shared/components/build_item.dart';
+import 'package:udemy_flutter/shared/components/empty_screen.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 
 class FavouritesScreen extends StatelessWidget {
@@ -18,20 +19,28 @@ class FavouritesScreen extends StatelessWidget {
                   child: CircularProgressIndicator(
                 color: red,
               )),
-              fallback: (context) => Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: ListView.builder(
-                    itemBuilder: (context, index) => BuildItem(
-                        model: FavouriteCubit.get(context)
-                            .favouritesModel!
-                            .data!
-                            .data[index]
-                            .product),
-                    itemCount: FavouriteCubit.get(context)
-                        .favouritesModel!
-                        .data!
-                        .data
-                        .length),
+              fallback: (context) => ConditionalBuilder(
+                condition: (FavouriteCubit.get(context)
+                    .favouritesModel!
+                    .data!
+                    .data
+                    .isEmpty),
+                builder: (context) => EmptyScreen(),
+                fallback: (context) => Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: ListView.builder(
+                      itemBuilder: (context, index) => BuildItem(
+                          model: FavouriteCubit.get(context)
+                              .favouritesModel!
+                              .data!
+                              .data[index]
+                              .product),
+                      itemCount: FavouriteCubit.get(context)
+                          .favouritesModel!
+                          .data!
+                          .data
+                          .length),
+                ),
               ),
             ),
           );
@@ -39,5 +48,3 @@ class FavouritesScreen extends StatelessWidget {
         listener: (context, state) {});
   }
 }
-
-

@@ -15,3 +15,4 @@ class GetFavoritesLoading extends FavouriteStates {}
 class GetFavoritesSuccess extends FavouriteStates {}
 
 class GetFavoritesError extends FavouriteStates {}
+

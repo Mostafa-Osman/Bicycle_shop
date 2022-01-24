@@ -35,17 +35,16 @@ class BuildItem extends StatelessWidget {
                     Positioned(
                       top: 0,
                       left: 0,
-                        child: SvgPicture.asset('assets/icons/discount.svg',
-                            fit: BoxFit.cover, height: 30, width: 30),
-
+                      child: SvgPicture.asset('assets/icons/discount.svg',
+                          fit: BoxFit.cover, height: 30, width: 30),
                     ),
                 ],
               ),
               SizedBox(width: 5),
               Expanded(
                 child: Padding(
-                  padding:
-                  const EdgeInsets.only(top: 10.0, bottom: 10, right: 10,left: 5.0),
+                  padding: const EdgeInsets.only(
+                      top: 10.0, bottom: 10, right: 10, left: 5.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -70,11 +69,7 @@ class BuildItem extends StatelessWidget {
                             textColor: mainColor,
                           ),
                           Spacer(),
-                            CustomFavouriteIcon(
-                              checkFavourite:
-                              HomeCubit.get(context).favourites[model.id],
-                              onPressed: () => FavouriteCubit.get(context)
-                                  .changeFavorites(model.id!, context))
+                          CustomFavouriteIcon(productId: model.id!),
                         ],
                       ),
                       if (model.discount != 0)
