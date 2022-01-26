@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/screens/home/home_cubit/home_cubit.dart';
 import 'package:udemy_flutter/screens/home/ui/home_body.dart';
+import 'package:udemy_flutter/shared/components/loading.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 import '../home_cubit/states.dart';
 
@@ -16,10 +17,8 @@ class HomeScreen extends StatelessWidget {
               //     state is BannerLoadingState ||
               //     state is HomeInitialState||
                   HomeCubit.get(context).homeModel==null)
-              ? const Center(
-                  child: CircularProgressIndicator(
-                  color: red,
-                ))
+              ?  Center(
+                  child:CustomLoading())
               : (state is HomeErrorState || state is BannerErrorState)
                   ? const Center(
                       child: Text('Error 404 !',

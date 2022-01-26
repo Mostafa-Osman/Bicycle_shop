@@ -8,6 +8,7 @@ import 'package:udemy_flutter/screens/basket/ui/basket_item.dart';
 import 'package:udemy_flutter/shared/components/custom_button.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/components/empty_screen.dart';
+import 'package:udemy_flutter/shared/components/loading.dart';
 import 'package:udemy_flutter/shared/components/navigate.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 
@@ -55,9 +56,8 @@ class BasketScreen extends StatelessWidget {
                     );
             },
             fallback: (context) => Center(
-                child: CircularProgressIndicator(
-              color: red,
-            )),
+                child:CustomLoading()
+            ),
           ),
           bottomNavigationBar: BasketCubit.get(context).myBag != null &&
                   BasketCubit.get(context).myBag!.data!.cartItems.isNotEmpty

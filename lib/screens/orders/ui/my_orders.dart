@@ -6,6 +6,7 @@ import 'package:udemy_flutter/screens/orders/my_orders_cubit/my_orders_cubit.dar
 import 'package:udemy_flutter/screens/orders/my_orders_cubit/states.dart';
 import 'package:udemy_flutter/shared/components/Dotted_line.dart';
 import 'package:udemy_flutter/shared/components/empty_screen.dart';
+import 'package:udemy_flutter/shared/components/loading.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/components/custom%20_card.dart';
@@ -46,9 +47,7 @@ class MyOrdersScreen extends StatelessWidget {
               },
               fallback: (context) {
                 return Center(
-                    child: CircularProgressIndicator(
-                  color: red,
-                ));
+                    child:CustomLoading());
               });
         });
   }

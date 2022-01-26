@@ -11,6 +11,7 @@ import 'package:udemy_flutter/shared/components/constants.dart';
 import 'package:udemy_flutter/shared/components/custom_button.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/components/custom_text_form_field.dart';
+import 'package:udemy_flutter/shared/components/loading.dart';
 import 'package:udemy_flutter/shared/components/navigate.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 
@@ -32,11 +33,8 @@ class LoginScreen extends StatelessWidget {
               navigatorAndFinish(context, RouteConstant.shopLayoutRoute);
             });
           }
-        }
-        else if (state  is LoginErrorState)
-        {
-          showToast(
-              state: ToastStates.ERROR, message:state.error );
+        } else if (state is LoginErrorState) {
+          showToast(state: ToastStates.ERROR, message: state.error);
         }
       },
       builder: (context, state) => Scaffold(
@@ -139,10 +137,11 @@ class LoginScreen extends StatelessWidget {
                                   },
                                   buttonColor: Color(0xffAF4537),
                                 ),
-                                fallback: (context) => Center(
-                                  child: CircularProgressIndicator(
-                                      color: Color(0xffAF4537)),
-                                ),
+                                fallback: (context) =>
+                                    Center(child: CustomLoading()
+                                        //   CircularProgressIndicator(
+                                        //       color: Color(0xffAF4537)),
+                                        ),
                               ),
                             ),
 

@@ -7,6 +7,7 @@ import 'package:udemy_flutter/screens/search/cubit/states.dart';
 import 'package:udemy_flutter/shared/components/build_item.dart';
 import 'package:udemy_flutter/shared/components/custom_divider.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
+import 'package:udemy_flutter/shared/components/loading.dart';
 import 'package:udemy_flutter/shared/components/navigate.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 
@@ -71,7 +72,7 @@ class SearchScreen extends StatelessWidget {
                   ? SizedBox()
                   : (state is SearchLoadingState)
                       ? Center(
-                          child: CircularProgressIndicator(),
+                          child:CustomLoading(),
                         )
                       : (state is SearchErrorState)
                           ? Center(

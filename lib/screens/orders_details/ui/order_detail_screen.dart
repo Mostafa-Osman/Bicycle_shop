@@ -7,6 +7,7 @@ import 'package:udemy_flutter/shared/components/Dotted_line.dart';
 import 'package:udemy_flutter/shared/components/component.dart';
 import 'package:udemy_flutter/shared/components/custom%20_card.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
+import 'package:udemy_flutter/shared/components/loading.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 
 class OrderDetailsScreen extends StatelessWidget {
@@ -358,7 +359,7 @@ class OrderDetailsScreen extends StatelessWidget {
                 );
               },
               fallback: (context) => Center(
-                child: CircularProgressIndicator(),
+                child: CustomLoading(),
               ),
             ),
           );

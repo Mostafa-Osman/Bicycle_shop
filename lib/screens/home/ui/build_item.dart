@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:udemy_flutter/screens/home/home_cubit/home_cubit.dart';
 import 'package:udemy_flutter/shared/components/custom_favourite-icon.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
+import 'package:udemy_flutter/shared/components/loading.dart';
 import 'package:udemy_flutter/shared/components/navigate.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -38,6 +39,7 @@ class BuildItem extends StatelessWidget {
             children: [
               Stack(
                 children: [
+
                   Container(
                     margin: EdgeInsets.all(10.0),
                     height: 200.0,

@@ -5,6 +5,7 @@ import 'package:udemy_flutter/screens/notifications/notification_cubit/notificat
 import 'package:udemy_flutter/screens/notifications/notification_cubit/states.dart';
 import 'package:udemy_flutter/shared/components/custom_divider.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
+import 'package:udemy_flutter/shared/components/loading.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 
 class NotificationsScreen extends StatelessWidget {
@@ -27,9 +28,7 @@ class NotificationsScreen extends StatelessWidget {
                     .notificationData
                     .length),
             fallback: (context) => Center(
-                child: CircularProgressIndicator(
-              color: red,
-            )),
+                child: CustomLoading()),
           );
         },
         listener: (context, state) {});

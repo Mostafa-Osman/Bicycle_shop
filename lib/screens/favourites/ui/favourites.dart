@@ -5,6 +5,7 @@ import 'package:udemy_flutter/screens/favourites/favourite_cubit/favourite_cubit
 import 'package:udemy_flutter/screens/favourites/favourite_cubit/states.dart';
 import 'package:udemy_flutter/shared/components/build_item.dart';
 import 'package:udemy_flutter/shared/components/empty_screen.dart';
+import 'package:udemy_flutter/shared/components/loading.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 
 class FavouritesScreen extends StatelessWidget {
@@ -16,9 +17,8 @@ class FavouritesScreen extends StatelessWidget {
             body: ConditionalBuilder(
               condition: (state is GetFavoritesLoading),
               builder: (context) => Center(
-                  child: CircularProgressIndicator(
-                color: red,
-              )),
+                  child: CustomLoading()
+              ),
               fallback: (context) => ConditionalBuilder(
                 condition: (FavouriteCubit.get(context)
                     .favouritesModel!

@@ -202,6 +202,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.0"
+  flutter_spinkit:
+    dependency: "direct main"
+    description:
+      name: flutter_spinkit
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "5.1.0"
   flutter_staggered_grid_view:
     dependency: "direct main"
     description:
@@ -215,7 +222,7 @@ packages:
       name: flutter_svg
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.2"
+    version: "1.0.3"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -267,7 +274,7 @@ packages:
       name: image_picker
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.8.4+4"
+    version: "0.8.4+5"
   image_picker_for_web:
     dependency: transitive
     description:
@@ -580,7 +587,7 @@ packages:
       name: win32
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.3.6"
+    version: "2.3.8"
   xdg_directories:
     dependency: transitive
     description:

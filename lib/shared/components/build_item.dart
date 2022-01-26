@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:udemy_flutter/screens/favourites/favourite_cubit/favourite_cubit.dart';
-import 'package:udemy_flutter/screens/home/home_cubit/home_cubit.dart';
 import 'package:udemy_flutter/shared/components/custom%20_card.dart';
 import 'package:udemy_flutter/shared/components/custom_favourite-icon.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';

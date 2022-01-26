@@ -9,6 +9,7 @@ import 'package:udemy_flutter/screens/profile/cubit/states.dart';
 import 'package:udemy_flutter/shared/components/Dotted_line.dart';
 import 'package:udemy_flutter/shared/components/constants.dart';
 import 'package:udemy_flutter/shared/components/custom%20_card.dart';
+import 'package:udemy_flutter/shared/components/loading.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/components/navigate.dart';
@@ -209,7 +210,7 @@ class AccountScreen extends StatelessWidget {
               );
             },
             fallback: (BuildContext context) =>
-                Center(child: CircularProgressIndicator()),
+                Center(child: CustomLoading()),
           );
         });
   }

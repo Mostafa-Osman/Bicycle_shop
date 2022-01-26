@@ -1,8 +1,6 @@
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:like_button/like_button.dart';
-import 'package:udemy_flutter/screens/favourites/favourite_cubit/favourite_cubit.dart';
 import 'package:udemy_flutter/screens/home/home_cubit/home_cubit.dart';
 import 'package:udemy_flutter/shared/components/custom_favourite-icon.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
