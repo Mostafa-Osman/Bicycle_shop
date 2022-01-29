@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/layout/layout_cubit/cubit.dart';
 import 'package:udemy_flutter/layout/shop_layout.dart';
 import 'package:udemy_flutter/route/router.dart';
+import 'package:udemy_flutter/screens/address/address_cubit/address_cubit.dart';
+import 'package:udemy_flutter/screens/address/address_cubit/test_cubit.dart';
 import 'package:udemy_flutter/screens/login/login_cubit/login_cubit.dart';
 import 'package:udemy_flutter/screens/login/ui/login.dart';
 import 'package:udemy_flutter/screens/on_boarding/on_boarding_cubit/cubit.dart';
@@ -38,8 +40,12 @@ void main() async {
       widget = ShopLayout();
     else
       widget = LoginScreen();
-  } else
+  } else {
     widget = OnBoardingScreen();
+
+  }
+
+
 
   print(token.toString());
   BlocOverrides.runZoned(() => runApp(MyApp(widget: widget)),
@@ -76,7 +82,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => OnBoardingCubit()),
         BlocProvider(create: (context) => PaymentCubit()),
         BlocProvider(create: (context) => UpdateProfileCubit()),
-
+        BlocProvider(create: (context) => AddressCubit()..getMyAddressData()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -86,7 +92,6 @@ class MyApp extends StatelessWidget {
         //themeMode: isDark ? ThemeMode.dark : ThemeMode.light,
         themeMode: ThemeMode.light,
         home: widget,
-        // home: ProductDetails(),
       ),
     );
   }

@@ -12,11 +12,7 @@ class HomeScreen extends StatelessWidget {
     return BlocConsumer<HomeCubit, HomeStates>(
         listener: (context, state) {},
         builder: (context, state) {
-          return (
-              // state is HomeLoadingState ||
-              //     state is BannerLoadingState ||
-              //     state is HomeInitialState||
-                  HomeCubit.get(context).homeModel==null)
+          return (HomeCubit.get(context).homeModel==null)
               ?  Center(
                   child:CustomLoading())
               : (state is HomeErrorState || state is BannerErrorState)

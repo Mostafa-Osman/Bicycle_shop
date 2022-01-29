@@ -20,4 +20,5 @@ class ProfileCubit extends Cubit<ProfileStates> {
       emit(ProfileError());
     }
   }
+
 }

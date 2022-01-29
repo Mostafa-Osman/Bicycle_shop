@@ -23,6 +23,10 @@ class RouteConstant {
   static const String aboutRoute = '/about_us';
   static const String questionsRoute = '/questions';
   static const String languageRoute = '/language';
+  static const String addAddressRoute = '/addAddress';
+  static const String updateAddressRoute = '/updateAddress';
+
+
 
 // static const String verifyRoute = '/verify';
 }

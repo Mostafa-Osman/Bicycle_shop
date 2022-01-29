@@ -11,7 +11,7 @@ class BasketModel {
 }
 
 class Data {
-  List<CartItems> cartItems = [];
+  List<Cart> cartItems = [];
   int? subTotal;
   dynamic total;
 
@@ -20,18 +20,18 @@ class Data {
     total = json['total'];
     if (json['cart_items'] != null) {
       json['cart_items'].forEach((v) {
-        cartItems.add(CartItems.fromJson(v));
+        cartItems.add(Cart.fromJson(v));
       });
     }
   }
 }
 
-class CartItems {
+class Cart {
   int? id;
   int? quantity;
   Product? product;
 
-  CartItems.fromJson(Map<String, dynamic> json) {
+  Cart.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     quantity = json['quantity'];
     product =

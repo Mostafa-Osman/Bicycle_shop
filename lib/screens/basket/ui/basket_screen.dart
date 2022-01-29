@@ -32,9 +32,9 @@ class BasketScreen extends StatelessWidget {
             ),
           ),
           body: ConditionalBuilder(
-            condition: (BasketCubit.get(context).myBag != null
-                //state is ShopGetOrderSuccessState
-                ),
+            condition: (
+                //BasketCubit.get(context).myBag != null
+                state is ShopGetOrderSuccessState),
             builder: (context) {
               var cubit = BasketCubit.get(context).myBag!.data!;
               return BasketCubit.get(context).myBag!.data!.cartItems.isEmpty

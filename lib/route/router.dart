@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:udemy_flutter/layout/shop_layout.dart';
 import 'package:udemy_flutter/screens/about_us/about.dart';
+import 'package:udemy_flutter/screens/address/ui/add_address_screen.dart';
+import 'package:udemy_flutter/screens/address/ui/update_address_screen.dart';
 import 'package:udemy_flutter/screens/contacts/contacts.dart';
 import 'package:udemy_flutter/screens/favourites/ui/favourites.dart';
 import 'package:udemy_flutter/screens/home/model/home_model.dart';
@@ -73,6 +75,14 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => QuestionsScreen());
       case RouteConstant.languageRoute:
         return MaterialPageRoute(builder: (_) => LanguageScreen());
+      case RouteConstant.addAddressRoute:
+        return MaterialPageRoute(builder: (_) => AddAddressScreen());
+      case RouteConstant.updateAddressRoute:
+        final int arguments = settings.arguments as int;
+        var index = arguments;
+        return MaterialPageRoute(
+            builder: (_) => UpdateAddressScreen(index: index));
+
       // case RouteConstant.verifyRoute:
       //   return MaterialPageRoute(builder: (_) {
       //     final bool arguments = settings.arguments as bool;

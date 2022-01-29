@@ -60,7 +60,7 @@ class HomeBody extends StatelessWidget {
             crossAxisSpacing: 8.0,
             shrinkWrap: true,
             crossAxisCount: 2,
-            itemCount: model.data!.detailsData.length,
+            itemCount:  model.data!.detailsData.length,
             itemBuilder: (BuildContext context, int index) =>
                 BuildItem(data: model.data!.detailsData[index]),
           ),

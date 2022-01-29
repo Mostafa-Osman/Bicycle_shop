@@ -1,4 +1,3 @@
-import 'package:udemy_flutter/screens/favourites/model/change_favourites_model.dart';
 
 abstract class FavouriteStates {}
 

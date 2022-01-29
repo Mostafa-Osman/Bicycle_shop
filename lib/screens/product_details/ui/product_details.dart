@@ -29,7 +29,9 @@ class ProductDetailsScreen extends StatelessWidget {
             elevation: 0.0,
             leading: IconButton(
               onPressed: () {
-                HomeCubit.get(context).quantityProduct = 1;
+                HomeCubit
+                    .get(context)
+                    .quantityProduct = 1;
                 Navigator.pop(context);
               },
               icon: Icon(Icons.arrow_back_ios_sharp, color: mainColor),
@@ -47,12 +49,15 @@ class ProductDetailsScreen extends StatelessWidget {
           ),
           body: SingleChildScrollView(
             child: ConditionalBuilder(
-              condition: HomeCubit.get(context).homeModel != null,
+              condition: HomeCubit
+                  .get(context)
+                  .homeModel != null,
               builder: (context) => Body(productDetails: productDetails),
-              fallback: (context) => Center(
-                child:
+              fallback: (context) =>
+                  Center(
+                    child:
                     CustomText(text: 'Empty !', fontSize: 15, textColor: grey),
-              ),
+                  ),
             ),
           ),
           bottomNavigationBar: Container(
@@ -62,7 +67,9 @@ class ProductDetailsScreen extends StatelessWidget {
               children: [
                 CustomCounter(
                   increment: () => HomeCubit.get(context).incrementOrder(),
-                  textCount: HomeCubit.get(context).quantityProduct,
+                  textCount: HomeCubit
+                      .get(context)
+                      .quantityProduct,
                   decrement: () => HomeCubit.get(context).decrementOrder(),
                 ),
                 SizedBox(width: 10),
@@ -72,6 +79,14 @@ class ProductDetailsScreen extends StatelessWidget {
                       onPressed: () {
                         BasketCubit.get(context)
                             .addToBasketOrders(productDetails.id!);
+                        Future.delayed(const Duration(milliseconds: 1000), () {
+                          BasketCubit.get(context).updateBasketOrderData(
+                              productId: productDetails.id!, quantity: HomeCubit
+                              .get(context)
+                              .quantityProduct);
+
+                        });
+
                       }),
                 ),
               ],
