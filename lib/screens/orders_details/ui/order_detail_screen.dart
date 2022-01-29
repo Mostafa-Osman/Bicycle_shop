@@ -1,4 +1,5 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/screens/orders_details/cubit/order_details_cubit.dart';
@@ -167,11 +168,11 @@ class OrderDetailsScreen extends StatelessWidget {
                         //address
                         Padding(
                           padding: const EdgeInsets.only(top: 10.0, bottom: 10),
-                          child: CustomCard(
-                            widget: Container(
-                              padding:
-                                  EdgeInsets.only(right: 10.0, bottom: 10.0),
-                              child: Column(
+                          child: InkWell(
+                            onTap: () =>
+                                orderDetailsCubit.changeAddressVisibility(),
+                            child: CustomCard(
+                              widget: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Row(
@@ -181,23 +182,21 @@ class OrderDetailsScreen extends StatelessWidget {
                                             fontSize: 20,
                                             textColor: mainColor),
                                         Spacer(),
-                                        IconButton(
-                                            onPressed: () => orderDetailsCubit
-                                                .changeAddressVisibility(),
-                                            icon: orderDetailsCubit
-                                                    .isAddressVisible
-                                                ? Icon(
-                                                    Icons
-                                                        .keyboard_arrow_up_outlined,
-                                                    size: 35,
-                                                    color: mainColor)
-                                                : Icon(
-                                                    Icons
-                                                        .keyboard_arrow_down_outlined,
-                                                    size: 35,
-                                                    color: mainColor)),
+                                        orderDetailsCubit.isAddressVisible
+                                            ? Icon(
+                                                Icons
+                                                    .keyboard_arrow_up_outlined,
+                                                size: 35,
+                                                color: mainColor)
+                                            : Icon(
+                                                Icons
+                                                    .keyboard_arrow_down_outlined,
+                                                size: 35,
+                                                color: mainColor),
                                       ],
                                     ),
+                                    if (orderDetailsCubit.isAddressVisible)
+                                      CustomDotedLine(),
                                     if (orderDetailsCubit.isAddressVisible)
                                       Row(
                                         children: [
@@ -240,6 +239,7 @@ class OrderDetailsScreen extends StatelessWidget {
                                           ),
                                         ],
                                       ),
+                                    SizedBox(height: 10.0),
                                   ]),
                             ),
                           ),
