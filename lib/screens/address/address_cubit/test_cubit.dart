@@ -27,9 +27,12 @@ class AddressCubit extends Cubit<AddressStates> {
       'region': region,
       'details': details,
       'notes': notes,
+      'latitude':0.0,
+      'longitude':0.0,
     }).then((value) {
       addressModel = AddressModel.fromJson(value.data);
       emit(AddAddressSuccess());
+
       getMyAddressData();
     }).catchError((error) {
       print(error.toString());
@@ -54,13 +57,18 @@ class AddressCubit extends Cubit<AddressStates> {
       {required addressId, name, city, region, details, notes}) async {
     emit(UpdateAddressLoading());
 
-    DioHelper.putData(url: UPDATE_ADDRESSES +  '$addressId', token: token, data: {
-      'name': name,
-      'city': city,
-      'region': region,
-      'details': details,
-      'notes': notes,
-    }).then((value) {
+    DioHelper.putData(
+        url: UPDATE_ADDRESSES + '$addressId',
+        token: token,
+        data: {
+          'name': name,
+          'city': city,
+          'region': region,
+          'details': details,
+          'notes': notes,
+          'latitude':0.0,
+          'longitude':0.0,
+        }).then((value) {
       addressModel = AddressModel.fromJson(value.data);
       emit(UpdateAddressOrderSuccess());
       getMyAddressData();

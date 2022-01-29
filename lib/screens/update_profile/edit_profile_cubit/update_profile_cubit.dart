@@ -4,12 +4,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/data/repository/user_repo/profile_repo.dart';
-import 'package:udemy_flutter/screens/profile/cubit/profile_cubit.dart';
-import 'package:udemy_flutter/screens/profile/cubit/states.dart';
 import 'package:udemy_flutter/screens/profile/model/profile_model.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:udemy_flutter/shared/components/component.dart';
-
 part 'update_profile_state.dart';
 
 class UpdateProfileCubit extends Cubit<UpdateProfileState> {

@@ -136,12 +136,8 @@ class ProfileScreen extends StatelessWidget {
                                                 filled: true,
                                                 contentPadding:
                                                     EdgeInsets.all(10),
-                                                hintText:
-                                                    AddressCubit.get(context)
-                                                        .addressModel!
-                                                        .data!
-                                                        .data![index]
-                                                        .city,
+                                                hintText: 'City : ' +
+                                                    '${AddressCubit.get(context).addressModel!.data!.data![index].city}',
                                                 hintStyle: TextStyle(
                                                     fontSize: 18,
                                                     fontWeight: FontWeight.bold,

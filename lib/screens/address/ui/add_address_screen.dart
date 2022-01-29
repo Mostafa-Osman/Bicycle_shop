@@ -115,7 +115,6 @@ class AddAddressScreen extends StatelessWidget {
                                         name: addressNameControl.text,
                                         notes: notesAddressControl.text);
                                     Navigator.pop(context);
-
                                   }
                                 },
                               ),
