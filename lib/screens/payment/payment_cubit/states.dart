@@ -15,3 +15,4 @@ class MakeOrderLoadingState extends PaymentStates {}
 class MakeOrderSuccessState extends PaymentStates {}
 
 class MakeOrderErrorState extends PaymentStates {}
+class ChangeAddressIndex extends PaymentStates {}

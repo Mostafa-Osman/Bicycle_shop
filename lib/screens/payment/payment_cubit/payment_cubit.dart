@@ -13,10 +13,10 @@ class PaymentCubit extends Cubit<PaymentStates> {
   bool isOnline = false;
   int discountTabTextIndexSelected = 1;
   int voucherTabTextIndexSelected = 1;
-  String cardNumber = '';
-  String expiryDate = '';
-  String cardHolderName = '';
-  String cvvCode = '';
+  String? cardNumber;
+  String? expiryDate;
+  String? cardHolderName;
+  String? cvvCode;
   bool isCvvFocused = false;
   TabController? tabController;
   ValueNotifier<int> current = ValueNotifier(0);
@@ -53,16 +53,27 @@ class PaymentCubit extends Cubit<PaymentStates> {
 
   void makeOrderData(addressId, paymentMethod, usePoints) {
     emit(MakeOrderLoadingState());
-    DioHelper.postData(url: ADD_ORDER, token: token, data: {
-      'address_id': addressId,
-      'payment_method': paymentMethod,
-      'use_points': usePoints,
-    }).then((value) {
+    DioHelper.postData(
+      url: ADD_ORDER,
+      data: {
+        'address_id': addressId,
+        'payment_method': paymentMethod,
+        'use_points': usePoints,
+      },
+      token: token,
+    ).then((value) {
       makeOrders = AddOrderModel.fromJson(value.data);
       emit(MakeOrderSuccessState());
     }).catchError((error) {
       print(error.toString());
       emit(MakeOrderErrorState());
     });
+  }
+
+  int addressIndex = 0;
+
+  changeAddressIndex(index) {
+    addressIndex = index;
+    emit(ChangeAddressIndex());
   }
 }

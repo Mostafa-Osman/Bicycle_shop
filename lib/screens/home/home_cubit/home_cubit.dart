@@ -47,12 +47,12 @@ class HomeCubit extends Cubit<HomeStates> {
     });
   }
 
-  // int photoIndex = 0;
-  //
-  // changePhotoIndex(index) {
-  //   photoIndex = index;
-  //   emit(ChangePhotoIndexState());
-  // }
+  int photoIndex = 0;
+
+  changePhotoIndex(index) {
+    photoIndex = index;
+    emit(ChangePhotoIndexState());
+  }
 
   int quantityProduct = 1;
 

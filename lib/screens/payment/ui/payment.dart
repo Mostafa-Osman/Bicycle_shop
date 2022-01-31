@@ -1,21 +1,19 @@
 import 'package:checkbox_grouped/checkbox_grouped.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:udemy_flutter/screens/basket/basket_cubit/basket_cubit.dart';
 import 'package:udemy_flutter/screens/payment/payment_cubit/payment_cubit.dart';
 import 'package:udemy_flutter/screens/payment/payment_cubit/states.dart';
-import 'package:udemy_flutter/screens/payment/ui/card_item.dart';
-import 'package:udemy_flutter/screens/payment/ui/credit_card.dart';
+import 'package:udemy_flutter/screens/payment/ui/widgets/address.dart';
+import 'package:udemy_flutter/screens/payment/ui/widgets/bottom_nav.dart';
+import 'package:udemy_flutter/screens/payment/ui/widgets/card_item.dart';
+import 'package:udemy_flutter/screens/payment/ui/widgets/credit_card.dart';
 import 'package:udemy_flutter/shared/components/custom%20_card.dart';
-import 'package:udemy_flutter/shared/components/custom_button.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
-import 'package:udemy_flutter/shared/components/custom_text_form_field.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 
 class PaymentScreen extends StatelessWidget {
-  final controller = GroupController();
+  final checkBoxController = GroupController();
   final addressControl = TextEditingController();
-  final _key = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +44,7 @@ class PaymentScreen extends StatelessWidget {
                         height: 170,
                         child: SimpleGroupedCheckbox(
                           checkFirstElement: true,
-                          controller: controller,
+                          controller: checkBoxController,
                           itemsSubTitle: [
                             'The delivery staff goes to your door,you give the money according to the value of the application and delivery fees for employees',
                             'We will call you back to confirm the order,After confirmation,we will proceed to pick up,pack,issue bills and will notify the actual bill for you to transfer'
@@ -82,77 +80,14 @@ class PaymentScreen extends StatelessWidget {
                             return cubit.changeVoucher(index);
                           }),
                     ),
-                    CustomCard(
-                      widget: SizedBox(
-                        height: 120,
-                        child: Column(
-                          children: [
-                            CustomText(
-                                text: 'Write your address please',
-                                fontSize: 18),
-                            SizedBox(height: 10),
-                            Form(
-                              key: _key,
-                              child: CustomTextFormField(
-                                  controller: addressControl,
-                                  textHint: 'Add new address',
-                                  hintColor: grey,
-                                  roundedRectangleBorder: 15.0,
-                                  validator: (value) => value!.isEmpty
-                                      ? 'please Enter your address'
-                                      : null),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                    // address
+                    SizedBox(height: 20.0),
+                    AddressPayment()
                   ],
                 ),
               ),
             ),
-            bottomNavigationBar: Container(
-              padding: EdgeInsets.only(right: 10.0, left: 15.0, top: 10),
-              height: 110.0,
-              decoration: BoxDecoration(
-                color: Colors.grey[200],
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(40.0),
-                    topRight: Radius.circular(40.0)),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CustomText(
-                    text:
-                        ' Total: ${BasketCubit.get(context).myBag!.data!.total} EGP',
-                    fontSize: 18.0,
-                    textColor: mainColor,
-                    // backgroundColor: Colors.orangeAccent[100],
-                  ),
-                  SizedBox(
-                    height: 10.0,
-                  ),
-                  CustomButton(
-                    text: 'Complete orders now',
-                    onPressed: () {
-                      if (_key.currentState!.validate())
-                        PaymentCubit.get(context).makeOrderData(
-                          BasketCubit.get(context)
-                              .myBag!
-                              .data!
-                              .cartItems[0]
-                              .product!
-                              .id,
-                          //points you must change it
-                          100,
-                          PaymentCubit.get(context).isOnline ? 0 :1,
-                          
-                        );
-                    },
-                  )
-                ],
-              ),
-            ),
+            bottomNavigationBar: BottomNavBar(),
           );
         });
   }

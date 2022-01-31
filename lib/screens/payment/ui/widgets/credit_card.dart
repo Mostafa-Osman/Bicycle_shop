@@ -6,10 +6,7 @@ import 'package:udemy_flutter/shared/styles/color.dart';
 
 class CreditCard extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
-  String cardNumber = '';
-  String expiryDate = '';
-  String cardHolderName = '';
-  String cvvCode = '';
+
   @override
   Widget build(BuildContext context) {
     var cubit = PaymentCubit.get(context);
@@ -18,10 +15,10 @@ class CreditCard extends StatelessWidget {
         child: Column(
           children: [
             CreditCardWidget(
-              cardNumber: cubit.cardNumber,
-              expiryDate: cubit.expiryDate,
-              cardHolderName: cubit.cardHolderName,
-              cvvCode: cubit.cvvCode,
+              cardNumber: cubit.cardNumber!,
+              expiryDate: cubit.expiryDate!,
+              cardHolderName: cubit.cardHolderName!,
+              cvvCode: cubit.cvvCode!,
               showBackView: cubit.isCvvFocused,
               onCreditCardWidgetChange: (_) => cubit.onCreditCardModelChange,
             ),
@@ -52,10 +49,10 @@ class CreditCard extends StatelessWidget {
                 border: OutlineInputBorder(),
                 labelText: 'Card Holder',
               ),
-              cardNumber: cardNumber,
-              cvvCode: cvvCode,
-              cardHolderName: cardHolderName,
-              expiryDate:expiryDate,
+              cardNumber: cubit.cardNumber!,
+              cvvCode: cubit.cvvCode!,
+              cardHolderName: cubit.cardHolderName!,
+              expiryDate: cubit.expiryDate!,
             ),
             SizedBox(height: 10),
           ],
