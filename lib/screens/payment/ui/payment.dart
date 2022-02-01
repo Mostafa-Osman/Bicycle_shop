@@ -9,11 +9,15 @@ import 'package:udemy_flutter/screens/payment/ui/widgets/card_item.dart';
 import 'package:udemy_flutter/screens/payment/ui/widgets/credit_card.dart';
 import 'package:udemy_flutter/shared/components/custom%20_card.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
+import 'package:udemy_flutter/shared/components/custom_text_button.dart';
+import 'package:udemy_flutter/shared/components/custom_text_form_field.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 
 class PaymentScreen extends StatelessWidget {
   final checkBoxController = GroupController();
   final addressControl = TextEditingController();
+  final promoCodeControl = TextEditingController();
+  final _promoCodeKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +30,7 @@ class PaymentScreen extends StatelessWidget {
               title: CustomText(text: 'Payment', textColor: mainColor),
               elevation: 0,
               leading: IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
+                onPressed: () => Navigator.pop(context),
                 icon: Icon(Icons.arrow_back_ios_sharp, color: mainColor),
               ),
             ),
@@ -80,6 +82,51 @@ class PaymentScreen extends StatelessWidget {
                             return cubit.changeVoucher(index);
                           }),
                     ),
+                    if (cubit.voucherTabTextIndexSelected == 0)
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Container(
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: SizedBox(
+                                  height: 50.0,
+                                  child: CustomTextFormField(
+                                      key: _promoCodeKey,
+                                      controller: promoCodeControl,
+                                      roundedRectangleBorder: 10.0,
+                                      textHint: 'Enter promo code',
+                                      validator: (value) => (value!.isEmpty)
+                                          ? 'Please Enter promo code'
+                                          : null),
+                                ),
+                              ),
+                              SizedBox(width: 10.0),
+                              Expanded(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    // borderRadius: BorderRadius.only(
+                                    //   topLeft: Radius.circular(10.0),
+                                    //   bottomLeft: Radius.circular(10.0),
+                                    //   bottomRight: Radius.circular(10.0),
+                                    // ),
+                                    color: Colors.green,
+                                  ),
+                                  child: CustomTextButton(
+                                    textColor: white,
+                                    onPressed: () {
+                                      if (_promoCodeKey.currentState!
+                                          .validate()) print(1);
+                                    },
+                                    text: 'Check',
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+
                     // address
                     SizedBox(height: 20.0),
                     AddressPayment()

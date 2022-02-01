@@ -19,6 +19,7 @@ class CustomTextFormField extends StatelessWidget {
   final String? label;
   final Key? key;
 
+
   CustomTextFormField(
       {required this.controller,
       this.validator,
@@ -54,6 +55,7 @@ class CustomTextFormField extends StatelessWidget {
         prefixIcon: prefix,
 
         hintStyle: TextStyle(color: hintColor),
+
         // icon: icon,
         suffixIcon: suffixIcon,
       ),

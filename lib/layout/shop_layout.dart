@@ -16,7 +16,7 @@ class ShopLayout extends StatelessWidget {
             appBar: cubit.appBarScreen[cubit.currentPageIndex],
             body: cubit.bottomNavScreen[cubit.currentPageIndex],
             bottomNavigationBar: CurvedNavigationBar(
-                index: 2,
+                index: cubit.currentPageIndex,
                 height: 50,
                 backgroundColor: white,
                 color: mainColor,

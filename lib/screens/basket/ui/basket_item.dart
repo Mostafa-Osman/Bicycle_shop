@@ -164,7 +164,7 @@ class MyDialog extends StatelessWidget {
                 child: Row(children: [
                   Expanded(
                     child: CustomTextButton(
-                      onPress: () {
+                      onPressed: () {
                         BasketCubit.get(context)
                             .deleteOrderFromBasketData(productId: model.id);
                         BasketCubit.get(context).getMyBasketData();
@@ -180,7 +180,7 @@ class MyDialog extends StatelessWidget {
                   ),
                   Expanded(
                     child: CustomTextButton(
-                      onPress: () {
+                      onPressed: () {
                         Navigator.of(context).pop();
                       },
                       text: 'Cancel',

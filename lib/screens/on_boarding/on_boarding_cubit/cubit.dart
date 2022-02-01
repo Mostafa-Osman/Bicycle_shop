@@ -6,8 +6,7 @@ class OnBoardingCubit extends Cubit<OnBoardingStates> {
 
   static OnBoardingCubit get(context) => BlocProvider.of(context);
 
-  bool isLast = false;
-
+  bool isLastPage = false;
   List<OnBoardingModel> items = [
     OnBoardingModel(
         image: 'assets/images/onBoarding_1.svg',
@@ -23,7 +22,15 @@ class OnBoardingCubit extends Cubit<OnBoardingStates> {
         title: 'Let\'s Start',
         body: 'Wish for you a good time'),
   ];
+
+  checkLastPage(bool changeText) {
+    (changeText) ? isLastPage = true : isLastPage = false;
+    emit(CheckLastPageSuccess());
+  }
 }
+
+
+
 
 class OnBoardingModel {
   final String image;

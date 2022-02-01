@@ -115,7 +115,7 @@ class LoginScreen extends StatelessWidget {
                             CustomTextButton(
                               text: 'forget password ?',
                               textColor: black,
-                              onPress: () {},
+                              onPressed: () {},
                               //    textAlign: TextAlign.right
                             ),
 
@@ -156,7 +156,7 @@ class LoginScreen extends StatelessWidget {
                                       text: 'Sign Up',
                                       textColor: Color(0xffAF4537),
                                       fontSize: 20,
-                                      onPress: () => navigateTo(
+                                      onPressed: () => navigateTo(
                                           context, RouteConstant.registerRoute))
                                 ],
                               ),

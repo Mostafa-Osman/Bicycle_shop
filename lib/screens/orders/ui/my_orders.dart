@@ -22,7 +22,7 @@ class MyOrdersScreen extends StatelessWidget {
               condition: state is! MyOrderLoadingState,
               builder: (context) {
                 return MyOrdersCubit.get(context)
-                        .order!
+                        .orders!
                         .data!
                         .listDoneOrders
                         .isEmpty
@@ -34,11 +34,11 @@ class MyOrdersScreen extends StatelessWidget {
                         child: ListView.builder(
                           itemBuilder: (context, index) => OrdersBody(
                               order: MyOrdersCubit.get(context)
-                                  .order!
+                                  .orders!
                                   .data!
                                   .listDoneOrders[index]),
                           itemCount: MyOrdersCubit.get(context)
-                              .order!
+                              .orders!
                               .data!
                               .listDoneOrders
                               .length,

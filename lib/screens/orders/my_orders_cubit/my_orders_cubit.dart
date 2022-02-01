@@ -9,13 +9,13 @@ class MyOrdersCubit extends Cubit<MyOrdersStates> {
   static MyOrdersCubit get(context) => BlocProvider.of(context);
 
   //get orders
-  MyOrderModel? order;
+  MyOrderModel? orders;
   final ordersRepo = OrdersRepo();
 
   Future<void> getOrders() async {
     emit(MyOrderLoadingState());
     try {
-      order = await ordersRepo.getOrder();
+      orders = await ordersRepo.getOrder();
       emit(MyOrderSuccessState());
     } catch (e) {
       emit(MyOrderErrorState());

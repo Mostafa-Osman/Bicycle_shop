@@ -330,8 +330,10 @@ class OrderDetailsScreen extends StatelessWidget {
                         SizedBox(height: 10),
                         if (orderDetails.status == 'New')
                           InkWell(
-                            onTap: () =>
-                                orderDetailsCubit.cancelOrder(orderDetails.id),
+                            onTap: () {
+                              orderDetailsCubit.cancelOrder(orderDetails.id);
+                              Navigator.pop(context);
+                            },
                             child: CustomCard(
                               widget: Padding(
                                 padding: EdgeInsets.only(

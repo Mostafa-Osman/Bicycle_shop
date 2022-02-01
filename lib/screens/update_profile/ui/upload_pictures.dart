@@ -59,7 +59,7 @@ class UploadPictures extends StatelessWidget {
                                       textAlign: TextAlign.start,
                                       fontSize: 20,
                                       textColor: mainColor,
-                                      onPress: () {
+                                      onPressed: () {
                                         UpdateProfileCubit.get(context)
                                             .getImageFromGallery();
                                         Navigator.pop(context);
@@ -73,7 +73,7 @@ class UploadPictures extends StatelessWidget {
                                       textAlign: TextAlign.start,
                                       fontSize: 20,
                                       textColor: mainColor,
-                                      onPress: () {
+                                      onPressed: () {
                                         UpdateProfileCubit.get(context)
                                             .getImageFromCamera();
                                         Navigator.pop(context);

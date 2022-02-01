@@ -1,10 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:udemy_flutter/data/remote/dio_helper.dart';
-import 'package:udemy_flutter/data/remote/end_points.dart';
 import 'package:udemy_flutter/data/repository/address_repo/address_repo.dart';
 import 'package:udemy_flutter/screens/address/address_cubit/states.dart';
 import 'package:udemy_flutter/screens/address/model/address_model.dart';
-import 'package:udemy_flutter/shared/components/constants.dart';
 
 class AddressCubit extends Cubit<AddressStates> {
   AddressCubit() : super(AddressInitial());

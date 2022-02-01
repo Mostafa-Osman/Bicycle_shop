@@ -3,8 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/data/remote/dio_helper.dart';
 import 'package:udemy_flutter/data/remote/end_points.dart';
 import 'package:udemy_flutter/screens/basket/model/add_order_model.dart';
+import 'package:udemy_flutter/screens/orders/my_orders_cubit/my_orders_cubit.dart';
 import 'package:udemy_flutter/screens/payment/payment_cubit/states.dart';
 import 'package:udemy_flutter/shared/components/constants.dart';
+import 'package:udemy_flutter/shared/styles/color.dart';
 
 class PaymentCubit extends Cubit<PaymentStates> {
   PaymentCubit() : super(PaymentInitialState());
@@ -13,18 +15,18 @@ class PaymentCubit extends Cubit<PaymentStates> {
   bool isOnline = false;
   int discountTabTextIndexSelected = 1;
   int voucherTabTextIndexSelected = 1;
-  String? cardNumber;
-  String? expiryDate;
-  String? cardHolderName;
-  String? cvvCode;
+  String cardNumber = '';
+  String expiryDate = '';
+  String cardHolderName = '';
+  String cvvCode = '';
   bool isCvvFocused = false;
   TabController? tabController;
   ValueNotifier<int> current = ValueNotifier(0);
   var labelText = ["Yes", "No"];
 
   isOnlinePayment() {
-    emit(IsOnlineState());
     isOnline = !isOnline;
+    emit(IsOnlineState());
   }
 
   //credit card
@@ -64,6 +66,7 @@ class PaymentCubit extends Cubit<PaymentStates> {
     ).then((value) {
       makeOrders = AddOrderModel.fromJson(value.data);
       emit(MakeOrderSuccessState());
+      print(value.data);
     }).catchError((error) {
       print(error.toString());
       emit(MakeOrderErrorState());
@@ -75,5 +78,19 @@ class PaymentCubit extends Cubit<PaymentStates> {
   changeAddressIndex(index) {
     addressIndex = index;
     emit(ChangeAddressIndex());
+  }
+
+  Color backgroundTextAddress=Color(0xffE0E0E0);
+  Color textColor=black;
+
+  void addressStyle(index) {
+    if (addressIndex == index) {
+      backgroundTextAddress = mainColor;
+      textColor = white;
+    } else {
+      textColor = black;
+      backgroundTextAddress = Color(0xffE0E0E0);
+    }
+    emit(AddressStyleState());
   }
 }

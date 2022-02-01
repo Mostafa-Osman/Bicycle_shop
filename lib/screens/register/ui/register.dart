@@ -209,7 +209,7 @@ class RegisterScreen extends StatelessWidget {
                                     text: ' Sign In',
                                     textColor: mainColor,
                                     fontSize: 20,
-                                    onPress: () => navigateTo(
+                                    onPressed: () => navigateTo(
                                         context, RouteConstant.loginRoute))
                               ],
                             ),

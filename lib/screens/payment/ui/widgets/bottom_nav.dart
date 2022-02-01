@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:udemy_flutter/layout/layout_cubit/cubit.dart';
+import 'package:udemy_flutter/route/route_constants.dart';
 import 'package:udemy_flutter/screens/address/address_cubit/address_cubit.dart';
 import 'package:udemy_flutter/screens/basket/basket_cubit/basket_cubit.dart';
 import 'package:udemy_flutter/screens/basket/model/basket_model.dart';
+import 'package:udemy_flutter/screens/orders/my_orders_cubit/my_orders_cubit.dart';
 import 'package:udemy_flutter/screens/payment/payment_cubit/payment_cubit.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
+import 'package:udemy_flutter/shared/components/navigate.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 import 'package:udemy_flutter/shared/components/custom_button.dart';
 
@@ -41,12 +45,14 @@ class BottomNavBar extends StatelessWidget {
                     .data!
                     .data![PaymentCubit.get(context).addressIndex]
                     .id,
-                cubit.isOnline ? 1 : 0,
+                cubit.isOnline ? 2 : 1,
+                //change it
                 true,
               );
-
+              BasketCubit.get(context).myBag!.data!.cartItems=[];
+              LayoutCubit.get(context).changeCurrentIndex(3);
+              navigatorAndFinish(context, RouteConstant.shopLayoutRoute);
             },
-
           )
         ],
       ),

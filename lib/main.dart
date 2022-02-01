@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/layout/layout_cubit/cubit.dart';
-import 'package:udemy_flutter/layout/shop_layout.dart';
 import 'package:udemy_flutter/route/router.dart';
 import 'package:udemy_flutter/screens/address/address_cubit/address_cubit.dart';
-import 'package:udemy_flutter/screens/address/address_cubit/test_cubit.dart';
 import 'package:udemy_flutter/screens/login/login_cubit/login_cubit.dart';
 import 'package:udemy_flutter/screens/login/ui/login.dart';
 import 'package:udemy_flutter/screens/on_boarding/on_boarding_cubit/cubit.dart';
@@ -29,30 +27,17 @@ void main() async {
   // to ensure that all method  in project finish loading then open app
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Bloc.observer = MyBlocObserver();
   DioHelper.int();
   await CacheHelper.init();
   Widget widget;
-  var onBoarding = CacheHelper.getData(key: 'onBoarding');
+  onBoarding = CacheHelper.getData(key: 'onBoarding');
   token = await CacheHelper.getData(key: 'token');
-  if (onBoarding != null) {
-    if (token != null)
-      widget = ShopLayout();
-    else
-      widget = LoginScreen();
-  } else {
-    widget = OnBoardingScreen();
 
-  }
-
-
+  (onBoarding == null) ? widget = OnBoardingScreen() : widget = LoginScreen();
 
   print(token.toString());
   BlocOverrides.runZoned(() => runApp(MyApp(widget: widget)),
-      blocObserver: MyBlocObserver()
-  );
-
-
+      blocObserver: MyBlocObserver());
 }
 
 class MyApp extends StatelessWidget {
@@ -89,7 +74,6 @@ class MyApp extends StatelessWidget {
         onGenerateRoute: AppRouter.generateRoute,
         theme: lightTheme,
         darkTheme: darkTheme,
-        //themeMode: isDark ? ThemeMode.dark : ThemeMode.light,
         themeMode: ThemeMode.light,
         home: widget,
       ),

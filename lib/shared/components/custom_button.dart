@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 
@@ -7,20 +6,26 @@ class CustomButton extends StatelessWidget {
   final double height;
   final double fontSize;
   final Color buttonColor;
+  final double radiusCircular;
   final VoidCallback onPressed;
   final String text;
   final EdgeInsetsGeometry margin;
   final FontWeight fontWeight;
+  final TextAlign textAlign;
+  final Color textColor;
 
   CustomButton({
     this.margin = EdgeInsets.zero,
     this.width = double.infinity,
     this.height = 50,
+    this.textAlign=TextAlign.center,
     this.fontWeight = FontWeight.normal,
     this.fontSize = 20,
+    this.radiusCircular = 18.0,
     this.buttonColor = mainColor,
     required this.onPressed,
     required this.text,
+    this.textColor=white,
   });
 
   @override
@@ -30,15 +35,16 @@ class CustomButton extends StatelessWidget {
       width: width,
       decoration: BoxDecoration(
         color: buttonColor,
-        borderRadius: const BorderRadiusDirectional.all(Radius.circular(18)),
+        borderRadius:
+            BorderRadiusDirectional.all(Radius.circular(radiusCircular)),
       ),
       child: MaterialButton(
         onPressed: onPressed,
         height: height,
         child: Text(
-          text,
+          text,textAlign:textAlign ,
           style: TextStyle(
-            color: white,
+            color: textColor,
             fontSize: fontSize,
             fontWeight: fontWeight,
 

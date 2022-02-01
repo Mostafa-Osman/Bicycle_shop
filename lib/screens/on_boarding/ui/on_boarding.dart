@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:udemy_flutter/data/local/cache_helper.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
 import 'package:udemy_flutter/screens/on_boarding/on_boarding_cubit/cubit.dart';
 import 'package:udemy_flutter/screens/on_boarding/on_boarding_cubit/states.dart';
+import 'package:udemy_flutter/shared/components/constants.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/components/navigate.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
@@ -14,10 +16,20 @@ class OnBoardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var cubit = OnBoardingCubit.get(context);
     return BlocConsumer<OnBoardingCubit, OnBoardingStates>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if (cubit.isLastPage) {
+          CacheHelper.saveData(key: 'onBoarding', value: true).then((value) {
+            onBoarding = true;
+          });
+        } else {
+          CacheHelper.removeData(key: 'onBoarding').then((value) {
+            onBoarding = false;
+          });
+        }
+      },
       builder: (context, state) {
-        var cubit = OnBoardingCubit.get(context);
         return Scaffold(
             body: Container(
               width: 500,
@@ -35,8 +47,8 @@ class OnBoardingScreen extends StatelessWidget {
                         controller: boardingController,
                         onPageChanged: (index) {
                           (index == cubit.items.length - 1)
-                              ? cubit.isLast = true
-                              : cubit.isLast = false;
+                              ? cubit.checkLastPage(true)
+                              : cubit.checkLastPage(false);
                         },
                       ),
                     ),
@@ -47,7 +59,7 @@ class OnBoardingScreen extends StatelessWidget {
             floatingActionButton: FloatingActionButton(
               backgroundColor: mainColor,
               onPressed: () {
-                (cubit.isLast)
+                (cubit.isLastPage)
                     ? navigatorAndFinish(context, RouteConstant.loginRoute)
                     : boardingController.nextPage(
                         duration: Duration(microseconds: 700),

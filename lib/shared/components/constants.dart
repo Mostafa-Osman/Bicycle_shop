@@ -8,12 +8,5 @@ void signOut(context) {
     if (value) navigatorAndFinish(context, RouteConstant.loginRoute);
   });
 }
-//to print all text
-// void printFullText(String text) {
-//   final pattern = RegExp(".{1,800}");
-//   pattern.allMatches(text).forEach((element) {
-//     print(element.group(0));
-//   });
-// }
-
 var token;
+var onBoarding;
