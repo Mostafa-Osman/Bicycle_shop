@@ -1,7 +1,7 @@
 const LOGIN = 'login';
 const REGISTER = 'register';
 const HOME = 'home';
-const BANNER='banners';
+const BANNER = 'banners';
 const Get_CATEGORIES = 'categories';
 const FAVORITES = 'favorites';
 const PROFILE = 'profile';
@@ -11,12 +11,12 @@ const SEARCH = 'products/search';
 const BASKET = 'carts';
 const UPDATE_QUANTITY_ORDERS = 'carts/';
 const DELETE_ORDERS = 'carts/';
-const NOTIFICATIONS='notifications';
-const MY_ORDERS='orders';
-const ADD_ORDER='orders';
-const ORDER_DETAILS='orders/';
-const CONTACTS='contacts';
-const ADDRESSES='addresses';
-const UPDATE_ADDRESSES='addresses/';
-
-
+const NOTIFICATIONS = 'notifications';
+const MY_ORDERS = 'orders';
+const ADD_ORDER = 'orders';
+const ORDER_DETAILS = 'orders/';
+const CONTACTS = 'contacts';
+const ADDRESSES = 'addresses';
+const UPDATE_ADDRESSES = 'addresses/';
+const ESTIMATE_ORDER = 'estimate-order';
+const PROMO_CODE='promo-codes/validate';

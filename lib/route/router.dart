@@ -55,7 +55,7 @@ class AppRouter {
           return ProductDetailsScreen(productDetails: arguments);
         });
       case RouteConstant.shopLayoutRoute:
-        return MaterialPageRoute(builder: (_) => ShopLayout());
+        return MaterialPageRoute(builder: (_) => ShopLayoutScreen());
       case RouteConstant.paymentRoute:
         return MaterialPageRoute(builder: (_) => PaymentScreen());
       case RouteConstant.favouriteRoute:

@@ -5,7 +5,7 @@ import 'package:udemy_flutter/layout/layout_cubit/cubit.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 import 'layout_cubit/states.dart';
 
-class ShopLayout extends StatelessWidget {
+class ShopLayoutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<LayoutCubit, LayoutStates>(

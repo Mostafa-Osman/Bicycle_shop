@@ -31,7 +31,7 @@ class UpdateAddressScreen extends StatelessWidget {
         builder: (context, state) {
           var cubit = AddressCubit.get(context).addressModel!;
           final cityControl =
-              TextEditingController(text: cubit.data!.data![index].city);
+              TextEditingController(text: cubit.data!.data![index].city );
           final addressDetailsControl =
               TextEditingController(text: cubit.data!.data![index].details);
           final regionControl =

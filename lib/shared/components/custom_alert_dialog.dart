@@ -22,7 +22,8 @@ class CustomAlertDialog extends StatelessWidget {
       backgroundColor: backgroundColor,
       contentPadding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
       insetPadding: EdgeInsets.symmetric(vertical: 50),
-      content: Container(
+      content:
+      Container(
         width: 300,
         height: height,
         decoration: BoxDecoration(
@@ -30,11 +31,11 @@ class CustomAlertDialog extends StatelessWidget {
           shape: BoxShape.rectangle,
           borderRadius: new BorderRadius.all(new Radius.circular(20.0)),
         ),
-        child: Column(
+        child:
+        Column(
           children: [
             SizedBox(height: 25),
             widget,
-
             Expanded(
                 child: Container(width: double.infinity, child: bottomWidget))
           ],

@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
 import 'package:udemy_flutter/screens/address/address_cubit/address_cubit.dart';
 import 'package:udemy_flutter/screens/address/address_cubit/states.dart';
-import 'package:udemy_flutter/screens/address/address_cubit/test_cubit.dart';
 import 'package:udemy_flutter/screens/profile/cubit/profile_cubit.dart';
 import 'package:udemy_flutter/shared/components/custom%20_card.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
@@ -116,7 +115,12 @@ class ProfileScreen extends StatelessWidget {
                                         ),
                                         SizedBox(height: 10.0),
                                         Container(
-                                          height: 120.0,
+                                          height:
+                                          AddressCubit.get(context)
+                                              .addressModel!
+                                              .data!
+                                              .data!
+                                              .length>1? 120.0:60.0,
                                           child: ListView.separated(
                                             itemCount: AddressCubit.get(context)
                                                 .addressModel!

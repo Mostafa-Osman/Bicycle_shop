@@ -3,7 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/data/remote/dio_helper.dart';
 import 'package:udemy_flutter/data/remote/end_points.dart';
 import 'package:udemy_flutter/screens/basket/model/add_order_model.dart';
-import 'package:udemy_flutter/screens/orders/my_orders_cubit/my_orders_cubit.dart';
+import 'package:udemy_flutter/screens/payment/model/estimate.dart';
+import 'package:udemy_flutter/screens/payment/model/promo_code.dart';
 import 'package:udemy_flutter/screens/payment/payment_cubit/states.dart';
 import 'package:udemy_flutter/shared/components/constants.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
@@ -20,8 +21,6 @@ class PaymentCubit extends Cubit<PaymentStates> {
   String cardHolderName = '';
   String cvvCode = '';
   bool isCvvFocused = false;
-  TabController? tabController;
-  ValueNotifier<int> current = ValueNotifier(0);
   var labelText = ["Yes", "No"];
 
   isOnlinePayment() {
@@ -73,6 +72,48 @@ class PaymentCubit extends Cubit<PaymentStates> {
     });
   }
 
+  EstimateModel? estimatePrice;
+
+  void estimateOrdersData(usePoints , promoCodeId
+      ) {
+    emit(EstimateOrderLoading());
+    DioHelper.postData(
+      url: ESTIMATE_ORDER,
+      data: {
+        'use_points': usePoints,
+        'promo_code_id': promoCodeId,
+      },
+      token: token,
+    ).then((value) {
+      estimatePrice = EstimateModel.fromJson(value.data);
+      emit(EstimateOrderSuccess());
+      print(value.data);
+    }).catchError((error) {
+      print(error.toString());
+      emit(EstimateOrderError());
+    });
+  }
+
+  PromoCodeModel? promoCodeModel;
+
+  void promoCode(code) {
+    emit(PromoCodeLoading());
+    DioHelper.postData(
+      url: PROMO_CODE,
+      data: {
+        'code': code,
+      },
+      token: token,
+    ).then((value) {
+      promoCodeModel = PromoCodeModel.fromJson(value.data);
+      emit(PromoCodeSuccess());
+      print(value.data);
+    }).catchError((error) {
+      print(error.toString());
+      emit(PromoCodeError());
+    });
+  }
+
   int addressIndex = 0;
 
   changeAddressIndex(index) {
@@ -80,13 +121,13 @@ class PaymentCubit extends Cubit<PaymentStates> {
     emit(ChangeAddressIndex());
   }
 
-  Color backgroundTextAddress=Color(0xffE0E0E0);
-  Color textColor=black;
+  Color backgroundTextAddress = Color(0xffE0E0E0);
+  Color textColor = black;
 
   void addressStyle(index) {
     if (addressIndex == index) {
-      backgroundTextAddress = mainColor;
-      textColor = white;
+      backgroundTextAddress = lightMainColor;
+      textColor = mainColor;
     } else {
       textColor = black;
       backgroundTextAddress = Color(0xffE0E0E0);

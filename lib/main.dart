@@ -21,6 +21,7 @@ import 'package:udemy_flutter/screens/profile/cubit/profile_cubit.dart';
 import 'package:udemy_flutter/screens/search/cubit/cubit.dart';
 import 'data/local/cache_helper.dart';
 import 'data/remote/dio_helper.dart';
+import 'layout/shop_layout.dart';
 import 'screens/payment/payment_cubit/payment_cubit.dart';
 
 void main() async {
@@ -33,7 +34,11 @@ void main() async {
   onBoarding = CacheHelper.getData(key: 'onBoarding');
   token = await CacheHelper.getData(key: 'token');
 
-  (onBoarding == null) ? widget = OnBoardingScreen() : widget = LoginScreen();
+  (onBoarding == null)
+      ? widget = OnBoardingScreen()
+      : (token == null)
+          ? widget = LoginScreen()
+          : widget = ShopLayoutScreen();
 
   print(token.toString());
   BlocOverrides.runZoned(() => runApp(MyApp(widget: widget)),

@@ -12,7 +12,7 @@ class BasketModel {
 
 class Data {
   List<Cart> cartItems = [];
-  int? subTotal;
+  dynamic subTotal;
   dynamic total;
 
   Data.fromJson(Map<String, dynamic> json) {

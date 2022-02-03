@@ -19,3 +19,15 @@ class MakeOrderErrorState extends PaymentStates {}
 class ChangeAddressIndex extends PaymentStates {}
 
 class AddressStyleState extends PaymentStates {}
+
+class EstimateOrderLoading extends PaymentStates {}
+
+class EstimateOrderSuccess extends PaymentStates {}
+
+class EstimateOrderError extends PaymentStates {}
+
+class PromoCodeLoading extends PaymentStates {}
+
+class PromoCodeSuccess extends PaymentStates {}
+
+class PromoCodeError extends PaymentStates {}

@@ -48,7 +48,7 @@ class AddressCubit extends Cubit<AddressStates> {
     }
   }
 
-//update address
+  //update address
   Future<void> updateAddressData(
       {required addressId, name, city, region, details, notes}) async {
     emit(UpdateAddressLoading());

@@ -5,6 +5,7 @@ import 'package:udemy_flutter/route/route_constants.dart';
 import 'package:udemy_flutter/screens/basket/basket_cubit/basket_cubit.dart';
 import 'package:udemy_flutter/screens/basket/basket_cubit/states.dart';
 import 'package:udemy_flutter/screens/basket/ui/basket_item.dart';
+import 'package:udemy_flutter/screens/payment/payment_cubit/payment_cubit.dart';
 import 'package:udemy_flutter/shared/components/custom_button.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/components/empty_screen.dart';
@@ -85,6 +86,7 @@ class BasketScreen extends StatelessWidget {
                       CustomButton(
                         text: 'Pay now',
                         onPressed: () {
+                          PaymentCubit.get(context).estimateOrdersData(false,null);
                           navigateTo(context, RouteConstant.paymentRoute);
                         },
                       )

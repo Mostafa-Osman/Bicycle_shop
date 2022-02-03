@@ -1,17 +1,15 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:udemy_flutter/data/remote/dio_helper.dart';
 import 'package:udemy_flutter/data/repository/user_repo/login_repo.dart';
 import 'package:udemy_flutter/screens/login/model/login_model.dart';
 import 'package:udemy_flutter/screens/login/login_cubit/states.dart';
-import 'package:udemy_flutter/data/remote/end_points.dart';
 
 class LoginCubit extends Cubit<LoginStates> {
   LoginCubit() : super(LoginInitialState());
 
   static LoginCubit get(context) => BlocProvider.of(context);
+
   // var loginModel;
   ShopLoginModel? loginModel;
-
 
   final loginRepo = LoginRepo();
 
@@ -20,7 +18,7 @@ class LoginCubit extends Cubit<LoginStates> {
     emit(LoginLoadingState());
 
     try {
-      loginModel= await loginRepo.userLogin(email, password);
+      loginModel = await loginRepo.userLogin(email, password);
       emit(LoginSuccessState(loginModel!));
     } catch (e) {
       emit(LoginErrorState(e));
