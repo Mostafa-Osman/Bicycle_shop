@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:udemy_flutter/data/models/home_model/home_model.dart';
-import 'package:udemy_flutter/layout/shop_layout.dart';
 import 'package:udemy_flutter/presentation/about_us/ui/about.dart';
 import 'package:udemy_flutter/presentation/address/ui/add_address_screen.dart';
 import 'package:udemy_flutter/presentation/address/ui/update_address_screen.dart';
@@ -9,6 +8,7 @@ import 'package:udemy_flutter/presentation/contacts/ui/contacts.dart';
 import 'package:udemy_flutter/presentation/favourites/ui/favourites.dart';
 import 'package:udemy_flutter/presentation/home/ui/home.dart';
 import 'package:udemy_flutter/presentation/language/language.dart';
+import 'package:udemy_flutter/presentation/layout/ui/shop_layout.dart';
 import 'package:udemy_flutter/presentation/login/ui/login.dart';
 import 'package:udemy_flutter/presentation/notifications/ui/notifications_screen.dart';
 import 'package:udemy_flutter/presentation/on_boarding/ui/on_boarding.dart';

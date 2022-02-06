@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:udemy_flutter/layout/layout_cubit/cubit.dart';
 import 'package:udemy_flutter/presentation/address/address_cubit/address_cubit.dart';
 import 'package:udemy_flutter/presentation/basket/basket_cubit/basket_cubit.dart';
 import 'package:udemy_flutter/presentation/favourites/favourite_cubit/favourite_cubit.dart';
 import 'package:udemy_flutter/presentation/home/home_cubit/home_cubit.dart';
+import 'package:udemy_flutter/presentation/layout/layout_cubit/cubit.dart';
+import 'package:udemy_flutter/presentation/layout/ui/shop_layout.dart';
 import 'package:udemy_flutter/presentation/login/login_cubit/login_cubit.dart';
 import 'package:udemy_flutter/presentation/login/ui/login.dart';
 import 'package:udemy_flutter/presentation/notifications/notification_cubit/notification_cubit.dart';
@@ -22,7 +23,6 @@ import 'package:udemy_flutter/shared/styles/themes.dart';
 import 'package:udemy_flutter/my_bloc_observer.dart';
 import 'data/data_sources/local/cache_helper.dart';
 import 'data/data_sources/remote/dio_helper.dart';
-import 'layout/shop_layout.dart';
 
 void main() async {
   // to ensure that all method  in project finish loading then open app

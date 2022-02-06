@@ -1,9 +1,9 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:udemy_flutter/layout/layout_cubit/cubit.dart';
 import 'package:udemy_flutter/presentation/address/address_cubit/address_cubit.dart';
 import 'package:udemy_flutter/presentation/basket/basket_cubit/basket_cubit.dart';
+import 'package:udemy_flutter/presentation/layout/layout_cubit/cubit.dart';
 import 'package:udemy_flutter/presentation/payment/payment_cubit/payment_cubit.dart';
 import 'package:udemy_flutter/presentation/payment/payment_cubit/states.dart';
 import 'package:udemy_flutter/presentation/payment/widgets/showd_details_price.dart';
