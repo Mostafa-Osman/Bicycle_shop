@@ -6,7 +6,6 @@ import 'package:udemy_flutter/screens/favourites/favourite_cubit/states.dart';
 import 'package:udemy_flutter/shared/components/build_item.dart';
 import 'package:udemy_flutter/shared/components/empty_screen.dart';
 import 'package:udemy_flutter/shared/components/loading.dart';
-import 'package:udemy_flutter/shared/styles/color.dart';
 
 class FavouritesScreen extends StatelessWidget {
   @override
@@ -15,33 +14,34 @@ class FavouritesScreen extends StatelessWidget {
         builder: (context, state) {
           return Scaffold(
             body: ConditionalBuilder(
-              condition: (state is GetFavoritesLoading),
+              condition:
+               (state is GetFavoritesSuccess),
               builder: (context) => Center(
-                  child: CustomLoading()
-              ),
-              fallback: (context) => ConditionalBuilder(
-                condition: (FavouriteCubit.get(context)
-                    .favouritesModel!
-                    .data!
-                    .data
-                    .isEmpty),
-                builder: (context) => EmptyScreen(),
-                fallback: (context) => Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: ListView.builder(
-                      itemBuilder: (context, index) => BuildItem(
-                          model: FavouriteCubit.get(context)
+                  child:ConditionalBuilder(
+                    condition: (FavouriteCubit.get(context)
+                        .favouritesModel!
+                        .data!
+                        .data
+                        .isEmpty),
+                    builder: (context) => EmptyScreen(),
+                    fallback: (context) => Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: ListView.builder(
+                          itemBuilder: (context, index) => BuildItem(
+                              model: FavouriteCubit.get(context)
+                                  .favouritesModel!
+                                  .data!
+                                  .data[index]
+                                  .product),
+                          itemCount: FavouriteCubit.get(context)
                               .favouritesModel!
                               .data!
-                              .data[index]
-                              .product),
-                      itemCount: FavouriteCubit.get(context)
-                          .favouritesModel!
-                          .data!
-                          .data
-                          .length),
-                ),
+                              .data
+                              .length),
+                    ),
+                  ),
               ),
+              fallback: (context) => CustomLoading()
             ),
           );
         },
