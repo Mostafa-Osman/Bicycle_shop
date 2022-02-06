@@ -37,8 +37,8 @@ void main() async {
   (onBoarding == null)
       ? widget = OnBoardingScreen()
       : (token == null)
-          ? widget = LoginScreen()
-          : widget = ShopLayoutScreen();
+      ? widget = LoginScreen()
+      : widget = ShopLayoutScreen();
 
   print(token.toString());
   BlocOverrides.runZoned(() => runApp(MyApp(widget: widget)),

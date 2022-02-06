@@ -33,7 +33,6 @@ class FavouriteCubit extends Cubit<FavouriteStates> {
       getFavouritesData();
     } catch (onError) {
       log(onError.toString());
-
       emit(ChangeFavoritesError());
     }
   }

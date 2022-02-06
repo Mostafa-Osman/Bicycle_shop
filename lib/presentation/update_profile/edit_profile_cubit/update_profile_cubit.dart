@@ -66,8 +66,8 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
        password: password
       );
       emit(UpdateProfileSuccess(userData!));
-    } catch (e) {
-      emit(UpdateProfileError());
+    } catch (error) {
+      emit(UpdateProfileError(error));
       rethrow;
     }
   }

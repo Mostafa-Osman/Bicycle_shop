@@ -13,7 +13,11 @@ class UpdateProfileSuccess extends UpdateProfileState {
   UpdateProfileSuccess(this.userModel);
 }
 
-class UpdateProfileError extends UpdateProfileState {}
+class UpdateProfileError extends UpdateProfileState {
+  final error;
+
+  UpdateProfileError(this.error);
+}
 
 class PictureState extends UpdateProfileState {}
 

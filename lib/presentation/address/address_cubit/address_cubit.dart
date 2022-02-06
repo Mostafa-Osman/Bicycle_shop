@@ -40,7 +40,6 @@ class AddressCubit extends Cubit<AddressStates> {
     try {
       addressModel = await addressRepo.getMyAddressData();
       emit(GetAddressSuccess());
-      print(addressModel!.data!.data![0].city);
     } catch (e, s) {
       print(s.toString());
       emit(GetAddressError());

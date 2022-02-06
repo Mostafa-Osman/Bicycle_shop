@@ -39,10 +39,9 @@ class ProfileRepo {
         'image': image,
         'password': password
       });
-      if (response.data['status'] == true) {
-        showToast(state: ToastStates.SUCCESS, message: 'update data success');
+      if (response.data['status'] == true)
         return ProfileModel.fromJson(response.data);
-      }
+
       throw response.data['message'] ?? 'server error';
     } catch (e) {
       rethrow;

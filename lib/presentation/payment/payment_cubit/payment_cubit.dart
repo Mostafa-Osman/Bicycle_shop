@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:udemy_flutter/data/data_sources/remote/dio_helper.dart';
-import 'package:udemy_flutter/data/data_sources/remote/end_points.dart';
 import 'package:udemy_flutter/data/models/basket_model/add_order_model.dart';
 import 'package:udemy_flutter/data/models/payment_model/estimate.dart';
 import 'package:udemy_flutter/data/models/payment_model/promo_code.dart';
+import 'package:udemy_flutter/data/repository/payment_repo/payment_repo.dart';
 import 'package:udemy_flutter/presentation/payment/payment_cubit/states.dart';
-import 'package:udemy_flutter/shared/components/constants.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 
 class PaymentCubit extends Cubit<PaymentStates> {
@@ -51,67 +49,45 @@ class PaymentCubit extends Cubit<PaymentStates> {
   //complete make order and add to get it
 
   AddOrderModel? makeOrders;
+  final paymentRepo = PaymentRepo();
 
-  void makeOrderData(addressId, paymentMethod, usePoints) {
+  Future<void> makeOrderData(addressId, paymentMethod, usePoints) async {
     emit(MakeOrderLoadingState());
-    DioHelper.postData(
-      url: ADD_ORDER,
-      data: {
-        'address_id': addressId,
-        'payment_method': paymentMethod,
-        'use_points': usePoints,
-      },
-      token: token,
-    ).then((value) {
-      makeOrders = AddOrderModel.fromJson(value.data);
+    try {
+      makeOrders =
+          await paymentRepo.makeOrderData(addressId, paymentMethod, usePoints);
       emit(MakeOrderSuccessState());
-      print(value.data);
-    }).catchError((error) {
-      print(error.toString());
+    } catch (e, s) {
+      print(s.toString());
       emit(MakeOrderErrorState());
-    });
+    }
   }
 
   EstimateModel? estimatePrice;
 
-  void estimateOrdersData(usePoints , promoCodeId
-      ) {
+  Future<void> estimateOrdersData(usePoints, promoCodeId) async {
     emit(EstimateOrderLoading());
-    DioHelper.postData(
-      url: ESTIMATE_ORDER,
-      data: {
-        'use_points': usePoints,
-        'promo_code_id': promoCodeId,
-      },
-      token: token,
-    ).then((value) {
-      estimatePrice = EstimateModel.fromJson(value.data);
+    try {
+      estimatePrice =
+          await paymentRepo.estimateOrdersData(usePoints, promoCodeId);
       emit(EstimateOrderSuccess());
-      print(value.data);
-    }).catchError((error) {
-      print(error.toString());
+    } catch (e, s) {
+      print(s.toString());
       emit(EstimateOrderError());
-    });
+    }
   }
 
   PromoCodeModel? promoCodeModel;
 
-  void promoCode(code) {
+  Future<void> promoCode(code) async {
     emit(PromoCodeLoading());
-    DioHelper.postData(
-      url: PROMO_CODE,
-      data: {
-        'code': code,
-      },
-      token: token,
-    ).then((value) {
-      promoCodeModel = PromoCodeModel.fromJson(value.data);
+    try {
+      promoCodeModel = await PaymentRepo().promoCode(code);
       emit(PromoCodeSuccess());
-      print(value.data);
-    }).catchError((error) {
-      print(error.toString());
+    } catch (e, s) {
+      print(s.toString());
       emit(PromoCodeError());
-    });
+    }
   }
 
   int addressIndex = 0;
