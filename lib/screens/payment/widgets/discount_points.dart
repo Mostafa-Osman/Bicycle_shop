@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:udemy_flutter/screens/payment/payment_cubit/payment_cubit.dart';
-import 'package:udemy_flutter/screens/payment/ui/widgets/card_item.dart';
+import 'package:udemy_flutter/screens/payment/widgets/card_item.dart';
 
 class DiscountPoints extends StatelessWidget {
   @override

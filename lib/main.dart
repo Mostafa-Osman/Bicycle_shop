@@ -57,6 +57,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => RegisterCubit()),
         BlocProvider(create: (context) => LoginCubit()),
         BlocProvider(create: (context) => SearchCubit()),
+
         BlocProvider(
             create: (context) => FavouriteCubit()..getFavouritesData()),
         BlocProvider(
@@ -71,6 +72,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => LayoutCubit()),
         BlocProvider(create: (context) => OnBoardingCubit()),
         BlocProvider(create: (context) => PaymentCubit()),
+
         BlocProvider(create: (context) => UpdateProfileCubit()),
         BlocProvider(create: (context) => AddressCubit()..getMyAddressData()),
       ],

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/screens/notifications/notification_cubit/notification_cubit.dart';
 import 'package:udemy_flutter/screens/notifications/notification_cubit/states.dart';
+import 'package:udemy_flutter/shared/components/custom%20_card.dart';
 import 'package:udemy_flutter/shared/components/custom_divider.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/components/loading.dart';
@@ -42,24 +43,26 @@ class ListProduct extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Padding(
-        padding: const EdgeInsets.only(top: 10.0, right: 10.0, left: 20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CustomText(
-                text: model.title, fontSize: 18, fontWeight: FontWeight.bold),
-            SizedBox(height: 10),
-            CustomText(
-              text: model.message,
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
+    return  Padding(
+      padding: const EdgeInsets.only(left:8.0,right: 8.0),
+      child: CustomCard(
+            widget: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CustomText(
+                    text: model.title, fontSize: 18, fontWeight: FontWeight.bold),
+                SizedBox(height: 10),
+                CustomText(
+                  text: model.message,
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                ),
+                SizedBox(height: 10.0),
+              ],
             ),
-            CustomDivider(thickness: 1.0, color: mainColor),
-          ],
-        ),
-      ),
+          ),
     );
+
+
   }
 }

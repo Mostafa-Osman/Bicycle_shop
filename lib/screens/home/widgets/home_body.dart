@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:udemy_flutter/screens/home/home_cubit/home_cubit.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:udemy_flutter/screens/home/ui/build_item.dart';
+import 'package:udemy_flutter/screens/home/widgets/build_item.dart';
 
 class HomeBody extends StatelessWidget {
   final model;

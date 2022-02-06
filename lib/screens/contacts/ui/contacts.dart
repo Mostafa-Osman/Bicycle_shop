@@ -87,7 +87,7 @@ class ContactsScreen extends StatelessWidget {
                         height: 120,
                         width: 50,
                         fit: BoxFit.cover,
-                        color: Colors.red,
+                        color: red,
                       ),
                       title: CustomText(
                           text: 'Subscribe our channel', fontSize: 20),

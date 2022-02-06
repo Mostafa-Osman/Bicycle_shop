@@ -1,7 +1,7 @@
 import 'package:checkbox_grouped/checkbox_grouped.dart';
 import 'package:flutter/material.dart';
 import 'package:udemy_flutter/screens/payment/payment_cubit/payment_cubit.dart';
-import 'package:udemy_flutter/screens/payment/ui/widgets/credit_card.dart';
+import 'package:udemy_flutter/screens/payment/widgets/credit_card.dart';
 import 'package:udemy_flutter/shared/components/custom%20_card.dart';
 
 class SelectPaymentMethod extends StatelessWidget {

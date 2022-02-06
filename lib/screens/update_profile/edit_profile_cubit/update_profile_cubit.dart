@@ -6,6 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/data/repository/user_repo/profile_repo.dart';
 import 'package:udemy_flutter/screens/profile/model/profile_model.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:udemy_flutter/shared/components/constants.dart';
+
 part 'update_profile_state.dart';
 
 class UpdateProfileCubit extends Cubit<UpdateProfileState> {
@@ -13,7 +15,6 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
 
   static UpdateProfileCubit get(context) => BlocProvider.of(context);
 
-  ProfileModel? userData;
   final profileRepo = ProfileRepo();
 
   final ImagePicker imagePicker = ImagePicker();
@@ -54,38 +55,17 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
     imageProfile = fileInBase64;
   }
 
-  // bool isVisibility = true;
-
-  // void visibilityPassword() {
-  //   isVisibility = !isVisibility;
-  //   emit(VisibilityPassword());
-  // }
-
-  // variable bool to change visibility in (confirm field)
-  // bool confirmNotVisible = true;
-
-  // method to switch icon visibility (in confirm password field )
-  // void confirmVisibilityPassword() {
-  //   confirmNotVisible = !confirmNotVisible;
-  //   emit(ConfirmVisibilityPassword());
-  // }
 
   // update profile
-  Future<void> updateUserData(
-      {required name,
-      required email,
-      required phone,
-      required image,
-     // required password
-      }) async {
+  Future<void> updateUserData({name, email, phone, image, password}) async {
     emit(UpdateProfileLoading());
     try {
       userData = await profileRepo.updateUserData(
-          name: name,
-          email: email,
-          phone: phone,
-          image: image,
-         // password: password
+        name: name,
+        email: email,
+        phone: phone,
+        image: image,
+       password: password
       );
       emit(UpdateProfileSuccess(userData!));
     } catch (e) {

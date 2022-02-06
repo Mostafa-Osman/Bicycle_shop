@@ -24,11 +24,11 @@ class ProfileRepo {
 
   // update user data
   Future<ProfileModel> updateUserData({
-    required name,
-    required email,
-    required phone,
-    required image,
-    //required password
+     name,
+     email,
+     phone,
+     image,
+     password
   }) async {
     try {
       final response =
@@ -37,7 +37,7 @@ class ProfileRepo {
         'email': email,
         'phone': phone,
         'image': image,
-        //'password': password
+        'password': password
       });
       if (response.data['status'] == true) {
         showToast(state: ToastStates.SUCCESS, message: 'update data success');

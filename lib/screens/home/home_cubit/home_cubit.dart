@@ -47,6 +47,8 @@ class HomeCubit extends Cubit<HomeStates> {
     });
   }
 
+
+
   int photoIndex = 0;
 
   changePhotoIndex(index) {

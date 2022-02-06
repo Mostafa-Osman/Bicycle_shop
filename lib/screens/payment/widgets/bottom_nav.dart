@@ -1,16 +1,13 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
-import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/layout/layout_cubit/cubit.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
 import 'package:udemy_flutter/screens/address/address_cubit/address_cubit.dart';
 import 'package:udemy_flutter/screens/basket/basket_cubit/basket_cubit.dart';
-import 'package:udemy_flutter/screens/basket/model/basket_model.dart';
-import 'package:udemy_flutter/screens/orders/my_orders_cubit/my_orders_cubit.dart';
 import 'package:udemy_flutter/screens/payment/payment_cubit/payment_cubit.dart';
 import 'package:udemy_flutter/screens/payment/payment_cubit/states.dart';
-import 'package:udemy_flutter/screens/payment/ui/widgets/showd_details_price.dart';
+import 'package:udemy_flutter/screens/payment/widgets/showd_details_price.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/components/custom_text_button.dart';
 import 'package:udemy_flutter/shared/components/loading.dart';

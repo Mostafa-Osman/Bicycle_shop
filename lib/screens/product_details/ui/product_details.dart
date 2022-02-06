@@ -5,10 +5,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:udemy_flutter/screens/home/home_cubit/home_cubit.dart';
 import 'package:udemy_flutter/screens/home/home_cubit/states.dart';
 import 'package:udemy_flutter/screens/home/model/home_model.dart';
-import 'package:udemy_flutter/screens/basket/basket_cubit/basket_cubit.dart';
-import 'package:udemy_flutter/screens/product_details/ui/body.dart';
-import 'package:udemy_flutter/shared/components/counter.dart';
-import 'package:udemy_flutter/shared/components/custom_button.dart';
+import 'package:udemy_flutter/screens/product_details/widgets/body.dart';
+import 'package:udemy_flutter/screens/product_details/widgets/bottom_nav_bar.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
 import 'package:udemy_flutter/shared/components/navigate.dart';
@@ -29,9 +27,7 @@ class ProductDetailsScreen extends StatelessWidget {
             elevation: 0.0,
             leading: IconButton(
               onPressed: () {
-                HomeCubit
-                    .get(context)
-                    .quantityProduct = 1;
+                HomeCubit.get(context).quantityProduct = 1;
                 Navigator.pop(context);
               },
               icon: Icon(Icons.arrow_back_ios_sharp, color: mainColor),
@@ -49,49 +45,15 @@ class ProductDetailsScreen extends StatelessWidget {
           ),
           body: SingleChildScrollView(
             child: ConditionalBuilder(
-              condition: HomeCubit
-                  .get(context)
-                  .homeModel != null,
+              condition: HomeCubit.get(context).homeModel != null,
               builder: (context) => Body(productDetails: productDetails),
-              fallback: (context) =>
-                  Center(
-                    child:
+              fallback: (context) => Center(
+                child:
                     CustomText(text: 'Empty !', fontSize: 15, textColor: grey),
-                  ),
+              ),
             ),
           ),
-          bottomNavigationBar: Container(
-            color: Color(0xFFFFF8DC),
-            padding: EdgeInsets.all(10.0),
-            child: Row(
-              children: [
-                CustomCounter(
-                  increment: () => HomeCubit.get(context).incrementOrder(),
-                  textCount: HomeCubit
-                      .get(context)
-                      .quantityProduct,
-                  decrement: () => HomeCubit.get(context).decrementOrder(),
-                ),
-                SizedBox(width: 10),
-                Expanded(
-                  child: CustomButton(
-                      text: 'Add to basket',
-                      onPressed: () {
-                        BasketCubit.get(context)
-                            .addToBasketOrders(productDetails.id!);
-                        Future.delayed(const Duration(milliseconds: 1000), () {
-                          BasketCubit.get(context).updateBasketOrderData(
-                              productId: productDetails.id!, quantity: HomeCubit
-                              .get(context)
-                              .quantityProduct);
-
-                        });
-
-                      }),
-                ),
-              ],
-            ),
-          ),
+          bottomNavigationBar: BottomNavBar(productDetails: productDetails),
         );
       },
     );

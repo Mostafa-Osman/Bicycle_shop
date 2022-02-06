@@ -3,9 +3,6 @@ import 'package:udemy_flutter/screens/on_boarding/on_boarding_cubit/states.dart'
 
 class OnBoardingCubit extends Cubit<OnBoardingStates> {
   OnBoardingCubit() : super(OnBoardingInitialState());
-
-  static OnBoardingCubit get(context) => BlocProvider.of(context);
-
   bool isLastPage = false;
   List<OnBoardingModel> items = [
     OnBoardingModel(

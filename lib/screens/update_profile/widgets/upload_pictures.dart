@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:udemy_flutter/screens/profile/cubit/profile_cubit.dart';
 import 'package:udemy_flutter/screens/update_profile/edit_profile_cubit/update_profile_cubit.dart';
+import 'package:udemy_flutter/shared/components/constants.dart';
 import 'package:udemy_flutter/shared/components/custom_alert_dialog.dart';
 import 'package:udemy_flutter/shared/components/custom_text_button.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
@@ -25,7 +26,7 @@ class UploadPictures extends StatelessWidget {
               fit: BoxFit.fitWidth,
               child: ClipOval(
                   child: Image.network(
-                ProfileCubit.get(context).userData!.data!.image!,
+               userData!.data!.image!,
                 height: 180,
                 width: 180,
                 fit: BoxFit.cover,

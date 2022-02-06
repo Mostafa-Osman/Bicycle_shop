@@ -29,17 +29,14 @@ class UpdateAddressScreen extends StatelessWidget {
       body: BlocConsumer<AddressCubit, AddressStates>(
         listener: (context, state) {},
         builder: (context, state) {
-          var cubit = AddressCubit.get(context).addressModel!;
-          final cityControl =
-              TextEditingController(text: cubit.data!.data![index].city );
+          var cubit =
+              AddressCubit.get(context).addressModel!.data!.data![index];
+          final cityControl = TextEditingController(text: cubit.city);
           final addressDetailsControl =
-              TextEditingController(text: cubit.data!.data![index].details);
-          final regionControl =
-              TextEditingController(text: cubit.data!.data![index].region);
-          final addressNameControl =
-              TextEditingController(text: cubit.data!.data![index].name);
-          final notesAddressControl =
-              TextEditingController(text: cubit.data!.data![index].notes);
+              TextEditingController(text: cubit.details);
+          final regionControl = TextEditingController(text: cubit.region);
+          final addressNameControl = TextEditingController(text: cubit.name);
+          final notesAddressControl = TextEditingController(text: cubit.notes);
           return SingleChildScrollView(
             child: Padding(
               padding:
@@ -119,11 +116,7 @@ class UpdateAddressScreen extends StatelessWidget {
                                 onPressed: () {
                                   if (_formKey.currentState!.validate()) {
                                     AddressCubit.get(context).updateAddressData(
-                                        addressId: AddressCubit.get(context)
-                                            .addressModel!
-                                            .data!
-                                            .data![index]
-                                            .id,
+                                        addressId: cubit.id,
                                         city: cityControl.text,
                                         region: regionControl.text,
                                         details: addressDetailsControl.text,
@@ -140,12 +133,8 @@ class UpdateAddressScreen extends StatelessWidget {
                                 buttonColor: mainColor,
                                 onPressed: () {
                                   if (_formKey.currentState!.validate()) {
-                                    AddressCubit.get(context).deleteAddressData(
-                                        addressId: AddressCubit.get(context)
-                                            .addressModel!
-                                            .data!
-                                            .data![index]
-                                            .id);
+                                    AddressCubit.get(context)
+                                        .deleteAddressData(addressId: cubit.id);
                                     Navigator.pop(context);
                                   }
                                 },
