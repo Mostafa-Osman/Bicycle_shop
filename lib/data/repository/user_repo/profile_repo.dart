@@ -1,6 +1,6 @@
-import 'package:udemy_flutter/data/remote/dio_helper.dart';
-import 'package:udemy_flutter/data/remote/end_points.dart';
-import 'package:udemy_flutter/screens/profile/model/profile_model.dart';
+import 'package:udemy_flutter/data/data_sources/remote/dio_helper.dart';
+import 'package:udemy_flutter/data/data_sources/remote/end_points.dart';
+import 'package:udemy_flutter/data/models/profile_model/profile_model.dart';
 import 'package:udemy_flutter/shared/components/component.dart';
 import 'package:udemy_flutter/shared/components/constants.dart';
 

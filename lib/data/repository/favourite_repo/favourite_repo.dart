@@ -1,6 +1,6 @@
-import 'package:udemy_flutter/data/remote/dio_helper.dart';
-import 'package:udemy_flutter/data/remote/end_points.dart';
-import 'package:udemy_flutter/screens/favourites/model/favourites_model.dart';
+import 'package:udemy_flutter/data/data_sources/remote/dio_helper.dart';
+import 'package:udemy_flutter/data/data_sources/remote/end_points.dart';
+import 'package:udemy_flutter/data/models/favourit_model/favourites_model.dart';
 import 'package:udemy_flutter/shared/components/constants.dart';
 
 class FavouriteRepo {

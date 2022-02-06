@@ -1,6 +1,6 @@
-import 'package:udemy_flutter/data/local/cache_helper.dart';
+import 'package:udemy_flutter/data/data_sources/local/cache_helper.dart';
+import 'package:udemy_flutter/data/models/profile_model/profile_model.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
-import 'package:udemy_flutter/screens/profile/model/profile_model.dart';
 import 'package:udemy_flutter/shared/components/navigate.dart';
 
 

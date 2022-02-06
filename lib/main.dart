@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/layout/layout_cubit/cubit.dart';
+import 'package:udemy_flutter/presentation/address/address_cubit/address_cubit.dart';
+import 'package:udemy_flutter/presentation/basket/basket_cubit/basket_cubit.dart';
+import 'package:udemy_flutter/presentation/favourites/favourite_cubit/favourite_cubit.dart';
+import 'package:udemy_flutter/presentation/home/home_cubit/home_cubit.dart';
+import 'package:udemy_flutter/presentation/login/login_cubit/login_cubit.dart';
+import 'package:udemy_flutter/presentation/login/ui/login.dart';
+import 'package:udemy_flutter/presentation/notifications/notification_cubit/notification_cubit.dart';
+import 'package:udemy_flutter/presentation/on_boarding/on_boarding_cubit/cubit.dart';
+import 'package:udemy_flutter/presentation/on_boarding/ui/on_boarding.dart';
+import 'package:udemy_flutter/presentation/orders/my_orders_cubit/my_orders_cubit.dart';
+import 'package:udemy_flutter/presentation/payment/payment_cubit/payment_cubit.dart';
+import 'package:udemy_flutter/presentation/profile/cubit/profile_cubit.dart';
+import 'package:udemy_flutter/presentation/register/cubit/recubit.dart';
+import 'package:udemy_flutter/presentation/search/cubit/cubit.dart';
+import 'package:udemy_flutter/presentation/update_profile/edit_profile_cubit/update_profile_cubit.dart';
 import 'package:udemy_flutter/route/router.dart';
-import 'package:udemy_flutter/screens/address/address_cubit/address_cubit.dart';
-import 'package:udemy_flutter/screens/login/login_cubit/login_cubit.dart';
-import 'package:udemy_flutter/screens/login/ui/login.dart';
-import 'package:udemy_flutter/screens/on_boarding/on_boarding_cubit/cubit.dart';
-import 'package:udemy_flutter/screens/on_boarding/ui/on_boarding.dart';
-import 'package:udemy_flutter/screens/orders/my_orders_cubit/my_orders_cubit.dart';
-import 'package:udemy_flutter/screens/register/cubit/recubit.dart';
-import 'package:udemy_flutter/screens/update_profile/edit_profile_cubit/update_profile_cubit.dart';
 import 'package:udemy_flutter/shared/components/constants.dart';
 import 'package:udemy_flutter/shared/styles/themes.dart';
 import 'package:udemy_flutter/my_bloc_observer.dart';
-import 'package:udemy_flutter/screens/favourites/favourite_cubit/favourite_cubit.dart';
-import 'package:udemy_flutter/screens/home/home_cubit/home_cubit.dart';
-import 'package:udemy_flutter/screens/basket/basket_cubit/basket_cubit.dart';
-import 'package:udemy_flutter/screens/notifications/notification_cubit/notification_cubit.dart';
-import 'package:udemy_flutter/screens/profile/cubit/profile_cubit.dart';
-import 'package:udemy_flutter/screens/search/cubit/cubit.dart';
-import 'data/local/cache_helper.dart';
-import 'data/remote/dio_helper.dart';
+import 'data/data_sources/local/cache_helper.dart';
+import 'data/data_sources/remote/dio_helper.dart';
 import 'layout/shop_layout.dart';
-import 'screens/payment/payment_cubit/payment_cubit.dart';
 
 void main() async {
   // to ensure that all method  in project finish loading then open app

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:like_button/like_button.dart';
-import 'package:udemy_flutter/screens/favourites/favourite_cubit/favourite_cubit.dart';
-import 'package:udemy_flutter/screens/home/home_cubit/home_cubit.dart';
+import 'package:udemy_flutter/presentation/favourites/favourite_cubit/favourite_cubit.dart';
+import 'package:udemy_flutter/presentation/home/home_cubit/home_cubit.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 
 class CustomFavouriteIcon extends StatelessWidget {
