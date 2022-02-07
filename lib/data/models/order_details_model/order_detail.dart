@@ -27,16 +27,16 @@ class OrderDetailsModel {
 
   OrderDetailsModel(
       {this.id,
-      this.cost,
-      this.discount,
-      this.points,
-      this.vat,
-      this.total,
-      this.paymentMethod,
-      this.date,
-      this.status,
-      this.address,
-      this.products});
+        this.cost,
+        this.discount,
+        this.points,
+        this.vat,
+        this.total,
+        this.paymentMethod,
+        this.date,
+        this.status,
+        this.address,
+        this.products});
 
   OrderDetailsModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -49,7 +49,7 @@ class OrderDetailsModel {
     date = json['date'];
     status = json['status'];
     address =
-        json['address'] != null ? new Address.fromJson(json['address']) : null;
+    json['address'] != null ? new Address.fromJson(json['address']) : null;
     if (json['products'] != null) {
       products = <Products>[];
       json['products'].forEach((v) {

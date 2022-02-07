@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:udemy_flutter/presentation/address/address_cubit/address_cubit.dart';
+import 'package:udemy_flutter/data/data_sources/local/check_internet.dart';
+import 'package:udemy_flutter/presentation/add&update_address/address_cubit/address_cubit.dart';
 import 'package:udemy_flutter/presentation/basket/basket_cubit/basket_cubit.dart';
 import 'package:udemy_flutter/presentation/favourites/favourite_cubit/favourite_cubit.dart';
 import 'package:udemy_flutter/presentation/home/home_cubit/home_cubit.dart';
 import 'package:udemy_flutter/presentation/layout/layout_cubit/cubit.dart';
-import 'package:udemy_flutter/presentation/layout/ui/shop_layout.dart';
+import 'package:udemy_flutter/presentation/layout/screens/shop_layout.dart';
 import 'package:udemy_flutter/presentation/login/login_cubit/login_cubit.dart';
-import 'package:udemy_flutter/presentation/login/ui/login.dart';
+import 'package:udemy_flutter/presentation/login/screens/login.dart';
 import 'package:udemy_flutter/presentation/notifications/notification_cubit/notification_cubit.dart';
 import 'package:udemy_flutter/presentation/on_boarding/on_boarding_cubit/cubit.dart';
-import 'package:udemy_flutter/presentation/on_boarding/ui/on_boarding.dart';
+import 'package:udemy_flutter/presentation/on_boarding/screens/on_boarding.dart';
 import 'package:udemy_flutter/presentation/orders/my_orders_cubit/my_orders_cubit.dart';
 import 'package:udemy_flutter/presentation/payment/payment_cubit/payment_cubit.dart';
 import 'package:udemy_flutter/presentation/profile/cubit/profile_cubit.dart';
@@ -82,7 +83,7 @@ class MyApp extends StatelessWidget {
         theme: lightTheme,
         darkTheme: darkTheme,
         themeMode: ThemeMode.light,
-        home: widget,
+        home:widget
       ),
     );
   }

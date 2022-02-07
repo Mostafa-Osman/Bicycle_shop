@@ -13,7 +13,7 @@ import 'package:udemy_flutter/shared/components/navigate.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
-  final DetailsData productDetails;
+  final dynamic productDetails;
 
   ProductDetailsScreen({required this.productDetails});
 

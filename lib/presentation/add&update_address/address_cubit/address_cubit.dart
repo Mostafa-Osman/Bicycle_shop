@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/data/repository/address_repo/address_repo.dart';
-import 'package:udemy_flutter/presentation/address/address_cubit/states.dart';
+import 'package:udemy_flutter/presentation/add&update_address/address_cubit/states.dart';
 import 'package:udemy_flutter/data/models/address_model/address_model.dart';
 
 class AddressCubit extends Cubit<AddressStates> {
@@ -34,7 +34,7 @@ class AddressCubit extends Cubit<AddressStates> {
     }
   }
 
-  //get address
+  //get add&update_address
   Future<void> getMyAddressData() async {
     emit(GetAddressLoading());
     try {
@@ -46,7 +46,7 @@ class AddressCubit extends Cubit<AddressStates> {
     }
   }
 
-  //update address
+  //update add&update_address
   Future<void> updateAddressData(
       {required addressId, name, city, region, details, notes}) async {
     emit(UpdateAddressLoading());
@@ -66,7 +66,7 @@ class AddressCubit extends Cubit<AddressStates> {
     }
   }
 
-  //delete address
+  //delete add&update_address
   Future<void> deleteAddressData({required addressId}) async {
     emit(DeleteAddressLoading());
     try {

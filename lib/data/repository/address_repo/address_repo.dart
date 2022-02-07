@@ -5,7 +5,7 @@ import 'package:udemy_flutter/data/models/address_model/address_model.dart';
 import 'package:udemy_flutter/shared/components/constants.dart';
 
 class AddressRepo {
-  //add address
+  //add add&update_address
 
   Future<AddressModel> addNewAddressData(
       {required name,
@@ -34,7 +34,7 @@ class AddressRepo {
     }
   }
 
-  //get address
+  //get add&update_address
   Future<AddressModel> getMyAddressData() async {
     try {
       final response = await DioHelper.getData(url: ADDRESSES, token: token);
@@ -47,7 +47,7 @@ class AddressRepo {
     }
   }
 
-  //update address
+  //update add&update_address
   Future<AddressModel> updateAddressData(
       {required addressId, name, city, region, details, notes}) async {
     try {
@@ -72,7 +72,7 @@ class AddressRepo {
     }
   }
 
-  //delete address
+  //delete add&update_address
   Future<AddressModel> deleteAddressData({required addressId}) async {
     try {
       final response = await DioHelper.deleteData(

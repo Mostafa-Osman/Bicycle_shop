@@ -40,8 +40,8 @@ class PaymentScreen extends StatelessWidget {
                         child: DiscountPoints(),
                       ),
                       //  option to use promo code or not
-                      PromoCode(),
-                      SizedBox(height: 20.0),
+                      // PromoCode(),
+                      // SizedBox(height: 20.0),
                       //select address
                       AddressPayment()
                     ],

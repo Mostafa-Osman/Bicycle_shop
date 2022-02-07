@@ -31,7 +31,6 @@ class OrderDetailsCubit extends Cubit<OrderDetailsState> {
 
   changeAddressVisibility() {
     emit(OrderDetailsRefreshUi());
-
     isAddressVisible = !isAddressVisible;
   }
 

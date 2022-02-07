@@ -1,5 +1,5 @@
 class BasketModel {
-  bool? status;
+  bool status=false;
   String? message;
   Data? data;
 

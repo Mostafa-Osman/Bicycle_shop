@@ -29,7 +29,7 @@ class CustomCounter extends StatelessWidget {
             backgroundColor: mainColor,
           ),
         ),
-        CustomText(text: '${textCount}'),
+        CustomText(text: '$textCount'),
         SizedBox(
           height: 40.0,
           child: FloatingActionButton(

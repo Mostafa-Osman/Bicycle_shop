@@ -65,11 +65,15 @@ class PaymentCubit extends Cubit<PaymentStates> {
 
   EstimateModel? estimatePrice;
 
-  Future<void> estimateOrdersData(usePoints, promoCodeId) async {
+  Future<void> estimateOrdersData(usePoints
+    //  , promoCodeId
+      ) async {
     emit(EstimateOrderLoading());
     try {
       estimatePrice =
-          await paymentRepo.estimateOrdersData(usePoints, promoCodeId);
+          await paymentRepo.estimateOrdersData(usePoints
+           //   , promoCodeId
+          );
       emit(EstimateOrderSuccess());
     } catch (e, s) {
       print(s.toString());

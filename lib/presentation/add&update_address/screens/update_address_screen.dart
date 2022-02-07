@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:udemy_flutter/presentation/address/address_cubit/address_cubit.dart';
-import 'package:udemy_flutter/presentation/address/address_cubit/states.dart';
+import 'package:udemy_flutter/presentation/add&update_address/address_cubit/address_cubit.dart';
+import 'package:udemy_flutter/presentation/add&update_address/address_cubit/states.dart';
 import 'package:udemy_flutter/shared/components/custom_text_form_field.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/components/custom_button.dart';
 
-class AddAddressScreen extends StatelessWidget {
+class UpdateAddressScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
-  final cityControl = TextEditingController();
-  final addressDetailsControl = TextEditingController();
-  final regionControl = TextEditingController();
-  final addressNameControl = TextEditingController();
-  final notesAddressControl = TextEditingController();
+  final index;
+
+  UpdateAddressScreen({required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +19,7 @@ class AddAddressScreen extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         elevation: 0.0,
-        title: CustomText(text: 'new address', textColor: mainColor),
+        title: CustomText(text: 'Edit address', textColor: mainColor),
         leading: IconButton(
           onPressed: () => Navigator.pop(context),
           icon: Icon(Icons.arrow_back_ios_sharp, color: mainColor),
@@ -30,6 +28,14 @@ class AddAddressScreen extends StatelessWidget {
       body: BlocConsumer<AddressCubit, AddressStates>(
         listener: (context, state) {},
         builder: (context, state) {
+          var cubit =
+              AddressCubit.get(context).addressModel!.data!.data![index];
+          final cityControl = TextEditingController(text: cubit.city);
+          final addressDetailsControl =
+              TextEditingController(text: cubit.details);
+          final regionControl = TextEditingController(text: cubit.region);
+          final addressNameControl = TextEditingController(text: cubit.name);
+          final notesAddressControl = TextEditingController(text: cubit.notes);
           return SingleChildScrollView(
             child: Padding(
               padding:
@@ -76,7 +82,7 @@ class AddAddressScreen extends StatelessWidget {
                                 textHint: "Address details",
                                 validator: (value) {
                                   if (value!.isEmpty)
-                                    return 'Please Enter Your address details';
+                                    return 'Please Enter Your add&update_address details';
                                   return null;
                                 },
                               ),
@@ -104,16 +110,30 @@ class AddAddressScreen extends StatelessWidget {
                               SizedBox(height: 30),
                               // button to submit register
                               CustomButton(
-                                text: 'Save new address',
+                                text: 'Update address',
                                 buttonColor: mainColor,
                                 onPressed: () {
                                   if (_formKey.currentState!.validate()) {
-                                    AddressCubit.get(context).addNewAddressData(
+                                    AddressCubit.get(context).updateAddressData(
+                                        addressId: cubit.id,
                                         city: cityControl.text,
                                         region: regionControl.text,
                                         details: addressDetailsControl.text,
                                         name: addressNameControl.text,
                                         notes: notesAddressControl.text);
+                                    Navigator.pop(context);
+                                  }
+                                },
+                              ),
+                              SizedBox(height: 10),
+                              // button to submit register
+                              CustomButton(
+                                text: 'Delete address',
+                                buttonColor: mainColor,
+                                onPressed: () {
+                                  if (_formKey.currentState!.validate()) {
+                                    AddressCubit.get(context)
+                                        .deleteAddressData(addressId: cubit.id);
                                     Navigator.pop(context);
                                   }
                                 },

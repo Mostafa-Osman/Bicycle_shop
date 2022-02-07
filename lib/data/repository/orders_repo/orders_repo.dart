@@ -38,7 +38,7 @@ class OrdersRepo {
   Future<OrderDetailsModel> cancelOrder(int orderId) async {
     try {
       final response = await DioHelper.getData(
-          url: 'orders/' + '${orderId}' + '/cancel', token: token);
+          url: 'orders/' + '$orderId' + '/cancel', token: token);
       if (response.data['status'] == true) {
         // should change it
         showToast(state: ToastStates.SUCCESS, message: 'cancel order success');

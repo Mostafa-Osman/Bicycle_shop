@@ -26,14 +26,16 @@ class PaymentRepo {
   }
 
   //Estimate order
-  Future<EstimateModel> estimateOrdersData(usePoints, promoCodeId) async {
+  Future<EstimateModel> estimateOrdersData(usePoints
+     // , promoCodeId
+      ) async {
     try {
       final response = await DioHelper.postData(
         url: ESTIMATE_ORDER,
         token: token,
         data: {
           'use_points': usePoints,
-          'promo_code_id': promoCodeId,
+         // 'promo_code_id': promoCodeId,
         },
       );
       if (response.data['status'] == true) {

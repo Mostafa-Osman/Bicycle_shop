@@ -15,7 +15,7 @@ class DiscountPoints extends StatelessWidget {
       selectedLabelIndex: (index) {
         cubit.changeDiscount(index);
         cubit.estimateOrdersData(
-            cubit.discountTabTextIndexSelected == 0 ? true : false,null);
+            cubit.discountTabTextIndexSelected == 0 ? true : false);
       },
     );
   }

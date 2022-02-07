@@ -3,12 +3,11 @@ import 'package:udemy_flutter/data/repository/basket_repo/basket_repo.dart';
 import 'package:udemy_flutter/presentation/basket/basket_cubit/states.dart';
 import 'package:udemy_flutter/data/models/basket_model/basket_model.dart';
 
-
-
 class BasketCubit extends Cubit<BasketStates> {
   BasketCubit() : super(BasketInitialState());
 
   static BasketCubit get(context) => BlocProvider.of(context);
+
 
   //add order to my basket
   final basketRepo = BasketRepo();
@@ -22,7 +21,6 @@ class BasketCubit extends Cubit<BasketStates> {
       myBag = await basketRepo.addToBasketOrders(productId);
       emit(AddToBasketSuccessState(myBag));
       getMyBasketData();
-
     } catch (error) {
       print(error.toString());
       emit(AddToBasketErrorState());
@@ -67,6 +65,4 @@ class BasketCubit extends Cubit<BasketStates> {
       emit(DeleteFromBasketErrorState());
     }
   }
-
-
 }

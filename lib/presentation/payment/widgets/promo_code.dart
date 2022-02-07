@@ -58,10 +58,7 @@ class PromoCode extends StatelessWidget {
                               cubit.estimateOrdersData(
                                   cubit.discountTabTextIndexSelected == 0
                                       ? true
-                                      : false,
-                                  cubit.voucherTabTextIndexSelected == 0
-                                      ? promoCodeControl
-                                      : null);
+                                      : false);
                             }
                           },
                           text: 'Check',
