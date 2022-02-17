@@ -43,8 +43,7 @@ class ProductDetailsScreen extends StatelessWidget {
               ),
             ],
           ),
-          body: SingleChildScrollView(
-            child: ConditionalBuilder(
+          body: ConditionalBuilder(
               condition: HomeCubit.get(context).homeModel != null,
               builder: (context) => Body(productDetails: productDetails),
               fallback: (context) => Center(
@@ -52,7 +51,7 @@ class ProductDetailsScreen extends StatelessWidget {
                     CustomText(text: 'Empty !', fontSize: 15, textColor: grey),
               ),
             ),
-          ),
+
           bottomNavigationBar: BottomNavBar(productDetails: productDetails),
         );
       },

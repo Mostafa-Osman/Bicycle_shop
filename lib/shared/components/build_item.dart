@@ -16,8 +16,8 @@ class BuildItem extends StatelessWidget {
       padding: const EdgeInsets.only(right: 10.0, left: 10.0, top: 10),
       child: CustomCard(
         widget: SizedBox(
-          height: 130,
-          width: double.infinity,
+          height: MediaQuery.of(context).size.height/8.0,
+          width: MediaQuery.of(context).size.width,
           child: Row(
             children: [
               SizedBox(width: 7.0),
@@ -27,7 +27,7 @@ class BuildItem extends StatelessWidget {
                   Image(
                     image: NetworkImage(model.image),
                     width: 120,
-                    height: 120,
+                    height: 80,
                   ),
                   if (model.discount != 0)
                     Positioned(

@@ -20,5 +20,6 @@ class CounterPlusState extends HomeStates {}
 
 class CounterMinusState extends HomeStates {}
 
-
 class ChangePhotoIndexState extends HomeStates {}
+
+class ChangeBannerIndexState extends HomeStates {}

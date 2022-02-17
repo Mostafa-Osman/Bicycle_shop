@@ -33,10 +33,7 @@ class BasketScreen extends StatelessWidget {
             ),
           ),
           body: ConditionalBuilder(
-            condition: (
-                state is ShopGetOrderSuccessState
-
-            ),
+            condition: (state is ShopGetOrderSuccessState),
             builder: (context) {
               var cubit = BasketCubit.get(context).myBag!.data!;
               return BasketCubit.get(context).myBag!.data!.cartItems.isEmpty
@@ -44,15 +41,14 @@ class BasketScreen extends StatelessWidget {
                   : Column(
                       children: [
                         Expanded(
-                      child:    ListView.builder(
-                                shrinkWrap: true,
-                                itemBuilder: (context, index) {
-                                  return BasketItem(
-                                    model: cubit.cartItems[index],
-                                  );
-                                },
-                                itemCount: cubit.cartItems.length),
-
+                          child: ListView.builder(
+                              shrinkWrap: true,
+                              itemBuilder: (context, index) {
+                                return BasketItem(
+                                  model: cubit.cartItems[index],
+                                );
+                              },
+                              itemCount: cubit.cartItems.length),
                         ),
                       ],
                     );
@@ -85,8 +81,7 @@ class BasketScreen extends StatelessWidget {
                       CustomButton(
                         text: 'Pay now',
                         onPressed: () {
-                          PaymentCubit.get(context)
-                              .estimateOrdersData(false);
+                          PaymentCubit.get(context).estimateOrdersData(false);
                           navigateTo(context, RouteConstant.paymentRoute);
                         },
                       )

@@ -11,41 +11,44 @@ class PointsAndWallet extends StatelessWidget {
   Widget build(BuildContext context) {
     var userInformation = userData!.data;
 
-    return  CustomCard(
-      widget: Column(
-        children: [
-          //points
-          ListTile(
-            leading: SvgPicture.asset(
-                'assets/icons/points.svg',
-                fit: BoxFit.cover,
-                height: 30,
-                width: 30),
-            title: CustomText(
-              text: 'Membership points',
-              fontSize: 20,
+    return  Container(
+      height: MediaQuery.of(context).size.height/5.0,
+      width: MediaQuery.of(context).size.width,
+      child: CustomCard(
+        widget: Column(
+          children: [
+            //points
+            ListTile(
+              leading: SvgPicture.asset(
+                  'assets/icons/points.svg',
+                  fit: BoxFit.cover,
+                  height: 30,
+                  width: 30),
+              title: CustomText(
+                text: 'Membership points',
+                fontSize: 20,
+              ),
+              subtitle: CustomText(
+                  text: '${userInformation!.points}points',
+                  fontSize: 15),
             ),
-            subtitle: CustomText(
-                text: '${userInformation!.points}points',
-                fontSize: 15),
-          ),
-          CustomDotedLine(),
-          // wallet
-
-          ListTile(
-            leading: SvgPicture.asset(
-                'assets/icons/wallet.svg',
-                fit: BoxFit.cover,
-                height: 30,
-                width: 30),
-            title:
-            CustomText(text: 'Cash Wallet', fontSize: 20),
-            subtitle: CustomText(
-                text:
-                userInformation.credit.toString() + ' \$',
-                fontSize: 15),
-          ),
-        ],
+            CustomDotedLine(),
+            // wallet
+            ListTile(
+              leading: SvgPicture.asset(
+                  'assets/icons/wallet.svg',
+                  fit: BoxFit.cover,
+                  height: 30,
+                  width: 30),
+              title:
+              CustomText(text: 'Cash Wallet', fontSize: 20),
+              subtitle: CustomText(
+                  text:
+                  userInformation.credit.toString() + ' \$',
+                  fontSize: 15),
+            ),
+          ],
+        ),
       ),
     );
   }

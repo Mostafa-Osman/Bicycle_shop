@@ -22,29 +22,31 @@ class ProfileDetails extends StatelessWidget {
       }
     }, builder: (context, state) {
       return InkWell(
-        child: CustomCard(
-          widget: Padding(
-            padding: const EdgeInsets.only(bottom: 8.0),
-            child: ListTile(
-              leading: ClipOval(
-                  child: Image.network(
-                userInformation.image!,
-                height: 150,
-                width: 70,
-                fit: BoxFit.cover,
-              )),
-              title: CustomText(
-                text: '${userInformation.name}',
-                fontSize: 20,
+        child: Container(
+          height: MediaQuery.of(context).size.height/9.0,
+          width: MediaQuery.of(context).size.width,
+          child: CustomCard(
+            widget:  ListTile(
+                leading: ClipOval(
+                    child: Image.network(
+                  userInformation.image!,
+                  height: 150,
+                  width: 70,
+                  fit: BoxFit.cover,
+                )),
+                title: CustomText(
+                  text: '${userInformation.name}',
+                  fontSize: 20,
+                ),
+                subtitle: CustomText(
+                  text: '${userInformation.phone}',
+                  fontSize: 15,
+                ),
+                trailing:
+                    Icon(Icons.arrow_forward_ios_outlined, color: mainColor),
               ),
-              subtitle: CustomText(
-                text: '${userInformation.phone}',
-                fontSize: 15,
-              ),
-              trailing:
-                  Icon(Icons.arrow_forward_ios_outlined, color: mainColor),
             ),
-          ),
+
         ),
         onTap: () => navigateTo(context, RouteConstant.profileRoute),
       );

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:udemy_flutter/data/data_sources/local/check_internet.dart';
 import 'package:udemy_flutter/presentation/add&update_address/address_cubit/address_cubit.dart';
 import 'package:udemy_flutter/presentation/basket/basket_cubit/basket_cubit.dart';
 import 'package:udemy_flutter/presentation/favourites/favourite_cubit/favourite_cubit.dart';
@@ -14,6 +13,7 @@ import 'package:udemy_flutter/presentation/on_boarding/on_boarding_cubit/cubit.d
 import 'package:udemy_flutter/presentation/on_boarding/screens/on_boarding.dart';
 import 'package:udemy_flutter/presentation/orders/my_orders_cubit/my_orders_cubit.dart';
 import 'package:udemy_flutter/presentation/payment/payment_cubit/payment_cubit.dart';
+import 'package:udemy_flutter/presentation/product_details/cubit/product_details_cubit.dart';
 import 'package:udemy_flutter/presentation/profile/cubit/profile_cubit.dart';
 import 'package:udemy_flutter/presentation/register/cubit/recubit.dart';
 import 'package:udemy_flutter/presentation/search/cubit/cubit.dart';
@@ -28,7 +28,6 @@ import 'data/data_sources/remote/dio_helper.dart';
 void main() async {
   // to ensure that all method  in project finish loading then open app
   WidgetsFlutterBinding.ensureInitialized();
-
   DioHelper.int();
   await CacheHelper.init();
   Widget widget;
@@ -65,6 +64,7 @@ class MyApp extends StatelessWidget {
             create: (context) => HomeCubit()
               ..getHomeData()
               ..getBannerData()),
+        BlocProvider(create: (context) => ProductDetailsCubit()),
         BlocProvider(create: (context) => BasketCubit()..getMyBasketData()),
         BlocProvider(create: (context) => MyOrdersCubit()..getOrders()),
         BlocProvider(

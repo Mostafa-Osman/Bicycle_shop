@@ -14,55 +14,63 @@ import 'package:udemy_flutter/shared/components/Dotted_line.dart';
 import 'package:udemy_flutter/shared/components/custom%20_card.dart';
 import 'package:udemy_flutter/shared/components/loading.dart';
 
-
-
 class AccountScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return  BlocConsumer<ProfileCubit, ProfileStates>(
-          listener: (context, state) {},
-          builder: (context, state) {
-            return ConditionalBuilder(
-              condition: (state is ProfileSuccess),
-              builder: (context) {
-                return SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
+    return BlocConsumer<ProfileCubit, ProfileStates>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          return ConditionalBuilder(
+            condition: (state is ProfileSuccess),
+            builder: (context) {
+              return SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Container(
+                    height: MediaQuery.of(context).size.height,
+                    width: MediaQuery.of(context).size.width,
                     child: Column(
                       children: [
                         // profile
                         ProfileDetails(),
-                        SizedBox(height: 20.0),
+                        SizedBox(height: 10.0),
                         //Points And Wallet
                         PointsAndWallet(),
-                        CustomCard(
-                          widget: Column(
-                            children: [
-                              //contact us
-                              ContactUs(),
-                              CustomDotedLine(),
-                              //about us
-                              AboutUS(),
-                              CustomDotedLine(),
-                              //F A Q
-                              FAQ(),
-                              CustomDotedLine(),
-                              // language
-                              Language()
-                            ],
+                        Container(
+                          height: MediaQuery.of(context).size.height / 2.6,
+                          width: MediaQuery.of(context).size.width,
+                          child: CustomCard(
+                            widget: Column(
+                              children: [
+                                //contact us
+                                ContactUs(),
+                                CustomDotedLine(),
+                                //about us
+                                AboutUS(),
+                                CustomDotedLine(),
+                                //F A Q
+                                FAQ(),
+                                CustomDotedLine(),
+                                // language
+                                Language()
+                              ],
+                            ),
                           ),
                         ),
                         //sign out
-                        SignOut(),
+                        Container(
+                            height: MediaQuery.of(context).size.height / 11,
+                            width: MediaQuery.of(context).size.width,
+                            child: SignOut()),
                         SizedBox(height: 10.0),
                       ],
                     ),
                   ),
-                );
-              },
-              fallback: (BuildContext context) => Center(child: CustomLoading()),
-            );
-          })
-    ;
+                ),
+              );
+            },
+            fallback: (BuildContext context) => Center(child: CustomLoading()),
+          );
+        });
   }
 }

@@ -40,6 +40,15 @@ class HomeCubit extends Cubit<HomeStates> {
     }
   }
 
+  int indicatorIndex = 4;
+  void changeBannerIndex(index) {
+    indicatorIndex = index;
+    emit(ChangeBannerIndexState());
+  }
+
+
+
+
   int photoIndex = 0;
 
   changePhotoIndex(index) {
