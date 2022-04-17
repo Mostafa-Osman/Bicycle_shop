@@ -1,68 +1,68 @@
+import 'dart:developer';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:udemy_flutter/data/repository/basket_repo/basket_repo.dart';
-import 'package:udemy_flutter/presentation/basket/basket_cubit/states.dart';
 import 'package:udemy_flutter/data/models/basket_model/basket_model.dart';
-
+import 'package:udemy_flutter/data/repository/basket_repo/basket_repo.dart';
+part  'basket_states.dart';
 class BasketCubit extends Cubit<BasketStates> {
-  BasketCubit() : super(BasketInitialState());
+  BasketCubit(this.basketRepository) : super(BasketInitialState());
 
-  static BasketCubit get(context) => BlocProvider.of(context);
 
 
   //add order to my basket
-  final basketRepo = BasketRepo();
+  final BasketRepository basketRepository  ;
 
   //get orders to basket
-  BasketModel? myBag;
+  late BasketModel myBag;
 
   Future<void> addToBasketOrders(int productId) async {
-    emit(AddToBasketLoadingState());
+    emit(AddToBasketLoading());
     try {
-      myBag = await basketRepo.addToBasketOrders(productId);
-      emit(AddToBasketSuccessState(myBag));
+      myBag = await basketRepository.addToBasketOrders(productId);
+      emit(AddToBasketSuccess());
       getMyBasketData();
-    } catch (error) {
-      print(error.toString());
-      emit(AddToBasketErrorState());
+    } catch (error,s) {
+      log('add to basket orders data',error: error,stackTrace: s);
+      emit(AddToBasketError(error.toString()));
     }
   }
 
   Future<void> getMyBasketData() async {
-    emit(ShopGetOrderLoadingState());
+    emit(BasketGetOrderLoading());
     try {
-      myBag = await basketRepo.getMyBasketData();
-      emit(ShopGetOrderSuccessState());
-    } catch (error) {
-      print(error.toString());
-      emit(ShopGetOrderErrorState());
+      myBag = await basketRepository.getMyBasketData();
+      emit(BasketGetOrderSuccess());
+    } catch (error,s) {
+      log('get myBasket data',error: error,stackTrace: s);
+      emit(BasketGetOrderError(error.toString()));
     }
   }
 
   //update quantity of orders in basket
   Future<void> updateBasketOrderData(
-      {required int productId, required quantity}) async {
-    emit(BasketUpdateQuantityLoadingState());
+      {required int productId, required int quantity,}) async {
+    emit(BasketUpdateQuantityLoading());
     try {
-      myBag = await basketRepo.updateBasketOrderData(productId, quantity);
-      emit(BasketUpdateQuantitySuccessState(myBag!));
+      myBag = await basketRepository.updateBasketOrderData(productId, quantity);
+      emit(BasketUpdateQuantitySuccess());
       getMyBasketData();
-    } catch (error) {
-      print(error.toString());
-      emit(BasketUpdateQuantityErrorState());
+    } catch (error,s) {
+      log('update basket orders data',error: error,stackTrace: s);
+      emit(BasketUpdateQuantityError(error.toString()));
     }
   }
 
   //delete orders from basket
   Future<void> deleteOrderFromBasketData({required int productId}) async {
-    emit(DeleteFromBasketLoadingState());
+    emit(DeleteFromBasketLoading());
 
     try {
-      basketRepo.deleteOrderFromBasketData(productId);
-      emit(DeleteFromBasketSuccessState());
+      basketRepository.deleteOrderFromBasketData(productId);
+      emit(DeleteFromBasketSuccess());
       getMyBasketData();
-    } catch (error) {
-      print(error.toString());
-      emit(DeleteFromBasketErrorState());
+    } catch (error,s) {
+      log('delete basket orders data',error: error,stackTrace: s);
+      emit(DeleteFromBasketError(error.toString()));
     }
   }
 }

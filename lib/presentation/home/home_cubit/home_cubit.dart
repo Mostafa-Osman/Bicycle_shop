@@ -1,70 +1,68 @@
+import 'dart:developer';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:udemy_flutter/data/models/home_model/home_model.dart';
-import 'package:udemy_flutter/data/repository/home_repo/home_repo.dart';
-import 'package:udemy_flutter/presentation/home/home_cubit/states.dart';
 import 'package:udemy_flutter/data/models/home_model/banner_model.dart';
+import 'package:udemy_flutter/data/models/home_model/home_model.dart';
+import 'package:udemy_flutter/data/repository/home_repository/home_repository.dart';
+
+part 'home_states.dart';
 
 class HomeCubit extends Cubit<HomeStates> {
-  HomeCubit() : super(HomeInitialState());
+  HomeRepository homeRepository;
 
-  static HomeCubit get(context) => BlocProvider.of(context);
-  HomeModel? homeModel;
-  var favourites = {};
-  HomeRepo _homeRepo = HomeRepo();
+  HomeCubit(this.homeRepository) : super(HomeInitialState());
+
+  late HomeModel homeModel;
+  late BannerModel banner;
+
+  late Map<int, bool> favourites = {};
 
   Future<void> getHomeData() async {
+    emit(HomeLoading());
     try {
-      homeModel = await _homeRepo.getHomeData();
-      homeModel!.data!.detailsData.forEach((element) {
+      homeModel = await homeRepository.getHomeData();
+      for (final element in homeModel.data.detailsData) {
         favourites.addAll({
-          element.id!: element.inFavorites!,
+          element.id: element.inFavorites,
         });
-      });
-      emit(HomeSuccessState());
-    } catch (error) {
-      print(error.toString());
-      emit(HomeErrorState());
+      }
+      emit(HomeSuccess());
+    } catch (error, s) {
+      log('get home data error', error: error, stackTrace: s);
+
+      emit(HomeError(error.toString()));
     }
   }
 
-  BannerModel? banner;
-
   Future<void> getBannerData() async {
     try {
-      emit(BannerLoadingState());
-      banner = await _homeRepo.getBannerData();
-      emit(BannerSuccessState());
-    } catch (error) {
-      print(error.toString());
-      emit(BannerErrorState());
+      emit(BannerLoading());
+      banner = await homeRepository.getBannerData();
+      emit(BannerSuccess());
+    } catch (error, s) {
+      log('get banner data error', error: error.toString(), stackTrace: s);
+
+      emit(BannerError(error.toString()));
     }
   }
 
   int indicatorIndex = 4;
-  void changeBannerIndex(index) {
+
+  void changeBannerIndex(int index) {
     indicatorIndex = index;
-    emit(ChangeBannerIndexState());
-  }
-
-
-
-
-  int photoIndex = 0;
-
-  changePhotoIndex(index) {
-    photoIndex = index;
-    emit(ChangePhotoIndexState());
+    emit(HomeRefreshUi());
   }
 
   int quantityProduct = 1;
 
-  incrementOrder() {
+  void incrementOrder() {
     quantityProduct++;
-    emit(CounterPlusState());
+    emit(HomeRefreshUi());
   }
 
-  decrementOrder() {
+  void decrementOrder() {
     if (quantityProduct != 1) quantityProduct--;
-    emit(CounterMinusState());
+    emit(HomeRefreshUi());
   }
 }

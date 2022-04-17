@@ -17,13 +17,13 @@ class AboutUS extends StatelessWidget {
             'assets/icons/about_us_icon.svg',
             fit: BoxFit.cover,
             height: 30,
-            width: 30),
+            width: 30,),
         title:
-        CustomText(text: 'About Us', fontSize: 20),
-        subtitle: CustomText(
-            text: 'Terms of use', fontSize: 15),
-        trailing: Icon(Icons.arrow_forward_ios_outlined,
-            color: mainColor),
+        const CustomText(text: 'About Us', fontSize: 20),
+        subtitle: const CustomText(
+            text: 'Terms of use', fontSize: 15,),
+        trailing: const Icon(Icons.arrow_forward_ios_outlined,
+            color: mainColor,),
       ),
     );
   }

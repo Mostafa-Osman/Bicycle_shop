@@ -3,36 +3,31 @@ import 'package:udemy_flutter/data/data_sources/remote/end_points.dart';
 import 'package:udemy_flutter/data/models/favourit_model/favourites_model.dart';
 import 'package:udemy_flutter/shared/components/constants.dart';
 
-class FavouriteRepo {
+class FavouriteRepository {
   // get favourites
   Future<FavouritesModel> getFavouritesData() async {
-    try {
-      final response = await DioHelper.getData(url: FAVORITES, token: token);
-      if (response.data['status'] == true) {
-        return FavouritesModel.fromJson(response.data);
-      }
-      throw response.data['message'] ?? 'server error';
-    } catch (e) {
-      rethrow;
+    final response = await DioHelper.getData(url: favoritesUrl, token: token);
+
+    final data = response.data as Map<String, dynamic>;
+    if (data['status'] == true) {
+      return FavouritesModel.fromJson(data);
     }
+    throw 'server error';
   }
 
   // change favourites
-  Future<FavouritesModel> changeFavorites(productId) async {
-    try {
-      final response = await DioHelper.postData(
-        url: FAVORITES,
-        data: {
-          'product_id': productId,
-        },
-        token: token,
-      );
-      if (response.data['status'] == true) {
-        return FavouritesModel.fromJson(response.data);
-      }
-      throw response.data['message'] ?? 'server error';
-    } catch (e) {
-      rethrow;
+  Future<FavouritesModel> changeFavorites(int productId) async {
+    final response = await DioHelper.postData(
+      url: favoritesUrl,
+      data: {
+        'product_id': productId,
+      },
+      token: token,
+    );
+    final data = response.data as Map<String, dynamic>;
+    if (data['status'] == true) {
+      return FavouritesModel.fromJson(data);
     }
+    throw 'server error';
   }
 }

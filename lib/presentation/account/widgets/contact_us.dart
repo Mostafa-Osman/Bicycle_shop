@@ -11,20 +11,20 @@ class ContactUs extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () => navigateTo(
-          context, RouteConstant.contactsRoute),
+          context, RouteConstant.contactsRoute,),
       child: ListTile(
         leading: SvgPicture.asset(
             'assets/icons/contact_us.svg',
             fit: BoxFit.cover,
             height: 30,
-            width: 30),
-        title: CustomText(
-            text: 'Contact Us', fontSize: 20),
-        subtitle: CustomText(
+            width: 30,),
+        title: const CustomText(
+            text: 'Contact Us', fontSize: 20,),
+        subtitle: const CustomText(
             text: 'Tap to view contact information',
-            fontSize: 15),
-        trailing: Icon(Icons.arrow_forward_ios_outlined,
-            color: mainColor),
+            fontSize: 15,),
+        trailing: const Icon(Icons.arrow_forward_ios_outlined,
+            color: mainColor,),
       ),
     );
   }

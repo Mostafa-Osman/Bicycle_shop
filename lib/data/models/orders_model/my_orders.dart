@@ -1,47 +1,56 @@
 class MyOrderModel {
-  bool? status;
-  String? message;
-  Data? data;
+  final bool status;
+  final Data data;
 
-  MyOrderModel({this.status, this.message, this.data});
+  MyOrderModel({
+    required this.status,
+    required this.data,
+  });
 
-  MyOrderModel.fromJson(Map<String, dynamic> json) {
-    status = json['status'];
-    message = json['message'];
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+  factory MyOrderModel.fromJson(Map<String, dynamic> json) {
+    return MyOrderModel(
+      status: json['status'] as bool,
+      data: Data.fromJson(json['data'] as Map<String, dynamic>),
+    );
   }
 }
 
 class Data {
-  List<Data1> listDoneOrders=[];
-  int? total;
+  final List<OrderData> listDoneOrders;
 
-  Data({required this.listDoneOrders, this.total});
+  final int total;
 
-  Data.fromJson(Map<String, dynamic> json) {
-    if (json['data'] != null) {
-      listDoneOrders = <Data1>[];
-      json['data'].forEach((v) {
-        listDoneOrders.add(new Data1.fromJson(v));
-      });
-    }
-    total = json['total'];
+  Data({required this.listDoneOrders, required this.total});
+
+  factory Data.fromJson(Map<String, dynamic> json) {
+    return Data(
+      listDoneOrders: (json['data'] as List<dynamic>)
+          .map((element) => OrderData.fromJson(element as Map<String, dynamic>))
+          .toList(),
+      total: json['total'] as int,
+    );
   }
 }
 
-class Data1 {
-  int? id;
-  dynamic total;
-  String? date;
-  String? status;
+class OrderData {
+  final int id;
+  final dynamic total;
+  final String date;
+  final String status;
 
-  Data1({this.id, this.total, this.date, this.status});
+  OrderData({
+    required this.id,
+    required this.total,
+    required this.date,
+    required this.status,
+  });
 
-  Data1.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    total = json['total'];
-    date = json['date'];
-    status = json['status'];
+  factory OrderData.fromJson(Map<String, dynamic> json) {
+    return OrderData(
+      id: json['id'] as int,
+      total: json['total'],
+      date: json['date'] as String,
+      status: json['status'] as String,
+    );
   }
 }
-

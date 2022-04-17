@@ -1,47 +1,49 @@
 import 'dart:developer';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meta/meta.dart';
-import 'package:udemy_flutter/data/repository/orders_repo/orders_repo.dart';
 import 'package:udemy_flutter/data/models/order_details_model/order_detail.dart';
+import 'package:udemy_flutter/data/repository/orders_repo/orders_repo.dart';
+
 part 'order_details_state.dart';
 
 class OrderDetailsCubit extends Cubit<OrderDetailsState> {
-  OrderDetailsCubit() : super(OrderDetailsInitial());
-  static OrderDetailsCubit get(context) => BlocProvider.of(context);
+  OrderDetailsCubit(this.ordersDetailsRepository)
+      : super(OrderDetailsInitial());
 
-
-  //pass order repo  by get it == di
-
-  final ordersRepo = OrdersRepo();
+  final OrdersRepository ordersDetailsRepository;
 
   //order details
-  OrderDetailsModel? orderDetails;
+  late OrderDetailsResponse orderDetailsModel;
   bool isAddressVisible = false;
 
   Future<void> getOrderDetails(int orderId) async {
     emit(OrderDetailsLoading());
     try {
-      orderDetails = await ordersRepo.getOrderDetails(orderId);
+      orderDetailsModel = await ordersDetailsRepository.getOrderDetails(orderId);
       emit(OrderDetailsSuccess());
     } catch (e, s) {
-      log(s.toString());
+      log('get order details data', error: e.toString(), stackTrace: s);
       emit(OrderDetailsError(errorMessage: e.toString()));
     }
   }
 
-  changeAddressVisibility() {
+  void changeAddressVisibility() {
     emit(OrderDetailsRefreshUi());
     isAddressVisible = !isAddressVisible;
   }
 
   //cancel order
-  Future<void> cancelOrder(orderId) async {
+  Future<void> cancelOrder(int orderId) async {
     emit(OrderCancelLoading());
     try {
-      ordersRepo.cancelOrder(orderId);
+      ordersDetailsRepository.cancelOrder(orderId);
       emit(OrderCancelSuccess());
-    } catch (e) {
-      emit(OrderCancelError());
+    } catch (e, s) {
+      log('cancel order data', error: e.toString(), stackTrace: s);
+
+      emit(
+        OrderCancelError(errorMessage: e.toString()),
+      );
       rethrow;
     }
   }

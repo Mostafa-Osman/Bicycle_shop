@@ -1,49 +1,78 @@
-
 class HomeModel {
-  bool? status;
-  String? message;
-  Data? data;
+  final bool status;
+  final String message;
+  final Data data;
 
-  HomeModel.fromJson(Map<String, dynamic> json) {
-    status = json['status'];
-    message = json['message'];
-    data = json['data'] != null ? Data.fromJson(json['data']) : null;
+  HomeModel({required this.status, required this.message, required this.data});
+
+  factory HomeModel.fromJson(Map<String, dynamic> json) {
+    return HomeModel(
+      status: json['status'] as bool,
+      message: json['message'] as String? ??'',
+      data: Data.fromJson(json['data'] as Map<String, dynamic>),
+    );
   }
 }
 
 class Data {
-  int? currentPage;
-  List<DetailsData> detailsData = [];
+  final int currentPage;
+  final List<DetailsData> detailsData;
 
-  Data.fromJson(Map<String, dynamic> json) {
-    currentPage = json['current_page'];
-    json['data'].forEach((element) {
-      detailsData.add(DetailsData.fromJson(element));
-    });
+  const Data({required this.currentPage, required this.detailsData});
+
+  factory Data.fromJson(Map<String, dynamic> json) {
+    return Data(
+      currentPage: json['current_page'] as int,
+      detailsData: (json["data"] as List<dynamic>)
+          .map(
+            (element) => DetailsData.fromJson(element as Map<String, dynamic>),
+          )
+          .toList(),
+    );
   }
 }
 
 class DetailsData {
-  int? id;
-  dynamic price;
-  dynamic oldPrice;
-  dynamic discount;
-  String? image;
-  String? name;
-  String? description;
-  List<dynamic>? images;
-  bool? inFavorites;
-  bool? inCart;
-  DetailsData.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    price = json['price'];
-    oldPrice = json['old_price'];
-    discount = json['discount'];
-    image = json['image'];
-    name = json['name'];
-    description = json['description'];
-    images = json['images'];
-    inFavorites = json['in_favorites'];
-    inCart = json['in_cart'];
+ final int id;
+ final dynamic price;
+ final dynamic oldPrice;
+ final dynamic discount;
+ final String image;
+ final String name;
+ final String description;
+ final List<dynamic> images;
+ final bool inFavorites;
+ final bool inCart;
+
+  const DetailsData({
+    required this.id,
+    required this.price,
+    required this.oldPrice,
+    required this.discount,
+    required this.image,
+    required this.name,
+    required this.description,
+    required this.images,
+    required this.inFavorites,
+    required this.inCart,
+  });
+
+  factory DetailsData.fromJson(Map<String, dynamic> json) {
+    return DetailsData(
+      id: json['id'] as int,
+      price: json['price'],
+      oldPrice: json['old_price'],
+      discount: json['discount'],
+      image: json['image'] as String,
+      name: json['name'] as String,
+      description: json['description'] as String,
+      images: (json["images"] as List<dynamic>)
+          .map(
+            (element) => element as String,
+          )
+          .toList(),
+      inFavorites: json['in_favorites'] as bool,
+      inCart: json['in_cart'] as bool,
+    );
   }
 }

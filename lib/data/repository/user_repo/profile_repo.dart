@@ -1,50 +1,46 @@
 import 'package:udemy_flutter/data/data_sources/remote/dio_helper.dart';
 import 'package:udemy_flutter/data/data_sources/remote/end_points.dart';
 import 'package:udemy_flutter/data/models/profile_model/profile_model.dart';
-import 'package:udemy_flutter/shared/components/component.dart';
 import 'package:udemy_flutter/shared/components/constants.dart';
 
-class ProfileRepo {
-  // object from dio and cash helper
-  // pass it to constructor
-  // use get it lib for dependency injection
+class ProfileRepository {
+
 
   //get user data
   Future<ProfileModel> getUserData() async {
-    try {
-      final response = await DioHelper.getData(url: PROFILE, token: token);
-      if (response.data['status'] == true) {
-        return ProfileModel.fromJson(response.data);
+      final response = await DioHelper.getData(url: profileUrl, token: token);
+
+
+      final data = response.data as Map<String, dynamic>;
+      if (data['status'] == true) {
+        return ProfileModel.fromJson(data);
       }
-      throw response.data['message'] ?? 'server error';
-    } catch (e) {
-      rethrow;
-    }
+      throw 'server error';
+
+
   }
 
   // update user data
   Future<ProfileModel> updateUserData({
-     name,
-     email,
-     phone,
-     image,
-     password
+    String?  name,
+    String?  email,
+    String?  phone,
+    String?  image,
+    String?  password,
   }) async {
-    try {
+
       final response =
-          await DioHelper.putData(url: UPDATE_PROFILE, token: token, data: {
+          await DioHelper.putData(url: updateProfileUrl, token: token, data: {
         'name': name,
         'email': email,
         'phone': phone,
         'image': image,
-        'password': password
-      });
-      if (response.data['status'] == true)
-        return ProfileModel.fromJson(response.data);
-
-      throw response.data['message'] ?? 'server error';
-    } catch (e) {
-      rethrow;
-    }
+        'password': password,
+      },);
+      final data = response.data as Map<String, dynamic>;
+      if (data['status'] == true) {
+        return ProfileModel.fromJson(data);
+      }
+      throw 'server error';
   }
 }

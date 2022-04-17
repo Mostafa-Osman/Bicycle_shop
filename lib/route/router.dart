@@ -1,5 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:udemy_flutter/data/models/home_model/home_model.dart';
+import 'package:udemy_flutter/data/repository/address_repo/address_repo.dart';
+import 'package:udemy_flutter/data/repository/basket_repo/basket_repo.dart';
+import 'package:udemy_flutter/data/repository/favourite_repo/favourite_repo.dart';
+import 'package:udemy_flutter/data/repository/home_repository/home_repository.dart';
+import 'package:udemy_flutter/data/repository/notifications_repo/notifications_repository.dart';
+import 'package:udemy_flutter/data/repository/orders_repo/orders_repo.dart';
+import 'package:udemy_flutter/data/repository/payment_repo/payment_repo.dart';
+import 'package:udemy_flutter/data/repository/search_repository/search_repository.dart';
+import 'package:udemy_flutter/data/repository/user_repo/login_repo.dart';
+import 'package:udemy_flutter/data/repository/user_repo/profile_repo.dart';
+import 'package:udemy_flutter/data/repository/user_repo/register_repo.dart';
 import 'package:udemy_flutter/presentation/about_us/screens/about.dart';
 import 'package:udemy_flutter/presentation/add&update_address/screens/add_address_screen.dart';
 import 'package:udemy_flutter/presentation/add&update_address/screens/update_address_screen.dart';
@@ -21,10 +32,37 @@ import 'package:udemy_flutter/presentation/questions/screens/questions.dart';
 import 'package:udemy_flutter/presentation/register/screens/register.dart';
 import 'package:udemy_flutter/presentation/search/screens/search.dart';
 import 'package:udemy_flutter/presentation/update_profile/screens/update_profile.dart';
-import 'route_constants.dart';
+import 'package:udemy_flutter/route/route_constants.dart';
 
 class AppRouter {
-  static Route<dynamic> generateRoute(RouteSettings settings) {
+  late HomeRepository homeRepository;
+  late NotificationsRepository notificationsRepository;
+  late AddressRepository addressRepository;
+  late BasketRepository basketRepository;
+  late FavouriteRepository favouriteRepository;
+  late LoginRepository loginRepo;
+  late OrdersRepository ordersRepo;
+  late ProfileRepository profileRepository;
+  late RegisterRepository registerRepository;
+  late SearchRepository searchRepository;
+  late PaymentRepository paymentRepository;
+
+  void initAppSettings() {
+    homeRepository = HomeRepository();
+    notificationsRepository = NotificationsRepository();
+    addressRepository = AddressRepository();
+    basketRepository = BasketRepository();
+    favouriteRepository = FavouriteRepository();
+    loginRepo = LoginRepository();
+    ordersRepo = OrdersRepository();
+    profileRepository = ProfileRepository();
+    registerRepository = RegisterRepository();
+    searchRepository = SearchRepository();
+    paymentRepository = PaymentRepository();
+  }
+
+  Route? generateRoute(RouteSettings settings) {
+    initAppSettings();
     switch (settings.name) {
       case RouteConstant.onBoardingRoute:
         return MaterialPageRoute(builder: (_) => OnBoardingScreen());
@@ -33,9 +71,14 @@ class AppRouter {
       case RouteConstant.loginRoute:
         return MaterialPageRoute(builder: (_) => LoginScreen());
       case RouteConstant.homeRoute:
-        return MaterialPageRoute(builder: (_) => HomeScreen());
+        return MaterialPageRoute(
+          builder: (_) => HomeScreen(),
+        );
+
       case RouteConstant.notificationsRoute:
-        return MaterialPageRoute(builder: (_) => NotificationsScreen());
+        return MaterialPageRoute(
+          builder: (_) => NotificationsScreen(),
+        );
       case RouteConstant.searchRoute:
         return MaterialPageRoute(builder: (_) => SearchScreen());
       case RouteConstant.profileRoute:
@@ -45,22 +88,28 @@ class AppRouter {
       case RouteConstant.myOrderRoute:
         return MaterialPageRoute(builder: (_) => MyOrdersScreen());
       case RouteConstant.productDetailsRoute:
-        return MaterialPageRoute(builder: (_) {
-          final DetailsData arguments = settings.arguments as DetailsData;
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) {
+            final DetailsData arguments = settings as DetailsData;
 
-          return ProductDetailsScreen(productDetails: arguments);
-        });
+            return ProductDetailsScreen(productDetails: arguments);
+          },
+        );
       case RouteConstant.shopLayoutRoute:
         return MaterialPageRoute(builder: (_) => ShopLayoutScreen());
+
       case RouteConstant.paymentRoute:
         return MaterialPageRoute(builder: (_) => PaymentScreen());
       case RouteConstant.favouriteRoute:
         return MaterialPageRoute(builder: (_) => FavouritesScreen());
       case RouteConstant.orderDetailsRoute:
-        final int arguments = settings.arguments as int;
-        var orderId = arguments;
+        // final int arguments = settings.arguments as int;
+        // final orderId = arguments;
         return MaterialPageRoute(
-            builder: (_) => OrderDetailsScreen(orderId: orderId));
+          settings: settings,
+          builder: (_) => OrderDetailsScreen(orderId: settings as int),
+        );
       case RouteConstant.updateProfileRoute:
         return MaterialPageRoute(builder: (_) => UpdateProfileScreen());
       case RouteConstant.contactsRoute:
@@ -72,18 +121,24 @@ class AppRouter {
       case RouteConstant.languageRoute:
         return MaterialPageRoute(builder: (_) => LanguageScreen());
       case RouteConstant.addAddressRoute:
-        return MaterialPageRoute(builder: (_) => AddAddressScreen());
-      case RouteConstant.updateAddressRoute:
-        final int arguments = settings.arguments as int;
-        var index = arguments;
         return MaterialPageRoute(
-            builder: (_) => UpdateAddressScreen(index: index));
+          settings: settings,
+          builder: (_) => AddAddressScreen(),
+        );
+      case RouteConstant.updateAddressRoute:
+        // final int arguments = settings.arguments as int;
+        // final index = arguments;
+        return MaterialPageRoute(
+          builder: (_) => UpdateAddressScreen(index: settings as int),
+        );
       default:
         return MaterialPageRoute(
-            builder: (_) => Scaffold(
-                  body: Center(
-                      child: Text('No route defined for ${settings.name}')),
-                ));
+          builder: (_) => Scaffold(
+            body: Center(
+              child: Text('No route defined for ${settings.name}'),
+            ),
+          ),
+        );
     }
   }
 }

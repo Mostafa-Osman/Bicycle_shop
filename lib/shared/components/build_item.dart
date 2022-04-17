@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:udemy_flutter/shared/components/custom%20_card.dart';
-import 'package:udemy_flutter/shared/components/custom_favourite-icon.dart';
+import 'package:udemy_flutter/data/models/favourit_model/favourites_model.dart';
+import 'package:udemy_flutter/shared/components/custom_card.dart';
+import 'package:udemy_flutter/shared/components/custom_favourite_icon.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 
 class BuildItem extends StatelessWidget {
-  final model;
+  final Product model;
 
   const BuildItem({required this.model});
 
@@ -20,7 +21,7 @@ class BuildItem extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           child: Row(
             children: [
-              SizedBox(width: 7.0),
+              const SizedBox(width: 7.0),
               Stack(
                 alignment: AlignmentDirectional.bottomStart,
                 children: [
@@ -34,15 +35,15 @@ class BuildItem extends StatelessWidget {
                       top: 0,
                       left: 0,
                       child: SvgPicture.asset('assets/icons/discount.svg',
-                          fit: BoxFit.cover, height: 30, width: 30),
+                          fit: BoxFit.cover, height: 30, width: 30,),
                     ),
                 ],
               ),
-              SizedBox(width: 5),
+              const  SizedBox(width: 5),
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.only(
-                      top: 10.0, bottom: 10, right: 10, left: 5.0),
+                      top: 10.0, bottom: 10, right: 10, left: 5.0,),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -54,7 +55,7 @@ class BuildItem extends StatelessWidget {
                         height: 1.3,
                         fontWeight: FontWeight.bold,
                       ),
-                      Spacer(),
+                      const   Spacer(),
                       Row(
                         children: [
                           CustomText(
@@ -66,8 +67,8 @@ class BuildItem extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                             textColor: mainColor,
                           ),
-                          Spacer(),
-                          CustomFavouriteIcon(productId: model.id!),
+                          const  Spacer(),
+                          CustomFavouriteIcon(productId: model.id),
                         ],
                       ),
                       if (model.discount != 0)
@@ -75,7 +76,7 @@ class BuildItem extends StatelessWidget {
                             text: 'EGP ${model.oldPrice.toString()}',
                             fontSize: 13,
                             textColor: grey,
-                            decoration: TextDecoration.lineThrough),
+                            decoration: TextDecoration.lineThrough,),
                     ],
                   ),
                 ),

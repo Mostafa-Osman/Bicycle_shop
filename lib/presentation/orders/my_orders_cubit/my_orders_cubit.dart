@@ -1,26 +1,27 @@
+import 'dart:developer';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:udemy_flutter/data/repository/orders_repo/orders_repo.dart';
 import 'package:udemy_flutter/data/models/orders_model/my_orders.dart';
-import 'package:udemy_flutter/presentation/orders/my_orders_cubit/states.dart';
+import 'package:udemy_flutter/data/repository/orders_repo/orders_repo.dart';
+import 'package:udemy_flutter/presentation/orders/my_orders_cubit/my_orders_states.dart';
 
 class MyOrdersCubit extends Cubit<MyOrdersStates> {
-  MyOrdersCubit() : super(MyOrdersInitialState());
+  MyOrdersCubit(this.ordersRepository) : super(MyOrdersInitial());
 
-  static MyOrdersCubit get(context) => BlocProvider.of(context);
 
   //get orders
-  MyOrderModel? orders;
-  final ordersRepo = OrdersRepo();
+ late  MyOrderModel orders;
+  final OrdersRepository ordersRepository;
 
   Future<void> getOrders() async {
-    emit(MyOrderLoadingState());
+    emit(MyOrderLoading());
     try {
-      orders = await ordersRepo.getOrder();
-      emit(MyOrderSuccessState());
-    } catch (e) {
-      emit(MyOrderErrorState());
+      orders = await ordersRepository.getOrder();
+      emit(MyOrderSuccess());
+    } catch (error,s) {
+      emit(MyOrderError(error.toString()),);
+      log('get Orders data',error:error,stackTrace: s);
 
-      rethrow;
     }
   }
 }

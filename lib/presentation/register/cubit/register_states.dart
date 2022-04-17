@@ -1,6 +1,5 @@
 
-import 'package:udemy_flutter/data/models/login_model/login_model.dart';
-
+part of 'register_cubit.dart';
 abstract class RegisterStates {}
 
 class ShopRegisterInitialState extends RegisterStates {}
@@ -14,11 +13,9 @@ class ShopRegisterSuccessState extends RegisterStates {
 }
 
 class ShopRegisterErrorState extends RegisterStates {
-  final  error;
+  final  String error;
 
   ShopRegisterErrorState(this.error);
 }
 
-class ShopRegisterVisibilityPasswordState extends RegisterStates {}
-
-class ConfirmRegisterVisibilityPasswordState extends RegisterStates {}
+class RegisterRefreshUi extends RegisterStates {}

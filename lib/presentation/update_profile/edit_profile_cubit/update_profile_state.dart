@@ -14,25 +14,27 @@ class UpdateProfileSuccess extends UpdateProfileState {
 }
 
 class UpdateProfileError extends UpdateProfileState {
-  final error;
+  final String error;
 
   UpdateProfileError(this.error);
 }
-
-class PictureState extends UpdateProfileState {}
 
 class GetCameraImageLoading extends UpdateProfileState {}
 
 class GetCameraImageSuccess extends UpdateProfileState {}
 
-class GetCameraImageError extends UpdateProfileState {}
+class GetCameraImageError extends UpdateProfileState {
+  final String message;
+
+  GetCameraImageError(this.message);
+}
 
 class GetGalleryImageLoading extends UpdateProfileState {}
 
 class GetGalleryImageSuccess extends UpdateProfileState {}
 
-class GetGalleryImageError extends UpdateProfileState {}
+class GetGalleryImageError extends UpdateProfileState {
+  final String message;
 
-class VisibilityPassword extends UpdateProfileState {}
-
-class ConfirmVisibilityPassword extends UpdateProfileState {}
+  GetGalleryImageError(this.message);
+}

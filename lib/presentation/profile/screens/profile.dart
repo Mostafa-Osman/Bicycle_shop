@@ -4,8 +4,8 @@ import 'package:udemy_flutter/presentation/profile/widgets/profile_photo.dart';
 import 'package:udemy_flutter/presentation/profile/widgets/user_data.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
-import 'package:udemy_flutter/shared/styles/color.dart';
 import 'package:udemy_flutter/shared/components/navigate.dart';
+import 'package:udemy_flutter/shared/styles/color.dart';
 
 class ProfileScreen extends StatelessWidget {
   final formKey = GlobalKey<FormState>();
@@ -17,9 +17,9 @@ class ProfileScreen extends StatelessWidget {
         elevation: 0.0,
         leading: IconButton(
           onPressed: () => Navigator.pop(context),
-          icon: Icon(Icons.arrow_back_ios_sharp, color: mainColor),
+          icon: const Icon(Icons.arrow_back_ios_sharp, color: mainColor),
         ),
-        title: CustomText(
+        title: const CustomText(
           text: 'Profile',
           textColor: mainColor,
           textAlign: TextAlign.center,
@@ -28,7 +28,7 @@ class ProfileScreen extends StatelessWidget {
         actions: [
           IconButton(
             iconSize: 28,
-            icon: Icon(
+            icon: const Icon(
               Icons.settings_rounded,
               color: mainColor,
             ),
@@ -45,14 +45,13 @@ class ProfileScreen extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 //profile photo
                 ProfilePhoto(),
                 //user data (name,email phone)
                 UserDataWidget(),
-                SizedBox(height: 20.0),
+                const SizedBox(height: 20.0),
                 //profile address
                 ProfileAddress(),
               ],

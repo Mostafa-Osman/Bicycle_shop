@@ -14,7 +14,7 @@ class CustomText extends StatelessWidget {
   final TextOverflow? overflow;
   final double? height;
 
-  CustomText(
+  const CustomText(
       {required this.text,
       this.fontSize = 25.0,
       this.textAlign,
@@ -23,7 +23,7 @@ class CustomText extends StatelessWidget {
       this.decoration,
       this.maxLines,
       this.overflow,
-      this.height});
+      this.height,});
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class CustomText extends StatelessWidget {
           fontWeight: fontWeight,
           color: textColor,
           height: height,
-          decoration: decoration),
+          decoration: decoration,),
     );
   }
 }

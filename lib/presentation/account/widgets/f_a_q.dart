@@ -11,19 +11,19 @@ class FAQ extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () => navigateTo(
-          context, RouteConstant.questionsRoute),
+          context, RouteConstant.questionsRoute,),
       child: ListTile(
         leading: SvgPicture.asset(
             'assets/icons/questions.svg',
             fit: BoxFit.cover,
             height: 30,
-            width: 30),
-        title: CustomText(text: 'F A Q', fontSize: 20),
-        subtitle: CustomText(
+            width: 30,),
+        title: const CustomText(text: 'F A Q', fontSize: 20),
+        subtitle: const CustomText(
             text: 'Answers of popular questions',
-            fontSize: 15),
-        trailing: Icon(Icons.arrow_forward_ios_outlined,
-            color: mainColor),
+            fontSize: 15,),
+        trailing: const Icon(Icons.arrow_forward_ios_outlined,
+            color: mainColor,),
       ),
     );
   }

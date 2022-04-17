@@ -1,28 +1,27 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:udemy_flutter/data/repository/user_repo/login_repo.dart';
-import 'package:udemy_flutter/presentation/login/login_cubit/states.dart';
 import 'package:udemy_flutter/data/models/login_model/login_model.dart';
+import 'package:udemy_flutter/data/repository/user_repo/login_repo.dart';
 
+part 'login_states.dart';
 
 class LoginCubit extends Cubit<LoginStates> {
-  LoginCubit() : super(LoginInitialState());
+  LoginCubit(this.loginRepo) : super(LoginInitialState());
 
-  static LoginCubit get(context) => BlocProvider.of(context);
+  late ShopLoginModel loginModel;
 
-  // var loginModel;
-  ShopLoginModel? loginModel;
+  final LoginRepository loginRepo;
 
-  final loginRepo = LoginRepo();
-
-  Future<void> userLogin(
-      {required String email, required String password}) async {
+  Future<void> userLogin({
+    required String email,
+    required String password,
+  }) async {
     emit(LoginLoadingState());
 
     try {
-      loginModel = await loginRepo.userLogin(email, password);
-      emit(LoginSuccessState(loginModel!));
+      loginModel = await loginRepo.userLogin(email: email, password: password);
+      emit(LoginSuccessState(loginModel));
     } catch (e) {
-      emit(LoginErrorState(e));
+      emit(LoginErrorState(e.toString()));
     }
   }
 

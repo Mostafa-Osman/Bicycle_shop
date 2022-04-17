@@ -6,31 +6,29 @@ class AccountTextFormField extends StatelessWidget {
   final String text;
   final IconData icon;
 
-  AccountTextFormField({required this.text, required this.icon});
+  const AccountTextFormField({required this.text, required this.icon});
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    final Size size = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Container(
         height: 45,
-        margin: EdgeInsets.only(right: 10),
-        decoration: BoxDecoration(
+        margin:const EdgeInsets.only(right: 10),
+        decoration:const BoxDecoration(
           color: lightMainColor,
           borderRadius: BorderRadius.all(
             Radius.circular(10),
           ),
-          shape: BoxShape.rectangle,
         ),
         child: ListView(
           scrollDirection: Axis.horizontal,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 Icon(icon, color: mainColor),
                 Padding(
                   padding: const EdgeInsets.only(top: 5.0, left: 10.0),

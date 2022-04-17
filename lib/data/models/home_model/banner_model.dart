@@ -1,30 +1,37 @@
 class BannerModel {
-  bool? status;
-  String? message;
-  List<Data> data=[];
+ final bool status;
+ final String message;
+ final List<Data> data;
 
-  BannerModel({this.status, this.message, required this.data});
+  const BannerModel({
+    required this.status,
+    required this.message,
+    required this.data,
+  });
 
-  BannerModel.fromJson(Map<String, dynamic> json) {
-    status = json['status'];
-    message = json['message'];
-    if (json['data'] != null) {
-      data = <Data>[];
-      json['data'].forEach((v) {
-        data.add(new Data.fromJson(v));
-      });
-    }
+  factory BannerModel.fromJson(Map<String, dynamic> json) {
+    return BannerModel(
+      status: json['status'] as bool,
+      message: json['message']as String ? ??'',
+      data: (json["data"] as List<dynamic>)
+          .map(
+            (element) => Data.fromJson(element as Map<String, dynamic>),
+          )
+          .toList(),
+    );
   }
 }
 
 class Data {
-  int? id;
-  String? image;
+ final int id;
+ final String image;
 
-  Data({this.id, this.image});
+ const Data({required this.id, required this.image});
 
-  Data.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    image = json['image'];
+  factory Data.fromJson(Map<String, dynamic> json) {
+    return Data(
+      id: json['id'] as int,
+      image: json['image'] as String,
+    );
   }
 }

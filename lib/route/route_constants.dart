@@ -5,10 +5,8 @@ class RouteConstant {
   static const String registerRoute = '/register';
   static const String loginRoute = '/login';
 
-  // static const String phoneNumberRoute = '/phoneNumber';
-  // static const String resetPasswordRoute = '/resetPassword';
   static const String homeRoute = '/home';
-  static const String notificationsRoute = '/notifications';
+  static const String notificationsRoute = '/notifications_repo';
   static const String searchRoute = '/search';
   static const String favouriteRoute = '/favourite';
   static const String profileRoute = '/profile';
@@ -28,5 +26,4 @@ class RouteConstant {
 
 
 
-// static const String verifyRoute = '/verify';
 }

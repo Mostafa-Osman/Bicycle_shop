@@ -1,74 +1,49 @@
 class SearchModel {
-  bool? status;
-  String? message;
-  Data? data;
+  final bool status;
+  List<Product> data;
 
+  SearchModel({required this.status, required this.data});
 
-  SearchModel.fromJson(Map<String, dynamic> json) {
-    status = json['status'];
-    message = json['message'];
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+  factory SearchModel.fromJson(Map<String, dynamic> json) {
+    return SearchModel(
+      status: json['status'] as bool,
+      data: (json['data'] as List<dynamic>)
+          .map(
+            (element) => Product.fromJson(element as Map<String, dynamic>),
+          )
+          .toList(),
+    );
   }
 }
-
-class Data {
-  int? currentPage;
-  List<Product> data=[];
-  String? firstPageUrl;
-  int? from;
-  int? lastPage;
-  String? lastPageUrl;
-  String? nextPageUrl;
-  String? path;
-  int? perPage;
-  String? prevPageUrl;
-  int? to;
-  int? total;
-
-
-  Data.fromJson(Map<String, dynamic> json) {
-    currentPage = json['current_page'];
-    if (json['data'] != null) {
-      json['data'].forEach((v) {
-        data.add(new Product.fromJson(v));
-      });
-    }
-    firstPageUrl = json['first_page_url'];
-    from = json['from'];
-    lastPage = json['last_page'];
-    lastPageUrl = json['last_page_url'];
-    nextPageUrl = json['next_page_url'];
-    path = json['path'];
-    perPage = json['per_page'];
-    prevPageUrl = json['prev_page_url'];
-    to = json['to'];
-    total = json['total'];
-  }
-
-}
-
-
-
 
 class Product {
-  int? id;
-  dynamic price;
-  dynamic oldPrice;
-  dynamic discount;
-  String? image;
-  String? name;
-  String? description;
+  final int id;
+  final dynamic price;
+  final dynamic oldPrice;
+  final dynamic discount;
+  final String image;
+  final String name;
+  final String description;
 
+  Product({
+    required this.id,
+    required this.price,
+    required this.oldPrice,
+    required this.discount,
+    required this.image,
+    required this.name,
+    required this.description,
+  });
 
-  Product.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    price = json['price'];
-    oldPrice = json['old_price'];
-    discount = json['discount'];
-    image = json['image'];
-    name = json['name'];
-    description = json['description'];
+  factory Product.fromJson(Map<String, dynamic> json) {
+    return Product(
+      id: json['id'] as int,
+      price: json['price'],
+      oldPrice: json['old_price'],
+      discount: json['discount'],
+      image: json['image'] as String,
+      name: json['name'] as String,
+      description: json['description'] as String,
+    );
   }
-
-
 }

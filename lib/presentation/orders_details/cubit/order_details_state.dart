@@ -27,4 +27,8 @@ class OrderCancelLoading extends OrderDetailsState {}
 
 class OrderCancelSuccess extends OrderDetailsState {}
 
-class OrderCancelError extends OrderDetailsState {}
+class OrderCancelError extends OrderDetailsState {
+  final String errorMessage;
+
+  OrderCancelError({required this.errorMessage});
+}

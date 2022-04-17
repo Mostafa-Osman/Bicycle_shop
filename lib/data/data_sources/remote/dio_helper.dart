@@ -2,8 +2,9 @@ import 'package:dio/dio.dart';
 
 class DioHelper {
   static Dio? dio;
+  const DioHelper();
 
-  static int() {
+  static void init() {
     dio = Dio(
       BaseOptions(
         baseUrl: 'https://student.valuxapps.com/api/',
@@ -18,13 +19,13 @@ class DioHelper {
     Map<String, dynamic>? query,
     String lang = 'en',
     String? token,
-  }) async {
+  })  {
     dio!.options.headers = {
       'lang': lang,
       'Authorization': token ?? '',
       'Content-Type': 'application/json',
     };
-    return await dio!.get(url, queryParameters: query ?? null);
+    return  dio!.get(url, queryParameters: query);
   }
 
   //post data
@@ -34,14 +35,14 @@ class DioHelper {
     Map<String, dynamic>? query,
     String lang = 'en',
     String? token,
-  }) async {
+  })  {
     dio!.options.headers = {
       'lang': lang,
       'Authorization': token ?? '',
       'Content-Type': 'application/json'
     };
 
-    return await dio!.post(url, queryParameters: query, data: data);
+    return  dio!.post(url, queryParameters: query, data: data);
   }
 
   //update data
@@ -51,14 +52,14 @@ class DioHelper {
     Map<String, dynamic>? query,
     String lang = 'en',
     String? token,
-  }) async {
+  })  {
     dio!.options.headers = {
       'lang': lang,
       'Authorization': token ?? '',
       'Content-Type': 'application/json'
     };
 
-    return await dio!.put(url, queryParameters: query, data: data);
+    return  dio!.put(url, queryParameters: query, data: data);
   }
 
   //delete data
@@ -67,12 +68,12 @@ class DioHelper {
     Map<String, dynamic>? query,
     String lang = 'en',
     String? token,
-  }) async {
+  })  {
     dio!.options.headers = {
       'lang': lang,
       'Authorization': token ?? '',
       'Content-Type': 'application/json',
     };
-    return await dio!.delete(url, queryParameters: query ?? null);
+    return  dio!.delete(url, queryParameters: query);
   }
 }

@@ -4,7 +4,7 @@ class CustomDivider extends StatelessWidget {
   final Color? color;
   final double? thickness;
 
-  CustomDivider({this.color, this.thickness});
+  const CustomDivider({this.color, this.thickness});
 
   @override
   Widget build(BuildContext context) {

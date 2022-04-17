@@ -13,7 +13,7 @@ class NotificationsAppBar extends StatelessWidget
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
-        title: CustomText(
+        title: const CustomText(
           text: 'Notifications',
           textColor: mainColor,
         ),
@@ -23,8 +23,7 @@ class NotificationsAppBar extends StatelessWidget
   }
 
   @override
-  // TODO: implement preferredSize
-  Size get preferredSize => new Size.fromHeight(60);
+  Size get preferredSize =>  const Size.fromHeight(60);
 }
 
 class FavouriteAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -33,14 +32,14 @@ class FavouriteAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
-        title: CustomText(text: 'Favourites', textColor: mainColor),
+        title: const CustomText(text: 'Favourites', textColor: mainColor),
         centerTitle: true,
       ),
     );
   }
 
   @override
-  Size get preferredSize => new Size.fromHeight(60);
+  Size get preferredSize => const Size.fromHeight(60);
 }
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -50,7 +49,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
       appBar: AppBar(
         elevation: 0.0,
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(kToolbarHeight),
+          preferredSize:const Size.fromHeight(kToolbarHeight),
           child: Row(
             children: [
               Expanded(
@@ -62,13 +61,13 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                     decoration: InputDecoration(
                       fillColor: Colors.grey[100],
                       filled: true,
-                      contentPadding: EdgeInsets.all(10),
-                      prefixIcon: Icon(Icons.search),
+                      contentPadding:const EdgeInsets.all(10),
+                      prefixIcon:const Icon(Icons.search),
                       hintText: 'Search...',
-                      hintStyle: TextStyle(
+                      hintStyle:const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
-                          color: grey),
+                          color: grey,),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(25),
                       ),
@@ -96,8 +95,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  // TODO: implement preferredSize
-  Size get preferredSize => new Size.fromHeight(60);
+  Size get preferredSize => const Size.fromHeight(60);
 }
 
 class OrdersAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -106,7 +104,7 @@ class OrdersAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
-        title: CustomText(
+        title: const CustomText(
           text: 'My Orders',
           textColor: mainColor,
           textAlign: TextAlign.center,
@@ -117,8 +115,7 @@ class OrdersAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  // TODO: implement preferredSize
-  Size get preferredSize => new Size.fromHeight(60);
+  Size get preferredSize => const Size.fromHeight(60);
 }
 
 class AccountAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -127,7 +124,7 @@ class AccountAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
-        title: CustomText(
+        title: const CustomText(
           text: 'Account',
           textColor: mainColor,
           textAlign: TextAlign.center,
@@ -138,6 +135,5 @@ class AccountAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  // TODO: implement preferredSize
-  Size get preferredSize => new Size.fromHeight(60);
+  Size get preferredSize => const Size.fromHeight(60);
 }

@@ -1,16 +1,17 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:udemy_flutter/data/models/basket_model/add_order_model.dart';
 import 'package:udemy_flutter/data/models/payment_model/estimate.dart';
 import 'package:udemy_flutter/data/models/payment_model/promo_code.dart';
 import 'package:udemy_flutter/data/repository/payment_repo/payment_repo.dart';
-import 'package:udemy_flutter/presentation/payment/payment_cubit/states.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
-
+part 'payment_states.dart';
 class PaymentCubit extends Cubit<PaymentStates> {
-  PaymentCubit() : super(PaymentInitialState());
+  PaymentCubit(this.paymentRepository) : super(PaymentInitial());
 
-  static PaymentCubit get(context) => BlocProvider.of(context);
   bool isOnline = false;
   int discountTabTextIndexSelected = 1;
   int voucherTabTextIndexSelected = 1;
@@ -19,16 +20,24 @@ class PaymentCubit extends Cubit<PaymentStates> {
   String cardHolderName = '';
   String cvvCode = '';
   bool isCvvFocused = false;
-  var labelText = ["Yes", "No"];
+  List<String> labelText = ["Yes", "No"];
 
-  isOnlinePayment() {
+  //complete make order and add to get it
+
+  late AddOrderModel makeOrders;
+  final PaymentRepository paymentRepository ;
+  int addressIndex = 0;
+  late PromoCodeModel promoCodeModel;
+  late EstimateModel estimatePrice;
+
+  void isOnlinePayment() {
     isOnline = !isOnline;
-    emit(IsOnlineState());
+    emit(PaymentRefreshUi());
   }
 
   //credit card
-  onCreditCardModelChange(creditCardModel) {
-    emit(CreditCardModelChangeSuccess());
+  void onCreditCardModelChange(CreditCardModel creditCardModel) {
+    emit(PaymentRefreshUi());
     cardNumber = creditCardModel.cardNumber;
     expiryDate = creditCardModel.expiryDate;
     cardHolderName = creditCardModel.cardHolderName;
@@ -36,82 +45,77 @@ class PaymentCubit extends Cubit<PaymentStates> {
     isCvvFocused = creditCardModel.isCvvFocused;
   }
 
-  changeDiscount(index) {
-    emit(SwitchDiscountState());
+  void changeDiscount(int index) {
+    emit(PaymentRefreshUi());
     discountTabTextIndexSelected = index;
   }
 
-  changeVoucher(index) {
-    emit(SwitchVoucherState());
+  void changeVoucher(int index) {
     voucherTabTextIndexSelected = index;
+    emit(PaymentRefreshUi());
   }
 
-  //complete make order and add to get it
-
-  AddOrderModel? makeOrders;
-  final paymentRepo = PaymentRepo();
-
-  Future<void> makeOrderData(addressId, paymentMethod, usePoints) async {
-    emit(MakeOrderLoadingState());
+  Future<void> makeOrderData({
+    required int addressId,
+  }) async {
+    emit(MakeOrderLoading());
     try {
-      makeOrders =
-          await paymentRepo.makeOrderData(addressId, paymentMethod, usePoints);
-      emit(MakeOrderSuccessState());
-    } catch (e, s) {
-      print(s.toString());
-      emit(MakeOrderErrorState());
+      makeOrders = await paymentRepository.makeOrderData(
+        addressId: addressId,
+        paymentMethod: isOnline ? 1 : 2,
+        // ignore: avoid_bool_literals_in_conditional_expressions
+        usePoints: discountTabTextIndexSelected == 0 ? true : false,
+      );
+      emit(MakeOrderSuccess());
+    } catch (error, s) {
+      log('make order data',error:error ,stackTrace: s);
+      emit(MakeOrderError(error.toString()));
     }
   }
 
-  EstimateModel? estimatePrice;
-
-  Future<void> estimateOrdersData(usePoints
-    //  , promoCodeId
+  Future<void> estimateOrdersData(//  , promoCodeId
       ) async {
     emit(EstimateOrderLoading());
     try {
-      estimatePrice =
-          await paymentRepo.estimateOrdersData(usePoints
-           //   , promoCodeId
-          );
+      estimatePrice = await paymentRepository.estimateOrdersData(
+        // ignore: avoid_bool_literals_in_conditional_expressions
+        usePoints: discountTabTextIndexSelected == 0 ? true : false,
+        //   , promoCodeId
+      );
       emit(EstimateOrderSuccess());
-    } catch (e, s) {
-      print(s.toString());
-      emit(EstimateOrderError());
+    } catch (error, s) {
+      log('estimate orders data',error:error ,stackTrace: s);
+      emit(EstimateOrderError(error.toString()));
     }
   }
 
-  PromoCodeModel? promoCodeModel;
-
-  Future<void> promoCode(code) async {
+  Future<void> promoCode({required String code}) async {
     emit(PromoCodeLoading());
     try {
-      promoCodeModel = await PaymentRepo().promoCode(code);
+      promoCodeModel = await PaymentRepository().promoCode(code: code);
       emit(PromoCodeSuccess());
-    } catch (e, s) {
-      print(s.toString());
-      emit(PromoCodeError());
+    } catch (error, s) {
+      log('promo code data',error:error ,stackTrace: s);
+      emit(PromoCodeError(error.toString()));
     }
   }
 
-  int addressIndex = 0;
-
-  changeAddressIndex(index) {
+  void changeAddressIndex(int index) {
     addressIndex = index;
-    emit(ChangeAddressIndex());
+    emit(PaymentRefreshUi());
   }
 
-  Color backgroundTextAddress = Color(0xffE0E0E0);
+  Color backgroundTextAddress = const Color(0xffE0E0E0);
   Color textColor = black;
 
-  void addressStyle(index) {
+  void addressStyle(int index) {
     if (addressIndex == index) {
       backgroundTextAddress = lightMainColor;
       textColor = mainColor;
     } else {
       textColor = black;
-      backgroundTextAddress = Color(0xffE0E0E0);
+      backgroundTextAddress = const Color(0xffE0E0E0);
     }
-    emit(AddressStyleState());
+    emit(PaymentRefreshUi());
   }
 }

@@ -8,14 +8,14 @@ class LanguageScreen extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           elevation: 0.0,
-          title: CustomText(text: 'Language', textColor: mainColor),
+          title: const CustomText(text: 'Language', textColor: mainColor),
           leading: IconButton(
             onPressed: () => Navigator.pop(context),
-            icon: Icon(Icons.arrow_back_ios_sharp, color: mainColor),
+            icon:const Icon(Icons.arrow_back_ios_sharp, color: mainColor),
           ),
         ),
-        body: Center(
+        body: const Center(
           child: CustomText(text: 'Coming soon', textColor: grey),
-        ));
+        ),);
   }
 }

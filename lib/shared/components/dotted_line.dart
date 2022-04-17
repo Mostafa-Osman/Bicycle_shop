@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 
 class CustomDotedLine extends StatelessWidget {
-  final dashColor;
+  final Color dashColor;
 
   const CustomDotedLine({this.dashColor = Colors.black12});
 

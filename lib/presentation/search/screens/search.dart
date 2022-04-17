@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:udemy_flutter/presentation/search/cubit/cubit.dart';
-import 'package:udemy_flutter/presentation/search/cubit/states.dart';
+import 'package:udemy_flutter/data/models/favourit_model/favourites_model.dart';
+import 'package:udemy_flutter/presentation/search/cubit/search_cubit.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
 import 'package:udemy_flutter/shared/components/build_item.dart';
 import 'package:udemy_flutter/shared/components/custom_divider.dart';
@@ -15,33 +15,34 @@ class SearchScreen extends StatelessWidget {
   final searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return  BlocConsumer<SearchCubit, SearchStates>(
-        listener: (context, state) {},
+    final searchCubit = BlocProvider.of<SearchCubit>(context);
+    return Scaffold(
+      body: BlocBuilder<SearchCubit, SearchStates>(
         builder: (context, state) {
-          var model = SearchCubit.get(context).searchModel;
-          return Scaffold(
-            body: SafeArea(
-              child: Stack(children: [
+          final model = searchCubit.searchModel;
+          return SafeArea(
+            child: Stack(
+              children: [
                 Container(
-                  margin: EdgeInsets.only(top: 10.0, left: 10.0),
+                  margin: const EdgeInsets.only(top: 10.0, left: 10.0),
                   width: double.infinity,
                   child: Row(
                     children: [
                       Expanded(
                         child: TextFormField(
                           autofocus: true,
-                          onFieldSubmitted: (text) =>
-                              SearchCubit.get(context).search(text),
+                          onFieldSubmitted: (text) => searchCubit.getSearchData(text:text),
                           decoration: InputDecoration(
                             fillColor: Colors.grey[100],
                             filled: true,
-                            contentPadding: EdgeInsets.all(10),
-                            prefixIcon: Icon(Icons.search),
+                            contentPadding: const EdgeInsets.all(10),
+                            prefixIcon: const Icon(Icons.search),
                             hintText: 'Search...',
-                            hintStyle: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: grey),
+                            hintStyle: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: grey,
+                            ),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25),
                             ),
@@ -51,8 +52,10 @@ class SearchScreen extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(right: 10.0),
                         child: IconButton(
-                          onPressed: () =>
-                              navigateTo(context, RouteConstant.basketRoute),
+                          onPressed: () => navigateTo(
+                            context,
+                            RouteConstant.basketRoute,
+                          ),
                           icon: SizedBox(
                             height: 40.0,
                             width: 40.0,
@@ -67,30 +70,31 @@ class SearchScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                (state is SearchInitialState)
-                    ? SizedBox()
-                    : (state is SearchLoadingState)
-                        ? Center(
-                            child: CustomLoading(),
-                          )
-                        : (state is SearchErrorState)
-                            ? Center(
-                                child: CustomText(text: 'error 404'),
-                              )
-                            : Padding(
-                                padding: const EdgeInsets.only(top: 70.0),
-                                child: ListView.separated(
-                                    itemBuilder: (context, index) => BuildItem(
-                                        model: model!.data!.data[index]),
-                                    separatorBuilder: (context, index) =>
-                                        CustomDivider(),
-                                    itemCount: model!.data!.data.length),
-                              ),
-              ]),
+                if (state is SearchLoading)
+                  const Center(
+                    child: CustomLoading(),
+                  )
+                else if
+                  (state is SearchError)
+                       const Center(
+                          child: CustomText(text: 'error 404'),
+                        )
+                      else Padding(
+                          padding: const EdgeInsets.only(top: 70.0),
+                          child: ListView.separated(
+                            itemBuilder: (context, index) => BuildItem(
+                              model: model.data[index] as Product,
+                            ),
+                            separatorBuilder: (context, index) =>
+                                const CustomDivider(),
+                            itemCount: model.data.length,
+                          ),
+                        ),
+              ],
             ),
           );
         },
-      )
-    ;
+      ),
+    );
   }
 }

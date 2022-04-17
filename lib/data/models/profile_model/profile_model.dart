@@ -1,45 +1,51 @@
 class ProfileModel {
-  bool? status;
-  String? message;
-  Data? data;
+  final bool status;
+  final Data data;
 
-  ProfileModel({this.status, this.message, this.data});
+  ProfileModel({
+    required this.status,
+    required this.data,
+  });
 
-  ProfileModel.fromJson(Map<String, dynamic> json) {
-    status = json['status'];
-    message = json['message'];
-    data = new Data.fromJson(json['data']);
+  factory ProfileModel.fromJson(Map<String, dynamic> json) {
+    return ProfileModel(
+      status: json['status'] as bool,
+      data: Data.fromJson(json['data'] as Map<String, dynamic>),
+    );
   }
 }
 
 class Data {
-  int? id;
-  String? name;
-  String? email;
-  String? phone;
-  String? image;
-  int? points;
-  dynamic credit;
-  String? token;
+  final int id;
+  late final String name;
+  late final String email;
+  late final String phone;
+  late final String image;
+  final int points;
+  final dynamic credit;
+  final String token;
 
-  Data(
-      {this.id,
-      this.name,
-      this.email,
-      this.phone,
-      this.image,
-      this.points,
-      this.credit,
-      this.token});
+  Data({
+    required this.id,
+    required this.name,
+    required this.email,
+    required this.phone,
+    required this.image,
+    required this.points,
+    required this.credit,
+    required this.token,
+  });
 
-  Data.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-    email = json['email'];
-    phone = json['phone'];
-    image = json['image'];
-    points = json['points'];
-    credit = json['credit'];
-    token = json['token'];
+  factory Data.fromJson(Map<String, dynamic> json) {
+    return Data(
+      id: json['id'] as int,
+      name: json['name'] as String,
+      email: json['email'] as String,
+      phone: json['phone'] as String,
+      image: json['image'] as String,
+      points: json['points'] as int,
+      credit: json['credit'],
+      token: json['token'] as String,
+    );
   }
 }

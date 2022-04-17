@@ -2,10 +2,9 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/presentation/add&update_address/address_cubit/address_cubit.dart';
-import 'package:udemy_flutter/presentation/add&update_address/address_cubit/states.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
-import 'package:udemy_flutter/shared/components/custom%20_card.dart';
 import 'package:udemy_flutter/shared/components/custom_button.dart';
+import 'package:udemy_flutter/shared/components/custom_card.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/components/loading.dart';
 import 'package:udemy_flutter/shared/components/navigate.dart';
@@ -14,13 +13,14 @@ import 'package:udemy_flutter/shared/styles/color.dart';
 class ProfileAddress extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final addressCubit=  BlocProvider.of<AddressCubit>(context).addressModel;
     return BlocConsumer<AddressCubit, AddressStates>(
         listener: (context, state) {},
         builder: (context, state) {
           return ConditionalBuilder(
-            condition: (state is GetAddressSuccess),
+            condition: state is GetAddressSuccess,
             builder: (BuildContext context) {
-              var cubit = AddressCubit.get(context).addressModel!.data!.data!;
+              // final cubit = AddressCubit.get(context).addressModel!.data!.data!;
 
               return SingleChildScrollView(
                 child: Padding(
@@ -29,35 +29,34 @@ class ProfileAddress extends StatelessWidget {
                     widget: Column(
                       children: [
                         CustomText(
-                          text: 'My Addresses' + ' (${cubit.length})',
+                          text: 'My Addresses' + ' (${addressCubit.data.length})',
                           textColor: Colors.grey,
                           fontSize: 20.0,
                         ),
-                        (cubit.length > 0)
-                            ? Padding(
+                        if (addressCubit.data.isNotEmpty) Padding(
                                 padding: const EdgeInsets.only(
-                                    top: 10.0, bottom: 20.0),
-                                child: Container(
-                                  height: cubit.length > 1 ? 120.0 : 60.0,
+                                    top: 10.0, bottom: 20.0,),
+                                child: SizedBox(
+                                  height: addressCubit.data.length > 1 ? 120.0 : 60.0,
                                   child: ListView.separated(
-                                    itemCount: cubit.length,
+                                    itemCount: addressCubit.data.length,
                                     itemBuilder: (context, index) =>
                                         TextFormField(
                                       readOnly: true,
                                       onTap: () => navigateWithArgument(
                                           context,
                                           RouteConstant.updateAddressRoute,
-                                          index),
+                                          index,),
                                       decoration: InputDecoration(
                                         fillColor: Colors.grey[100],
                                         filled: true,
-                                        contentPadding: EdgeInsets.all(10),
+                                        contentPadding:const EdgeInsets.all(10),
                                         hintText:
-                                            'City : ' + '${cubit[index].city}',
-                                        hintStyle: TextStyle(
+                                            'City : ${addressCubit.data[index].city}',
+                                        hintStyle:const TextStyle(
                                             fontSize: 18,
                                             fontWeight: FontWeight.bold,
-                                            color: grey),
+                                            color: grey,),
                                         border: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(10),
@@ -65,17 +64,16 @@ class ProfileAddress extends StatelessWidget {
                                       ),
                                     ),
                                     separatorBuilder: (context, _) =>
-                                        SizedBox(height: 10.0),
+                                    const  SizedBox(height: 10.0),
                                   ),
                                 ),
-                              )
-                            : SizedBox(height: 10.0),
+                              ) else const SizedBox(height: 10.0),
                         CustomButton(
                           onPressed: () => navigateTo(
-                              context, RouteConstant.addAddressRoute),
+                              context, RouteConstant.addAddressRoute,),
                           text: 'Add new address',
                         ),
-                        SizedBox(height: 20.0),
+                        const SizedBox(height: 20.0),
                       ],
                     ),
                   ),
@@ -83,9 +81,9 @@ class ProfileAddress extends StatelessWidget {
               );
             },
             fallback: (BuildContext context) {
-              return Center(child: CustomLoading());
+              return const Center(child: CustomLoading());
             },
           );
-        });
+        },);
   }
 }

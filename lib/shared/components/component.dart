@@ -11,29 +11,21 @@ void showToast({required String message, required ToastStates state}) =>
 
         backgroundColor: chooseToastColor(state),
         textColor: Colors.black,
-        fontSize: 16.0);
-enum ToastStates { SUCCESS, ERROR, WARNING }
+        fontSize: 16.0,);
+ enum ToastStates { success, error, warning }
 
 Color chooseToastColor(ToastStates state) {
   Color color;
   switch (state) {
-    case ToastStates.SUCCESS:
+    case ToastStates.success:
       color = Colors.green;
       break;
-    case ToastStates.ERROR:
+    case ToastStates.error:
       color = Colors.red;
       break;
-    case ToastStates.WARNING:
+    case ToastStates.warning:
       color = Colors.amber;
       break;
   }
   return color;
 }
-
-
-
-
-
-
-
-

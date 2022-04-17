@@ -1,29 +1,39 @@
 class EstimateModel {
-  bool? status;
-  String? message;
-  Data? data;
+  final bool status;
+  final EstimateData data;
 
-  EstimateModel({this.status, this.message, this.data});
+  EstimateModel({
+    required this.status,
+    required this.data,
+  });
 
-  EstimateModel.fromJson(Map<String, dynamic> json) {
-    status = json['status'];
-    message = json['message'];
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+  factory EstimateModel.fromJson(Map<String, dynamic> json) {
+    return EstimateModel(
+      status: json['status'] as bool,
+      data: EstimateData.fromJson(json['data'] as Map<String, dynamic>),
+    );
   }
 }
 
-class Data {
-  dynamic subTotal;
-  dynamic discount;
-  dynamic points;
-  dynamic total;
+class EstimateData {
+  final int subTotal;
+  final int discount;
+  final int points;
+  final int total;
 
-  Data({this.subTotal, this.discount, this.points, this.total});
+  EstimateData({
+    required this.subTotal,
+    required this.discount,
+    required this.points,
+    required this.total,
+  });
 
-  Data.fromJson(Map<String, dynamic> json) {
-    subTotal = json['sub_total'];
-    discount = json['discount'];
-    points = json['points'];
-    total = json['total'];
+  factory EstimateData.fromJson(Map<String, dynamic> json) {
+    return EstimateData(
+      subTotal: json['sub_total']as int,
+      discount: json['discount']as int,
+      points: json['points']as int,
+      total: json['total']as int,
+    );
   }
 }

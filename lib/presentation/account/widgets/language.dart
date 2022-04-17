@@ -11,19 +11,19 @@ class Language extends StatelessWidget {
   Widget build(BuildContext context) {
     return  InkWell(
       onTap: () => navigateTo(
-          context, RouteConstant.languageRoute),
+          context, RouteConstant.languageRoute,),
       child: ListTile(
         leading: SvgPicture.asset(
             'assets/icons/language.svg',
             fit: BoxFit.cover,
             height: 30,
-            width: 30),
+            width: 30,),
         title:
-        CustomText(text: 'Language', fontSize: 20),
+        const CustomText(text: 'Language', fontSize: 20),
         subtitle:
-        CustomText(text: 'English', fontSize: 15),
-        trailing: Icon(Icons.arrow_forward_ios_outlined,
-            color: mainColor),
+        const CustomText(text: 'English', fontSize: 15),
+        trailing: const Icon(Icons.arrow_forward_ios_outlined,
+            color: mainColor,),
       ),
     );
   }

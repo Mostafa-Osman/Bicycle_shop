@@ -20,7 +20,7 @@ class CustomTextFormField extends StatelessWidget {
   final String? initialValue;
 
 
-  CustomTextFormField(
+  const CustomTextFormField(
       {required this.controller,
       this.validator,
       this.textHint,

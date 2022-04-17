@@ -1,36 +1,38 @@
+import 'dart:developer';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:udemy_flutter/data/repository/address_repo/address_repo.dart';
-import 'package:udemy_flutter/presentation/add&update_address/address_cubit/states.dart';
 import 'package:udemy_flutter/data/models/address_model/address_model.dart';
+import 'package:udemy_flutter/data/repository/address_repo/address_repo.dart';
+
+part 'address_states.dart';
 
 class AddressCubit extends Cubit<AddressStates> {
-  AddressCubit() : super(AddressInitial());
+  AddressCubit(this.addressRepo) : super(AddressInitial());
 
-  static AddressCubit get(context) => BlocProvider.of(context);
+  late AddressModel addressModel;
+  final AddressRepository addressRepo;
 
-  AddressModel? addressModel;
-  final addressRepo = AddressRepo();
-
-
-  Future<void> addNewAddressData(
-      {required name,
-      required city,
-      required region,
-      required details,
-      notes}) async {
+  Future<void> addNewAddressData({
+    required String name,
+    required String city,
+    required String region,
+    required String details,
+    required String notes,
+  }) async {
     emit(AddAddressLoading());
     try {
       addressModel = await addressRepo.addNewAddressData(
-          name: name,
-          city: city,
-          region: region,
-          details: details,
-          notes: notes);
+        name: name,
+        city: city,
+        region: region,
+        details: details,
+        notes: notes,
+      );
       emit(AddAddressSuccess());
       getMyAddressData();
     } catch (e, s) {
-      print(s.toString());
-      emit(AddAddressError());
+      log('add new address data', error: e.toString(), stackTrace: s);
+      emit(AddAddressError(s.toString()));
     }
   }
 
@@ -41,41 +43,47 @@ class AddressCubit extends Cubit<AddressStates> {
       addressModel = await addressRepo.getMyAddressData();
       emit(GetAddressSuccess());
     } catch (e, s) {
-      print(s.toString());
-      emit(GetAddressError());
+      log('add get my address data', error: e.toString(), stackTrace: s);
+      emit(GetAddressError(s.toString()));
     }
   }
 
   //update add&update_address
-  Future<void> updateAddressData(
-      {required addressId, name, city, region, details, notes}) async {
+  Future<void> updateAddressData({
+    required int addressId,
+    required String name,
+    required String city,
+    required String region,
+    required String details,
+    required String notes,
+  }) async {
     emit(UpdateAddressLoading());
     try {
       addressModel = await addressRepo.updateAddressData(
-          addressId: addressId,
-          name: name,
-          city: city,
-          region: region,
-          details: details,
-          notes: notes);
+        addressId: addressId,
+        name: name,
+        city: city,
+        region: region,
+        details: details,
+        notes: notes,
+      );
       emit(UpdateAddressOrderSuccess());
       getMyAddressData();
     } catch (e, s) {
-      print(s.toString());
-      emit(UpdateAddressError());
+      log('add update address data', error: e.toString(), stackTrace: s);
+      emit(UpdateAddressError(e.toString()));
     }
   }
 
   //delete add&update_address
-  Future<void> deleteAddressData({required addressId}) async {
+  Future<void> deleteAddressData({required int addressId}) async {
     emit(DeleteAddressLoading());
     try {
       addressModel = await addressRepo.deleteAddressData(addressId: addressId);
       emit(DeleteAddressOrderSuccess());
       getMyAddressData();
-
     } catch (e, s) {
-      print(s.toString());
+      log(s.toString());
       emit(DeleteAddressError());
     }
   }

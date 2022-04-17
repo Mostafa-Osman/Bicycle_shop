@@ -1,57 +1,50 @@
 class AddressModel {
-  bool? status;
-  String? message;
-  Data? data;
+  final bool status;
+  final List<DetailsAddress> data;
 
-  AddressModel({this.status, this.message, this.data});
-
-  AddressModel.fromJson(Map<String, dynamic> json) {
-    status = json['status'];
-    message = json['message'];
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
-  }
-}
-
-class Data {
-  int? currentPage;
-  List<Data1>? data;
-
-  Data({this.currentPage, this.data});
-
-  Data.fromJson(Map<String, dynamic> json) {
-    currentPage = json['current_page'];
-    if (json['data'] != null) {
-      data = <Data1>[];
-      json['data'].forEach((v) {
-        data!.add(new Data1.fromJson(v));
-      });
-    }
-  }
-}
-
-class Data1 {
-  int? id;
-  String? name;
-  String? city;
-  String? region;
-  String? details;
-  String? notes;
-
-  Data1({
-    this.id,
-    this.name,
-    this.city,
-    this.region,
-    this.details,
-    this.notes,
+  AddressModel({
+    required this.status,
+    required this.data,
   });
 
-  Data1.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-    city = json['city'];
-    region = json['region'];
-    details = json['details'];
-    notes = json['notes'];
+  factory AddressModel.fromJson(Map<String, dynamic> json) {
+    return AddressModel(
+      status: json['status'] as bool,
+      data: (json["data"] as List<dynamic>)
+          .map(
+            (element) =>
+                DetailsAddress.fromJson(element as Map<String, dynamic>),
+          )
+          .toList(),
+    );
+  }
+}
+
+class DetailsAddress {
+  final int id;
+  final String name;
+  final String city;
+  final String region;
+  final String details;
+  final String notes;
+
+  DetailsAddress({
+    required this.id,
+    required this.name,
+    required this.city,
+    required this.region,
+    required this.details,
+    required this.notes,
+  });
+
+  factory DetailsAddress.fromJson(Map<String, dynamic> json) {
+    return DetailsAddress(
+      id: json['id'] as int,
+      name: json['name'] as String,
+      city: json['city'] as String,
+      region: json['region'] as String,
+      details: json['details'] as String,
+      notes: json['notes'] as String,
+    );
   }
 }

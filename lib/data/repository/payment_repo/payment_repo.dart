@@ -5,64 +5,63 @@ import 'package:udemy_flutter/data/models/payment_model/estimate.dart';
 import 'package:udemy_flutter/data/models/payment_model/promo_code.dart';
 import 'package:udemy_flutter/shared/components/constants.dart';
 
-class PaymentRepo {
+class PaymentRepository {
   // make  order
-  Future<AddOrderModel> makeOrderData(
-      addressId, paymentMethod, usePoints) async {
-    try {
-      final response =
-          await DioHelper.postData(url: ADD_ORDER, token: token, data: {
+  Future<AddOrderModel> makeOrderData({
+    required int addressId,
+    required int paymentMethod,
+    required bool usePoints,
+  }) async {
+    final response = await DioHelper.postData(
+      url: addOrdersUrl,
+      token: token,
+      data: {
         'address_id': addressId,
         'payment_method': paymentMethod,
         'use_points': usePoints,
-      });
-      if (response.data['status'] == true) {
-        return AddOrderModel.fromJson(response.data);
-      }
-      throw response.data['message'] ?? 'server error';
-    } catch (e) {
-      rethrow;
+      },
+    );
+    final data = response.data as Map<String, dynamic>;
+    if (data['status'] == true) {
+      return AddOrderModel.fromJson(data);
     }
+    throw 'server error';
   }
 
   //Estimate order
-  Future<EstimateModel> estimateOrdersData(usePoints
-     // , promoCodeId
+  Future<EstimateModel> estimateOrdersData({
+    required bool usePoints,
+  }
+      // , promoCodeId
       ) async {
-    try {
-      final response = await DioHelper.postData(
-        url: ESTIMATE_ORDER,
-        token: token,
-        data: {
-          'use_points': usePoints,
-         // 'promo_code_id': promoCodeId,
-        },
-      );
-      if (response.data['status'] == true) {
-        return EstimateModel.fromJson(response.data);
-      }
-      throw response.data['message'] ?? 'server error';
-    } catch (e) {
-      rethrow;
+    final response = await DioHelper.postData(
+      url: estimateOrderUrl,
+      token: token,
+      data: {
+        'use_points': usePoints,
+        // 'promo_code_id': promoCodeId,
+      },
+    );
+    final data = response.data as Map<String, dynamic>;
+    if (data['status'] == true) {
+      return EstimateModel.fromJson(data);
     }
+    throw 'server error';
   }
 
   //promo code
-  Future<PromoCodeModel> promoCode(code) async {
-    try {
-      final response = await DioHelper.postData(
-        url: PROMO_CODE,
-        token: token,
-        data: {
-          'code': code,
-        },
-      );
-      if (response.data['status'] == true) {
-        return PromoCodeModel.fromJson(response.data);
-      }
-      throw response.data['message'] ?? 'server error';
-    } catch (e) {
-      rethrow;
+  Future<PromoCodeModel> promoCode({required String code}) async {
+    final response = await DioHelper.postData(
+      url: promoCodeUrl,
+      token: token,
+      data: {
+        'code': code,
+      },
+    );
+    final data = response.data as Map<String, dynamic>;
+    if (data['status'] == true) {
+      return PromoCodeModel.fromJson(data);
     }
+    throw 'server error';
   }
 }

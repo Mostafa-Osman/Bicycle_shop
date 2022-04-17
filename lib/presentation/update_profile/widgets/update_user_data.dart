@@ -13,17 +13,17 @@ class UpdateUserData extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var userInformation = userData!.data;
-    final nameController = TextEditingController(text: userInformation!.name);
+    final userInformation = userData.data;
+    final nameController = TextEditingController(text: userInformation.name);
     final emailController = TextEditingController(text: userInformation.email);
     final phoneController = TextEditingController(text: userInformation.phone);
     return BlocConsumer<UpdateProfileCubit, UpdateProfileState>(
         listener: (context, state) {
-      if (state is UpdateProfileError)
-        showToast(message: state.error, state: ToastStates.ERROR);
-      else if (state is UpdateProfileSuccess){
+      if (state is UpdateProfileError) {
+        showToast(message: state.error, state: ToastStates.error);
+      } else if (state is UpdateProfileSuccess){
         showToast(
-            message: 'update profile success', state: ToastStates.SUCCESS);
+            message: 'update profile success', state: ToastStates.success,);
 
         Navigator.pop(context);
       }
@@ -38,16 +38,16 @@ class UpdateUserData extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CustomText(
+                  const CustomText(
                     text: ' Name',
                     fontSize: 20.0,
                     textColor: mainColor,
                   ),
-                  SizedBox(height: 5.0),
+                  const SizedBox(height: 5.0),
                   CustomTextFormField(
                     controller: nameController,
-                    backgroundColor: Color(0xfff2f2f2),
-                    prefix: Icon(
+                    backgroundColor:const Color(0xfff2f2f2),
+                    prefix:const Icon(
                       Icons.account_circle_outlined,
                       color: mainColor,
                     ),
@@ -55,17 +55,17 @@ class UpdateUserData extends StatelessWidget {
                         value!.isEmpty ? 'please enter your name' : null,
                     keyboardType: TextInputType.name,
                   ),
-                  SizedBox(height: 20),
-                  CustomText(
+                  const SizedBox(height: 20),
+                  const CustomText(
                     text: ' phone number',
                     textColor: mainColor,
                     fontSize: 20.0,
                   ),
-                  SizedBox(height: 5.0),
+                  const  SizedBox(height: 5.0),
                   CustomTextFormField(
                     controller: phoneController,
-                    backgroundColor: Color(0xfff2f2f2),
-                    prefix: Icon(
+                    backgroundColor:const Color(0xfff2f2f2),
+                    prefix:const Icon(
                       Icons.phone,
                       color: mainColor,
                     ),
@@ -76,17 +76,17 @@ class UpdateUserData extends StatelessWidget {
                             ? 'رقم الهاتف غير صحيح'
                             : null,
                   ),
-                  SizedBox(height: 20),
-                  CustomText(
+                  const SizedBox(height: 20),
+                  const CustomText(
                     text: ' E-mail',
                     textColor: mainColor,
                     fontSize: 20.0,
                   ),
-                  SizedBox(height: 5.0),
+                  const SizedBox(height: 5.0),
                   CustomTextFormField(
                     controller: emailController,
-                    backgroundColor: Color(0xfff2f2f2),
-                    prefix: Icon(
+                    backgroundColor:const Color(0xfff2f2f2),
+                    prefix:const Icon(
                       Icons.email,
                       color: mainColor,
                     ),
@@ -116,6 +116,6 @@ class UpdateUserData extends StatelessWidget {
           ),
         ],
       );
-    });
+    },);
   }
 }

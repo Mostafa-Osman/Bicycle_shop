@@ -3,14 +3,14 @@ import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 
 class CustomCounter extends StatelessWidget {
-  final increment;
-  final decrement;
-  final textCount;
+  final Function  increment;
+  final Function decrement;
+  final String textCount;
 
   const CustomCounter(
       {required this.increment,
       required this.decrement,
-      required this.textCount});
+      required this.textCount,});
 
   @override
   Widget build(BuildContext context) {
@@ -20,27 +20,27 @@ class CustomCounter extends StatelessWidget {
           height: 40.0,
           child: FloatingActionButton(
             heroTag: null,
-            onPressed: decrement,
-            child: Icon(
+            onPressed: ()=>decrement,
+            backgroundColor: mainColor,
+            child: const Icon(
               Icons.remove,
               color: white,
               size: 20,
             ),
-            backgroundColor: mainColor,
           ),
         ),
-        CustomText(text: '$textCount'),
+        CustomText(text: textCount),
         SizedBox(
           height: 40.0,
           child: FloatingActionButton(
             heroTag: null,
-            onPressed: increment,
-            child: Icon(
+            onPressed:()=> increment,
+            backgroundColor: mainColor,
+            child: const Icon(
               Icons.add,
               color: white,
               size: 20,
             ),
-            backgroundColor: mainColor,
           ),
         ),
       ],

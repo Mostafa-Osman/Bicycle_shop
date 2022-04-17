@@ -2,19 +2,21 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/presentation/add&update_address/address_cubit/address_cubit.dart';
-import 'package:udemy_flutter/presentation/add&update_address/address_cubit/states.dart';
 import 'package:udemy_flutter/presentation/payment/payment_cubit/payment_cubit.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
-import 'package:udemy_flutter/shared/components/custom%20_card.dart';
+import 'package:udemy_flutter/shared/components/custom_button.dart';
+import 'package:udemy_flutter/shared/components/custom_card.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/components/loading.dart';
 import 'package:udemy_flutter/shared/components/navigate.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
-import 'package:udemy_flutter/shared/components/custom_button.dart';
 
 class AddressPayment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final addressCubit=  BlocProvider.of<AddressCubit>(context).addressModel;
+    final paymentCubit = BlocProvider.of<PaymentCubit>(context);
+
     return BlocConsumer<AddressCubit, AddressStates>(
       listener: (context, state) {},
       builder: (context, state) {
@@ -28,66 +30,60 @@ class AddressPayment extends StatelessWidget {
                 children: [
                   CustomText(
                     text: 'My Addresses' +
-                        ' (${AddressCubit.get(context).addressModel!.data!.data!.length})',
+                        ' (${addressCubit.data.length})',
                     textColor: mainColor,
                     fontSize: 20.0,
                   ),
-                  SizedBox(height: 10.0),
-                  Container(
-                    height: AddressCubit.get(context)
-                                .addressModel!
-                                .data!
-                                .data!
+                 const SizedBox(height: 10.0),
+                  SizedBox(
+                    height: addressCubit
+                                .data
                                 .length >
                             1
                         ? 120.0
                         : 90.0,
                     child: ListView.separated(
-                      itemCount: AddressCubit.get(context)
-                          .addressModel!
-                          .data!
-                          .data!
+                      itemCount: addressCubit
+                          .data
                           .length,
                       itemBuilder: (context, index) {
                         // to make style of button address
-                        PaymentCubit.get(context).addressStyle(index);
+                        paymentCubit.addressStyle(index);
                         return InkWell(
-                          onTap: () => PaymentCubit.get(context)
+                          onTap: () => paymentCubit
                               .changeAddressIndex(index),
                           child: Container(
                             decoration: BoxDecoration(
-                                color: PaymentCubit.get(context)
+                                color: paymentCubit
                                     .backgroundTextAddress,
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(10.0)),
+                                const  BorderRadius.all( Radius.circular(10.0)),
                                 border: Border.all(
-                                    color: PaymentCubit.get(context)
-                                        .backgroundTextAddress)),
+                                    color: paymentCubit
+                                        .backgroundTextAddress,),),
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   CustomText(
-                                      text: 'City : ' +
-                                          '${AddressCubit.get(context).addressModel!.data!.data![index].city}',
+                                      text: 'City : ${addressCubit.data[index].city}',
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
                                       textColor:
-                                          PaymentCubit.get(context).textColor),
+                                      paymentCubit.textColor,),
 
                                       CustomText(
-                                          text: 'region : ' +
-                                              '${AddressCubit.get(context).addressModel!.data!.data![index].region}',
+                                          text: 'region : ${addressCubit.data[index].region}',
                                           fontSize: 20,
-                                          textColor: PaymentCubit.get(context)
-                                              .textColor),
+                                          textColor: paymentCubit
+                                              .textColor,),
                                       CustomText(
                                           text: 'details : '
-                                              '${AddressCubit.get(context).addressModel!.data!.data![index].details}',
+                                              '${addressCubit.data[index].details}',
                                           fontSize: 20,
-                                          textColor: PaymentCubit.get(context)
-                                              .textColor),
+                                          textColor: paymentCubit
+                                              .textColor,),
 
 
                                 ],
@@ -96,24 +92,22 @@ class AddressPayment extends StatelessWidget {
                           ),
                         );
                       },
-                      separatorBuilder: (context, _) => SizedBox(height: 10.0),
+                      separatorBuilder: (context, _) =>const SizedBox(height: 10.0),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
                     child: CustomButton(
-                      buttonColor: mainColor,
                       onPressed: () =>
                           navigateTo(context, RouteConstant.addAddressRoute),
                       text: 'Add new address',
-                      textColor: white,
                     ),
                   ),
                 ],
               ),
             ),
           ),
-          fallback: (context) => Center(child: CustomLoading()),
+          fallback: (context) =>const Center(child: CustomLoading()),
         );
       },
     );

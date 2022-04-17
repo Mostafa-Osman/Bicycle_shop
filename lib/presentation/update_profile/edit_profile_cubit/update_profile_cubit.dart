@@ -1,19 +1,22 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:udemy_flutter/data/repository/user_repo/profile_repo.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:udemy_flutter/data/models/profile_model/profile_model.dart';
+import 'package:udemy_flutter/data/repository/user_repo/profile_repo.dart';
 import 'package:udemy_flutter/shared/components/constants.dart';
+
 part 'update_profile_state.dart';
 
 class UpdateProfileCubit extends Cubit<UpdateProfileState> {
   UpdateProfileCubit() : super(UpdateProfileInitial());
 
-  static UpdateProfileCubit get(context) => BlocProvider.of(context);
+  static UpdateProfileCubit get(BuildContext context) =>
+      BlocProvider.of(context);
 
-  final profileRepo = ProfileRepo();
+  final profileRepo = ProfileRepository();
 
   final ImagePicker imagePicker = ImagePicker();
 
@@ -23,11 +26,13 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
   Future getImageFromCamera() async {
     emit(GetCameraImageLoading());
     try {
-      XFile? photo = await imagePicker.pickImage(source: ImageSource.camera);
+      final XFile? photo =
+          await imagePicker.pickImage(source: ImageSource.camera);
       convertPhotoToBase64(photo);
       emit(GetCameraImageSuccess());
-    } catch (error) {
-      emit(GetCameraImageError());
+    } catch (error, s) {
+      log('get image from camera', error: error, stackTrace: s);
+      emit(GetCameraImageError(error.toString()));
     }
   }
 
@@ -40,22 +45,29 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
     try {
       convertPhotoToBase64(selectedImages);
       emit(GetGalleryImageSuccess());
-    } catch (error) {
-      emit(GetGalleryImageError());
+    } catch (error, s) {
+      log('get image from gallery', error: error, stackTrace: s);
+
+      emit(GetGalleryImageError(error.toString()));
     }
   }
 
   //convert Photo To Base64
   Future convertPhotoToBase64(myFileImage) async {
-    File file = File(myFileImage.path);
-    List<int> fileInByte = file.readAsBytesSync();
-    String fileInBase64 = base64Encode(fileInByte);
+    final File file = File(myFileImage.path.toString());
+    final List<int> fileInByte = file.readAsBytesSync();
+    final String fileInBase64 = base64Encode(fileInByte);
     imageProfile = fileInBase64;
   }
 
-
   // update profile
-  Future<void> updateUserData({name, email, phone, image, password}) async {
+  Future<void> updateUserData({
+    String? name,
+    String? email,
+    String? phone,
+    String? image,
+    String? password,
+  }) async {
     emit(UpdateProfileLoading());
     try {
       userData = await profileRepo.updateUserData(
@@ -63,12 +75,13 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
         email: email,
         phone: phone,
         image: image,
-       password: password
+        password: password,
       );
-      emit(UpdateProfileSuccess(userData!));
-    } catch (error) {
-      emit(UpdateProfileError(error));
-      rethrow;
+      emit(UpdateProfileSuccess(userData));
+    } catch (error, s) {
+      log('update user data', error: error, stackTrace: s);
+
+      emit(UpdateProfileError(error.toString()));
     }
   }
 }

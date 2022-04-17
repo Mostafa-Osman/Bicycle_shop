@@ -9,9 +9,8 @@ import 'package:udemy_flutter/presentation/account/widgets/points_wallet.dart';
 import 'package:udemy_flutter/presentation/account/widgets/profile_details.dart';
 import 'package:udemy_flutter/presentation/account/widgets/sign_out.dart';
 import 'package:udemy_flutter/presentation/profile/cubit/profile_cubit.dart';
-import 'package:udemy_flutter/presentation/profile/cubit/states.dart';
-import 'package:udemy_flutter/shared/components/Dotted_line.dart';
-import 'package:udemy_flutter/shared/components/custom%20_card.dart';
+import 'package:udemy_flutter/shared/components/custom_card.dart';
+import 'package:udemy_flutter/shared/components/dotted_line.dart';
 import 'package:udemy_flutter/shared/components/loading.dart';
 
 class AccountScreen extends StatelessWidget {
@@ -21,22 +20,22 @@ class AccountScreen extends StatelessWidget {
         listener: (context, state) {},
         builder: (context, state) {
           return ConditionalBuilder(
-            condition: (state is ProfileSuccess),
+            condition: state is ProfileSuccess,
             builder: (context) {
               return SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
-                  child: Container(
+                  child: SizedBox(
                     height: MediaQuery.of(context).size.height,
                     width: MediaQuery.of(context).size.width,
                     child: Column(
                       children: [
                         // profile
                         ProfileDetails(),
-                        SizedBox(height: 10.0),
+                        const SizedBox(height: 10.0),
                         //Points And Wallet
                         PointsAndWallet(),
-                        Container(
+                        SizedBox(
                           height: MediaQuery.of(context).size.height / 2.6,
                           width: MediaQuery.of(context).size.width,
                           child: CustomCard(
@@ -44,13 +43,13 @@ class AccountScreen extends StatelessWidget {
                               children: [
                                 //contact us
                                 ContactUs(),
-                                CustomDotedLine(),
+                                const CustomDotedLine(),
                                 //about us
                                 AboutUS(),
-                                CustomDotedLine(),
+                                const   CustomDotedLine(),
                                 //F A Q
                                 FAQ(),
-                                CustomDotedLine(),
+                                const  CustomDotedLine(),
                                 // language
                                 Language()
                               ],
@@ -58,19 +57,19 @@ class AccountScreen extends StatelessWidget {
                           ),
                         ),
                         //sign out
-                        Container(
+                        SizedBox(
                             height: MediaQuery.of(context).size.height / 11,
                             width: MediaQuery.of(context).size.width,
-                            child: SignOut()),
-                        SizedBox(height: 10.0),
+                            child: SignOut(),),
+                        const  SizedBox(height: 10.0),
                       ],
                     ),
                   ),
                 ),
               );
             },
-            fallback: (BuildContext context) => Center(child: CustomLoading()),
+            fallback: (BuildContext context) =>const Center(child: CustomLoading()),
           );
-        });
+        },);
   }
 }

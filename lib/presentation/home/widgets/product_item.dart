@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:udemy_flutter/shared/components/custom_favourite-icon.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:udemy_flutter/data/models/home_model/home_model.dart';
+import 'package:udemy_flutter/route/route_constants.dart';
+import 'package:udemy_flutter/shared/components/custom_favourite_icon.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/components/navigate.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:udemy_flutter/route/route_constants.dart';
+
 
 class BuildItem extends StatelessWidget {
-  final data;
+  final DetailsData data;
 
   const BuildItem({required this.data});
 
@@ -17,17 +19,17 @@ class BuildItem extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
         onTap: () => navigateWithArgument(
-            context, RouteConstant.productDetailsRoute, data),
+            context, RouteConstant.productDetailsRoute, data,),
         child: Container(
           decoration: BoxDecoration(
             color: white,
-            borderRadius: BorderRadius.all(Radius.circular(25)),
+            borderRadius: const BorderRadius.all(Radius.circular(25)),
             boxShadow: [
               BoxShadow(
                 color: Colors.grey.withOpacity(0.3),
                 spreadRadius: 5,
                 blurRadius: 7,
-                offset: Offset(0, 3), // changes position of shadow
+                offset: const Offset(0, 3), // changes position of shadow
               ),
             ],
           ),
@@ -38,7 +40,7 @@ class BuildItem extends StatelessWidget {
                 children: [
 
                   Container(
-                    margin: EdgeInsets.all(10.0),
+                    margin: const EdgeInsets.all(10.0),
                     height: 200.0,
                     child: Image(
                       image: NetworkImage(data.image),
@@ -52,7 +54,7 @@ class BuildItem extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: SvgPicture.asset('assets/icons/discount.svg',
-                            fit: BoxFit.cover, height: 30, width: 30),
+                            fit: BoxFit.cover, height: 30, width: 30,),
                       ),
                     ),
                 ],
@@ -63,7 +65,7 @@ class BuildItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomText(
-                      text: data.name!,
+                      text: data.name,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       fontSize: 14,
@@ -80,7 +82,7 @@ class BuildItem extends StatelessWidget {
                                 fontSize: 14,
                                 height: 1.3,
                                 fontWeight: FontWeight.bold,
-                                textColor: mainColor),
+                                textColor: mainColor,),
                             if (data.discount != 0)
                               CustomText(
                                   text: ' ${data.oldPrice} EGP',
@@ -89,12 +91,12 @@ class BuildItem extends StatelessWidget {
                                   fontSize: 13,
                                   height: 1.3,
                                   textColor: grey,
-                                  decoration: TextDecoration.lineThrough),
+                                  decoration: TextDecoration.lineThrough,),
                           ],
                         ),
-                        Spacer(),
+                        const Spacer(),
                         CustomFavouriteIcon(
-                            productId: data.id!, iconSize: 35.0),
+                            productId: data.id, iconSize: 35.0,),
                       ],
                     ),
                   ],

@@ -1,102 +1,117 @@
 class OrderDetailsResponse {
-  bool? status;
-  String? message;
-  OrderDetailsModel? orderDetails;
+  final bool status;
+  final OrderDetailsModel orderDetails;
 
-  OrderDetailsResponse({this.status, this.message, this.orderDetails});
+  OrderDetailsResponse({
+    required this.status,
+    required this.orderDetails,
+  });
 
-  OrderDetailsResponse.fromJson(Map<String, dynamic> json) {
-    status = json['status'];
-    message = json['message'];
-    orderDetails = new OrderDetailsModel.fromJson(json['data']);
+  factory OrderDetailsResponse.fromJson(Map<String, dynamic> json) {
+    return OrderDetailsResponse(
+      status: json['status'] as bool,
+      orderDetails:
+          OrderDetailsModel.fromJson(json['data'] as Map<String, dynamic>),
+    );
   }
 }
 
 class OrderDetailsModel {
-  int? id;
-  dynamic cost;
-  dynamic discount;
-  dynamic points;
-  dynamic vat;
-  dynamic total;
-  String? paymentMethod;
-  String? date;
-  String? status;
-  Address? address;
-  List<Products>? products;
+  final int id;
+  final dynamic cost;
+  final dynamic discount;
+  final dynamic points;
+  final dynamic vat;
+  final dynamic total;
+  final String paymentMethod;
+  final String date;
+  final String status;
+  final Address address;
+  final List<Products> products;
 
-  OrderDetailsModel(
-      {this.id,
-        this.cost,
-        this.discount,
-        this.points,
-        this.vat,
-        this.total,
-        this.paymentMethod,
-        this.date,
-        this.status,
-        this.address,
-        this.products});
+  OrderDetailsModel({
+    required this.id,
+    required this.cost,
+    required this.discount,
+    required this.points,
+    required this.vat,
+    required this.total,
+    required this.paymentMethod,
+    required this.date,
+    required this.status,
+    required this.address,
+    required this.products,
+  });
 
-  OrderDetailsModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    cost = json['cost'];
-    discount = json['discount'];
-    points = json['points'];
-    vat = json['vat'];
-    total = json['total'];
-    paymentMethod = json['payment_method'];
-    date = json['date'];
-    status = json['status'];
-    address =
-    json['address'] != null ? new Address.fromJson(json['address']) : null;
-    if (json['products'] != null) {
-      products = <Products>[];
-      json['products'].forEach((v) {
-        products!.add(new Products.fromJson(v));
-      });
-    }
+  factory OrderDetailsModel.fromJson(Map<String, dynamic> json) {
+    return OrderDetailsModel(
+      id: json['id'] as int,
+      cost: json['cost'],
+      discount: json['discount'],
+      points: json['points'],
+      vat: json['vat'],
+      total: json['total'],
+      paymentMethod: json['payment_method'] as String,
+      date: json['date'] as String,
+      status: json['status'] as String,
+      address: Address.fromJson(json['address'] as Map<String, dynamic>),
+      products: (json['products'] as List<dynamic>)
+          .map(
+            (element) => Products.fromJson(element as Map<String, dynamic>),
+          )
+          .toList(),
+    );
   }
 }
 
 class Address {
-  int? id;
-  String? name;
-  String? city;
-  String? region;
-  String? details;
+  final int id;
+  final String name;
+  final String city;
+  final String region;
+  final String details;
 
   Address({
-    this.id,
-    this.name,
-    this.city,
-    this.region,
-    this.details,
+    required this.id,
+    required this.name,
+    required this.city,
+    required this.region,
+    required this.details,
   });
 
-  Address.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-    city = json['city'];
-    region = json['region'];
-    details = json['details'];
+  factory Address.fromJson(Map<String, dynamic> json) {
+    return Address(
+      id: json['id'] as int,
+      name: json['name'] as String,
+      city: json['city'] as String,
+      region: json['region'] as String,
+      details: json['details'] as String,
+    );
   }
 }
 
 class Products {
-  int? id;
-  int? quantity;
-  dynamic price;
-  String? name;
-  String? image;
+  final int id;
+  final int quantity;
+  final dynamic price;
+  final String name;
+  final String image;
 
-  Products({this.id, this.quantity, this.price, this.name, this.image});
+  Products({
+    required this.id,
+    required this.quantity,
+    required this.price,
+    required this.name,
+    required this.image,
+  });
 
-  Products.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    quantity = json['quantity'];
-    price = json['price'];
-    name = json['name'];
-    image = json['image'];
+  factory Products.fromJson(Map<String, dynamic> json) {
+    return Products(
+      id: json['id'] as int,
+      quantity: json['quantity'] as int,
+      price: json['price'],
+      name: json['name'] as String,
+      image: json['image'] as String,
+    );
   }
 }

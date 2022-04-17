@@ -1,6 +1,4 @@
-
-
-import 'package:udemy_flutter/data/models/login_model/login_model.dart';
+part of 'login_cubit.dart';
 
 abstract class LoginStates {}
 
@@ -15,10 +13,9 @@ class LoginSuccessState extends LoginStates {
 }
 
 class LoginErrorState extends LoginStates {
-  final error;
+  final String error;
 
   LoginErrorState(this.error);
 }
 
 class LoginVisibilityPasswordState extends LoginStates {}
-

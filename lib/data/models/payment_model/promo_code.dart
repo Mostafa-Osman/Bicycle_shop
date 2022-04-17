@@ -1,31 +1,33 @@
 class PromoCodeModel {
-  bool? status;
-  String? message;
-  Data? data;
+  bool status;
+  Data data;
 
-  PromoCodeModel({this.status, this.message, this.data});
+  PromoCodeModel({required this.status, required this.data});
 
-  PromoCodeModel.fromJson(Map<String, dynamic> json) {
-    status = json['status'];
-    message = json['message'];
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+  factory PromoCodeModel.fromJson(Map<String, dynamic> json) {
+    return PromoCodeModel(
+      status: json['status'] as bool,
+      data: Data.fromJson(json['data'] as Map<String, dynamic>),
+    );
   }
 }
 
 class Data {
-  int? id;
-  String? code;
-  int? value;
+  final int id;
+  final String code;
+  final int value;
 
   Data({
-    this.id,
-    this.code,
-    this.value,
+    required this.id,
+    required this.code,
+    required this.value,
   });
 
-  Data.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    code = json['code'];
-    value = json['value'];
+  factory Data.fromJson(Map<String, dynamic> json) {
+    return Data(
+      id: json['id'] as int,
+      code: json['code'] as String,
+      value: json['value'] as int,
+    );
   }
 }

@@ -1,14 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:udemy_flutter/presentation/product_details/cubit/states.dart';
-
+part 'product_details_states.dart';
 class ProductDetailsCubit extends Cubit<ProductDetailsStates> {
   ProductDetailsCubit() : super(ProductDetailsInitial());
 
-  static ProductDetailsCubit get(context) => BlocProvider.of(context);
   int indicatorIndex = 0;
 
-  void changeSmallPhotoIndex(index) {
+  void changeSmallPhotoIndex(int index) {
     indicatorIndex = index;
-    emit(ChangeSmallPhotoIndexState());
+    emit(ChangeSmallPhotoIndex());
   }
 }
