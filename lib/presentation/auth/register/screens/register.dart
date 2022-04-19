@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:udemy_flutter/presentation/register/cubit/register_cubit.dart';
+import 'package:udemy_flutter/presentation/auth/register/cubit/register_cubit.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
 import 'package:udemy_flutter/shared/components/component.dart';
 import 'package:udemy_flutter/shared/components/custom_button.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
-import 'package:udemy_flutter/shared/components/custom_text_button.dart';
 import 'package:udemy_flutter/shared/components/custom_text_form_field.dart';
 import 'package:udemy_flutter/shared/components/navigate.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
@@ -232,10 +231,14 @@ class RegisterScreen extends StatelessWidget {
                                 text: "Already have an Account ?",
                                 fontSize: 13,
                               ),
-                              CustomTextButton(
-                                text: ' Sign In',
-                                textColor: mainColor,
-                                fontSize: 20,
+                              TextButton(
+                                child: const Text(
+                                  ' Sign In',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    color: mainColor,
+                                  ),
+                                ),
                                 onPressed: () => navigateTo(
                                   context,
                                   RouteConstant.loginRoute,

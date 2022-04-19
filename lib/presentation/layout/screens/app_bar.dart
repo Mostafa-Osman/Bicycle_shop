@@ -65,8 +65,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                       prefixIcon:const Icon(Icons.search),
                       hintText: 'Search...',
                       hintStyle:const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
                           color: grey,),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(25),

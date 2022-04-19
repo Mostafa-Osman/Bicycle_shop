@@ -18,6 +18,7 @@ class CustomTextFormField extends StatelessWidget {
   final TextInputType? keyboardType;
   final String? label;
   final String? initialValue;
+  final double? fontSize;
 
 
   const CustomTextFormField(
@@ -28,8 +29,8 @@ class CustomTextFormField extends StatelessWidget {
       this.roundedRectangleBorder = 25.0,
       this.backgroundColor = Colors.white,
       this.obscureText = false,
-      this.suffixIcon,
-      this.textColor = black,
+      this.suffixIcon, this.fontSize = 15.0,
+        this.textColor = black,
       this.prefix,
       this.keyboardType,
       this.label,
@@ -39,11 +40,12 @@ class CustomTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+
       controller: controller,
       keyboardType: keyboardType,
       validator: validator,
       initialValue: initialValue,
-      style: TextStyle(color: textColor),
+      style: TextStyle(color: textColor,fontSize:fontSize ),
       decoration: InputDecoration(
         hintText: textHint,
         filled: true,

@@ -1,13 +1,13 @@
 import 'package:udemy_flutter/data/data_sources/remote/dio_helper.dart';
 import 'package:udemy_flutter/data/data_sources/remote/end_points.dart';
-import 'package:udemy_flutter/data/models/basket_model/add_order_model.dart';
+import 'package:udemy_flutter/data/models/payment_model/cost_orders_model.dart';
 import 'package:udemy_flutter/data/models/payment_model/estimate.dart';
 import 'package:udemy_flutter/data/models/payment_model/promo_code.dart';
 import 'package:udemy_flutter/shared/components/constants.dart';
 
 class PaymentRepository {
   // make  order
-  Future<AddOrderModel> makeOrderData({
+  Future<CostOrdersModel> makeOrderData({
     required int addressId,
     required int paymentMethod,
     required bool usePoints,
@@ -23,7 +23,7 @@ class PaymentRepository {
     );
     final data = response.data as Map<String, dynamic>;
     if (data['status'] == true) {
-      return AddOrderModel.fromJson(data);
+      return CostOrdersModel.fromJson(data);
     }
     throw 'server error';
   }

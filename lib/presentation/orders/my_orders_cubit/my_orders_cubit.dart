@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:udemy_flutter/data/models/orders_model/my_orders.dart';
+import 'package:udemy_flutter/data/models/history_orders_model/history_orders.dart';
 import 'package:udemy_flutter/data/repository/orders_repo/orders_repo.dart';
 import 'package:udemy_flutter/presentation/orders/my_orders_cubit/my_orders_states.dart';
 
@@ -10,7 +10,7 @@ class MyOrdersCubit extends Cubit<MyOrdersStates> {
 
 
   //get orders
- late  MyOrderModel orders;
+ late  HistoryOrdersModel orders;
   final OrdersRepository ordersRepository;
 
   Future<void> getOrders() async {

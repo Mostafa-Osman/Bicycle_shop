@@ -3,8 +3,10 @@ import 'package:udemy_flutter/data/data_sources/remote/end_points.dart';
 import 'package:udemy_flutter/data/models/login_model/login_model.dart';
 
 class LoginRepository {
-  Future<ShopLoginModel> userLogin(
-      {required String email, required String password,}) async {
+  Future<ShopLoginModel> userLogin({
+    required String email,
+    required String password,
+  }) async {
     final response = await DioHelper.postData(
       url: loginUrl,
       data: {
@@ -18,7 +20,6 @@ class LoginRepository {
     if (data['status'] == true) {
       return ShopLoginModel.fromJson(data);
     }
-    //todo handle login error as error email or password
     throw 'Email or password invalid';
   }
 }

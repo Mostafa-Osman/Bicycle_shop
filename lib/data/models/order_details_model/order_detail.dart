@@ -1,22 +1,22 @@
-class OrderDetailsResponse {
+class OrderDetailsModel {
   final bool status;
-  final OrderDetailsModel orderDetails;
+  final OrderDetailsData orderDetails;
 
-  OrderDetailsResponse({
+  OrderDetailsModel({
     required this.status,
     required this.orderDetails,
   });
 
-  factory OrderDetailsResponse.fromJson(Map<String, dynamic> json) {
-    return OrderDetailsResponse(
+  factory OrderDetailsModel.fromJson(Map<String, dynamic> json) {
+    return OrderDetailsModel(
       status: json['status'] as bool,
       orderDetails:
-          OrderDetailsModel.fromJson(json['data'] as Map<String, dynamic>),
+          OrderDetailsData.fromJson(json['data'] as Map<String, dynamic>),
     );
   }
 }
 
-class OrderDetailsModel {
+class OrderDetailsData {
   final int id;
   final dynamic cost;
   final dynamic discount;
@@ -25,11 +25,11 @@ class OrderDetailsModel {
   final dynamic total;
   final String paymentMethod;
   final String date;
-  final String status;
+  late final String orderStatus;
   final Address address;
   final List<Products> products;
 
-  OrderDetailsModel({
+  OrderDetailsData({
     required this.id,
     required this.cost,
     required this.discount,
@@ -38,13 +38,13 @@ class OrderDetailsModel {
     required this.total,
     required this.paymentMethod,
     required this.date,
-    required this.status,
+    required this.orderStatus,
     required this.address,
     required this.products,
   });
 
-  factory OrderDetailsModel.fromJson(Map<String, dynamic> json) {
-    return OrderDetailsModel(
+  factory OrderDetailsData.fromJson(Map<String, dynamic> json) {
+    return OrderDetailsData(
       id: json['id'] as int,
       cost: json['cost'],
       discount: json['discount'],
@@ -53,7 +53,7 @@ class OrderDetailsModel {
       total: json['total'],
       paymentMethod: json['payment_method'] as String,
       date: json['date'] as String,
-      status: json['status'] as String,
+      orderStatus: json['status'] as String,
       address: Address.fromJson(json['address'] as Map<String, dynamic>),
       products: (json['products'] as List<dynamic>)
           .map(

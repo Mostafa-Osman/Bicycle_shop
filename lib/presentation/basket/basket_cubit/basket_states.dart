@@ -4,6 +4,7 @@ part of 'basket_cubit.dart';
 abstract class BasketStates {}
 
 class BasketInitialState extends BasketStates {}
+class AddToBasketRefreshUi extends BasketStates {}
 
 class AddToBasketLoading extends BasketStates {}
 

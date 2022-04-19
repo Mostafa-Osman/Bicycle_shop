@@ -19,7 +19,7 @@ class EstimateData {
   final int subTotal;
   final int discount;
   final int points;
-  final int total;
+  final dynamic total;
 
   EstimateData({
     required this.subTotal,
@@ -33,7 +33,7 @@ class EstimateData {
       subTotal: json['sub_total']as int,
       discount: json['discount']as int,
       points: json['points']as int,
-      total: json['total']as int,
+      total: json['total'],
     );
   }
 }

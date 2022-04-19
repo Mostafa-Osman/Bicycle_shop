@@ -2,13 +2,12 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/data/data_sources/local/cache_helper.dart';
-import 'package:udemy_flutter/presentation/login/login_cubit/login_cubit.dart';
+import 'package:udemy_flutter/presentation/auth/login/login_cubit/login_cubit.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
 import 'package:udemy_flutter/shared/components/component.dart';
 import 'package:udemy_flutter/shared/components/constants.dart';
 import 'package:udemy_flutter/shared/components/custom_button.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
-import 'package:udemy_flutter/shared/components/custom_text_button.dart';
 import 'package:udemy_flutter/shared/components/custom_text_form_field.dart';
 import 'package:udemy_flutter/shared/components/loading.dart';
 import 'package:udemy_flutter/shared/components/navigate.dart';
@@ -120,11 +119,16 @@ class LoginScreen extends StatelessWidget {
                               obscureText: loginCubit.isVisibility,
                             ),
                             //GestureDetector action when click in text forget password ?
-                            CustomTextButton(
-                              text: 'forget password ?',
-                              textColor: black,
+
+                            TextButton(
+                              child: const Text(
+                                'forget password ?',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  color: black,
+                                ),
+                              ),
                               onPressed: () {},
-                              //    textAlign: TextAlign.right
                             ),
 
                             //button login
@@ -159,10 +163,14 @@ class LoginScreen extends StatelessWidget {
                                     text: "Don't have an Account?",
                                     fontSize: 15,
                                   ),
-                                  CustomTextButton(
-                                    text: 'Sign Up',
-                                    textColor: const Color(0xffAF4537),
-                                    fontSize: 20,
+                                  TextButton(
+                                    child: const Text(
+                                      'Sign Up',
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        color: black,
+                                      ),
+                                    ),
                                     onPressed: () => navigateTo(
                                       context,
                                       RouteConstant.registerRoute,

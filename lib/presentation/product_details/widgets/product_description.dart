@@ -33,6 +33,7 @@ class ProductDescription extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(right: 10.0),
                 child: CustomFavouriteIcon(
+
                     productId: productDetails.id, iconSize: 40.0,),
               ),
             ],

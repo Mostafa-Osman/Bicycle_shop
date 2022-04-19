@@ -16,14 +16,16 @@ class Language extends StatelessWidget {
         leading: SvgPicture.asset(
             'assets/icons/language.svg',
             fit: BoxFit.cover,
-            height: 30,
-            width: 30,),
+            height: 32,
+            width: 32,
+        ),
         title:
-        const CustomText(text: 'Language', fontSize: 20),
+        const CustomText(text: 'Language',fontSize: 15,
+          fontWeight: FontWeight.w400,),
         subtitle:
-        const CustomText(text: 'English', fontSize: 15),
+        const CustomText(text: 'English', fontSize: 12),
         trailing: const Icon(Icons.arrow_forward_ios_outlined,
-            color: mainColor,),
+            color: mainColor,size: 32.0,),
       ),
     );
   }

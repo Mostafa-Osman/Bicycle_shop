@@ -11,10 +11,10 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<HomeCubit, HomeStates>(
       builder: (context, state) {
-        if (state is HomeLoading || state is BannerLoading) {
+        if (state is HomeLoading ) {
           return const Center(child: CustomLoading());
         } else {
-          if (state is HomeError || state is BannerError) {
+          if (state is HomeError ) {
             return const Center(
               child: Text(
                 'Error',

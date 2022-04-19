@@ -16,14 +16,15 @@ class FAQ extends StatelessWidget {
         leading: SvgPicture.asset(
             'assets/icons/questions.svg',
             fit: BoxFit.cover,
-            height: 30,
-            width: 30,),
-        title: const CustomText(text: 'F A Q', fontSize: 20),
+            height: 32,
+            width: 20,),
+        title: const CustomText(text: 'F A Q',fontSize: 15,
+          fontWeight: FontWeight.w400,),
         subtitle: const CustomText(
             text: 'Answers of popular questions',
-            fontSize: 15,),
+            fontSize: 12,),
         trailing: const Icon(Icons.arrow_forward_ios_outlined,
-            color: mainColor,),
+            color: mainColor,size: 32,),
       ),
     );
   }

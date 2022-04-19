@@ -14,12 +14,12 @@ class NotificationsModel {
       status: json['status'] as bool,
       message: json['message'] as String? ?? '',
       notificationData:
-      (json["data"] as List<NotificationData>)
-          .map(
-            (element) =>
-                NotificationData.fromJson(element as Map<String, dynamic>),
-          )
-          .toList(),
+          ((json["data"] as Map<String, dynamic>)['data'] as List<dynamic>)
+              .map(
+                (element) =>
+                    NotificationData.fromJson(element as Map<String, dynamic>),
+              )
+              .toList(),
     );
   }
 }

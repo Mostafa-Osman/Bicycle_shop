@@ -14,13 +14,14 @@ import 'package:udemy_flutter/data/repository/user_repo/register_repo.dart';
 import 'package:udemy_flutter/presentation/about_us/screens/about.dart';
 import 'package:udemy_flutter/presentation/add&update_address/screens/add_address_screen.dart';
 import 'package:udemy_flutter/presentation/add&update_address/screens/update_address_screen.dart';
+import 'package:udemy_flutter/presentation/auth/login/screens/login.dart';
+import 'package:udemy_flutter/presentation/auth/register/screens/register.dart';
 import 'package:udemy_flutter/presentation/basket/screens/basket_screen.dart';
 import 'package:udemy_flutter/presentation/contacts/screens/contacts.dart';
 import 'package:udemy_flutter/presentation/favourites/screens/favourites.dart';
 import 'package:udemy_flutter/presentation/home/screens/home.dart';
 import 'package:udemy_flutter/presentation/language/screens/language.dart';
 import 'package:udemy_flutter/presentation/layout/screens/shop_layout.dart';
-import 'package:udemy_flutter/presentation/login/screens/login.dart';
 import 'package:udemy_flutter/presentation/notifications/screens/notifications_screen.dart';
 import 'package:udemy_flutter/presentation/on_boarding/screens/on_boarding.dart';
 import 'package:udemy_flutter/presentation/orders/screens/my_orders.dart';
@@ -29,7 +30,6 @@ import 'package:udemy_flutter/presentation/payment/screens/payment.dart';
 import 'package:udemy_flutter/presentation/product_details/screens/product_details.dart';
 import 'package:udemy_flutter/presentation/profile/screens/profile.dart';
 import 'package:udemy_flutter/presentation/questions/screens/questions.dart';
-import 'package:udemy_flutter/presentation/register/screens/register.dart';
 import 'package:udemy_flutter/presentation/search/screens/search.dart';
 import 'package:udemy_flutter/presentation/update_profile/screens/update_profile.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
@@ -65,11 +65,17 @@ class AppRouter {
     initAppSettings();
     switch (settings.name) {
       case RouteConstant.onBoardingRoute:
-        return MaterialPageRoute(builder: (_) => OnBoardingScreen());
+        return MaterialPageRoute(
+          builder: (_) => OnBoardingScreen(),
+        );
       case RouteConstant.registerRoute:
-        return MaterialPageRoute(builder: (_) => RegisterScreen());
+        return MaterialPageRoute(
+          builder: (_) => RegisterScreen(),
+        );
       case RouteConstant.loginRoute:
-        return MaterialPageRoute(builder: (_) => LoginScreen());
+        return MaterialPageRoute(
+          builder: (_) => LoginScreen(),
+        );
       case RouteConstant.homeRoute:
         return MaterialPageRoute(
           builder: (_) => HomeScreen(),
@@ -80,46 +86,71 @@ class AppRouter {
           builder: (_) => NotificationsScreen(),
         );
       case RouteConstant.searchRoute:
-        return MaterialPageRoute(builder: (_) => SearchScreen());
+        return MaterialPageRoute(
+          builder: (_) => SearchScreen(),
+        );
       case RouteConstant.profileRoute:
-        return MaterialPageRoute(builder: (_) => ProfileScreen());
+        return MaterialPageRoute(
+          builder: (_) => ProfileScreen(),
+        );
       case RouteConstant.basketRoute:
-        return MaterialPageRoute(builder: (_) => BasketScreen());
+        return MaterialPageRoute(
+          builder: (_) => BasketScreen(),
+        );
       case RouteConstant.myOrderRoute:
-        return MaterialPageRoute(builder: (_) => MyOrdersScreen());
+        return MaterialPageRoute(
+          builder: (_) => MyOrdersScreen(),
+        );
       case RouteConstant.productDetailsRoute:
         return MaterialPageRoute(
           settings: settings,
           builder: (_) {
-            final DetailsData arguments = settings as DetailsData;
-
-            return ProductDetailsScreen(productDetails: arguments);
+            return ProductDetailsScreen(
+              productDetails: settings.arguments! as DetailsData,
+            );
           },
         );
       case RouteConstant.shopLayoutRoute:
-        return MaterialPageRoute(builder: (_) => ShopLayoutScreen());
+        return MaterialPageRoute(
+          builder: (_) => ShopLayoutScreen(),
+        );
 
       case RouteConstant.paymentRoute:
-        return MaterialPageRoute(builder: (_) => PaymentScreen());
+        return MaterialPageRoute(
+          builder: (_) => PaymentScreen(),
+        );
       case RouteConstant.favouriteRoute:
-        return MaterialPageRoute(builder: (_) => FavouritesScreen());
+        return MaterialPageRoute(
+          builder: (_) => FavouritesScreen(),
+        );
       case RouteConstant.orderDetailsRoute:
         // final int arguments = settings.arguments as int;
         // final orderId = arguments;
         return MaterialPageRoute(
           settings: settings,
-          builder: (_) => OrderDetailsScreen(orderId: settings as int),
+          builder: (_) =>
+              OrderDetailsScreen(orderId: settings.arguments! as int),
         );
       case RouteConstant.updateProfileRoute:
-        return MaterialPageRoute(builder: (_) => UpdateProfileScreen());
+        return MaterialPageRoute(
+          builder: (_) => UpdateProfileScreen(),
+        );
       case RouteConstant.contactsRoute:
-        return MaterialPageRoute(builder: (_) => ContactsScreen());
+        return MaterialPageRoute(
+          builder: (_) => ContactsScreen(),
+        );
       case RouteConstant.aboutRoute:
-        return MaterialPageRoute(builder: (_) => AboutUsScreen());
+        return MaterialPageRoute(
+          builder: (_) => AboutUsScreen(),
+        );
       case RouteConstant.questionsRoute:
-        return MaterialPageRoute(builder: (_) => QuestionsScreen());
+        return MaterialPageRoute(
+          builder: (_) => QuestionsScreen(),
+        );
       case RouteConstant.languageRoute:
-        return MaterialPageRoute(builder: (_) => LanguageScreen());
+        return MaterialPageRoute(
+          builder: (_) => LanguageScreen(),
+        );
       case RouteConstant.addAddressRoute:
         return MaterialPageRoute(
           settings: settings,
@@ -129,7 +160,8 @@ class AppRouter {
         // final int arguments = settings.arguments as int;
         // final index = arguments;
         return MaterialPageRoute(
-          builder: (_) => UpdateAddressScreen(index: settings as int),
+          builder: (_) =>
+              UpdateAddressScreen(index: settings.arguments! as int),
         );
       default:
         return MaterialPageRoute(

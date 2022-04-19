@@ -11,12 +11,10 @@ import 'package:udemy_flutter/shared/components/constants.dart';
 part 'update_profile_state.dart';
 
 class UpdateProfileCubit extends Cubit<UpdateProfileState> {
-  UpdateProfileCubit() : super(UpdateProfileInitial());
+  UpdateProfileCubit(this.updateProfileRepository)
+      : super(UpdateProfileInitial());
 
-  static UpdateProfileCubit get(BuildContext context) =>
-      BlocProvider.of(context);
-
-  final profileRepo = ProfileRepository();
+  final ProfileRepository updateProfileRepository;
 
   final ImagePicker imagePicker = ImagePicker();
 
@@ -53,7 +51,8 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
   }
 
   //convert Photo To Base64
-  Future convertPhotoToBase64(myFileImage) async {
+  Future convertPhotoToBase64(dynamic myFileImage) async {
+    // ignore: avoid_dynamic_calls
     final File file = File(myFileImage.path.toString());
     final List<int> fileInByte = file.readAsBytesSync();
     final String fileInBase64 = base64Encode(fileInByte);
@@ -70,7 +69,7 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
   }) async {
     emit(UpdateProfileLoading());
     try {
-      userData = await profileRepo.updateUserData(
+      userData = await updateProfileRepository.updateUserData(
         name: name,
         email: email,
         phone: phone,
@@ -84,4 +83,5 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
       emit(UpdateProfileError(error.toString()));
     }
   }
+
 }

@@ -4,6 +4,7 @@ import 'package:udemy_flutter/presentation/add&update_address/address_cubit/addr
 import 'package:udemy_flutter/shared/components/custom_button.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/components/custom_text_form_field.dart';
+import 'package:udemy_flutter/shared/components/loading.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 
 class AddAddressScreen extends StatelessWidget {
@@ -16,8 +17,7 @@ class AddAddressScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final addressCubit=  BlocProvider.of<AddressCubit>(context);
-
+    final addressCubit = BlocProvider.of<AddressCubit>(context);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -29,22 +29,28 @@ class AddAddressScreen extends StatelessWidget {
         ),
       ),
       body: BlocConsumer<AddressCubit, AddressStates>(
-        listener: (context, state) {},
+        listener: (context, state) {
+        },
         builder: (context, state) {
-          return SingleChildScrollView(
-            child: Padding(
-              padding:
-                  const EdgeInsets.only(left: 20.0, right: 20.0, top: 40.0),
-              child: SizedBox(
-                width: double.infinity,
-                height: MediaQuery.of(context).size.height,
-                child: Column(
-                  children: [
-                    Form(
-                      key: _formKey,
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 10, left: 10),
-                        child: Column(
+          if (state is AddAddressLoading || state is GetAddressLoading) {
+            return const CustomLoading();
+          } else if (state is AddAddressError || state is GetAddressError) {
+            return const Text('Error');
+          } else {
+            return SingleChildScrollView(
+              child: Padding(
+                padding:
+                    const EdgeInsets.only(left: 20.0, right: 20.0, top: 40.0),
+                child: SizedBox(
+                  width: double.infinity,
+                  height: MediaQuery.of(context).size.height,
+                  child: Column(
+                    children: [
+                      Form(
+                        key: _formKey,
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 10, left: 10),
+                          child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               CustomTextFormField(
@@ -85,7 +91,9 @@ class AddAddressScreen extends StatelessWidget {
 
                               Padding(
                                 padding: const EdgeInsets.only(
-                                    top: 10.0, bottom: 10.0,),
+                                  top: 10.0,
+                                  bottom: 10.0,
+                                ),
                                 child: CustomTextFormField(
                                   controller: addressNameControl,
                                   backgroundColor: const Color(0xfff2f2f2),
@@ -110,23 +118,26 @@ class AddAddressScreen extends StatelessWidget {
                                 onPressed: () {
                                   if (_formKey.currentState!.validate()) {
                                     addressCubit.addNewAddressData(
-                                        city: cityControl.text,
-                                        region: regionControl.text,
-                                        details: addressDetailsControl.text,
-                                        name: addressNameControl.text,
-                                        notes: notesAddressControl.text,);
+                                      city: cityControl.text,
+                                      region: regionControl.text,
+                                      details: addressDetailsControl.text,
+                                      name: addressNameControl.text,
+                                      notes: notesAddressControl.text,
+                                    );
                                     Navigator.pop(context);
                                   }
                                 },
                               ),
-                            ],),
-                      ),
-                    )
-                  ],
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
-            ),
-          );
+            );
+          }
         },
       ),
     );

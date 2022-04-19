@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:udemy_flutter/data/models/basket_model/basket_model.dart';
+import 'package:udemy_flutter/data/models/basket_model/basket_get_orders_model.dart';
 import 'package:udemy_flutter/presentation/basket/basket_cubit/basket_cubit.dart';
 import 'package:udemy_flutter/shared/components/custom_divider.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
-import 'package:udemy_flutter/shared/components/custom_text_button.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 
 class MyDialog extends StatelessWidget {
@@ -43,37 +42,42 @@ class MyDialog extends StatelessWidget {
                 child: Row(
                   children: [
                     Expanded(
-                      child: CustomTextButton(
+                      child: TextButton(
                         onPressed: () {
                           final basketCubit = BlocProvider.of<BasketCubit>(context);
-
                           basketCubit
                               .deleteOrderFromBasketData(productId: model.id);
-                          basketCubit.getMyBasketData();
                           Navigator.of(context).pop();
                         },
-                        text: 'Delete',
-                        fontSize: 20,
-                        textColor: mainColor,
+                        child:const Text( 'Delete',style: TextStyle(fontSize: 20,
+                          color: mainColor,),
+                        ),
+
                       ),
                     ),
                     const SizedBox(
                       width: 5.0,
                     ),
                     Expanded(
-                      child: CustomTextButton(
+                      child:
+                      TextButton(
                         onPressed: () {
                           Navigator.of(context).pop();
+
                         },
-                        text: 'Cancel',
-                        fontSize: 20,
-                        textColor: mainColor,
+                        child:const Text( 'Cancel',style: TextStyle(fontSize: 20,
+                          color: mainColor,),
+                        ),
+
                       ),
+
+
                     ),
                   ],
                 ),
               ),
             )
+
           ],
         ),
       ),

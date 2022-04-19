@@ -16,18 +16,19 @@ class BannerWidget extends StatelessWidget {
         CarouselSlider(
           items: homeCubit.banner.data
               .map(
-                (e) => Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                    child: Image(
-                      image: NetworkImage(e.image),
-                      width: double.infinity,
-                      fit: BoxFit.cover,
-                    ),
+                (e) => Container(
+                  margin: const EdgeInsets.all(10.0),
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(15.0),
+                        bottomRight: Radius.circular(15.0),
+                        bottomLeft: Radius.circular(15.0),),
+                  ),
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                  child: Image(
+                    image: NetworkImage(e.image),
+                    width: double.infinity,
+                    fit: BoxFit.contain,
                   ),
                 ),
               )
@@ -48,8 +49,8 @@ class BannerWidget extends StatelessWidget {
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
             itemBuilder: (_, index) => Container(
-              width: 10,
-              height: 5,
+              width: 10.0,
+              height: 2.5,
               decoration: BoxDecoration(
                 color: homeCubit.indicatorIndex == index
                     ? mainColor

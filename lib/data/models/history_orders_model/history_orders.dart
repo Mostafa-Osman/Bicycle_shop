@@ -1,14 +1,14 @@
-class MyOrderModel {
+class HistoryOrdersModel {
   final bool status;
   final Data data;
 
-  MyOrderModel({
+  HistoryOrdersModel({
     required this.status,
     required this.data,
   });
 
-  factory MyOrderModel.fromJson(Map<String, dynamic> json) {
-    return MyOrderModel(
+  factory HistoryOrdersModel.fromJson(Map<String, dynamic> json) {
+    return HistoryOrdersModel(
       status: json['status'] as bool,
       data: Data.fromJson(json['data'] as Map<String, dynamic>),
     );
@@ -36,13 +36,13 @@ class OrderData {
   final int id;
   final dynamic total;
   final String date;
-  final String status;
+  final String orderStatus;
 
   OrderData({
     required this.id,
     required this.total,
     required this.date,
-    required this.status,
+    required this.orderStatus,
   });
 
   factory OrderData.fromJson(Map<String, dynamic> json) {
@@ -50,7 +50,7 @@ class OrderData {
       id: json['id'] as int,
       total: json['total'],
       date: json['date'] as String,
-      status: json['status'] as String,
+      orderStatus: json['status'] as String,
     );
   }
 }

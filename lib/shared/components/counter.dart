@@ -19,7 +19,6 @@ class CustomCounter extends StatelessWidget {
         SizedBox(
           height: 40.0,
           child: FloatingActionButton(
-            heroTag: null,
             onPressed: ()=>decrement,
             backgroundColor: mainColor,
             child: const Icon(
@@ -33,7 +32,6 @@ class CustomCounter extends StatelessWidget {
         SizedBox(
           height: 40.0,
           child: FloatingActionButton(
-            heroTag: null,
             onPressed:()=> increment,
             backgroundColor: mainColor,
             child: const Icon(

@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:udemy_flutter/data/models/favourit_model/favourites_model.dart';
+import 'package:udemy_flutter/data/models/favourite_model/favourites_model.dart';
 import 'package:udemy_flutter/data/repository/favourite_repo/favourite_repo.dart';
 
 part 'favourite_states.dart';
@@ -29,8 +29,8 @@ class FavouriteCubit extends Cubit<FavouriteStates> {
     emit(ChangeFavorites());
     try {
       await favouritesRepo.changeFavorites(productId);
-      emit(ChangeFavoritesSuccess());
       getFavouritesData();
+      emit(ChangeFavoritesSuccess());
     } catch (error, s) {
       log('change favorites data', error: error, stackTrace: s);
       emit(ChangeFavoritesError(error.toString()));

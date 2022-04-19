@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:udemy_flutter/data/models/favourit_model/favourites_model.dart';
+import 'package:udemy_flutter/data/models/favourite_model/favourites_model.dart';
 import 'package:udemy_flutter/shared/components/custom_card.dart';
 import 'package:udemy_flutter/shared/components/custom_favourite_icon.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 
 class BuildItem extends StatelessWidget {
-  final Product model;
+  final DataDetails model;
 
   const BuildItem({required this.model});
 

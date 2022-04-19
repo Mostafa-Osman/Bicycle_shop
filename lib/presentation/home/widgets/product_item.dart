@@ -18,18 +18,21 @@ class BuildItem extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
-        onTap: () => navigateWithArgument(
-            context, RouteConstant.productDetailsRoute, data,),
+        onTap: () {
+          
+          navigateWithArgument(
+            context, RouteConstant.productDetailsRoute, data,);
+        },
         child: Container(
           decoration: BoxDecoration(
             color: white,
-            borderRadius: const BorderRadius.all(Radius.circular(25)),
+            borderRadius: const BorderRadius.all(Radius.circular(10.0)),
             boxShadow: [
               BoxShadow(
                 color: Colors.grey.withOpacity(0.3),
-                spreadRadius: 5,
-                blurRadius: 7,
-                offset: const Offset(0, 3), // changes position of shadow
+                spreadRadius: 2,
+                blurRadius: 5,
+                offset: const Offset(0, 1), // changes position of shadow
               ),
             ],
           ),
@@ -38,10 +41,9 @@ class BuildItem extends StatelessWidget {
             children: [
               Stack(
                 children: [
-
                   Container(
                     margin: const EdgeInsets.all(10.0),
-                    height: 200.0,
+                    height: 120.0,
                     child: Image(
                       image: NetworkImage(data.image),
                       fit: BoxFit.contain,
@@ -52,7 +54,7 @@ class BuildItem extends StatelessWidget {
                       top: 0,
                       right: 0,
                       child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.only(top: 8.0),
                         child: SvgPicture.asset('assets/icons/discount.svg',
                             fit: BoxFit.cover, height: 30, width: 30,),
                       ),
@@ -66,7 +68,7 @@ class BuildItem extends StatelessWidget {
                   children: [
                     CustomText(
                       text: data.name,
-                      maxLines: 2,
+                      maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       fontSize: 14,
                       height: 1.3,
@@ -78,7 +80,6 @@ class BuildItem extends StatelessWidget {
                           children: [
                             CustomText(
                                 text: 'EGP ${data.price}',
-                                maxLines: 2,
                                 fontSize: 14,
                                 height: 1.3,
                                 fontWeight: FontWeight.bold,
@@ -86,7 +87,6 @@ class BuildItem extends StatelessWidget {
                             if (data.discount != 0)
                               CustomText(
                                   text: ' ${data.oldPrice} EGP',
-                                  maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                   fontSize: 13,
                                   height: 1.3,
@@ -96,7 +96,7 @@ class BuildItem extends StatelessWidget {
                         ),
                         const Spacer(),
                         CustomFavouriteIcon(
-                            productId: data.id, iconSize: 35.0,),
+                            productId: data.id,),
                       ],
                     ),
                   ],

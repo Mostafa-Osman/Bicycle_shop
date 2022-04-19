@@ -32,12 +32,13 @@ class AccountScreen extends StatelessWidget {
                       children: [
                         // profile
                         ProfileDetails(),
-                        const SizedBox(height: 10.0),
                         //Points And Wallet
                         PointsAndWallet(),
+                        const  SizedBox(height: 10.0),
+
                         SizedBox(
-                          height: MediaQuery.of(context).size.height / 2.6,
-                          width: MediaQuery.of(context).size.width,
+                          height: 305.0,
+                          width: double.infinity,
                           child: CustomCard(
                             widget: Column(
                               children: [
@@ -56,11 +57,10 @@ class AccountScreen extends StatelessWidget {
                             ),
                           ),
                         ),
+                        const  SizedBox(height: 10.0),
+
                         //sign out
-                        SizedBox(
-                            height: MediaQuery.of(context).size.height / 11,
-                            width: MediaQuery.of(context).size.width,
-                            child: SignOut(),),
+                        SignOut(),
                         const  SizedBox(height: 10.0),
                       ],
                     ),

@@ -5,9 +5,8 @@ class ProfilePhoto extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final userInformation = userData.data;
 
-    return   Container(
+    return  Container(
       decoration: BoxDecoration(
         border: Border.all(
           width: 1.3,
@@ -18,9 +17,9 @@ class ProfilePhoto extends StatelessWidget {
         fit: BoxFit.fitWidth,
         child: ClipOval(
             child: Image.network(
-              userInformation.image,
-              height: 180,
-              width: 180,
+              userData.data.image,
+              height: 115,
+              width: 115,
               fit: BoxFit.cover,
             ),),
       ),

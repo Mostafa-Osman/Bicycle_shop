@@ -1,20 +1,20 @@
-class AddressModel {
+class GetAddressModel {
   final bool status;
   final List<DetailsAddress> data;
 
-  AddressModel({
+  GetAddressModel({
     required this.status,
     required this.data,
   });
 
-  factory AddressModel.fromJson(Map<String, dynamic> json) {
-    return AddressModel(
+  factory GetAddressModel.fromJson(Map<String, dynamic> json) {
+    return GetAddressModel(
       status: json['status'] as bool,
-      data: (json["data"] as List<dynamic>)
+      data: ((json["data"] as Map<String, dynamic>)['data'] as List<dynamic>)
           .map(
             (element) =>
                 DetailsAddress.fromJson(element as Map<String, dynamic>),
-          )
+      )
           .toList(),
     );
   }

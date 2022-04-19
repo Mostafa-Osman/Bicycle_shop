@@ -41,7 +41,7 @@ class DetailsData {
  final String name;
  final String description;
  final List<dynamic> images;
- final bool inFavorites;
+ final bool isFavorite;
  final bool inCart;
 
   const DetailsData({
@@ -53,7 +53,7 @@ class DetailsData {
     required this.name,
     required this.description,
     required this.images,
-    required this.inFavorites,
+    required this.isFavorite,
     required this.inCart,
   });
 
@@ -71,7 +71,7 @@ class DetailsData {
             (element) => element as String,
           )
           .toList(),
-      inFavorites: json['in_favorites'] as bool,
+      isFavorite: json['in_favorites'] as bool,
       inCart: json['in_cart'] as bool,
     );
   }

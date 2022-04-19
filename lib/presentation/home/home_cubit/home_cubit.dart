@@ -24,26 +24,15 @@ class HomeCubit extends Cubit<HomeStates> {
       homeModel = await homeRepository.getHomeData();
       for (final element in homeModel.data.detailsData) {
         favourites.addAll({
-          element.id: element.inFavorites,
+          element.id: element.isFavorite,
         });
       }
+      banner = await homeRepository.getBannerData();
       emit(HomeSuccess());
     } catch (error, s) {
       log('get home data error', error: error, stackTrace: s);
 
       emit(HomeError(error.toString()));
-    }
-  }
-
-  Future<void> getBannerData() async {
-    try {
-      emit(BannerLoading());
-      banner = await homeRepository.getBannerData();
-      emit(BannerSuccess());
-    } catch (error, s) {
-      log('get banner data error', error: error.toString(), stackTrace: s);
-
-      emit(BannerError(error.toString()));
     }
   }
 

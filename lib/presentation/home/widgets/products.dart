@@ -11,13 +11,12 @@ class Products extends StatelessWidget {
     return StaggeredGridView.countBuilder(
       staggeredTileBuilder: (int index) => const StaggeredTile.fit(1),
       physics: const ScrollPhysics(),
-      mainAxisSpacing: 8.0,
-      crossAxisSpacing: 8.0,
       shrinkWrap: true,
       crossAxisCount: 2,
       itemCount: homeCubit.homeModel.data.detailsData.length,
       itemBuilder: (BuildContext context, int index) => BuildItem(
         data: homeCubit.homeModel.data.detailsData[index],
+
       ),
     );
   }

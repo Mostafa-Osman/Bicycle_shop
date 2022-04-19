@@ -56,8 +56,8 @@ class PromoCode extends StatelessWidget {
                                 .promoCode(code:promoCodeControl.toString());
                             if (_promoCodeKey.currentState!.validate() &&
                                 state is PromoCodeSuccess) {
-                              paymentCubit.estimateOrdersData(
-                                );
+                              // paymentCubit.estimateOrdersData(
+                              //   );
                             }
                           },
                           text: 'Check',

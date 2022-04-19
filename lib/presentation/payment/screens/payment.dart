@@ -42,7 +42,8 @@ class PaymentScreen extends StatelessWidget {
                   // PromoCode(),
                   // SizedBox(height: 20.0),
                   //select address
-                  AddressPayment()
+                  AddressPayment(),
+                  PaymentBottomNavBar()
                 ],
               ),
             ),
@@ -51,7 +52,7 @@ class PaymentScreen extends StatelessWidget {
       ),
 
       // bottom Navigation Bar
-      bottomNavigationBar: PaymentBottomNavBar(),
+      // bottomNavigationBar: PaymentBottomNavBar(),
     );
   }
 }

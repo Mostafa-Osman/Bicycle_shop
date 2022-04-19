@@ -10,40 +10,39 @@ class FavouritesModel {
   factory FavouritesModel.fromJson(Map<String, dynamic> json) {
     return FavouritesModel(
       status: json['status'] as bool,
-      data: (json['data'] as List<dynamic>)
+      data: ((json["data"] as Map<String, dynamic>)['data'] as List<dynamic>)
           .map(
             (element) =>
                 FavouritesData.fromJson(element as Map<String, dynamic>),
-          )
+      )
           .toList(),
+
     );
   }
 }
 
 class FavouritesData {
-  final int id;
-  final Product product;
+  final DataDetails product;
 
-  FavouritesData({required this.id, required this.product});
+  FavouritesData({ required this.product});
 
   factory FavouritesData.fromJson(Map<String, dynamic> json) {
     return FavouritesData(
-      id: json['id'] as int,
-      product: Product.fromJson(json['product'] as Map<String, dynamic>),
+      product: DataDetails.fromJson(json['product'] as Map<String, dynamic>),
     );
   }
 }
 
-class Product {
+class DataDetails {
   final int id;
   final dynamic price;
   final dynamic oldPrice;
-  final int discount;
+  final dynamic discount;
   final String image;
   final String name;
   final String description;
 
-  Product({
+  DataDetails({
     required this.id,
     required this.price,
     required this.oldPrice,
@@ -53,12 +52,12 @@ class Product {
     required this.description,
   });
 
-  factory Product.fromJson(Map<String, dynamic> json) {
-    return Product(
+  factory DataDetails.fromJson(Map<String, dynamic> json) {
+    return DataDetails(
       id: json['id'] as int,
       price: json['price'],
       oldPrice: json['old_price'],
-      discount: json['discount'] as int,
+      discount: json['discount'] ,
       image: json['image'] as String,
       name: json['name'] as String,
       description: json['description'] as String,

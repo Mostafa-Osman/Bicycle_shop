@@ -1,11 +1,11 @@
-class AddOrderModel {
+class CostOrdersModel {
   final bool status;
   final Data data;
 
-  AddOrderModel({required this.status, required this.data});
+  CostOrdersModel({required this.status, required this.data});
 
-  factory AddOrderModel.fromJson(Map<String, dynamic> json) {
-    return AddOrderModel(
+  factory CostOrdersModel.fromJson(Map<String, dynamic> json) {
+    return CostOrdersModel(
       status: json['status'] as bool,
       data: Data.fromJson(json['data'] as Map<String, dynamic>),
     );

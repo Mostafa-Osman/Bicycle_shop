@@ -1,6 +1,7 @@
 import 'package:udemy_flutter/data/data_sources/remote/dio_helper.dart';
 import 'package:udemy_flutter/data/data_sources/remote/end_points.dart';
-import 'package:udemy_flutter/data/models/favourit_model/favourites_model.dart';
+import 'package:udemy_flutter/data/models/favourite_model/change_favourites_model.dart';
+import 'package:udemy_flutter/data/models/favourite_model/favourites_model.dart';
 import 'package:udemy_flutter/shared/components/constants.dart';
 
 class FavouriteRepository {
@@ -16,7 +17,7 @@ class FavouriteRepository {
   }
 
   // change favourites
-  Future<FavouritesModel> changeFavorites(int productId) async {
+  Future<ChangeFavoritesModel> changeFavorites(int productId) async {
     final response = await DioHelper.postData(
       url: favoritesUrl,
       data: {
@@ -26,7 +27,7 @@ class FavouriteRepository {
     );
     final data = response.data as Map<String, dynamic>;
     if (data['status'] == true) {
-      return FavouritesModel.fromJson(data);
+      return ChangeFavoritesModel.fromJson(data);
     }
     throw 'server error';
   }

@@ -41,6 +41,6 @@ class ProfileRepository {
       if (data['status'] == true) {
         return ProfileModel.fromJson(data);
       }
-      throw 'server error';
+      throw data['message'] as String;
   }
 }

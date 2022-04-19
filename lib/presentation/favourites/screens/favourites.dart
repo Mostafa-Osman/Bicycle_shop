@@ -1,26 +1,32 @@
-import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/presentation/favourites/favourite_cubit/favourite_cubit.dart';
 import 'package:udemy_flutter/shared/components/build_item.dart';
 import 'package:udemy_flutter/shared/components/empty_screen.dart';
 import 'package:udemy_flutter/shared/components/loading.dart';
+import 'package:udemy_flutter/shared/styles/color.dart';
 
 class FavouritesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final favouriteCubit = BlocProvider.of<FavouriteCubit>(context);
-    //todo change to block builder and handle states
-    return BlocConsumer<FavouriteCubit, FavouriteStates>(
-      listener: (context, state) {},
+    return BlocBuilder<FavouriteCubit, FavouriteStates>(
       builder: (context, state) {
-        return ConditionalBuilder(
-          condition: state is GetFavoritesSuccess,
-          builder: (context) => Center(
-            child: ConditionalBuilder(
-              condition: favouriteCubit.favouritesModel.data.isEmpty,
-              builder: (context) => EmptyScreen(),
-              fallback: (context) => Padding(
+        if (state is GetFavoritesLoading) {
+          return const Center(child: CustomLoading());
+        } else {
+          if (state is GetFavoritesError) {
+            return const Center(
+              child: Text(
+                'Error',
+                style: TextStyle(fontSize: 30, color: red),
+              ),
+            );
+          } else {
+            if (favouriteCubit.favouritesModel.data.isEmpty) {
+              return EmptyScreen();
+            } else {
+              return Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: ListView.builder(
                   itemBuilder: (context, index) => BuildItem(
@@ -28,11 +34,10 @@ class FavouritesScreen extends StatelessWidget {
                   ),
                   itemCount: favouriteCubit.favouritesModel.data.length,
                 ),
-              ),
-            ),
-          ),
-          fallback: (context) => const CustomLoading(),
-        );
+              );
+            }
+          }
+        }
       },
     );
   }

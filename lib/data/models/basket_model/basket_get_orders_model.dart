@@ -1,44 +1,41 @@
-class BasketModel {
+class BasketGetOrdersModel {
   final bool status;
-
   final Data data;
 
-  BasketModel({
+  BasketGetOrdersModel({
     required this.status,
     required this.data,
   });
 
-  factory BasketModel.fromJson(Map<String, dynamic> json) {
-    return BasketModel(
+  factory BasketGetOrdersModel.fromJson(Map<String, dynamic> json) {
+    return BasketGetOrdersModel(
       status: json['status'] as bool,
       data: Data.fromJson(json['data'] as Map<String, dynamic>),
     );
   }
 }
-
 class Data {
   late final List<Cart> cartItems;
   dynamic subTotal;
-  final int total;
+  final dynamic total;
 
   Data({required this.cartItems, this.subTotal,required this.total});
 
   factory Data.fromJson(Map<String, dynamic> json) {
     return Data(
       subTotal: json['subTotal'],
-      total: json['total']as int,
-      cartItems: List<Cart>.from(
-        (json["cart_items"] as List)
-            .map((x) => Cart.fromJson(x as Map<String, dynamic>)),
+      total: json['total'],
+      cartItems:(json['cart_items'] as List<dynamic>)
+          .map((element) => Cart.fromJson(element as Map<String, dynamic>))
+          .toList(),
 
-      ),
     );
   }
 }
 
 class Cart {
   final int id;
-  late final int quantity;
+  int quantity;
   final Product product;
 
   Cart({required this.id, required this.quantity, required this.product});

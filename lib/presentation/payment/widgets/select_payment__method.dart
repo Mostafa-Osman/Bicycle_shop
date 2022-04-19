@@ -33,12 +33,12 @@ class SelectPaymentMethod extends StatelessWidget {
           ),
         ),
       ),
-      if (paymentCubit.isOnline)
-        Padding(
-          padding:
-          const EdgeInsets.only(top: 10.0, bottom: 10.0),
-          child: CreditCard(),
-        ),
+      // if (paymentCubit.isOnline)
+      //   Padding(
+      //     padding:
+      //     const EdgeInsets.only(top: 10.0, bottom: 10.0),
+      //     child: CreditCard(),
+      //   ),
     ],);
   }
 }

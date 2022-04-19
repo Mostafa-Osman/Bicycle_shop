@@ -48,8 +48,8 @@ class UserData {
       email: json['email'] as String,
       phone: json['phone'] as String,
       image: json['image'] as String,
-      points: json['points'] as String,
-      credit: json['credit'] as String,
+      points: json['points'] ,
+      credit: json['credit'] ,
       token: json['token'] as String,
     );
   }

@@ -13,7 +13,7 @@ class OrderDetailsCubit extends Cubit<OrderDetailsState> {
   final OrdersRepository ordersDetailsRepository;
 
   //order details
-  late OrderDetailsResponse orderDetailsModel;
+  late OrderDetailsModel orderDetailsModel;
   bool isAddressVisible = false;
 
   Future<void> getOrderDetails(int orderId) async {

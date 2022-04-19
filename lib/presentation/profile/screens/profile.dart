@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/presentation/profile/widgets/profile_address.dart';
 import 'package:udemy_flutter/presentation/profile/widgets/profile_photo.dart';
 import 'package:udemy_flutter/presentation/profile/widgets/user_data.dart';
+import 'package:udemy_flutter/presentation/update_profile/edit_profile_cubit/update_profile_cubit.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/components/navigate.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 
 class ProfileScreen extends StatelessWidget {
-  final formKey = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,26 +38,30 @@ class ProfileScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          width: 500,
-          color: white,
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              children: [
-                const SizedBox(height: 30),
-                //profile photo
-                ProfilePhoto(),
-                //user data (name,email phone)
-                UserDataWidget(),
-                const SizedBox(height: 20.0),
-                //profile address
-                ProfileAddress(),
-              ],
+      body: BlocBuilder<UpdateProfileCubit, UpdateProfileState>(
+        builder: (context, state) {
+          return SingleChildScrollView(
+            child: Container(
+              width: 500,
+              color: white,
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  children: [
+                    const SizedBox(height: 30),
+                    //profile photo
+                    ProfilePhoto(),
+                    //user data (name,email phone)
+                    UserDataWidget(),
+                    const SizedBox(height: 20.0),
+                    //profile address
+                    ProfileAddress(),
+                  ],
+                ),
+              ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:udemy_flutter/data/models/orders_model/my_orders.dart';
+import 'package:udemy_flutter/data/models/history_orders_model/history_orders.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
 import 'package:udemy_flutter/shared/components/custom_card.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
@@ -38,7 +38,7 @@ class BuildOrderCard extends StatelessWidget {
                   Row(
                     children: [
                       CustomText(
-                          text: 'Status : ${order.status}', fontSize: 15,),
+                          text: 'Status : ${order.orderStatus}', fontSize: 15,),
                       const Spacer(),
                       const  Icon(Icons.arrow_forward_ios_outlined, color: mainColor),
                     ],
