@@ -23,6 +23,8 @@ class RouteConstant {
   static const String languageRoute = '/language';
   static const String addAddressRoute = '/addAddress';
   static const String updateAddressRoute = '/updateAddress';
+  static const String myAddressRoute = '/myAddress';
+
 
 
 

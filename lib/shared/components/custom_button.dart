@@ -21,7 +21,7 @@ class CustomButton extends StatelessWidget {
     this.textAlign=TextAlign.center,
     this.fontWeight = FontWeight.normal,
     this.fontSize = 20,
-    this.radiusCircular = 18.0,
+    this.radiusCircular = 10.0,
     this.buttonColor = mainColor,
     required this.onPressed,
     required this.text,

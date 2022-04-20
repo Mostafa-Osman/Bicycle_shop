@@ -36,10 +36,8 @@ class AccountScreen extends StatelessWidget {
                         PointsAndWallet(),
                         const  SizedBox(height: 10.0),
 
-                        SizedBox(
-                          height: 305.0,
-                          width: double.infinity,
-                          child: CustomCard(
+                         CustomCard(height: 305.0,
+                            width: double.infinity,
                             widget: Column(
                               children: [
                                 //contact us
@@ -56,7 +54,7 @@ class AccountScreen extends StatelessWidget {
                               ],
                             ),
                           ),
-                        ),
+
                         const  SizedBox(height: 10.0),
 
                         //sign out

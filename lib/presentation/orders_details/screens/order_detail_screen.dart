@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/data/repository/orders_repo/orders_repo.dart';
 import 'package:udemy_flutter/presentation/orders_details/cubit/order_details_cubit.dart';
-import 'package:udemy_flutter/presentation/orders_details/widgets/cancel_order.dart';
 import 'package:udemy_flutter/presentation/orders_details/widgets/details_order.dart';
 import 'package:udemy_flutter/presentation/orders_details/widgets/products_order_details.dart';
 import 'package:udemy_flutter/shared/components/component.dart';
@@ -165,8 +164,8 @@ class OrderDetailsScreen extends StatelessWidget {
                       ProductsOrderDetails(),
                       // cancel order
                       const SizedBox(height: 10),
-                      if (orderDetailsCubit.orderDetailsModel.status == 'New')
-                        CancelOrder(),
+                      // if (orderDetailsCubit.orderDetailsModel.status == 'New')
+                      //   CancelOrder(),
 
                     ],
                   ),

@@ -1,7 +1,7 @@
 class AddNewAddressModel {
   final bool status;
   final String message;
-  final Data data;
+  final AddNewAddressData data;
 
   AddNewAddressModel({
     required this.status,
@@ -13,12 +13,12 @@ class AddNewAddressModel {
     return AddNewAddressModel(
       status: json['status'] as bool,
       message: json['message'] as String,
-      data: Data.fromJson(json['data'] as Map<String, dynamic>),
+      data: AddNewAddressData.fromJson(json['data'] as Map<String, dynamic>),
     );
   }
 }
 
-class Data {
+class AddNewAddressData {
   final String name;
   final String city;
   final String region;
@@ -26,7 +26,7 @@ class Data {
   final String notes;
   final int id;
 
-  Data({
+  AddNewAddressData({
     required this.name,
     required this.city,
     required this.region,
@@ -35,8 +35,8 @@ class Data {
     required this.id,
   });
 
-  factory Data.fromJson(Map<String, dynamic> json) {
-    return Data(
+  factory AddNewAddressData.fromJson(Map<String, dynamic> json) {
+    return AddNewAddressData(
       name: json['name'] as String,
       city: json['city'] as String,
       region: json['region'] as String,

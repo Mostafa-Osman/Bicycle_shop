@@ -107,15 +107,6 @@ class UpdateUserData extends StatelessWidget {
               ),
             ),
             CustomButton(
-              onPressed: () {},
-              text: 'change password',
-              radiusCircular: 5.0,
-
-            ),
-            const SizedBox(
-              height: 20.0,
-            ),
-            CustomButton(
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   updateProfileCubit.updateUserData(

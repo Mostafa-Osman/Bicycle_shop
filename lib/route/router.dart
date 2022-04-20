@@ -12,8 +12,9 @@ import 'package:udemy_flutter/data/repository/user_repo/login_repo.dart';
 import 'package:udemy_flutter/data/repository/user_repo/profile_repo.dart';
 import 'package:udemy_flutter/data/repository/user_repo/register_repo.dart';
 import 'package:udemy_flutter/presentation/about_us/screens/about.dart';
-import 'package:udemy_flutter/presentation/add&update_address/screens/add_address_screen.dart';
-import 'package:udemy_flutter/presentation/add&update_address/screens/update_address_screen.dart';
+import 'package:udemy_flutter/presentation/address/screens/add_address_screen.dart';
+import 'package:udemy_flutter/presentation/address/screens/my_address.dart';
+import 'package:udemy_flutter/presentation/address/screens/update_address_screen.dart';
 import 'package:udemy_flutter/presentation/auth/login/screens/login.dart';
 import 'package:udemy_flutter/presentation/auth/register/screens/register.dart';
 import 'package:udemy_flutter/presentation/basket/screens/basket_screen.dart';
@@ -92,6 +93,10 @@ class AppRouter {
       case RouteConstant.profileRoute:
         return MaterialPageRoute(
           builder: (_) => ProfileScreen(),
+        );
+      case RouteConstant.myAddressRoute:
+        return MaterialPageRoute(
+          builder: (_) => MyAddressScreen(),
         );
       case RouteConstant.basketRoute:
         return MaterialPageRoute(

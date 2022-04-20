@@ -16,11 +16,14 @@ class ProductDescription extends StatelessWidget {
     return Container(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
-      padding:const EdgeInsets.all(10),
-      decoration:const BoxDecoration(
-          color: Color(0xFFFFF8DC),
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(30), topRight: Radius.circular(30),),),
+      padding: const EdgeInsets.only(left: 10.0, top: 10.0),
+      decoration: BoxDecoration(
+        color: const Color(0xFFC4C4C4).withOpacity(0.2),
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
+        ),
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -28,63 +31,70 @@ class ProductDescription extends StatelessWidget {
           Row(
             children: [
               CustomText(
-                  text: 'EGP ${productDetails.price}  ', textColor: mainColor,),
-              const Spacer(),
-              Padding(
-                padding: const EdgeInsets.only(right: 10.0),
-                child: CustomFavouriteIcon(
-
-                    productId: productDetails.id, iconSize: 40.0,),
+                text: 'EGP ${productDetails.price}  ',
+                textColor: mainColor,
               ),
+              const Spacer(),
+              CustomFavouriteIcon(
+                productId: productDetails.id,
+                iconSize: 40.0,
+              ),
+              const SizedBox(width: 10.0),
             ],
           ),
+          const SizedBox(height: 5.0),
           //name
           Padding(
             padding: const EdgeInsets.only(
-                top: 10.0, right: 10.0, left: 10.0, bottom: 30.0,),
+              top: 10.0,
+              right: 10.0,
+              left: 10.0,
+              bottom: 30.0,
+            ),
             child: CustomText(
-                text: productDetails.name,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                fontSize: 18,
-                height: 1.3,
-                fontWeight: FontWeight.bold,),
+              text: productDetails.name,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              fontSize: 18,
+              height: 1.3,
+              fontWeight: FontWeight.w500,
+            ),
           ),
           //description
           Expanded(
             child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10.0),
-                    child: ExpandableText(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 10.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ExpandableText(
                       productDetails.description,
                       expandText: 'show more',
                       collapseText: 'show less',
-                      linkStyle: const TextStyle(fontWeight: FontWeight.bold),
-                      maxLines: 4,
+                      linkStyle: const TextStyle(fontWeight: FontWeight.w400),
+                      maxLines: 7,
                       linkColor: mainColor,
-                      style:const TextStyle(
+                      style: const TextStyle(
                         fontSize: 15,
                         height: 1.3,
                       ),
                     ),
-                  ),
-                  const   SizedBox(height: 80.0),
-                  //rate
-                  RatingBar.builder(
-                    minRating: 1,
-                    allowHalfRating: true,
-                    itemPadding:const EdgeInsets.symmetric(horizontal: 0.1),
-                    itemBuilder: (context, _) =>const Icon(
-                      Icons.star,
-                      color: amber,
+                    const SizedBox(height: 30.0),
+                    //rate
+                    RatingBar.builder(
+                      minRating: 1,
+                      allowHalfRating: true,
+                      itemPadding: const EdgeInsets.symmetric(horizontal: 0.1),
+                      itemBuilder: (context, _) => const Icon(
+                        Icons.star,
+                        color: amber,
+                      ),
+                      onRatingUpdate: (rating) => 0,
                     ),
-                    onRatingUpdate: (rating) => 0,
-                  ),
-                  const SizedBox(height: 20.0),
-                ],
+                    const SizedBox(height: 20.0),
+                  ],
+                ),
               ),
             ),
           ),

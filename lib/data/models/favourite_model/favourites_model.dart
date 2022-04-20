@@ -22,18 +22,18 @@ class FavouritesModel {
 }
 
 class FavouritesData {
-  final DataDetails product;
+  final FavouriteDataDetails product;
 
   FavouritesData({ required this.product});
 
   factory FavouritesData.fromJson(Map<String, dynamic> json) {
     return FavouritesData(
-      product: DataDetails.fromJson(json['product'] as Map<String, dynamic>),
+      product: FavouriteDataDetails.fromJson(json['product'] as Map<String, dynamic>),
     );
   }
 }
 
-class DataDetails {
+class FavouriteDataDetails {
   final int id;
   final dynamic price;
   final dynamic oldPrice;
@@ -42,7 +42,7 @@ class DataDetails {
   final String name;
   final String description;
 
-  DataDetails({
+  FavouriteDataDetails({
     required this.id,
     required this.price,
     required this.oldPrice,
@@ -52,8 +52,8 @@ class DataDetails {
     required this.description,
   });
 
-  factory DataDetails.fromJson(Map<String, dynamic> json) {
-    return DataDetails(
+  factory FavouriteDataDetails.fromJson(Map<String, dynamic> json) {
+    return FavouriteDataDetails(
       id: json['id'] as int,
       price: json['price'],
       oldPrice: json['old_price'],

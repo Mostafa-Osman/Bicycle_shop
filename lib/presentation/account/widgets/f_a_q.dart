@@ -24,7 +24,7 @@ class FAQ extends StatelessWidget {
             text: 'Answers of popular questions',
             fontSize: 12,),
         trailing: const Icon(Icons.arrow_forward_ios_outlined,
-            color: mainColor,size: 32,),
+            color: mainColor,size: 25,),
       ),
     );
   }

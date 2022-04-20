@@ -16,6 +16,7 @@ class PaymentCubit extends Cubit<PaymentStates> {
   bool isOnline = false;
   int discountTabTextIndexSelected = 1;
   int voucherTabTextIndexSelected = 1;
+  int usePromoCode = 1;
   String cardNumber = '';
   String expiryDate = '';
   String cardHolderName = '';
@@ -57,14 +58,18 @@ class PaymentCubit extends Cubit<PaymentStates> {
     emit(PaymentRefreshUi());
   }
 
+  void changePromoCode(int index) {
+    usePromoCode = index;
+    emit(PaymentRefreshUi());
+  }
+
   Future<void> makeOrderData({
-      required int addressId,
-      }
-      ) async {
+    required int addressId,
+  }) async {
     emit(MakeOrderLoading());
     try {
       makeOrders = await paymentRepository.makeOrderData(
-        addressId:addressId ,
+        addressId: addressId,
         paymentMethod: isOnline ? 1 : 2,
         // ignore: avoid_bool_literals_in_conditional_expressions
         usePoints: discountTabTextIndexSelected == 0 ? true : false,
@@ -111,14 +116,14 @@ class PaymentCubit extends Cubit<PaymentStates> {
   Color backgroundTextAddress = const Color(0xffE0E0E0);
   Color textColor = black;
 
-  void addressStyle(int index) {
-    if (addressIndex == index) {
-      backgroundTextAddress = lightMainColor;
-      textColor = mainColor;
-    } else {
-      textColor = black;
-      backgroundTextAddress = const Color(0xffE0E0E0);
-    }
-    emit(PaymentRefreshUi());
-  }
+// void addressStyle(int index) {
+//   if (addressIndex == index) {
+//     backgroundTextAddress = lightMainColor;
+//     textColor = mainColor;
+//   } else {
+//     textColor = black;
+//     backgroundTextAddress = const Color(0xffE0E0E0);
+//   }
+//   emit(PaymentRefreshUi());
+// }
 }

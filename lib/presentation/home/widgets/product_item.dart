@@ -8,10 +8,10 @@ import 'package:udemy_flutter/shared/components/navigate.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 
 
-class BuildItem extends StatelessWidget {
+class ProductItem extends StatelessWidget {
   final DetailsData data;
 
-  const BuildItem({required this.data});
+  const ProductItem({required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,7 @@ class BuildItem extends StatelessWidget {
                 children: [
                   Container(
                     margin: const EdgeInsets.all(10.0),
-                    height: 120.0,
+                    height: 130.0,
                     child: Image(
                       image: NetworkImage(data.image),
                       fit: BoxFit.contain,

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:udemy_flutter/presentation/add&update_address/address_cubit/address_cubit.dart';
+import 'package:udemy_flutter/presentation/address/address_cubit/address_cubit.dart';
 import 'package:udemy_flutter/presentation/basket/basket_cubit/basket_cubit.dart';
 import 'package:udemy_flutter/presentation/layout/layout_cubit/layout_cubit.dart';
 import 'package:udemy_flutter/presentation/orders/my_orders_cubit/my_orders_cubit.dart';
-import 'package:udemy_flutter/presentation/orders_details/cubit/order_details_cubit.dart';
 import 'package:udemy_flutter/presentation/payment/payment_cubit/payment_cubit.dart';
 import 'package:udemy_flutter/presentation/payment/widgets/showd_details_price.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
@@ -34,8 +33,8 @@ class PaymentBottomNavBar extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.grey[200],
               borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(40.0),
-                topRight: Radius.circular(40.0),
+                topLeft: Radius.circular(15.0),
+                topRight: Radius.circular(15.0),
               ),
             ),
             child: Column(

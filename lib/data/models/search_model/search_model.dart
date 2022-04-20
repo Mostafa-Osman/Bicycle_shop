@@ -2,7 +2,7 @@ import 'package:udemy_flutter/data/models/favourite_model/favourites_model.dart'
 
 class SearchModel {
   final bool status;
-  List<DataDetails> data;
+  List<FavouriteDataDetails> data;
 
   SearchModel({required this.status, required this.data});
 
@@ -11,7 +11,7 @@ class SearchModel {
       status: json['status'] as bool,
       data: ((json["data"] as Map<String, dynamic>)['data'] as List<dynamic>)
           .map(
-            (element) => DataDetails.fromJson(element as Map<String, dynamic>),
+            (element) => FavouriteDataDetails.fromJson(element as Map<String, dynamic>),
           )
           .toList(),
     );

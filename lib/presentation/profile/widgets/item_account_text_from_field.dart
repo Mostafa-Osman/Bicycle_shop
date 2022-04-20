@@ -22,7 +22,8 @@ class AccountTextFormField extends StatelessWidget {
             Radius.circular(10),
           ),
         ),
-        child: ListView(
+        child:
+        ListView(
           scrollDirection: Axis.horizontal,
           children: [
             Row(

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/presentation/update_profile/edit_profile_cubit/update_profile_cubit.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
 import 'package:udemy_flutter/shared/components/constants.dart';
+import 'package:udemy_flutter/shared/components/custom_card.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/components/navigate.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
@@ -13,10 +14,11 @@ class ProfileDetails extends StatelessWidget {
     return BlocBuilder<UpdateProfileCubit, UpdateProfileState>(
          builder: (context, state) {
       return InkWell(
-        child: SizedBox(
+        child: CustomCard(
+          paddingLeft: 0.0,
           height: MediaQuery.of(context).size.height/10.0,
           width: MediaQuery.of(context).size.width,
-          child:  ListTile(
+          widget:  ListTile(
             leading: ClipOval(
               child: Image.network(
                 userData.data.image,
@@ -33,7 +35,7 @@ class ProfileDetails extends StatelessWidget {
               fontSize: 15,
             ),
             trailing:
-            const Icon(Icons.arrow_forward_ios_outlined, color: mainColor),
+            const Icon(Icons.arrow_forward_ios_outlined, color: mainColor,size: 25.0,),
           ),
 
         ),

@@ -18,7 +18,6 @@ class SearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final searchCubit = BlocProvider.of<SearchCubit>(context);
-
     return Scaffold(
       body: BlocBuilder<SearchCubit, SearchStates>(
         builder: (context, state) {
@@ -42,7 +41,8 @@ class SearchScreen extends StatelessWidget {
                                 state: ToastStates.warning,
                               );
                             }
-                          },                          decoration: InputDecoration(
+                          },
+                          decoration: InputDecoration(
                             fillColor: Colors.grey[100],
                             filled: true,
                             contentPadding: const EdgeInsets.all(10),
@@ -89,25 +89,29 @@ class SearchScreen extends StatelessWidget {
                     child: CustomText(text: 'error 404'),
                   )
                 else if (state is SearchSuccess &&
-                      searchCubit.searchModel.data.isEmpty)
-                    EmptyScreen()
-                  else if (state is SearchSuccess &&
-                        searchCubit.searchModel.data.isNotEmpty)
-                      Padding(
-                        padding: const EdgeInsets.only(top: 70.0),
-                        child: ListView.separated(
-                          itemBuilder: (context, index) {
-                            return BuildItem(
-                              model: searchCubit.searchModel.data[index],
-                            );
-                          },
-                          separatorBuilder: (context, index) =>
+                    searchCubit.searchModel.data.isEmpty)
+                  EmptyScreen()
+                else if (state is SearchSuccess &&
+                    searchCubit.searchModel.data.isNotEmpty)
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 70.0,
+                      right: 10.0,
+                      left: 10.0,
+                    ),
+                    child: ListView.separated(
+                      itemBuilder: (context, index) {
+                        return BuildItem(
+                          model: searchCubit.searchModel.data[index],
+                        );
+                      },
+                      separatorBuilder: (context, index) =>
                           const CustomDivider(),
-                          itemCount: searchCubit.searchModel.data.length,
-                        ),
-                      )
-                    else
-                      const SizedBox(),
+                      itemCount: searchCubit.searchModel.data.length,
+                    ),
+                  )
+                else
+                  const SizedBox(),
               ],
             ),
           );

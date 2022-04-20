@@ -24,10 +24,11 @@ class AddAddressError extends AddressStates {
 
   AddAddressError(this.message);
 }
+class AddressRefreshUi extends AddressStates {}
 
 class UpdateAddressLoading extends AddressStates {}
 
-class UpdateAddressOrderSuccess extends AddressStates {}
+class UpdateAddressSuccess extends AddressStates {}
 
 class UpdateAddressError extends AddressStates {
   final String message;

@@ -22,7 +22,7 @@ class GetAddressModel {
 
 class DetailsAddress {
   final int id;
-  final String name;
+  final String buildingNumber;
   final String city;
   final String region;
   final String details;
@@ -30,7 +30,7 @@ class DetailsAddress {
 
   DetailsAddress({
     required this.id,
-    required this.name,
+    required this.buildingNumber,
     required this.city,
     required this.region,
     required this.details,
@@ -40,7 +40,7 @@ class DetailsAddress {
   factory DetailsAddress.fromJson(Map<String, dynamic> json) {
     return DetailsAddress(
       id: json['id'] as int,
-      name: json['name'] as String,
+      buildingNumber: json['name'] as String,
       city: json['city'] as String,
       region: json['region'] as String,
       details: json['details'] as String,

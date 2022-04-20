@@ -12,15 +12,23 @@ class ShopLayoutScreen extends StatelessWidget {
         final layoutCubit = BlocProvider.of<LayoutCubit>(context);
         return Scaffold(
           appBar: layoutCubit.appBarScreen[layoutCubit.currentPageIndex],
-          body: layoutCubit.bottomNavScreen[layoutCubit.currentPageIndex],
-          bottomNavigationBar: CurvedNavigationBar(
-            index: layoutCubit.currentPageIndex,
-            height: 50,
-            backgroundColor: white,
-            color: mainColor,
-            buttonBackgroundColor: mainColor,
-            items: layoutCubit.bottomNavIcons,
-            onTap: (index) => layoutCubit.changeCurrentIndex(index),
+          body: Stack(
+            children: [
+              layoutCubit.bottomNavScreen[layoutCubit.currentPageIndex],
+              Positioned(
+                bottom: 0.0,
+                right: 0.0,
+                left: 0.0,
+                child: CurvedNavigationBar(
+                index: layoutCubit.currentPageIndex,
+                height: 50,
+                backgroundColor: Colors.transparent,
+                color: mainColor,
+                buttonBackgroundColor: mainColor,
+                items: layoutCubit.bottomNavIcons,
+                onTap: (index) => layoutCubit.changeCurrentIndex(index),
+              ),)
+            ],
           ),
         );
       },

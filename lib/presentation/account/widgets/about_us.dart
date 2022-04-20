@@ -24,7 +24,7 @@ class AboutUS extends StatelessWidget {
         subtitle: const CustomText(
             text: 'Terms of use', fontSize: 12,),
         trailing: const Icon(Icons.arrow_forward_ios_outlined,
-            color: mainColor,size: 32.0,),
+            color: mainColor,size: 25.0,),
       ),
     );
   }

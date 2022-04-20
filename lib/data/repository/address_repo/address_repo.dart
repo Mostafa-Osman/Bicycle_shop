@@ -5,10 +5,10 @@ import 'package:udemy_flutter/data/models/address_model/get_address_model.dart';
 import 'package:udemy_flutter/shared/components/constants.dart';
 
 class AddressRepository {
-  //add add&update_address
+  //add address
 
   Future<AddNewAddressModel> addNewAddressData({
-    required String name,
+    required String buildingNumber,
     required String city,
     required String region,
     required String details,
@@ -18,10 +18,10 @@ class AddressRepository {
       url: addressesUrl,
       token: token,
       data: {
-        'name': name,
         'city': city,
         'region': region,
         'details': details,
+        'name': buildingNumber,
         'notes': notes,
         'latitude': '0.0',
         'longitude': '0.0',
@@ -32,10 +32,10 @@ class AddressRepository {
       return AddNewAddressModel.fromJson(data);
     }
 
-    throw 'server error';
+    throw data['message'] as String;
   }
 
-  //get add&update_address
+  //get address
   Future<GetAddressModel> getMyAddressData() async {
     final response = await DioHelper.getData(url: addressesUrl, token: token);
     final data = response.data as Map<String, dynamic>;
@@ -45,7 +45,7 @@ class AddressRepository {
     throw 'server error';
   }
 
-  //update add&update_address
+  //update address
   Future<AddNewAddressModel> updateAddressData({
     required int addressId,
     required String name,
@@ -74,7 +74,7 @@ class AddressRepository {
     throw 'server error';
   }
 
-  //delete add&update_address
+  //delete address
   Future<AddNewAddressModel> deleteAddressData({required int addressId}) async {
     final response = await DioHelper.deleteData(
       url: '$updateAddressesUrl$addressId',

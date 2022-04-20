@@ -24,7 +24,6 @@ class UserDataWidget extends StatelessWidget {
           icon: Icons.email,
         )
       ],
-    )
-    ;
+    );
   }
 }

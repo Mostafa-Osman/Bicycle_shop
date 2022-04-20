@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/presentation/favourites/favourite_cubit/favourite_cubit.dart';
@@ -28,11 +29,15 @@ class FavouritesScreen extends StatelessWidget {
             } else {
               return Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: ListView.builder(
+                child: ListView.separated(
                   itemBuilder: (context, index) => BuildItem(
                     model: favouriteCubit.favouritesModel.data[index].product,
                   ),
                   itemCount: favouriteCubit.favouritesModel.data.length,
+                  separatorBuilder: (BuildContext context, int index) =>
+                      const SizedBox(
+                    height: 5.0,
+                  ),
                 ),
               );
             }
