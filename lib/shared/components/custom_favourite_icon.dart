@@ -40,12 +40,9 @@ class CustomFavouriteIcon extends StatelessWidget {
     required BuildContext context,
     required int productId,
   }) async {
+    BlocProvider.of<HomeCubit>(context).changeHomeFavourites(productId);
 
-
-    BlocProvider.of<HomeCubit>(context).favourites[productId]=
-        !BlocProvider.of<HomeCubit>(context).favourites[productId]!;
-
-    BlocProvider.of<FavouriteCubit>(context).changeFavorites(productId);
+    BlocProvider.of<FavouriteCubit>(context).changeFavourites(productId);
     return !isLiked;
   }
 }

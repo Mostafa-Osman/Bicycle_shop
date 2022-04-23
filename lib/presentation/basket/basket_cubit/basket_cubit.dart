@@ -49,8 +49,7 @@ class BasketCubit extends Cubit<BasketStates> {
         productId: productId,
         quantity: quantity,
       );
-      // getMyBasketData();
-
+      getMyBasketData();
       emit(BasketUpdateQuantitySuccess());
     } catch (error, s) {
       log('update basket orders data', error: error, stackTrace: s);

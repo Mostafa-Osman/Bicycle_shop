@@ -92,7 +92,7 @@ class ProductDescription extends StatelessWidget {
                       ),
                       onRatingUpdate: (rating) => 0,
                     ),
-                    const SizedBox(height: 20.0),
+                    const SizedBox(height: 80.0),
                   ],
                 ),
               ),

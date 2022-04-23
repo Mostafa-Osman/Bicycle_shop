@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/presentation/address/address_cubit/address_cubit.dart';
 import 'package:udemy_flutter/presentation/address/widgets/form_adress.dart';
-import 'package:udemy_flutter/route/route_constants.dart';
 import 'package:udemy_flutter/shared/components/component.dart';
 import 'package:udemy_flutter/shared/components/custom_button.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/components/loading.dart';
-import 'package:udemy_flutter/shared/components/navigate.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 
 class AddAddressScreen extends StatelessWidget {
@@ -31,13 +29,14 @@ class AddAddressScreen extends StatelessWidget {
           if (state is AddAddressSuccess) {
             showToast(
               state: ToastStates.success,
-              message: 'new address added successfully',
+              message: 'address added successfully',
             );
-            navigatorAndFinish(context, RouteConstant.myAddressRoute);
+            Navigator.pop(context);
+            addressCubit.clearTextFromField();
           } else if (state is AddAddressError) {
             showToast(
               state: ToastStates.error,
-              message:'something wrong try again later',
+              message: 'something wrong try again later',
             );
           }
         },

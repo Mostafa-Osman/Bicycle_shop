@@ -28,7 +28,6 @@ import 'package:udemy_flutter/presentation/layout/screens/shop_layout.dart';
 import 'package:udemy_flutter/presentation/notifications/notification_cubit/notification_cubit.dart';
 import 'package:udemy_flutter/presentation/on_boarding/on_boarding_cubit/on_boarding_cubit.dart';
 import 'package:udemy_flutter/presentation/on_boarding/screens/on_boarding.dart';
-import 'package:udemy_flutter/presentation/orders/my_orders_cubit/my_orders_cubit.dart';
 import 'package:udemy_flutter/presentation/payment/payment_cubit/payment_cubit.dart';
 import 'package:udemy_flutter/presentation/product_details/cubit/product_details_cubit.dart';
 import 'package:udemy_flutter/presentation/profile/cubit/profile_cubit.dart';
@@ -37,6 +36,8 @@ import 'package:udemy_flutter/presentation/update_profile/edit_profile_cubit/upd
 import 'package:udemy_flutter/route/router.dart';
 import 'package:udemy_flutter/shared/components/constants.dart';
 import 'package:udemy_flutter/shared/styles/themes.dart';
+
+import 'presentation/history_orders/history_orders_cubit/history_orders_cubit.dart';
 
 
 
@@ -90,6 +91,7 @@ class MyApp extends StatelessWidget {
           create: (context) =>
           BasketCubit(BasketRepository())..getMyBasketData(),
         ),
+
         BlocProvider(create: (context) => ProductDetailsCubit()),
         BlocProvider(create: (context) => LayoutCubit()),
         BlocProvider(
@@ -100,9 +102,7 @@ class MyApp extends StatelessWidget {
           FavouriteCubit(FavouriteRepository())..getFavouritesData(),
         ),
 
-        BlocProvider(
-          create: (context) => MyOrdersCubit(OrdersRepository())..getOrders(),
-        ),
+
         BlocProvider(
           create: (context) => NotificationCubit(NotificationsRepository())
             ..getNotificationsData(),
@@ -115,6 +115,11 @@ class MyApp extends StatelessWidget {
           create: (context) => UpdateProfileCubit(
             ProfileRepository(),
           ),
+        ),
+        BlocProvider(
+          create: (context) => HistoryOrdersCubit(
+            OrdersRepository(),
+          )..getOrders(),
         ),
         BlocProvider(
           create: (context) =>

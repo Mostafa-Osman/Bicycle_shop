@@ -5,7 +5,6 @@ import 'package:udemy_flutter/presentation/basket/basket_cubit/basket_cubit.dart
 import 'package:udemy_flutter/presentation/basket/widgets/alert__dialog.dart';
 import 'package:udemy_flutter/shared/components/change_quantity_product.dart';
 import 'package:udemy_flutter/shared/components/custom_card.dart';
-import 'package:udemy_flutter/shared/components/custom_favourite_icon.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 
@@ -16,13 +15,13 @@ class BasketItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final basketCubit = BlocProvider.of<BasketCubit>(context);
-    final model = basketCubit.myBag.data.cartItems[index];
+    final data =
+        BlocProvider.of<BasketCubit>(context).myBag.data.cartItems[index];
     return Padding(
       padding: const EdgeInsets.only(top: 10.0, right: 10.0, left: 10.0),
       child: CustomCard(
         height: 140,
-        paddingTop: 10.0,
+        paddingTop: 15.0,
         paddingBottom: 10.0,
         widget: Row(
           children: [
@@ -30,11 +29,11 @@ class BasketItem extends StatelessWidget {
               alignment: AlignmentDirectional.bottomStart,
               children: [
                 Image(
-                  image: NetworkImage(model.product.image),
+                  image: NetworkImage(data.product.image),
                   width: 80,
                   height: 80,
                 ),
-                if (model.product.discount != 0)
+                if (data.product.discount != 0)
                   Positioned(
                     top: 0,
                     left: 0,
@@ -50,7 +49,6 @@ class BasketItem extends StatelessWidget {
             const SizedBox(
               width: 10.0,
             ),
-            //show product data (name ,price ,favourite icon,update quantity and delete product)
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -58,7 +56,7 @@ class BasketItem extends StatelessWidget {
                   Row(
                     children: [
                       CustomText(
-                        text: 'EGP ${model.product.price.toString()}',
+                        text: 'EGP ${data.product.price.toString()}',
                         fontSize: 15.0,
                         height: 1.0,
                         fontWeight: FontWeight.w600,
@@ -67,28 +65,28 @@ class BasketItem extends StatelessWidget {
                       const SizedBox(
                         width: 5.0,
                       ),
-                      if (model.product.discount != 0)
+                      if (data.product.discount != 0)
                         CustomText(
-                          text: 'EGP ${model.product.oldPrice.toString()}',
+                          text: 'EGP ${data.product.oldPrice.toString()}',
                           fontSize: 13.0,
                           height: 1.0,
                           textColor: grey,
                           decoration: TextDecoration.lineThrough,
                         ),
-                      const Spacer(),
-                      CustomFavouriteIcon(
-                        productId: model.product.id,
-                      ),
-                      const SizedBox(
-                        width: 8.0,
-                      )
+                      // const Spacer(),
+                      // CustomFavouriteIcon(
+                      //   productId: data.product.id,
+                      // ),
+                      // const SizedBox(
+                      //   width: 8.0,
+                      // )
                     ],
                   ),
                   //product name
                   Padding(
                     padding: const EdgeInsets.only(top: 5.0, bottom: 5.0),
                     child: CustomText(
-                      text: model.product.name,
+                      text: data.product.name,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       fontSize: 13.0,
@@ -96,7 +94,6 @@ class BasketItem extends StatelessWidget {
                       fontWeight: FontWeight.w400,
                     ),
                   ),
-                  //increment and  decrement product quantity and delete product
                   Expanded(
                     child: Row(
                       children: [
@@ -109,7 +106,7 @@ class BasketItem extends StatelessWidget {
                           onPressed: () => showDialog(
                             context: context,
                             builder: (BuildContext context) {
-                              return MyDialog(model: model);
+                              return MyDialog(model: data);
                             },
                           ),
                           icon: const Icon(Icons.delete),

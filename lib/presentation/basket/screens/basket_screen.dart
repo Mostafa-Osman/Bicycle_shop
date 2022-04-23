@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/presentation/basket/basket_cubit/basket_cubit.dart';
 import 'package:udemy_flutter/presentation/basket/widgets/basket_item.dart';
+import 'package:udemy_flutter/presentation/payment/payment_cubit/payment_cubit.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
 import 'package:udemy_flutter/shared/components/custom_button.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
@@ -79,53 +80,22 @@ class BasketScreen extends StatelessWidget {
                             CustomButton(
                               text: 'Pay now',
                               onPressed: () {
-                                // BlocProvider.of<PaymentCubit>(context)
-                                //     .estimateOrdersData();
-                                navigateTo(context, RouteConstant.paymentRoute);
+                                BlocProvider.of<PaymentCubit>(context)
+                                    .estimateOrdersData();
+                                navigateTo(
+                                  context,
+                                  RouteConstant.paymentRoute,
+                                );
                               },
                             )
                           ],
                         ),
-                      )
+                      ),
                     ],
                   );
           }
         },
       ),
-      // bottomNavigationBar: basketCubit.myBag.data.cartItems.isNotEmpty
-      //     ? Container(
-      //         padding: const EdgeInsets.all(10),
-      //         height: 110.0,
-      //         decoration: BoxDecoration(
-      //           color: Colors.grey[200],
-      //           borderRadius: const BorderRadius.only(
-      //             topLeft: Radius.circular(40.0),
-      //             topRight: Radius.circular(40.0),
-      //           ),
-      //         ),
-      //         child: Column(
-      //           crossAxisAlignment: CrossAxisAlignment.start,
-      //           children: [
-      //             CustomText(
-      //               text: ' Total: ${basketCubit.myBag.data.total} EGP',
-      //               fontSize: 18.0,
-      //               textColor: mainColor,
-      //             ),
-      //             const SizedBox(
-      //               height: 10.0,
-      //             ),
-      //             CustomButton(
-      //               text: 'Pay now',
-      //               onPressed: () {
-      //               BlocProvider.of<PaymentCubit>(context)
-      //                 .estimateOrdersData();
-      //                 navigateTo(context, RouteConstant.paymentRoute);
-      //               },
-      //             )
-      //           ],
-      //         ),
-      //       )
-      //     : null,
     );
   }
 }

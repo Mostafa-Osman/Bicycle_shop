@@ -20,13 +20,13 @@ import 'package:udemy_flutter/presentation/auth/register/screens/register.dart';
 import 'package:udemy_flutter/presentation/basket/screens/basket_screen.dart';
 import 'package:udemy_flutter/presentation/contacts/screens/contacts.dart';
 import 'package:udemy_flutter/presentation/favourites/screens/favourites.dart';
+import 'package:udemy_flutter/presentation/history_orders/screens/my_orders.dart';
+import 'package:udemy_flutter/presentation/history_orders/screens/order_detail_screen.dart';
 import 'package:udemy_flutter/presentation/home/screens/home.dart';
 import 'package:udemy_flutter/presentation/language/screens/language.dart';
 import 'package:udemy_flutter/presentation/layout/screens/shop_layout.dart';
 import 'package:udemy_flutter/presentation/notifications/screens/notifications_screen.dart';
 import 'package:udemy_flutter/presentation/on_boarding/screens/on_boarding.dart';
-import 'package:udemy_flutter/presentation/orders/screens/my_orders.dart';
-import 'package:udemy_flutter/presentation/orders_details/screens/order_detail_screen.dart';
 import 'package:udemy_flutter/presentation/payment/screens/payment.dart';
 import 'package:udemy_flutter/presentation/product_details/screens/product_details.dart';
 import 'package:udemy_flutter/presentation/profile/screens/profile.dart';
@@ -132,9 +132,8 @@ class AppRouter {
         // final int arguments = settings.arguments as int;
         // final orderId = arguments;
         return MaterialPageRoute(
-          settings: settings,
           builder: (_) =>
-              OrderDetailsScreen(orderId: settings.arguments! as int),
+              OrderDetailsScreen(),
         );
       case RouteConstant.updateProfileRoute:
         return MaterialPageRoute(

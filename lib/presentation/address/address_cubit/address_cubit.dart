@@ -9,13 +9,13 @@ part 'address_states.dart';
 class AddressCubit extends Cubit<AddressStates> {
   AddressCubit(this.addressRepo) : super(AddressInitial());
   final formKey = GlobalKey<FormState>();
-  late TextEditingController cityControl;
-  late TextEditingController addressDetailsControl;
+  TextEditingController cityControl = TextEditingController();
+  TextEditingController addressDetailsControl = TextEditingController();
 
-  late TextEditingController regionControl;
+  TextEditingController regionControl = TextEditingController();
 
-  late TextEditingController buildingNumberControl;
-  late TextEditingController notesAddressControl;
+  TextEditingController buildingNumberControl = TextEditingController();
+  TextEditingController notesAddressControl = TextEditingController();
 
   late GetAddressModel addressModel;
   final AddressRepository addressRepo;

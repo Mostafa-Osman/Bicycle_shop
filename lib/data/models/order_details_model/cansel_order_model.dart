@@ -17,7 +17,7 @@ class CancelOrderModel {
 
 class Data {
   final int id;
-  final int cost;
+  final dynamic cost;
   final int discount;
   final int points;
   final dynamic vat;
@@ -41,7 +41,7 @@ class Data {
   factory Data.fromJson(Map<String, dynamic> json) {
     return Data(
       id: json['id'] as int,
-      cost: json['cost'] as int,
+      cost: json['cost'] ,
       discount: json['discount'] as int,
       points: json['points'] as int,
       vat: json['vat'] ,

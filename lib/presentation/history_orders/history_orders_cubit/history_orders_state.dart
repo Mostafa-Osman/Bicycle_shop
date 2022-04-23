@@ -1,9 +1,19 @@
-part of 'order_details_cubit.dart';
+part of 'history_orders_cubit.dart';
 
 @immutable
 abstract class OrderDetailsState {}
 
 class OrderDetailsInitial extends OrderDetailsState {}
+
+class HistoryOrdersLoading extends OrderDetailsState {}
+
+class HistoryOrdersSuccess extends OrderDetailsState {}
+
+class HistoryOrdersError extends OrderDetailsState {
+  final String message;
+
+  HistoryOrdersError(this.message);
+}
 
 class OrderDetailsLoading extends OrderDetailsState {}
 

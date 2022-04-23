@@ -10,8 +10,7 @@ class DiscountAndVoucher extends StatelessWidget {
     final paymentCubit = BlocProvider.of<PaymentCubit>(context);
 
     return CustomCard(
-      height:MediaQuery.of(context).size.height*0.2,
-      // 160,
+      height: MediaQuery.of(context).size.height * 0.2,
       width: double.infinity,
       paddingLeft: 15.0,
       paddingTop: 10.0,
@@ -21,11 +20,10 @@ class DiscountAndVoucher extends StatelessWidget {
           CardItem(
             title: "Do you want to use discount points?",
             labels: paymentCubit.labelText,
-            selectedIndex: paymentCubit.discountTabTextIndexSelected,
+            selectedIndex: paymentCubit.enableDiscountPoints,
             selectedLabelIndex: (int index) {
-              paymentCubit.changeDiscount(index);
-              // paymentCubit.estimateOrdersData(
-              // );
+              paymentCubit.changeDiscountPoints(index);
+              paymentCubit.estimateOrdersData();
             },
           ),
           const SizedBox(height: 20.0),

@@ -78,7 +78,9 @@ class BuildItem extends StatelessWidget {
                           decoration: TextDecoration.lineThrough,
                         ),
                       const Spacer(),
-                      CustomFavouriteIcon(productId: model.id),
+                      CustomFavouriteIcon(
+                        productId: model.id,
+                      ),
                     ],
                   ),
                 ],

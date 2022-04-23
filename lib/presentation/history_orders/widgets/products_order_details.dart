@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:udemy_flutter/presentation/orders_details/cubit/order_details_cubit.dart';
+import 'package:udemy_flutter/presentation/history_orders/history_orders_cubit/history_orders_cubit.dart';
 import 'package:udemy_flutter/shared/components/custom_card.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
@@ -8,7 +8,7 @@ import 'package:udemy_flutter/shared/styles/color.dart';
 class ProductsOrderDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final orderDetailsCubit = BlocProvider.of<OrderDetailsCubit>(context);
+    final orderDetailsCubit = BlocProvider.of<HistoryOrdersCubit>(context);
 
     return ListView.separated(
       shrinkWrap: true,

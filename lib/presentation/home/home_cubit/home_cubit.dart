@@ -54,4 +54,10 @@ class HomeCubit extends Cubit<HomeStates> {
     if (quantityProduct != 1) quantityProduct--;
     emit(HomeRefreshUi());
   }
+  void changeHomeFavourites(int productId){
+   favourites[productId]=
+    !favourites[productId]!;
+   emit(HomeRefreshUi());
+
+  }
 }

@@ -41,7 +41,7 @@ class AddNewAddressData {
       city: json['city'] as String,
       region: json['region'] as String,
       details: json['details'] as String,
-      notes: json['notes'] as String,
+      notes: json['notes'] as String? ??'',
       id: json['id'] as int,
     );
   }

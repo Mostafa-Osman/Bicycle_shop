@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:udemy_flutter/presentation/address/address_cubit/address_cubit.dart';
 import 'package:udemy_flutter/presentation/payment/payment_cubit/payment_cubit.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
@@ -16,7 +17,6 @@ class AddressPayment extends StatelessWidget {
   Widget build(BuildContext context) {
     final addressCubit = BlocProvider.of<AddressCubit>(context);
     final paymentCubit = BlocProvider.of<PaymentCubit>(context);
-
     return BlocConsumer<AddressCubit, AddressStates>(
       listener: (context, state) {
         if (state is AddAddressSuccess) {
@@ -45,48 +45,59 @@ class AddressPayment extends StatelessWidget {
                 ),
                 const SizedBox(height: 10.0),
                 SizedBox(
-                  height: addressCubit.addressModel.data.length > 1
-                      ? 200.0
-                      : 90.0,
+                  height:
+                      addressCubit.addressModel.data.length > 1 ? 200.0 : 90.0,
                   child: ListView.separated(
                     itemCount: addressCubit.addressModel.data.length,
                     itemBuilder: (context, index) {
-                      // to make style of button address
-                      // paymentCubit.addressStyle(index);
                       return InkWell(
                         onTap: () => paymentCubit.changeAddressIndex(index),
                         child: Container(
-                          decoration: BoxDecoration(
-                            color: paymentCubit.backgroundTextAddress,
+                          decoration: const BoxDecoration(
+                            color: Color(0xffE0E0E0),
                             borderRadius:
-                                const BorderRadius.all(Radius.circular(10.0)),
-                            border: Border.all(
-                              color: paymentCubit.backgroundTextAddress,
-                            ),
+                                BorderRadius.all(Radius.circular(10.0)),
                           ),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                            child: Stack(
                               children: [
-                                CustomText(
-                                  text:
-                                      'City : ${addressCubit.addressModel.data[index].city}',
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w600,
-                                  textColor: paymentCubit.textColor,
-                                ),
-                                CustomText(
-                                  text:
-                                      'region : ${addressCubit.addressModel.data[index].region}',
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w600,                                  textColor: paymentCubit.textColor,
-                                ),
-                                CustomText(
-                                  text: 'details : '
-                                      '${addressCubit.addressModel.data[index].details}',
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w600,                                  textColor: paymentCubit.textColor,
+                                if (paymentCubit.addressIndex == index)
+                                  Positioned(
+                                    top: 20.0,
+                                    right: 0.0,
+                                    child: SvgPicture.asset(
+                                      'assets/icons/done.svg',
+                                    ),
+                                  ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    CustomText(
+                                      text:
+                                          'City : ${addressCubit.addressModel.data[index].city}',
+                                      fontSize: 15,
+                                      height: 1.4,
+                                      fontWeight: FontWeight.w600,
+                                      textColor: black,
+                                    ),
+                                    CustomText(
+                                      text:
+                                          'region : ${addressCubit.addressModel.data[index].region}',
+                                      fontSize: 15,
+                                      height: 1.4,
+                                      fontWeight: FontWeight.w600,
+                                      textColor: black,
+                                    ),
+                                    CustomText(
+                                      text: 'details : '
+                                          '${addressCubit.addressModel.data[index].details}',
+                                      fontSize: 15,
+                                      height: 1.4,
+                                      fontWeight: FontWeight.w600,
+                                      textColor: black,
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),

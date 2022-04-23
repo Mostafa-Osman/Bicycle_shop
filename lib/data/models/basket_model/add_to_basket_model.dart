@@ -19,17 +19,20 @@ class AddToBasketModel {
 }
 
 class Data {
-    int quantity;
+  final int id;
+  dynamic quantity;
   final Product product;
 
   Data({
     required this.quantity,
     required this.product,
+    required this.id,
   });
 
   factory Data.fromJson(Map<String, dynamic> json) {
     return Data(
-      quantity: json['quantity'] as int,
+      id: json['id'] as int,
+      quantity: json['quantity'],
       product: Product.fromJson(json['product'] as Map<String, dynamic>),
     );
   }
@@ -57,9 +60,9 @@ class Product {
   factory Product.fromJson(Map<String, dynamic> json) {
     return Product(
       id: json['id'] as int,
-      price: json['price'] ,
-      oldPrice: json['old_price'] ,
-      discount: json['discount'] ,
+      price: json['price'],
+      oldPrice: json['old_price'],
+      discount: json['discount'],
       image: json['image'] as String,
       name: json['name'] as String,
       description: json['description'] as String,

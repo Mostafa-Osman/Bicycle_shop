@@ -25,7 +25,7 @@ class FavouriteCubit extends Cubit<FavouriteStates> {
     }
   }
 
-  Future<void> changeFavorites(int productId) async {
+  Future<void> changeFavourites(int productId) async {
     emit(ChangeFavorites());
     try {
       await favouritesRepo.changeFavorites(productId);

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/data/models/history_orders_model/history_orders.dart';
+import 'package:udemy_flutter/presentation/history_orders/history_orders_cubit/history_orders_cubit.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
 import 'package:udemy_flutter/shared/components/custom_card.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
@@ -14,12 +16,15 @@ class BuildOrderCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final historyOrdersCubit=BlocProvider.of<HistoryOrdersCubit>(context);
     return Column(
       children: [
         CustomCard(
           widget: InkWell(
-            onTap: () => navigateWithArgument(
-                context, RouteConstant.orderDetailsRoute, order.id,),
+            onTap: () {
+              historyOrdersCubit.getOrderDetails(order.id);
+              navigateTo(context,RouteConstant.orderDetailsRoute);
+            },
             child: Container(
               height: 90,
               width: double.infinity,
@@ -52,7 +57,7 @@ class BuildOrderCard extends StatelessWidget {
                       const CustomText(
                           text: 'Total : ', textColor: mainColor, fontSize: 20,),
                       const  Spacer(),
-                      CustomText(text: '${order.total} EGP', fontSize: 15),
+                      CustomText(text: '${order.total.ceil()} EGP', fontSize: 15),
                     ],
                   ),
                 ],

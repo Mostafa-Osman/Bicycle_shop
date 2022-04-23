@@ -1,25 +1,40 @@
 import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:udemy_flutter/data/models/history_orders_model/history_orders.dart';
 import 'package:udemy_flutter/data/models/order_details_model/order_detail.dart';
 import 'package:udemy_flutter/data/repository/orders_repo/orders_repo.dart';
 
-part 'order_details_state.dart';
+part 'history_orders_state.dart';
 
-class OrderDetailsCubit extends Cubit<OrderDetailsState> {
-  OrderDetailsCubit(this.ordersDetailsRepository)
+class HistoryOrdersCubit extends Cubit<OrderDetailsState> {
+  HistoryOrdersCubit(this.ordersDetailsRepository)
       : super(OrderDetailsInitial());
-
-  final OrdersRepository ordersDetailsRepository;
 
   //order details
   late OrderDetailsModel orderDetailsModel;
   bool isAddressVisible = false;
+  final OrdersRepository ordersDetailsRepository;
+  late HistoryOrdersModel orders;
+
+  Future<void> getOrders() async {
+    emit(HistoryOrdersLoading());
+    try {
+      orders = await ordersDetailsRepository.getOrder();
+      emit(HistoryOrdersSuccess());
+    } catch (error, s) {
+      emit(
+        HistoryOrdersError(error.toString()),
+      );
+      log('get Orders data', error: error, stackTrace: s);
+    }
+  }
 
   Future<void> getOrderDetails(int orderId) async {
     emit(OrderDetailsLoading());
     try {
-      orderDetailsModel = await ordersDetailsRepository.getOrderDetails(orderId);
+      orderDetailsModel =
+          await ordersDetailsRepository.getOrderDetails(orderId);
       emit(OrderDetailsSuccess());
     } catch (e, s) {
       log('get order details data', error: e.toString(), stackTrace: s);
@@ -33,10 +48,12 @@ class OrderDetailsCubit extends Cubit<OrderDetailsState> {
   }
 
   //cancel order
-  Future<void> cancelOrder(int orderId) async {
+  Future<void> cancelOrder() async {
     emit(OrderCancelLoading());
     try {
-      ordersDetailsRepository.cancelOrder(orderId);
+      await ordersDetailsRepository
+          .cancelOrder(orderDetailsModel.orderDetails.id);
+      getOrders();
       emit(OrderCancelSuccess());
     } catch (e, s) {
       log('cancel order data', error: e.toString(), stackTrace: s);

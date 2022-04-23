@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:udemy_flutter/data/models/home_model/home_model.dart';
-import 'package:udemy_flutter/presentation/home/home_cubit/home_cubit.dart';
-import 'package:udemy_flutter/presentation/product_details/widgets/body.dart';
+import 'package:udemy_flutter/presentation/product_details/widgets/product_description.dart';
+import 'package:udemy_flutter/presentation/product_details/widgets/product_details_button.dart';
+import 'package:udemy_flutter/presentation/product_details/widgets/product_details_photos.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
-import 'package:udemy_flutter/shared/components/loading.dart';
 import 'package:udemy_flutter/shared/components/navigate.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
   final DetailsData productDetails;
-  const ProductDetailsScreen(
-      {required this.productDetails,});
+
+  const ProductDetailsScreen({
+    required this.productDetails,
+  });
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
@@ -37,23 +37,27 @@ class ProductDetailsScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: BlocBuilder<HomeCubit, HomeStates>(
-        builder: (context, state) {
-          if (state is HomeLoading) {
-            return const Center(child: CustomLoading());
-          } else if (state is HomeError) {
-            return const Center(
-              child: Text(
-                'Error',
-                style: TextStyle(fontSize: 30, color: red),
-              ),
-            );
-          } else {
-            return ProductDetailsBody(productDetails: productDetails);
-          }
-        },
+      body: SizedBox(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        child: Stack(
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ProductDetailsPhotos(productDetails: productDetails),
+                const SizedBox(height: 20.0),
+                Expanded(
+                  child: ProductDescription(productDetails: productDetails),
+                ),
+              ],
+            ),
+            ProductDetailsButton(
+              productId: productDetails.id,
+            ),
+          ],
+        ),
       ),
-
     );
   }
 }

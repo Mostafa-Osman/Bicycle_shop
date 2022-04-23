@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:udemy_flutter/data/data_sources/remote/dio_helper.dart';
 import 'package:udemy_flutter/data/data_sources/remote/end_points.dart';
 import 'package:udemy_flutter/data/models/basket_model/add_to_basket_model.dart';
 import 'package:udemy_flutter/data/models/basket_model/basket_get_orders_model.dart';
+import 'package:udemy_flutter/data/models/basket_model/update_basket_model.dart';
 import 'package:udemy_flutter/shared/components/constants.dart';
 
 class BasketRepository {
@@ -30,7 +33,7 @@ class BasketRepository {
     throw 'server error';
   }
 
-  Future<AddToBasketModel> updateBasketOrderData({required int productId,required int quantity,}
+  Future<UpdateBasketModel> updateBasketOrderData({required int productId,required int quantity,}
      ) async {
     final response = await DioHelper.putData(
       url: '$updateQuantityOrdersUrl$productId',
@@ -41,7 +44,8 @@ class BasketRepository {
     );
     final data = response.data as Map<String, dynamic>;
     if (data['status'] == true) {
-      return AddToBasketModel.fromJson(data);
+      log(data.toString());
+      return UpdateBasketModel.fromJson(data);
     }
     throw 'server error';
   }

@@ -38,10 +38,12 @@ class HomeScreen extends StatelessWidget {
                     shrinkWrap: true,
                     crossAxisCount: 2,
                     itemCount: homeCubit.homeModel.data.detailsData.length,
-                    itemBuilder: (BuildContext context, int index) => ProductItem(
+                    itemBuilder: (BuildContext context, int index) =>
+                        ProductItem(
                       data: homeCubit.homeModel.data.detailsData[index],
                     ),
                   ),
+                  const SizedBox(height: 70),
                 ],
               ),
             );

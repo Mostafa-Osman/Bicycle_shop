@@ -1,47 +1,58 @@
-class BasketGetOrdersModel {
+class UpdateBasketModel {
   final bool status;
-  final Data data;
+  final String message;
+  final UpdateBasketData data;
 
-  BasketGetOrdersModel({
+  UpdateBasketModel({
     required this.status,
+    required this.message,
     required this.data,
   });
 
-  factory BasketGetOrdersModel.fromJson(Map<String, dynamic> json) {
-    return BasketGetOrdersModel(
+  factory UpdateBasketModel.fromJson(Map<String, dynamic> json) {
+    return UpdateBasketModel(
       status: json['status'] as bool,
-      data: Data.fromJson(json['data'] as Map<String, dynamic>),
+      message: json['message'] as String,
+      data: UpdateBasketData.fromJson(json['data'] as Map<String, dynamic>),
     );
   }
 }
 
-class Data {
-  final List<Cart> cartItems;
-  dynamic subTotal;
-  final int total;
+class UpdateBasketData {
+  final List<CartItems> cartItems;
+  final dynamic subTotal;
+  final dynamic total;
 
-  Data({required this.cartItems, this.subTotal, required this.total});
+  UpdateBasketData({
+    required this.cartItems,
+    required this.subTotal,
+    required this.total,
+  });
 
-  factory Data.fromJson(Map<String, dynamic> json) {
-    return Data(
-      subTotal: json['subTotal'],
-      total: json['total']as int,
-      cartItems: (json['cart_items'] as List<dynamic>)
-          .map((element) => Cart.fromJson(element as Map<String, dynamic>))
+  factory UpdateBasketData.fromJson(Map<String, dynamic> json) {
+    return UpdateBasketData(
+      cartItems: List.from(json['cart_items'] as List<CartItems>? ??[])
+          .map((e) => CartItems.fromJson(e as Map<String, dynamic>))
           .toList(),
+      subTotal: json['sub_total'],
+      total: json['total'],
     );
   }
 }
 
-class Cart {
+class CartItems {
   final int id;
-  int quantity;
+  final int quantity;
   final Product product;
 
-  Cart({required this.id, required this.quantity, required this.product});
+  CartItems({
+    required this.id,
+    required this.quantity,
+    required this.product,
+  });
 
-  factory Cart.fromJson(Map<String, dynamic> json) {
-    return Cart(
+  factory CartItems.fromJson(Map<String, dynamic> json) {
+    return CartItems(
       id: json['id'] as int,
       quantity: json['quantity'] as int,
       product: Product.fromJson(json['product'] as Map<String, dynamic>),
