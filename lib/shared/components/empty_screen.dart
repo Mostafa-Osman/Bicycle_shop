@@ -10,7 +10,6 @@ import 'package:udemy_flutter/shared/components/navigate.dart';
 
 import 'package:udemy_flutter/shared/styles/color.dart';
 
-
 class EmptyScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -45,7 +44,8 @@ class EmptyScreen extends StatelessWidget {
                     onPressed: () {
                       BlocProvider.of<LayoutCubit>(context)
                           .changeCurrentIndex(2);
-                      navigateTo(context, RouteConstant.shopLayoutRoute);
+                      navigatorAndFinish(
+                          context, RouteConstant.shopLayoutRoute,);
                     },
                   ),
                   const SizedBox(height: 20),

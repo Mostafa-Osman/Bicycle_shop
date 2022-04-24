@@ -1,14 +1,11 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:udemy_flutter/data/models/home_model/home_model.dart';
 import 'package:udemy_flutter/presentation/product_details/cubit/product_details_cubit.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 
 class ProductDetailsPhotos extends StatelessWidget {
-  final DetailsData productDetails;
 
-  const ProductDetailsPhotos({required this.productDetails});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +19,7 @@ class ProductDetailsPhotos extends StatelessWidget {
             children: [
               //photo
               CarouselSlider(
-                items: productDetails.images
+                items: productDetailsCubit.productDetailsModel.data.images
                     .map(
                       (e) => SizedBox(
                         height: 250.0,
@@ -60,19 +57,19 @@ class ProductDetailsPhotos extends StatelessWidget {
                           ),
                           child: Image(
                             image: NetworkImage(
-                              productDetails.images[index].toString(),
+                              productDetailsCubit.productDetailsModel.data.images[index].toString(),
                             ),
                             fit: BoxFit.fitWidth,
                           ),
                         )
                       : Image(
                           image: NetworkImage(
-                            productDetails.images[index].toString(),
+                            productDetailsCubit.productDetailsModel.data.images[index].toString(),
                           ),
                           fit: BoxFit.cover,
                         ),
                   separatorBuilder: (_, index) => const SizedBox(width: 5),
-                  itemCount: productDetails.images.length,
+                  itemCount: productDetailsCubit.productDetailsModel.data.images.length,
                 ),
               ),
             ],

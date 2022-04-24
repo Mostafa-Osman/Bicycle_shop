@@ -16,10 +16,10 @@ class EstimateModel {
 }
 
 class EstimateData {
-  final dynamic subTotal;
+  final double subTotal;
   final int discount;
-  final dynamic points;
-  final dynamic total;
+  final double points;
+  final double total;
 
   EstimateData({
     required this.subTotal,
@@ -30,10 +30,10 @@ class EstimateData {
 
   factory EstimateData.fromJson(Map<String, dynamic> json) {
     return EstimateData(
-      subTotal: json['sub_total'],
-      discount: json['discount']as int,
-      points: json['points'],
-      total: json['total'],
+      subTotal: (json['sub_total'] as num).toDouble(),
+      discount: json['discount'] as int,
+      points: (json['points'] as num).toDouble(),
+      total: (json['total'] as num).toDouble(),
     );
   }
 }

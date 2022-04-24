@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:udemy_flutter/data/models/basket_model/add_to_basket_model.dart';
 import 'package:udemy_flutter/data/models/basket_model/basket_get_orders_model.dart';
 import 'package:udemy_flutter/data/repository/basket_repo/basket_repo.dart';
 
@@ -9,18 +10,22 @@ part 'basket_states.dart';
 class BasketCubit extends Cubit<BasketStates> {
   BasketCubit(this.basketRepository) : super(BasketInitialState());
 
-  //add order to my basket
   final BasketRepository basketRepository;
+  int productQuantity = 1;
 
-  //get orders to basket
   late BasketGetOrdersModel myBag;
+  late AddToBasketModel addToBasketModel;
 
-  Future<void> addToBasketOrders(int productId) async {
+  Future<void> addToBasketOrders({required int productId}) async {
     emit(AddToBasketLoading());
     try {
-      await basketRepository.addToBasketOrders(productId);
-      emit(AddToBasketSuccess());
+      final value = await basketRepository.addToBasketOrders(productId);
+      updateBasketOrderData(
+        productId: value.data.id,
+        quantity: productQuantity,
+      );
       getMyBasketData();
+      emit(AddToBasketSuccess());
     } catch (error, s) {
       log('add to basket orders data', error: error, stackTrace: s);
       emit(AddToBasketError(error.toString()));
@@ -85,6 +90,34 @@ class BasketCubit extends Cubit<BasketStates> {
           quantity: myBag.data.cartItems[index].quantity,
           productId: myBag.data.cartItems[index].id,
         );
+      }
+    }
+    emit(AddToBasketRefreshUi());
+  }
+
+  void productDetailsQuantity({
+    bool isIncrement = false,
+    bool resetQuantity = false,
+  }) {
+    if (resetQuantity) {
+      productQuantity = 1;
+    } else if (isIncrement) {
+      productQuantity++;
+    } else {
+      if (productQuantity > 1) {
+        productQuantity--;
+      }
+    }
+    emit(AddToBasketRefreshUi());
+  }
+
+  void testIdea(int id) {
+    for (int i = 0; i < myBag.data.cartItems.length; ++i) {
+      if (myBag.data.cartItems[i].product.id == id) {
+        updateBasketOrderData(
+            productId: myBag.data.cartItems[i].id,
+            quantity: productQuantity,);
+        break;
       }
     }
     emit(AddToBasketRefreshUi());

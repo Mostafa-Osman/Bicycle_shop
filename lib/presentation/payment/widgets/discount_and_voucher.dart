@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/presentation/payment/payment_cubit/payment_cubit.dart';
 import 'package:udemy_flutter/presentation/payment/widgets/card_item.dart';
+import 'package:udemy_flutter/presentation/payment/widgets/promo_code.dart';
 import 'package:udemy_flutter/shared/components/custom_card.dart';
 
 class DiscountAndVoucher extends StatelessWidget {
@@ -10,7 +11,9 @@ class DiscountAndVoucher extends StatelessWidget {
     final paymentCubit = BlocProvider.of<PaymentCubit>(context);
 
     return CustomCard(
-      height: MediaQuery.of(context).size.height * 0.2,
+      height: paymentCubit.usePromoCode == 0
+          ? MediaQuery.of(context).size.height * 0.27
+          : MediaQuery.of(context).size.height * 0.21,
       width: double.infinity,
       paddingLeft: 15.0,
       paddingTop: 10.0,
@@ -44,6 +47,8 @@ class DiscountAndVoucher extends StatelessWidget {
               paymentCubit.changePromoCode(index);
             },
           ),
+          const SizedBox(height: 20.0),
+          if (paymentCubit.usePromoCode == 0) PromoCode(),
         ],
       ),
     );

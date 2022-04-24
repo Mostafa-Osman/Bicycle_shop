@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/presentation/address/address_cubit/address_cubit.dart';
-import 'package:udemy_flutter/presentation/basket/basket_cubit/basket_cubit.dart';
 import 'package:udemy_flutter/presentation/payment/payment_cubit/payment_cubit.dart';
 import 'package:udemy_flutter/presentation/payment/widgets/showd_details_price.dart';
 import 'package:udemy_flutter/shared/components/component.dart';
@@ -13,7 +12,6 @@ class PaymentBottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final addressCubit = BlocProvider.of<AddressCubit>(context);
-    final basketCubit = BlocProvider.of<BasketCubit>(context);
     final paymentCubit = BlocProvider.of<PaymentCubit>(context);
 
     return BlocBuilder<PaymentCubit, PaymentStates>(
@@ -72,7 +70,6 @@ class PaymentBottomNavBar extends StatelessWidget {
                       addressId: addressCubit
                           .addressModel.data[paymentCubit.addressIndex].id,
                     );
-                    basketCubit.myBag.data.cartItems.clear();
                   }
                 },
               ),

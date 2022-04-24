@@ -37,7 +37,7 @@ class ShowDetailsPrice extends StatelessWidget {
                   textColor: mainColor,
                 ),
                 CustomText(
-                  text: '${basketCubit.myBag.data.total.ceil()}',
+                  text: '${basketCubit.myBag.data.total}',
                   fontSize: 18,
                 ),
                 const SizedBox(height: 5),

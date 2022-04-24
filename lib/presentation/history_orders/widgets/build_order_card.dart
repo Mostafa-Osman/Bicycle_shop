@@ -57,7 +57,7 @@ class BuildOrderCard extends StatelessWidget {
                       const CustomText(
                           text: 'Total : ', textColor: mainColor, fontSize: 20,),
                       const  Spacer(),
-                      CustomText(text: '${order.total.ceil()} EGP', fontSize: 15),
+                      CustomText(text: '${order.total} EGP', fontSize: 15),
                     ],
                   ),
                 ],

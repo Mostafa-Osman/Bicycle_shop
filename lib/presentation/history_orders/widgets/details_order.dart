@@ -66,7 +66,7 @@ class DetailsOrder extends StatelessWidget {
               ),
               CustomText(
                 text:
-                    '${orderDetailsCubit.orderDetailsModel.orderDetails.cost.ceil()}',
+                    '${orderDetailsCubit.orderDetailsModel.orderDetails.cost}',
                 fontSize: 18,
               ),
               const SizedBox(height: 5),
@@ -86,7 +86,7 @@ class DetailsOrder extends StatelessWidget {
                 ),
                 CustomText(
                   text:
-                      '${orderDetailsCubit.orderDetailsModel.orderDetails.vat.ceil()}',
+                      '${orderDetailsCubit.orderDetailsModel.orderDetails.vat}',
                   fontSize: 18,
                 ),
               ],
@@ -101,7 +101,7 @@ class DetailsOrder extends StatelessWidget {
               ),
               CustomText(
                 text:
-                    '${orderDetailsCubit.orderDetailsModel.orderDetails.discount.ceil()}',
+                    '${orderDetailsCubit.orderDetailsModel.orderDetails.discount}',
                 fontSize: 18,
               ),
             ],
@@ -142,7 +142,7 @@ class DetailsOrder extends StatelessWidget {
                 const Spacer(),
                 CustomText(
                   text:
-                      '${orderDetailsCubit.orderDetailsModel.orderDetails.total.ceil()} EGP',
+                      '${orderDetailsCubit.orderDetailsModel.orderDetails.total} EGP',
                   fontSize: 18,
                 ),
               ],

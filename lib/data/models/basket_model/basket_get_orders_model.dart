@@ -25,7 +25,7 @@ class Data {
   factory Data.fromJson(Map<String, dynamic> json) {
     return Data(
       subTotal: json['subTotal'],
-      total: json['total']as int,
+      total: (json['total'] as num).toInt(),
       cartItems: (json['cart_items'] as List<dynamic>)
           .map((element) => Cart.fromJson(element as Map<String, dynamic>))
           .toList(),
@@ -58,7 +58,7 @@ class Product {
   final String name;
   final String description;
   final bool inFavorites;
-  final bool inCart;
+  late bool inCart;
 
   Product({
     required this.id,

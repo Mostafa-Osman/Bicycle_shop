@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:udemy_flutter/data/models/home_model/home_model.dart';
+import 'package:udemy_flutter/presentation/home/home_cubit/home_cubit.dart';
 import 'package:udemy_flutter/presentation/product_details/cubit/product_details_cubit.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
 import 'package:udemy_flutter/shared/components/custom_favourite_icon.dart';
@@ -10,22 +10,24 @@ import 'package:udemy_flutter/shared/components/navigate.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 
 class ProductItem extends StatelessWidget {
-  final DetailsData data;
+  final int index;
 
-  const ProductItem({required this.data});
+  const ProductItem({required this.index});
 
   @override
   Widget build(BuildContext context) {
+    final data =
+        BlocProvider.of<HomeCubit>(context).homeModel.data.detailsData[index];
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
         onTap: () {
           BlocProvider.of<ProductDetailsCubit>(context)
-              .quantityItem(resetQuantity: true);
+              .getProductDetailsData(productId: data.id);
           navigateWithArgument(
             context,
             RouteConstant.productDetailsRoute,
-            data,
+            index,
           );
         },
         child: Container(
@@ -37,7 +39,7 @@ class ProductItem extends StatelessWidget {
                 color: Colors.grey.withOpacity(0.3),
                 spreadRadius: 2,
                 blurRadius: 5,
-                offset: const Offset(0, 1), // changes position of shadow
+                offset: const Offset(0, 1),
               ),
             ],
           ),
@@ -71,7 +73,11 @@ class ProductItem extends StatelessWidget {
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 10, left: 10, right: 10),
+                padding: const EdgeInsets.only(
+                  bottom: 10.0,
+                  left: 10.0,
+                  right: 10.0,
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

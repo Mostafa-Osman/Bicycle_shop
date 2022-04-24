@@ -4,12 +4,11 @@ part of 'home_cubit.dart';
 abstract class HomeStates {}
 
 class HomeInitialState extends HomeStates {}
+class HomeRefreshUi extends HomeStates {}
 
 class HomeLoading extends HomeStates {}
 
 class HomeSuccess extends HomeStates {}
-
-class HomeRefreshUi extends HomeStates {}
 
 class HomeError extends HomeStates {
   final String message;

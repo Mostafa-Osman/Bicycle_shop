@@ -8,14 +8,13 @@ class PromoCode extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return   Row(
+    return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
           height: MediaQuery.of(context).size.height * 0.05,
           width: MediaQuery.of(context).size.width - 250,
-          padding:
-          const EdgeInsets.only(right: 5.0, left: 5.0),
+          padding: const EdgeInsets.only(right: 5.0, left: 5.0),
           child: CustomTextFormField(
             controller: promoCodeControl,
             roundedRectangleBorder: 7.0,

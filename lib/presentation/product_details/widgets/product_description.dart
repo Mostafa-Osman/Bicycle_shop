@@ -1,18 +1,19 @@
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:udemy_flutter/data/models/home_model/home_model.dart';
+import 'package:udemy_flutter/presentation/product_details/cubit/product_details_cubit.dart';
 import 'package:udemy_flutter/shared/components/custom_favourite_icon.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 
 class ProductDescription extends StatelessWidget {
-  final DetailsData productDetails;
 
-  const ProductDescription({required this.productDetails});
 
   @override
   Widget build(BuildContext context) {
+    final productDetailsCubit=BlocProvider.of<ProductDetailsCubit>(context);
+
     return Container(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
@@ -31,12 +32,12 @@ class ProductDescription extends StatelessWidget {
           Row(
             children: [
               CustomText(
-                text: 'EGP ${productDetails.price}  ',
+                text: 'EGP ${productDetailsCubit.productDetailsModel.data.price}  ',
                 textColor: mainColor,
               ),
               const Spacer(),
               CustomFavouriteIcon(
-                productId: productDetails.id,
+                productId: productDetailsCubit.productDetailsModel.data.id,
                 iconSize: 40.0,
               ),
               const SizedBox(width: 10.0),
@@ -52,7 +53,7 @@ class ProductDescription extends StatelessWidget {
               bottom: 30.0,
             ),
             child: CustomText(
-              text: productDetails.name,
+              text: productDetailsCubit.productDetailsModel.data.name,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
               fontSize: 18,
@@ -69,7 +70,7 @@ class ProductDescription extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     ExpandableText(
-                      productDetails.description,
+                      productDetailsCubit.productDetailsModel.data.description,
                       expandText: 'show more',
                       collapseText: 'show less',
                       linkStyle: const TextStyle(fontWeight: FontWeight.w400),

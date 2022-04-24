@@ -12,7 +12,7 @@ class UpdateBasketModel {
   factory UpdateBasketModel.fromJson(Map<String, dynamic> json) {
     return UpdateBasketModel(
       status: json['status'] as bool,
-      message: json['message'] as String,
+      message: json['message'] as String? ??'',
       data: UpdateBasketData.fromJson(json['data'] as Map<String, dynamic>),
     );
   }

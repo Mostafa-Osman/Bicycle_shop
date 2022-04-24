@@ -33,8 +33,10 @@ class BasketRepository {
     throw 'server error';
   }
 
-  Future<UpdateBasketModel> updateBasketOrderData({required int productId,required int quantity,}
-     ) async {
+  Future<UpdateBasketModel> updateBasketOrderData({
+    required int productId,
+    required int quantity,
+  }) async {
     final response = await DioHelper.putData(
       url: '$updateQuantityOrdersUrl$productId',
       token: token,

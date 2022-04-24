@@ -18,11 +18,11 @@ class OrderDetailsModel {
 
 class OrderDetailsData {
   final int id;
-  final dynamic cost;
-  final dynamic discount;
-  final dynamic points;
-  final dynamic vat;
-  final dynamic total;
+  final int cost;
+  final int discount;
+  final int points;
+  final int vat;
+  final int total;
   final String paymentMethod;
   final String date;
   late final String orderStatus;
@@ -46,11 +46,11 @@ class OrderDetailsData {
   factory OrderDetailsData.fromJson(Map<String, dynamic> json) {
     return OrderDetailsData(
       id: json['id'] as int,
-      cost: json['cost'],
-      discount: json['discount'],
-      points: json['points'],
-      vat: json['vat'],
-      total: json['total'],
+      cost: (json['cost'] as num).toInt(),
+      discount: (json['discount'] as num).toInt(),
+      points: (json['points'] as num).toInt(),
+      vat: (json['vat'] as num).toInt(),
+      total: (json['total'] as num).toInt(),
       paymentMethod: json['payment_method'] as String,
       date: json['date'] as String,
       orderStatus: json['status'] as String,

@@ -11,6 +11,7 @@ import 'package:udemy_flutter/data/repository/home_repository/home_repository.da
 import 'package:udemy_flutter/data/repository/notifications_repo/notifications_repository.dart';
 import 'package:udemy_flutter/data/repository/orders_repo/orders_repo.dart';
 import 'package:udemy_flutter/data/repository/payment_repo/payment_repo.dart';
+import 'package:udemy_flutter/data/repository/product_details_repository/product_details_repository.dart';
 import 'package:udemy_flutter/data/repository/search_repository/search_repository.dart';
 import 'package:udemy_flutter/data/repository/user_repo/login_repo.dart';
 import 'package:udemy_flutter/data/repository/user_repo/profile_repo.dart';
@@ -22,6 +23,7 @@ import 'package:udemy_flutter/presentation/auth/login/screens/login.dart';
 import 'package:udemy_flutter/presentation/auth/register/cubit/register_cubit.dart';
 import 'package:udemy_flutter/presentation/basket/basket_cubit/basket_cubit.dart';
 import 'package:udemy_flutter/presentation/favourites/favourite_cubit/favourite_cubit.dart';
+import 'package:udemy_flutter/presentation/history_orders/history_orders_cubit/history_orders_cubit.dart';
 import 'package:udemy_flutter/presentation/home/home_cubit/home_cubit.dart';
 import 'package:udemy_flutter/presentation/layout/layout_cubit/layout_cubit.dart';
 import 'package:udemy_flutter/presentation/layout/screens/shop_layout.dart';
@@ -37,14 +39,6 @@ import 'package:udemy_flutter/route/router.dart';
 import 'package:udemy_flutter/shared/components/constants.dart';
 import 'package:udemy_flutter/shared/styles/themes.dart';
 
-import 'presentation/history_orders/history_orders_cubit/history_orders_cubit.dart';
-
-
-
-
-
-
-
 
 Future<void> main() async {
   // to ensure that all method  in project finish loading then open app
@@ -58,17 +52,18 @@ Future<void> main() async {
   (onBoarding == null)
       ? widget = OnBoardingScreen()
       : (token == null)
-          ? widget = LoginScreen()
-          : widget = ShopLayoutScreen();
+      ? widget = LoginScreen()
+      : widget = ShopLayoutScreen();
 
   log(token!);
   BlocOverrides.runZoned(
-    () => runApp(
-      MyApp(
-        widget: widget,
-        appRoutes: AppRouter(),
-      ),
-    ),
+        () =>
+        runApp(
+          MyApp(
+            widget: widget,
+            appRoutes: AppRouter(),
+          ),
+        ),
     blocObserver: MyBlocObserver(),
   );
 }
@@ -89,41 +84,54 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => SearchCubit(SearchRepository())),
         BlocProvider(
           create: (context) =>
-          BasketCubit(BasketRepository())..getMyBasketData(),
+          BasketCubit(BasketRepository())
+            ..getMyBasketData(),
         ),
 
-        BlocProvider(create: (context) => ProductDetailsCubit()),
+        BlocProvider(create: (context) =>
+        ProductDetailsCubit(ProductDetailsRepository())
+         ,),
         BlocProvider(create: (context) => LayoutCubit()),
         BlocProvider(
-          create: (context) => HomeCubit(HomeRepository())..getHomeData(),
+          create: (context) =>
+          HomeCubit(HomeRepository())
+            ..getHomeData(),
         ),
         BlocProvider(
           create: (context) =>
-          FavouriteCubit(FavouriteRepository())..getFavouritesData(),
+          FavouriteCubit(FavouriteRepository())
+            ..getFavouritesData(),
         ),
 
 
         BlocProvider(
-          create: (context) => NotificationCubit(NotificationsRepository())
+          create: (context) =>
+          NotificationCubit(NotificationsRepository())
             ..getNotificationsData(),
         ),
         BlocProvider(
-          create: (context) => ProfileCubit(ProfileRepository())..getUserData(),
+          create: (context) =>
+          ProfileCubit(ProfileRepository())
+            ..getUserData(),
         ),
         BlocProvider(create: (context) => PaymentCubit(PaymentRepository())),
         BlocProvider(
-          create: (context) => UpdateProfileCubit(
-            ProfileRepository(),
-          ),
-        ),
-        BlocProvider(
-          create: (context) => HistoryOrdersCubit(
-            OrdersRepository(),
-          )..getOrders(),
+          create: (context) =>
+              UpdateProfileCubit(
+                ProfileRepository(),
+              ),
         ),
         BlocProvider(
           create: (context) =>
-              AddressCubit(AddressRepository())..getMyAddressData(),
+          HistoryOrdersCubit(
+            OrdersRepository(),
+          )
+            ..getOrders(),
+        ),
+        BlocProvider(
+          create: (context) =>
+          AddressCubit(AddressRepository())
+            ..getMyAddressData(),
         ),
       ],
       child: MaterialApp(

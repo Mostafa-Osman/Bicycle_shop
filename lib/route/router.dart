@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:udemy_flutter/data/models/home_model/home_model.dart';
 import 'package:udemy_flutter/data/repository/address_repo/address_repo.dart';
 import 'package:udemy_flutter/data/repository/basket_repo/basket_repo.dart';
 import 'package:udemy_flutter/data/repository/favourite_repo/favourite_repo.dart';
@@ -7,6 +6,7 @@ import 'package:udemy_flutter/data/repository/home_repository/home_repository.da
 import 'package:udemy_flutter/data/repository/notifications_repo/notifications_repository.dart';
 import 'package:udemy_flutter/data/repository/orders_repo/orders_repo.dart';
 import 'package:udemy_flutter/data/repository/payment_repo/payment_repo.dart';
+import 'package:udemy_flutter/data/repository/product_details_repository/product_details_repository.dart';
 import 'package:udemy_flutter/data/repository/search_repository/search_repository.dart';
 import 'package:udemy_flutter/data/repository/user_repo/login_repo.dart';
 import 'package:udemy_flutter/data/repository/user_repo/profile_repo.dart';
@@ -47,6 +47,7 @@ class AppRouter {
   late RegisterRepository registerRepository;
   late SearchRepository searchRepository;
   late PaymentRepository paymentRepository;
+  late ProductDetailsRepository productDetailsRepository;
 
   void initAppSettings() {
     homeRepository = HomeRepository();
@@ -60,6 +61,7 @@ class AppRouter {
     registerRepository = RegisterRepository();
     searchRepository = SearchRepository();
     paymentRepository = PaymentRepository();
+    productDetailsRepository = ProductDetailsRepository();
   }
 
   Route? generateRoute(RouteSettings settings) {
@@ -111,7 +113,7 @@ class AppRouter {
           settings: settings,
           builder: (_) {
             return ProductDetailsScreen(
-              productDetails: settings.arguments! as DetailsData,
+              index: settings.arguments! as int,
             );
           },
         );
@@ -132,8 +134,7 @@ class AppRouter {
         // final int arguments = settings.arguments as int;
         // final orderId = arguments;
         return MaterialPageRoute(
-          builder: (_) =>
-              OrderDetailsScreen(),
+          builder: (_) => OrderDetailsScreen(),
         );
       case RouteConstant.updateProfileRoute:
         return MaterialPageRoute(

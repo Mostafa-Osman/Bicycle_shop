@@ -40,7 +40,7 @@ class HomeScreen extends StatelessWidget {
                     itemCount: homeCubit.homeModel.data.detailsData.length,
                     itemBuilder: (BuildContext context, int index) =>
                         ProductItem(
-                      data: homeCubit.homeModel.data.detailsData[index],
+                      index: index,
                     ),
                   ),
                   const SizedBox(height: 70),

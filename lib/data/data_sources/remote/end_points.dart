@@ -7,6 +7,7 @@ const favoritesUrl = 'favorites';
 const profileUrl = 'profile';
 const updateProfileUrl = 'update-profile';
 const productsUrl = 'products';
+const productsDetailsUrl = 'products/';
 const searchUrl = 'products/search';
 const basketUrl = 'carts';
 const updateQuantityOrdersUrl = 'carts/';

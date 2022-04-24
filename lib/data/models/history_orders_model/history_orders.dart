@@ -34,7 +34,7 @@ class Data {
 
 class OrderData {
   final int id;
-  final dynamic total;
+  final int total;
   final String date;
   final String orderStatus;
 
@@ -48,7 +48,7 @@ class OrderData {
   factory OrderData.fromJson(Map<String, dynamic> json) {
     return OrderData(
       id: json['id'] as int,
-      total: json['total'],
+      total: (json['total']as num).toInt(),
       date: json['date'] as String,
       orderStatus: json['status'] as String,
     );
