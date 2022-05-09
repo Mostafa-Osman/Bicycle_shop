@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:udemy_flutter/presentation/profile/widgets/profile_photo.dart';
 import 'package:udemy_flutter/presentation/profile/widgets/user_data.dart';
 import 'package:udemy_flutter/presentation/update_profile/edit_profile_cubit/update_profile_cubit.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
+import 'package:udemy_flutter/shared/components/constants.dart';
 import 'package:udemy_flutter/shared/components/custom_card.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/components/dotted_line.dart';
@@ -23,6 +23,7 @@ class ProfileScreen extends StatelessWidget {
         title: const CustomText(
           text: 'Profile',
           textColor: mainColor,
+          fontSize: 20.0,
           textAlign: TextAlign.center,
         ),
         centerTitle: true,
@@ -39,7 +40,25 @@ class ProfileScreen extends StatelessWidget {
                   children: [
                     const SizedBox(height: 30),
                     //profile photo
-                    ProfilePhoto(),
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          width: 1.3,
+                        ),
+                        shape: BoxShape.circle,
+                      ),
+                      child: FittedBox(
+                        fit: BoxFit.fitWidth,
+                        child: ClipOval(
+                          child: Image.network(
+                            userData.data.image,
+                            height: 115,
+                            width: 115,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                    ),
                     //user data (name,email phone)
                     UserDataWidget(),
                     const SizedBox(height: 20.0),

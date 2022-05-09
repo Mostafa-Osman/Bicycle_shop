@@ -11,7 +11,7 @@ class UpdateProfileScreen extends StatelessWidget {
       appBar: AppBar(
         title: const CustomText(
           text: 'Edit Profile',
-          textColor: mainColor,
+          textColor: mainColor,fontSize: 20.0,
           textAlign: TextAlign.center,
         ),
         leading: IconButton(

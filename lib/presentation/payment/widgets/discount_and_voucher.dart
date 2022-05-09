@@ -12,8 +12,8 @@ class DiscountAndVoucher extends StatelessWidget {
 
     return CustomCard(
       height: paymentCubit.usePromoCode == 0
-          ? MediaQuery.of(context).size.height * 0.27
-          : MediaQuery.of(context).size.height * 0.21,
+          ? MediaQuery.of(context).size.height * 0.21
+          : MediaQuery.of(context).size.height * 0.15,
       width: double.infinity,
       paddingLeft: 15.0,
       paddingTop: 10.0,
@@ -27,15 +27,6 @@ class DiscountAndVoucher extends StatelessWidget {
             selectedLabelIndex: (int index) {
               paymentCubit.changeDiscountPoints(index);
               paymentCubit.estimateOrdersData();
-            },
-          ),
-          const SizedBox(height: 20.0),
-          CardItem(
-            title: "Do you want to use discount voucher?",
-            labels: paymentCubit.labelText,
-            selectedIndex: paymentCubit.voucherTabTextIndexSelected,
-            selectedLabelIndex: (int index) {
-              paymentCubit.changeVoucher(index);
             },
           ),
           const SizedBox(height: 20.0),

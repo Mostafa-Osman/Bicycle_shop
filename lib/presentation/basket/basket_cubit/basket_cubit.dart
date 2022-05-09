@@ -11,12 +11,12 @@ class BasketCubit extends Cubit<BasketStates> {
   BasketCubit(this.basketRepository) : super(BasketInitialState());
 
   final BasketRepository basketRepository;
-  int productQuantity = 1;
 
   late BasketGetOrdersModel myBag;
   late AddToBasketModel addToBasketModel;
 
-  Future<void> addToBasketOrders({required int productId}) async {
+
+  Future<void> addToBasketOrders({required int productId,required int productQuantity}) async {
     emit(AddToBasketLoading());
     try {
       final value = await basketRepository.addToBasketOrders(productId);
@@ -67,7 +67,7 @@ class BasketCubit extends Cubit<BasketStates> {
     emit(DeleteFromBasketLoading());
 
     try {
-      basketRepository.deleteOrderFromBasketData(productId);
+      basketRepository.deleteOrderFromBasketData(productId:productId);
       emit(DeleteFromBasketSuccess());
       getMyBasketData();
     } catch (error, s) {
@@ -95,23 +95,9 @@ class BasketCubit extends Cubit<BasketStates> {
     emit(AddToBasketRefreshUi());
   }
 
-  void productDetailsQuantity({
-    bool isIncrement = false,
-    bool resetQuantity = false,
-  }) {
-    if (resetQuantity) {
-      productQuantity = 1;
-    } else if (isIncrement) {
-      productQuantity++;
-    } else {
-      if (productQuantity > 1) {
-        productQuantity--;
-      }
-    }
-    emit(AddToBasketRefreshUi());
-  }
 
-  void testIdea(int id) {
+
+  void updateQuantityCart(int id,int productQuantity) {
     for (int i = 0; i < myBag.data.cartItems.length; ++i) {
       if (myBag.data.cartItems[i].product.id == id) {
         updateBasketOrderData(
@@ -122,4 +108,5 @@ class BasketCubit extends Cubit<BasketStates> {
     }
     emit(AddToBasketRefreshUi());
   }
+
 }

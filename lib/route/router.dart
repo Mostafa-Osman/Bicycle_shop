@@ -9,6 +9,7 @@ import 'package:udemy_flutter/data/repository/payment_repo/payment_repo.dart';
 import 'package:udemy_flutter/data/repository/product_details_repository/product_details_repository.dart';
 import 'package:udemy_flutter/data/repository/search_repository/search_repository.dart';
 import 'package:udemy_flutter/data/repository/user_repo/login_repo.dart';
+import 'package:udemy_flutter/data/repository/user_repo/logout.dart';
 import 'package:udemy_flutter/data/repository/user_repo/profile_repo.dart';
 import 'package:udemy_flutter/data/repository/user_repo/register_repo.dart';
 import 'package:udemy_flutter/presentation/about_us/screens/about.dart';
@@ -48,6 +49,7 @@ class AppRouter {
   late SearchRepository searchRepository;
   late PaymentRepository paymentRepository;
   late ProductDetailsRepository productDetailsRepository;
+  late LogoutRepository logoutRepository;
 
   void initAppSettings() {
     homeRepository = HomeRepository();
@@ -62,6 +64,7 @@ class AppRouter {
     searchRepository = SearchRepository();
     paymentRepository = PaymentRepository();
     productDetailsRepository = ProductDetailsRepository();
+    logoutRepository = LogoutRepository();
   }
 
   Route? generateRoute(RouteSettings settings) {
@@ -112,9 +115,7 @@ class AppRouter {
         return MaterialPageRoute(
           settings: settings,
           builder: (_) {
-            return ProductDetailsScreen(
-              index: settings.arguments! as int,
-            );
+            return ProductDetailsScreen();
           },
         );
       case RouteConstant.shopLayoutRoute:

@@ -52,7 +52,7 @@ class BasketRepository {
     throw 'server error';
   }
 
-  Future<AddToBasketModel> deleteOrderFromBasketData(int productId) async {
+  Future<AddToBasketModel> deleteOrderFromBasketData({required int productId}) async {
     final response = await DioHelper.deleteData(
       url: '$deleteOrdersUrl$productId',
       token: token,

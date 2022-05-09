@@ -28,7 +28,7 @@ class Data {
   final String description;
   final List<dynamic> images;
   final bool isFavorite;
-  late  bool inCart;
+  late bool inCart;
 
   Data({
     required this.id,

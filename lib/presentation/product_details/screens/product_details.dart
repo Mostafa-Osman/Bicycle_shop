@@ -12,14 +12,11 @@ import 'package:udemy_flutter/shared/components/navigate.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
-  final int index;
 
-  const ProductDetailsScreen({required this.index});
 
   @override
   Widget build(BuildContext context) {
     final productDetailsCubit = BlocProvider.of<ProductDetailsCubit>(context);
-    final basketCubit = BlocProvider.of<BasketCubit>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -27,7 +24,7 @@ class ProductDetailsScreen extends StatelessWidget {
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
-            basketCubit.productDetailsQuantity(resetQuantity: true);
+            // basketCubit.productDetailsQuantity(resetQuantity: true);
           },
           icon: const Icon(Icons.arrow_back_ios_sharp, color: mainColor),
         ),
@@ -35,7 +32,7 @@ class ProductDetailsScreen extends StatelessWidget {
           IconButton(
             onPressed: () {
               navigateTo(context, RouteConstant.basketRoute);
-              basketCubit.productDetailsQuantity(resetQuantity: true);
+              // basketCubit.productDetailsQuantity(resetQuantity: true);
             },
             icon: SvgPicture.asset(
               'assets/icons/basket.svg',
@@ -69,6 +66,7 @@ class ProductDetailsScreen extends StatelessWidget {
                       ),
                     ],
                   ),
+
                   ProductDetailsButton(
                     productId: productDetailsCubit.productDetailsModel.data.id,
                   ),

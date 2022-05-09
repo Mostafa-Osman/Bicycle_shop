@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/data/data_sources/local/cache_helper.dart';
 import 'package:udemy_flutter/data/data_sources/remote/dio_helper.dart';
@@ -14,12 +15,14 @@ import 'package:udemy_flutter/data/repository/payment_repo/payment_repo.dart';
 import 'package:udemy_flutter/data/repository/product_details_repository/product_details_repository.dart';
 import 'package:udemy_flutter/data/repository/search_repository/search_repository.dart';
 import 'package:udemy_flutter/data/repository/user_repo/login_repo.dart';
+import 'package:udemy_flutter/data/repository/user_repo/logout.dart';
 import 'package:udemy_flutter/data/repository/user_repo/profile_repo.dart';
 import 'package:udemy_flutter/data/repository/user_repo/register_repo.dart';
 import 'package:udemy_flutter/my_bloc_observer.dart';
 import 'package:udemy_flutter/presentation/address/address_cubit/address_cubit.dart';
 import 'package:udemy_flutter/presentation/auth/login/login_cubit/login_cubit.dart';
 import 'package:udemy_flutter/presentation/auth/login/screens/login.dart';
+import 'package:udemy_flutter/presentation/auth/logout/logout_bloc.dart';
 import 'package:udemy_flutter/presentation/auth/register/cubit/register_cubit.dart';
 import 'package:udemy_flutter/presentation/basket/basket_cubit/basket_cubit.dart';
 import 'package:udemy_flutter/presentation/favourites/favourite_cubit/favourite_cubit.dart';
@@ -45,25 +48,31 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   DioHelper.init();
   await CacheHelper.init();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
   Widget widget;
-  onBoarding = CacheHelper.getData(key: 'onBoarding');
+  onBoarding = CacheHelper.getData(key: 'onBoarding') ;
   token = CacheHelper.getData(key: 'token').toString();
 
   (onBoarding == null)
       ? widget = OnBoardingScreen()
-      : (token == null)
+      : (token == '')
       ? widget = LoginScreen()
       : widget = ShopLayoutScreen();
 
   log(token!);
   BlocOverrides.runZoned(
-        () =>
-        runApp(
+        () {
+
+          runApp(
           MyApp(
             widget: widget,
             appRoutes: AppRouter(),
           ),
-        ),
+        );
+        },
     blocObserver: MyBlocObserver(),
   );
 }
@@ -99,8 +108,8 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) =>
-          FavouriteCubit(FavouriteRepository())
-            ..getFavouritesData(),
+          FavouriteCubit(FavouriteRepository()),
+           // ..getFavouritesData(),
         ),
 
 
@@ -133,6 +142,8 @@ class MyApp extends StatelessWidget {
           AddressCubit(AddressRepository())
             ..getMyAddressData(),
         ),
+        BlocProvider(create: (context) => LogoutCubit(LogoutRepository())),
+
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

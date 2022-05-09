@@ -16,58 +16,62 @@ import 'package:udemy_flutter/shared/components/loading.dart';
 class AccountScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<ProfileCubit, ProfileStates>(
-        listener: (context, state) {},
-        builder: (context, state) {
-          return ConditionalBuilder(
-            condition: state is ProfileSuccess,
-            builder: (context) {
-              return SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: SizedBox(
-                    height: MediaQuery.of(context).size.height,
-                    width: MediaQuery.of(context).size.width,
-                    child: Column(
-                      children: [
-                        // profile
-                        ProfileDetails(),
-                        //Points And Wallet
-                        PointsAndWallet(),
-                        const  SizedBox(height: 10.0),
+    return BlocBuilder<ProfileCubit, ProfileStates>(
+      builder: (context, state) {
+        return ConditionalBuilder(
+          condition: state is ProfileSuccess,
+          builder: (context) {
+            return SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: SizedBox(
+                  height: MediaQuery.of(context).size.height,
+                  width: MediaQuery.of(context).size.width,
+                  child: Column(
+                    children: [
+                      // profile
+                      ProfileDetails(),
+                      const SizedBox(height: 10.0),
+                      //Points And Wallet
 
-                         CustomCard(height: 305.0,
-                            width: double.infinity,
-                            widget: Column(
-                              children: [
-                                //contact us
-                                ContactUs(),
-                                const CustomDotedLine(),
-                                //about us
-                                AboutUS(),
-                                const   CustomDotedLine(),
-                                //F A Q
-                                FAQ(),
-                                const  CustomDotedLine(),
-                                // language
-                                Language()
-                              ],
-                            ),
-                          ),
+                      PointsAndWallet(),
+                      const SizedBox(height: 10.0),
 
-                        const  SizedBox(height: 10.0),
+                      CustomCard(
+                        height: 305.0,
+                        width: double.infinity,
+                        widget: Column(
+                          children: [
+                            //contact us
+                            ContactUs(),
+                            const CustomDotedLine(),
+                            //about us
+                            AboutUS(),
+                            const CustomDotedLine(),
+                            //F A Q
+                            FAQ(),
+                            const CustomDotedLine(),
+                            // language
+                            Language()
+                          ],
+                        ),
+                      ),
 
-                        //sign out
-                        SignOut(),
-                        const  SizedBox(height: 10.0),
-                      ],
-                    ),
+                      const SizedBox(height: 10.0),
+
+                      //sign out
+                      SignOut(),
+                      const SizedBox(height: 10.0),
+                    ],
                   ),
                 ),
-              );
-            },
-            fallback: (BuildContext context) =>const Center(child: CustomLoading()),
-          );
-        },);
+              ),
+            );
+          },
+          fallback: (BuildContext context) =>
+              const Center(child: CustomLoading()),
+        );
+      },
+    );
   }
 }

@@ -1,5 +1,6 @@
 const loginUrl = 'login';
 const registerUrl = 'register';
+const logoutUrl = 'logout';
 const homeUrl = 'home';
 const bannerUrl = 'banners';
 const categoriesUrl = 'categories';

@@ -22,12 +22,12 @@ class ProductItem extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
         onTap: () {
+
           BlocProvider.of<ProductDetailsCubit>(context)
               .getProductDetailsData(productId: data.id);
-          navigateWithArgument(
+          navigateTo(
             context,
             RouteConstant.productDetailsRoute,
-            index,
           );
         },
         child: Container(
@@ -51,6 +51,7 @@ class ProductItem extends StatelessWidget {
                   Container(
                     margin: const EdgeInsets.all(10.0),
                     height: 130.0,
+                    width: double.infinity,
                     child: Image(
                       image: NetworkImage(data.image),
                       fit: BoxFit.contain,
@@ -61,7 +62,7 @@ class ProductItem extends StatelessWidget {
                       top: 0,
                       right: 0,
                       child: Padding(
-                        padding: const EdgeInsets.only(top: 8.0),
+                        padding: const EdgeInsets.only(top: 8.0, right: 10.0),
                         child: SvgPicture.asset(
                           'assets/icons/discount.svg',
                           fit: BoxFit.cover,
@@ -72,6 +73,10 @@ class ProductItem extends StatelessWidget {
                     ),
                 ],
               ),
+              if (index.isOdd)
+                const SizedBox(
+                  height: 30.0,
+                ),
               Padding(
                 padding: const EdgeInsets.only(
                   bottom: 10.0,

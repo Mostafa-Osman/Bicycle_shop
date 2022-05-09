@@ -20,7 +20,11 @@ class UpdateAddressScreen extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         elevation: 0.0,
-        title: const CustomText(text: 'Edit address', textColor: mainColor),
+        title: const CustomText(
+          text: 'Edit address',
+          textColor: mainColor,
+          fontSize: 20.0,
+        ),
         leading: IconButton(
           onPressed: () => Navigator.pop(context),
           icon: const Icon(Icons.arrow_back_ios_sharp, color: mainColor),

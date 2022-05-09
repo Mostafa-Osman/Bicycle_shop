@@ -12,7 +12,11 @@ class ContactsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
-        title: const CustomText(text: 'Contacts Us', textColor: mainColor),
+        title: const CustomText(
+          text: 'Contacts Us',
+          textColor: mainColor,
+          fontSize: 20.0,
+        ),
         leading: IconButton(
           onPressed: () => Navigator.pop(context),
           icon: const Icon(Icons.arrow_back_ios_sharp, color: mainColor),
@@ -44,7 +48,8 @@ class ContactsScreen extends StatelessWidget {
                       text: 'Visit our facebook page',
                       fontSize: 20,
                     ),
-                    subtitle: const CustomText(text: 'FB.com/ourPage', fontSize: 15),
+                    subtitle:
+                        const CustomText(text: 'FB.com/ourPage', fontSize: 15),
                   ),
                   const SizedBox(height: 10.0),
                   const CustomDotedLine(),
@@ -57,10 +62,10 @@ class ContactsScreen extends StatelessWidget {
                       fit: BoxFit.cover,
                       color: Colors.blueAccent,
                     ),
-                    title:
-                        const CustomText(text: 'Follow us on twitter', fontSize: 20),
-                    subtitle:
-                        const CustomText(text: 'twitter.com/ourPage', fontSize: 15),
+                    title: const CustomText(
+                        text: 'Follow us on twitter', fontSize: 20,),
+                    subtitle: const CustomText(
+                        text: 'twitter.com/ourPage', fontSize: 15,),
                   ),
                   const SizedBox(height: 10.0),
                   const CustomDotedLine(),
@@ -75,11 +80,14 @@ class ContactsScreen extends StatelessWidget {
                       color: Colors.green,
                     ),
                     title: const CustomText(
-                        text: 'Contacts us on Whats App', fontSize: 20,),
-                    subtitle: const CustomText(text: '0123456789', fontSize: 15),
+                      text: 'Contacts us on Whats App',
+                      fontSize: 20,
+                    ),
+                    subtitle:
+                        const CustomText(text: '0123456789', fontSize: 15),
                   ),
-                  const   SizedBox(height: 10.0),
-                  const   CustomDotedLine(),
+                  const SizedBox(height: 10.0),
+                  const CustomDotedLine(),
                   // Youtube
 
                   ListTile(
@@ -90,12 +98,12 @@ class ContactsScreen extends StatelessWidget {
                       fit: BoxFit.cover,
                       color: red,
                     ),
-                    title:
-                        const CustomText(text: 'Subscribe our channel', fontSize: 20),
-                    subtitle:
-                        const CustomText(text: 'youtube.com/ourPage', fontSize: 15),
+                    title: const CustomText(
+                        text: 'Subscribe our channel', fontSize: 20,),
+                    subtitle: const CustomText(
+                        text: 'youtube.com/ourPage', fontSize: 15,),
                   ),
-                  const    SizedBox(height: 10.0),
+                  const SizedBox(height: 10.0),
                 ],
               ),
             ),

@@ -7,7 +7,6 @@ import 'package:udemy_flutter/shared/components/build_item.dart';
 import 'package:udemy_flutter/shared/components/component.dart';
 import 'package:udemy_flutter/shared/components/custom_divider.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
-import 'package:udemy_flutter/shared/components/empty_screen.dart';
 import 'package:udemy_flutter/shared/components/loading.dart';
 import 'package:udemy_flutter/shared/components/navigate.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
@@ -49,9 +48,10 @@ class SearchScreen extends StatelessWidget {
                             prefixIcon: const Icon(Icons.search),
                             hintText: 'Search...',
                             hintStyle: const TextStyle(
-                              fontSize: 18,
+                              fontSize: 15,
                               fontWeight: FontWeight.bold,
                               color: grey,
+                              fontFamily: 'RobotoSerif',
                             ),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25),
@@ -86,13 +86,16 @@ class SearchScreen extends StatelessWidget {
                   )
                 else if (state is SearchError)
                   const Center(
-                    child: CustomText(text: 'error 404'),
+                    child: CustomText(text: 'Error'),
                   )
                 else if (state is SearchSuccess &&
-                    searchCubit.searchModel.data.isEmpty)
-                  EmptyScreen()
+                    searchCubit.searchModel!.data.isEmpty)
+                  const Center(
+                    child: CustomText(text: 'No result found',textColor: grey,),
+                  )
+
                 else if (state is SearchSuccess &&
-                    searchCubit.searchModel.data.isNotEmpty)
+                    searchCubit.searchModel!.data.isNotEmpty)
                   Padding(
                     padding: const EdgeInsets.only(
                       top: 70.0,
@@ -102,12 +105,13 @@ class SearchScreen extends StatelessWidget {
                     child: ListView.separated(
                       itemBuilder: (context, index) {
                         return BuildItem(
-                          model: searchCubit.searchModel.data[index],
+                          model: searchCubit.searchModel!.data[index],
+                           itemId: searchCubit.searchModel!.data[index].id,
                         );
                       },
                       separatorBuilder: (context, index) =>
                           const CustomDivider(),
-                      itemCount: searchCubit.searchModel.data.length,
+                      itemCount: searchCubit.searchModel!.data.length,
                     ),
                   )
                 else

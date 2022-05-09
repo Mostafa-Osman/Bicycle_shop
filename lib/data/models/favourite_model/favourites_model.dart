@@ -14,9 +14,8 @@ class FavouritesModel {
           .map(
             (element) =>
                 FavouritesData.fromJson(element as Map<String, dynamic>),
-      )
+          )
           .toList(),
-
     );
   }
 }
@@ -24,11 +23,13 @@ class FavouritesModel {
 class FavouritesData {
   final FavouriteDataDetails product;
 
-  FavouritesData({ required this.product});
+  FavouritesData({required this.product});
 
   factory FavouritesData.fromJson(Map<String, dynamic> json) {
     return FavouritesData(
-      product: FavouriteDataDetails.fromJson(json['product'] as Map<String, dynamic>),
+      product: FavouriteDataDetails.fromJson(
+        json['product'] as Map<String, dynamic>,
+      ),
     );
   }
 }
@@ -37,7 +38,7 @@ class FavouriteDataDetails {
   final int id;
   final dynamic price;
   final dynamic oldPrice;
-  final dynamic discount;
+  dynamic discount;
   final String image;
   final String name;
   final String description;
@@ -57,7 +58,7 @@ class FavouriteDataDetails {
       id: json['id'] as int,
       price: json['price'],
       oldPrice: json['old_price'],
-      discount: json['discount'] ,
+      discount: json['discount'],
       image: json['image'] as String,
       name: json['name'] as String,
       description: json['description'] as String,

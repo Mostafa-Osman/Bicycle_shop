@@ -45,7 +45,6 @@ class ProductDetailsPhotos extends StatelessWidget {
                 height: 50.0,
                 child: ListView.separated(
                   shrinkWrap: true,
-                  // physics: null,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (_, index) => (index ==
                           productDetailsCubit.indicatorIndex)

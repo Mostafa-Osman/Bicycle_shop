@@ -20,7 +20,11 @@ class PaymentScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const CustomText(text: 'Payment', textColor: mainColor),
+        title: const CustomText(
+          text: 'Payment',
+          textColor: mainColor,
+          fontSize: 20.0,
+        ),
         elevation: 0,
         leading: IconButton(
           onPressed: () => Navigator.pop(context),
@@ -34,16 +38,19 @@ class PaymentScreen extends StatelessWidget {
               message: 'order completed successfully',
               state: ToastStates.success,
             );
-            // BlocProvider.of<LayoutCubit>(context).changeCurrentIndex(2);
             BlocProvider.of<HistoryOrdersCubit>(context).getOrders();
             BlocProvider.of<BasketCubit>(context).getMyBasketData();
-            navigatorAndFinish(context, RouteConstant.myOrderRoute);
+            BlocProvider.of<LayoutCubit>(context).changeCurrentIndex(3);
+            navigatorAndFinish(context, RouteConstant.shopLayoutRoute);
           }
         },
         builder: (context, state) {
           if (state is EstimateOrderError) {
             return const Text('Error');
-          } else if (state is EstimateOrderLoading) {
+          } else if (BlocProvider.of<PaymentCubit>(context).estimatePrice ==
+                  null
+              //state is EstimateOrderLoading
+              ) {
             return const Center(child: CustomLoading());
           } else {
             return SafeArea(

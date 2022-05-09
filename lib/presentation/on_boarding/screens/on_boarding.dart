@@ -32,25 +32,19 @@ class OnBoardingScreen extends StatelessWidget {
             width: 500,
             child: Padding(
               padding: const EdgeInsets.all(30.0),
-              child: Column(
-                children: [
-                  Flexible(
-                    child: PageView.builder(
-                      itemCount: cubit.items.length,
-                      itemBuilder: (context, index) => BuildBoardingItem(
-                        model: cubit.items[index],
-                        splashLength: cubit.items.length,
-                        controller: boardingController,
-                      ),
-                      controller: boardingController,
-                      onPageChanged: (index) {
-                        (index == cubit.items.length - 1)
-                            ? cubit.checkLastPage(changeText: true)
-                            : cubit.checkLastPage(changeText: false);
-                      },
-                    ),
-                  ),
-                ],
+              child: PageView.builder(
+                itemCount: cubit.items.length,
+                itemBuilder: (context, index) => BuildBoardingItem(
+                  model: cubit.items[index],
+                  splashLength: cubit.items.length,
+                  controller: boardingController,
+                ),
+                controller: boardingController,
+                onPageChanged: (index) {
+                  (index == cubit.items.length - 1)
+                      ? cubit.checkLastPage(changeText: true)
+                      : cubit.checkLastPage(changeText: false);
+                },
               ),
             ),
           ),

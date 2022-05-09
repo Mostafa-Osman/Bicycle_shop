@@ -17,6 +17,7 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
   final ProfileRepository updateProfileRepository;
 
   final ImagePicker imagePicker = ImagePicker();
+   File? tempImage;
 
   String? imageProfile;
 
@@ -45,7 +46,6 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
       emit(GetGalleryImageSuccess());
     } catch (error, s) {
       log('get image from gallery', error: error, stackTrace: s);
-
       emit(GetGalleryImageError(error.toString()));
     }
   }
@@ -53,8 +53,8 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
   //convert Photo To Base64
   Future convertPhotoToBase64(dynamic myFileImage) async {
     // ignore: avoid_dynamic_calls
-    final File file = File(myFileImage.path.toString());
-    final List<int> fileInByte = file.readAsBytesSync();
+    tempImage = File(myFileImage.path.toString());
+    final List<int> fileInByte = tempImage!.readAsBytesSync();
     final String fileInBase64 = base64Encode(fileInByte);
     imageProfile = fileInBase64;
   }
@@ -83,5 +83,4 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
       emit(UpdateProfileError(error.toString()));
     }
   }
-
 }

@@ -60,12 +60,17 @@ class RegisterScreen extends StatelessWidget {
                               left: 10.0,
                               bottom: 5.0,
                             ),
-                            child: CustomText(text: 'Name', fontSize: 20),
+                            child: CustomText(
+                              text: 'Name',
+                              fontSize: 15.0,
+                            ),
                           ),
                           // object of textFieldRegister to make text field (take name of user)
                           CustomTextFormField(
                             controller: registerNameControl,
+                            textInputAction: TextInputAction.next,
                             textHint: 'Enter your Name',
+                            roundedRectangleBorder: 10.0,
                             backgroundColor: const Color(0xfff2f2f2),
                             prefix: const Icon(
                               Icons.account_circle_outlined,
@@ -85,23 +90,27 @@ class RegisterScreen extends StatelessWidget {
                             ),
                             child: CustomText(
                               text: 'Phone number',
-                              fontSize: 20,
+                              fontSize: 15.0,
                             ),
                           ),
                           CustomTextFormField(
                             controller: registerPhoneControl,
                             keyboardType: TextInputType.phone,
+                            textInputAction: TextInputAction.next,
                             textHint: 'Enter your Phone Number',
+                            roundedRectangleBorder: 10.0,
                             backgroundColor: const Color(0xfff2f2f2),
                             prefix: const Icon(
                               Icons.phone_android,
                               color: mainColor,
                             ),
-                            validator: (value) => value!.isEmpty
+                            validator: (value) {
+                              return value!.isEmpty
                                 ? 'Please enter your phone number'
                                 : (value.length != 11)
                                     ? 'your number invalid enter valid number'
-                                    : null,
+                                    : null;
+                            },
                           ),
 
                           //  text to display text email
@@ -111,17 +120,20 @@ class RegisterScreen extends StatelessWidget {
                               left: 10.0,
                               bottom: 5.0,
                             ),
-                            child: CustomText(text: 'E-mail', fontSize: 20),
+                            child: CustomText(text: 'E-mail', fontSize: 15.0),
                           ),
                           //another text field for email
                           CustomTextFormField(
                             controller: registerEmailControl,
                             backgroundColor: const Color(0xfff2f2f2),
+                            roundedRectangleBorder: 10.0,
+                            textInputAction: TextInputAction.next,
                             textHint: "Enter your Email",
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return 'Please Enter Your Email';
-                              } else if (!value.contains('@')) {
+                              } else if (!value.contains('@') ||
+                                  !value.contains('.com')) {
                                 return 'Please Enter Valid Email';
                               }
                               return null;
@@ -139,11 +151,13 @@ class RegisterScreen extends StatelessWidget {
                               left: 10.0,
                               bottom: 5.0,
                             ),
-                            child: CustomText(text: 'password', fontSize: 20),
+                            child: CustomText(text: 'password', fontSize: 15.0),
                           ),
                           // Text form field to enter password
                           CustomTextFormField(
                             backgroundColor: const Color(0xfff2f2f2),
+                            roundedRectangleBorder: 10.0,
+                            textInputAction: TextInputAction.next,
                             controller: registerPasswordControl,
                             validator: (value) => (value!.isEmpty)
                                 ? 'Please Enter Your password'
@@ -177,15 +191,17 @@ class RegisterScreen extends StatelessWidget {
                             ),
                             child: CustomText(
                               text: 'Confirm password',
-                              fontSize: 20,
+                              fontSize: 15.0,
                             ),
                           ),
                           //  Text form field to confirm password
                           CustomTextFormField(
                             textHint: ' Rewrite password',
                             controller: registerConfirmPasswordControl,
+                            textInputAction: TextInputAction.next,
                             obscureText: cubit.confirmNotVisible,
                             backgroundColor: const Color(0xfff2f2f2),
+                            roundedRectangleBorder: 10.0,
                             prefix: const Icon(
                               Icons.lock,
                               color: mainColor,
@@ -237,6 +253,8 @@ class RegisterScreen extends StatelessWidget {
                                   style: TextStyle(
                                     fontSize: 20,
                                     color: mainColor,
+                                    fontFamily: 'RobotoSerif',
+
                                   ),
                                 ),
                                 onPressed: () => navigateTo(

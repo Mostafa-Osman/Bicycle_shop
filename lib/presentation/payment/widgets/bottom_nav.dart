@@ -33,7 +33,7 @@ class PaymentBottomNavBar extends StatelessWidget {
                 children: [
                   CustomText(
                     text:
-                        ' Total: ${paymentCubit.estimatePrice.data.total.ceil()} EGP',
+                        ' Total: ${paymentCubit.estimatePrice!.data.total.ceil()} EGP',
                     fontSize: 18.0,
                     textColor: mainColor,
                   ),
@@ -50,7 +50,7 @@ class PaymentBottomNavBar extends StatelessWidget {
                       context: context,
                       builder: (BuildContext context) {
                         return ShowDetailsPrice(
-                          detailsPrice: paymentCubit.estimatePrice.data,
+                          detailsPrice: paymentCubit.estimatePrice!.data,
                         );
                       },
                     ),

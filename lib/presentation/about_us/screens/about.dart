@@ -9,7 +9,7 @@ class AboutUsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
-        title: const CustomText(text: 'About Us', textColor: mainColor),
+        title: const CustomText(text: 'About Us', textColor: mainColor,fontSize: 20.0),
         leading: IconButton(
           onPressed: () => Navigator.pop(context),
           icon: const Icon(Icons.arrow_back_ios_sharp, color: mainColor),

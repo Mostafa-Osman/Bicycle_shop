@@ -17,32 +17,38 @@ class ChangeQuantityProduct extends StatelessWidget {
       children: [
         SizedBox(
           height: 40.0,
-          child: FloatingActionButton(
+          child: ElevatedButton(
             onPressed: () {
               basketCubit.quantityItem(
                 isIncrement: false,
                 index: index,
               );
             },
-            backgroundColor: mainColor,
+            style: ElevatedButton.styleFrom(
+              shape: const CircleBorder(),
+              primary: mainColor,
+            ),
             child: const Icon(
               Icons.remove,
               color: white,
-              size: 20,
+              size: 25,
             ),
           ),
         ),
         CustomText(text: model.quantity.toString()),
         SizedBox(
           height: 40.0,
-          child: FloatingActionButton(
+          child: ElevatedButton(
             onPressed: () {
               basketCubit.quantityItem(
                 isIncrement: true,
                 index: index,
               );
             },
-            backgroundColor: mainColor,
+            style: ElevatedButton.styleFrom(
+              shape: const CircleBorder(),
+              primary: mainColor,
+            ),
             child: const Icon(
               Icons.add,
               color: white,

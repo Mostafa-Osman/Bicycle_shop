@@ -18,6 +18,7 @@ class AddAddressScreen extends StatelessWidget {
         title: const CustomText(
           text: 'new address',
           textColor: mainColor,
+            fontSize: 20.0,
         ),
         leading: IconButton(
           onPressed: () => Navigator.pop(context),

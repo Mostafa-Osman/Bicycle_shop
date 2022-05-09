@@ -23,6 +23,6 @@ class RegisterRepository {
     if (data['status'] == true) {
       return ShopLoginModel.fromJson(data);
     }
-    throw 'server error';
+    throw data['message'] as String;
   }
 }

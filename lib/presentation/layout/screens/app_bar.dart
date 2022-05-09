@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:udemy_flutter/presentation/search/cubit/search_cubit.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/components/navigate.dart';
@@ -16,6 +18,7 @@ class NotificationsAppBar extends StatelessWidget
         title: const CustomText(
           text: 'Notifications',
           textColor: mainColor,
+          fontSize: 20.0,
         ),
         centerTitle: true,
       ),
@@ -23,7 +26,7 @@ class NotificationsAppBar extends StatelessWidget
   }
 
   @override
-  Size get preferredSize =>  const Size.fromHeight(60);
+  Size get preferredSize => const Size.fromHeight(60);
 }
 
 class FavouriteAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -32,7 +35,11 @@ class FavouriteAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
-        title: const CustomText(text: 'Favourites', textColor: mainColor),
+        title: const CustomText(
+          text: 'Favourites',
+          textColor: mainColor,
+          fontSize: 20.0,
+        ),
         centerTitle: true,
       ),
     );
@@ -49,24 +56,31 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
       appBar: AppBar(
         elevation: 0.0,
         bottom: PreferredSize(
-          preferredSize:const Size.fromHeight(kToolbarHeight),
+          preferredSize: const Size.fromHeight(kToolbarHeight),
           child: Row(
             children: [
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 10.0),
+                  padding: const EdgeInsets.only(left: 10.0, bottom: 5.0),
                   child: TextFormField(
                     readOnly: true,
-                    onTap: () => navigateTo(context, RouteConstant.searchRoute),
+                    onTap: () {
+                      BlocProvider.of<SearchCubit>(context).resetSearch();
+                      navigateTo(context, RouteConstant.searchRoute);
+                    },
                     decoration: InputDecoration(
                       fillColor: Colors.grey[100],
                       filled: true,
-                      contentPadding:const EdgeInsets.all(10),
-                      prefixIcon:const Icon(Icons.search),
+                      contentPadding: const EdgeInsets.all(10),
+                      prefixIcon: const Icon(Icons.search),
                       hintText: 'Search...',
-                      hintStyle:const TextStyle(
-                          fontSize: 15,
-                          color: grey,),
+                      hintStyle: const TextStyle(
+                        fontSize: 15,
+                        color: grey,
+                        fontFamily: 'RobotoSerif',
+
+
+                      ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(25),
                       ),
@@ -107,6 +121,7 @@ class OrdersAppBar extends StatelessWidget implements PreferredSizeWidget {
           text: 'My Orders',
           textColor: mainColor,
           textAlign: TextAlign.center,
+          fontSize: 20.0,
         ),
         centerTitle: true,
       ),
@@ -125,6 +140,7 @@ class AccountAppBar extends StatelessWidget implements PreferredSizeWidget {
         elevation: 0.0,
         title: const CustomText(
           text: 'Account',
+          fontSize: 20.0,
           textColor: mainColor,
           textAlign: TextAlign.center,
         ),

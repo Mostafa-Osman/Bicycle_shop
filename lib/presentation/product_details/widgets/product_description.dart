@@ -8,11 +8,9 @@ import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 
 class ProductDescription extends StatelessWidget {
-
-
   @override
   Widget build(BuildContext context) {
-    final productDetailsCubit=BlocProvider.of<ProductDetailsCubit>(context);
+    final productDetailsCubit = BlocProvider.of<ProductDetailsCubit>(context);
 
     return Container(
       height: MediaQuery.of(context).size.height,
@@ -32,9 +30,18 @@ class ProductDescription extends StatelessWidget {
           Row(
             children: [
               CustomText(
-                text: 'EGP ${productDetailsCubit.productDetailsModel.data.price}  ',
+                text:
+                    'EGP ${productDetailsCubit.productDetailsModel.data.price}  ',
                 textColor: mainColor,
               ),
+              if (productDetailsCubit.productDetailsModel.data.discount != 0)
+                CustomText(
+                  text:
+                      'EGP ${productDetailsCubit.productDetailsModel.data.oldPrice}  ',
+                  textColor: grey,
+                  fontSize: 14.0,
+                  decoration: TextDecoration.lineThrough,
+                ),
               const Spacer(),
               CustomFavouriteIcon(
                 productId: productDetailsCubit.productDetailsModel.data.id,
@@ -73,12 +80,16 @@ class ProductDescription extends StatelessWidget {
                       productDetailsCubit.productDetailsModel.data.description,
                       expandText: 'show more',
                       collapseText: 'show less',
-                      linkStyle: const TextStyle(fontWeight: FontWeight.w400),
+                      linkStyle: const TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontFamily: 'RobotoSerif',
+                      ),
                       maxLines: 7,
                       linkColor: mainColor,
                       style: const TextStyle(
                         fontSize: 15,
                         height: 1.3,
+                        fontFamily: 'RobotoSerif',
                       ),
                     ),
                     const SizedBox(height: 30.0),

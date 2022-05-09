@@ -21,7 +21,7 @@ class UpdateUserData extends StatelessWidget {
     return BlocConsumer<UpdateProfileCubit, UpdateProfileState>(
       listener: (context, state) {
         if (state is UpdateProfileError) {
-          showToast(message: state.error, state: ToastStates.error);
+          showToast(message: 'some thing want wrong try again later', state: ToastStates.error);
         } else if (state is UpdateProfileSuccess) {
           BlocProvider.of<ProfileCubit>(context).getUserData();
           showToast(

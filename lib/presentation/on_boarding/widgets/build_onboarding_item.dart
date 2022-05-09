@@ -25,15 +25,18 @@ class BuildBoardingItem extends StatelessWidget {
         const EdgeInsets.only(top: 40.0, right: 20, left: 20, bottom: 20),
         child: Column(
           children: [
-            SvgPicture.asset(
-              model.image,
-              fit: BoxFit.fitWidth,
+            SizedBox(
+              height:MediaQuery.of(context).size.height*0.5,
+              child: SvgPicture.asset(
+                model.image,
+                fit: BoxFit.fitWidth,
+              ),
             ),
             SmoothPageIndicator(
               count: 3,
               controller: controller,
               effect: const WormEffect(
-                dotWidth: 20,
+                dotWidth: 15,
                 activeDotColor: mainColor,
                 dotColor: Color(0xffE4C6A9),
               ),

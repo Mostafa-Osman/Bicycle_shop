@@ -18,14 +18,14 @@ class CustomButton extends StatelessWidget {
     this.margin = EdgeInsets.zero,
     this.width = double.infinity,
     this.height = 50,
-    this.textAlign=TextAlign.center,
+    this.textAlign = TextAlign.center,
     this.fontWeight = FontWeight.normal,
     this.fontSize = 20,
     this.radiusCircular = 10.0,
     this.buttonColor = mainColor,
     required this.onPressed,
     required this.text,
-    this.textColor=white,
+    this.textColor = white,
   });
 
   @override
@@ -42,12 +42,13 @@ class CustomButton extends StatelessWidget {
         onPressed: onPressed,
         height: height,
         child: Text(
-          text,textAlign:textAlign ,
+          text,
+          textAlign: textAlign,
           style: TextStyle(
             color: textColor,
             fontSize: fontSize,
             fontWeight: fontWeight,
-
+            fontFamily: 'RobotoSerif',
           ),
         ),
       ),

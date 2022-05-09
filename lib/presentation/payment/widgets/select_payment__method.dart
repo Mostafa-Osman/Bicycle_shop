@@ -22,7 +22,7 @@ class SelectPaymentMethod extends StatelessWidget {
             children: [
               InkWell(
                 onTap: () {
-                  paymentCubit.isOnlinePayment();
+                  paymentCubit.isOnlinePayment(onlinePayment: false);
                 },
                 child: Container(
                   width: double.infinity,
@@ -54,7 +54,7 @@ class SelectPaymentMethod extends StatelessWidget {
               const SizedBox(height: 10.0),
               InkWell(
                 onTap: () {
-                  paymentCubit.isOnlinePayment();
+                  paymentCubit.isOnlinePayment(onlinePayment: true);
                 },
                 child: Container(
                   width: double.infinity,

@@ -23,7 +23,7 @@ class LayoutCubit extends Cubit<LayoutStates> {
     AccountAppBar(),
   ];
 
-  List<Widget> bottomNavScreen = [
+  List<Widget> bodyScreen = [
     NotificationsScreen(),
     FavouritesScreen(),
     HomeScreen(),

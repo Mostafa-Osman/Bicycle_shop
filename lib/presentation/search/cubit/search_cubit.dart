@@ -10,16 +10,25 @@ class SearchCubit extends Cubit<SearchStates> {
   SearchCubit(this.searchRepository) : super(SearchInitial());
 
   SearchRepository searchRepository;
-  late SearchModel searchModel;
+  SearchModel? searchModel;
 
   Future<void> getSearchData({required String text}) async {
     emit(SearchLoading());
     try {
       searchModel = await searchRepository.getSearchData(text: text);
+      if (searchModel!.data[0].discount == null) {
+        searchModel!.data[0].discount = 0;
+      }
+      log(searchModel!.data[0].discount.toString());
       emit(SearchSuccess());
     } catch (error, s) {
       log('get search data', error: error, stackTrace: s);
       emit(SearchError(error.toString()));
     }
+  }
+
+  void resetSearch() {
+    searchModel = null;
+    emit(SearchRefreshUi());
   }
 }

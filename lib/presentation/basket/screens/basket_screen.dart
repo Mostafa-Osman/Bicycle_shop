@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/presentation/basket/basket_cubit/basket_cubit.dart';
 import 'package:udemy_flutter/presentation/basket/widgets/basket_item.dart';
+import 'package:udemy_flutter/presentation/layout/layout_cubit/layout_cubit.dart';
 import 'package:udemy_flutter/presentation/payment/payment_cubit/payment_cubit.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
 import 'package:udemy_flutter/shared/components/custom_button.dart';
@@ -21,7 +22,7 @@ class BasketScreen extends StatelessWidget {
         title: const CustomText(
           text: 'My Basket',
           textColor: mainColor,
-          textAlign: TextAlign.center,
+          textAlign: TextAlign.center,fontSize: 20.0,
         ),
         leading: IconButton(
           onPressed: () => Navigator.pop(context),
@@ -41,7 +42,14 @@ class BasketScreen extends StatelessWidget {
             );
           } else {
             return basketCubit.myBag.data.cartItems.isEmpty
-                ? EmptyScreen()
+                ? EmptyScreen(onPress:   () {
+              BlocProvider.of<LayoutCubit>(context)
+                  .changeCurrentIndex(2);
+              navigatorAndFinish(
+                context, RouteConstant.shopLayoutRoute,);
+
+
+            },)
                 : Column(
                     children: [
                       Expanded(

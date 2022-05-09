@@ -19,36 +19,43 @@ class CustomTextFormField extends StatelessWidget {
   final String? label;
   final String? initialValue;
   final double? fontSize;
+  final TextInputAction? textInputAction;
 
-
-  const CustomTextFormField(
-      {required this.controller,
-      this.validator,
-      this.textHint,
-      this.hintColor = Colors.grey,
-      this.roundedRectangleBorder = 25.0,
-      this.backgroundColor = Colors.white,
-      this.obscureText = false,
-      this.suffixIcon, this.fontSize = 15.0,
-        this.textColor = black,
-      this.prefix,
-      this.keyboardType,
-      this.label,
-      this.initialValue,
-});
+  const CustomTextFormField({
+    required this.controller,
+    this.validator,
+    this.textHint,
+    this.hintColor = Colors.grey,
+    this.roundedRectangleBorder = 25.0,
+    this.backgroundColor = Colors.white,
+    this.obscureText = false,
+    this.suffixIcon,
+    this.fontSize = 15.0,
+    this.textColor = black,
+    this.prefix,
+    this.keyboardType,
+    this.textInputAction,
+    this.label,
+    this.initialValue,
+  });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-
       controller: controller,
       keyboardType: keyboardType,
       validator: validator,
       initialValue: initialValue,
-      style: TextStyle(color: textColor,fontSize:fontSize ),
+      textInputAction: textInputAction,
+      style: TextStyle(
+        color: textColor,
+        fontSize: fontSize,
+        fontFamily: 'RobotoSerif',
+      ),
       decoration: InputDecoration(
         hintText: textHint,
         filled: true,
+
         fillColor: backgroundColor,
         labelText: label,
         border: OutlineInputBorder(

@@ -6,6 +6,7 @@ import 'package:udemy_flutter/shared/components/component.dart';
 import 'package:udemy_flutter/shared/components/custom_button.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/components/dotted_line.dart';
+import 'package:udemy_flutter/shared/components/empty_screen.dart';
 import 'package:udemy_flutter/shared/components/loading.dart';
 import 'package:udemy_flutter/shared/components/navigate.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
@@ -20,6 +21,7 @@ class MyAddressScreen extends StatelessWidget {
           text: 'My address',
           textColor: mainColor,
           textAlign: TextAlign.center,
+          fontSize: 20.0,
         ),
         leading: IconButton(
           onPressed: () {
@@ -56,88 +58,99 @@ class MyAddressScreen extends StatelessWidget {
                 ),
               );
             } else {
-              return Column(
-                children: [
-                  Expanded(
-                    child: SizedBox(
-                      height: MediaQuery.of(context).size.height,
-                      width: MediaQuery.of(context).size.width,
-                      child: ListView.separated(
-                        itemCount: addressCubit.addressModel.data.length,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              children: [
-                                Text(
-                                  '${index + 1} - City : ${addressCubit.addressModel.data[index].city}',
-                                  style: const TextStyle(
+              if (addressCubit.addressModel.data.isEmpty) {
+                return EmptyScreen(
+                  buttonText: 'Add new address',
+                  onPress: () {
+                    addressCubit.clearTextFromField();
+                    navigateTo(context, RouteConstant.addAddressRoute);
+                  },
+                );
+              } else {
+                return Column(
+                  children: [
+                    Expanded(
+                      child: SizedBox(
+                        height: MediaQuery.of(context).size.height,
+                        width: MediaQuery.of(context).size.width,
+                        child: ListView.separated(
+                          itemCount: addressCubit.addressModel.data.length,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                children: [
+                                  CustomText(
+                                    text:
+                                        '${index + 1} - City : ${addressCubit.addressModel.data[index].city}',
                                     fontSize: 18,
-                                    color: Colors.blueGrey,
+                                    textColor: Colors.blueGrey,
                                   ),
-                                ),
-                                const Spacer(),
-                                IconButton(
-                                  icon: const Icon(
-                                    Icons.edit,
-                                    color: black,
-                                    size: 25.0,
+                                  const Spacer(),
+                                  IconButton(
+                                    icon: const Icon(
+                                      Icons.edit,
+                                      color: black,
+                                      size: 25.0,
+                                    ),
+                                    onPressed: () {
+                                      addressCubit.initialTextFromField(
+                                        city: addressCubit
+                                            .addressModel.data[index].city,
+                                        addressDetails: addressCubit
+                                            .addressModel.data[index].details,
+                                        region: addressCubit
+                                            .addressModel.data[index].region,
+                                        buildingNumber: addressCubit
+                                            .addressModel
+                                            .data[index]
+                                            .buildingNumber,
+                                        notes: addressCubit
+                                            .addressModel.data[index].notes,
+                                      );
+                                      navigateWithArgument(
+                                        context,
+                                        RouteConstant.updateAddressRoute,
+                                        index,
+                                      );
+                                    },
                                   ),
-                                  onPressed: () {
-                                    addressCubit.initialTextFromField(
-                                      city: addressCubit
-                                          .addressModel.data[index].city,
-                                      addressDetails: addressCubit
-                                          .addressModel.data[index].details,
-                                      region: addressCubit
-                                          .addressModel.data[index].region,
-                                      buildingNumber: addressCubit.addressModel
-                                          .data[index].buildingNumber,
-                                      notes: addressCubit
-                                          .addressModel.data[index].notes,
-                                    );
-                                    navigateWithArgument(
-                                      context,
-                                      RouteConstant.updateAddressRoute,
-                                      index,
-                                    );
-                                  },
-                                ),
-                                const SizedBox(width: 5.0),
-                                IconButton(
-                                  icon: const Icon(
-                                    Icons.delete,
-                                    color: mainColor,
-                                    size: 25.0,
+                                  const SizedBox(width: 5.0),
+                                  IconButton(
+                                    icon: const Icon(
+                                      Icons.delete,
+                                      color: mainColor,
+                                      size: 25.0,
+                                    ),
+                                    onPressed: () {
+                                      addressCubit.deleteAddressData(
+                                        addressId: addressCubit
+                                            .addressModel.data[index].id,
+                                      );
+                                    },
                                   ),
-                                  onPressed: () {
-                                    addressCubit.deleteAddressData(
-                                      addressId: addressCubit
-                                          .addressModel.data[index].id,
-                                    );
-                                  },
-                                ),
-                              ],
-                            ),
-                          );
-                        },
-                        separatorBuilder: (context, _) =>
-                            const CustomDotedLine(),
+                                ],
+                              ),
+                            );
+                          },
+                          separatorBuilder: (context, _) =>
+                              const CustomDotedLine(),
+                        ),
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: CustomButton(
-                      text: 'Add new address',
-                      onPressed: () {
-                        addressCubit.clearTextFromField();
-                        navigateTo(context, RouteConstant.addAddressRoute);
-                      },
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: CustomButton(
+                        text: 'Add new address',
+                        onPressed: () {
+                          addressCubit.clearTextFromField();
+                          navigateTo(context, RouteConstant.addAddressRoute);
+                        },
+                      ),
                     ),
-                  ),
-                ],
-              );
+                  ],
+                );
+              }
             }
           }
         },

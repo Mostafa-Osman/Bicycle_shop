@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/data/data_sources/local/cache_helper.dart';
 import 'package:udemy_flutter/presentation/auth/login/login_cubit/login_cubit.dart';
+import 'package:udemy_flutter/presentation/layout/layout_cubit/layout_cubit.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
 import 'package:udemy_flutter/shared/components/component.dart';
 import 'package:udemy_flutter/shared/components/constants.dart';
@@ -74,6 +75,8 @@ class LoginScreen extends StatelessWidget {
                             CustomTextFormField(
                               controller: emailController,
                               backgroundColor: const Color(0xfff2f2f2),
+                              roundedRectangleBorder: 10.0,
+                              textInputAction: TextInputAction.next,
                               textHint: "Your Email",
                               validator: (value) {
                                 if (value!.isEmpty) {
@@ -94,6 +97,8 @@ class LoginScreen extends StatelessWidget {
                             CustomTextFormField(
                               controller: passwordController,
                               backgroundColor: const Color(0xfff2f2f2),
+                              roundedRectangleBorder: 10.0,
+                              textInputAction: TextInputAction.done,
                               validator: (value) {
                                 if (value!.isEmpty) {
                                   return 'Please Enter Your password';
@@ -120,21 +125,21 @@ class LoginScreen extends StatelessWidget {
                             ),
                             //GestureDetector action when click in text forget password ?
 
-                            TextButton(
-                              child: const Text(
-                                'forget password ?',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  color: black,
-                                ),
-                              ),
-                              onPressed: () {},
-                            ),
+                            // TextButton(
+                            //   child: const Text(
+                            //     'forget password ?',
+                            //     style: TextStyle(
+                            //       fontSize: 20,
+                            //       color: black,
+                            //     ),
+                            //   ),
+                            //   onPressed: () {},
+                            // ),
 
                             //button login
                             Padding(
                               padding: const EdgeInsets.only(
-                                top: 20.0,
+                                top: 40.0,
                                 bottom: 15.0,
                               ),
                               child: ConditionalBuilder(
@@ -142,6 +147,8 @@ class LoginScreen extends StatelessWidget {
                                 builder: (context) => CustomButton(
                                   text: 'Login',
                                   onPressed: () {
+                                    BlocProvider.of<LayoutCubit>(context)
+                                        .changeCurrentIndex(2);
                                     if (_formKey.currentState!.validate()) {
                                       loginCubit.userLogin(
                                         email: emailController.text,
@@ -168,7 +175,9 @@ class LoginScreen extends StatelessWidget {
                                       'Sign Up',
                                       style: TextStyle(
                                         fontSize: 20,
-                                        color: black,
+                                        color: mainColor,
+                                        fontFamily: 'RobotoSerif',
+
                                       ),
                                     ),
                                     onPressed: () => navigateTo(

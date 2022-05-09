@@ -13,7 +13,6 @@ class PaymentCubit extends Cubit<PaymentStates> {
 
   bool isOnline = false;
   int enableDiscountPoints = 1;
-  int voucherTabTextIndexSelected = 1;
   int usePromoCode = 1;
   String cardNumber = '';
   String expiryDate = '';
@@ -29,32 +28,19 @@ class PaymentCubit extends Cubit<PaymentStates> {
 
   int addressIndex = 0;
   late PromoCodeModel promoCodeModel;
-  late EstimateModel estimatePrice;
+   EstimateModel? estimatePrice;
 
-  void isOnlinePayment() {
-    isOnline = !isOnline;
+  void isOnlinePayment({required bool onlinePayment}) {
+    isOnline =onlinePayment;
     emit(PaymentRefreshUi());
   }
 
-  // //credit card
-  // void onCreditCardModelChange(CreditCardModel creditCardModel) {
-  //   emit(PaymentRefreshUi());
-  //   cardNumber = creditCardModel.cardNumber;
-  //   expiryDate = creditCardModel.expiryDate;
-  //   cardHolderName = creditCardModel.cardHolderName;
-  //   cvvCode = creditCardModel.cvvCode;
-  //   isCvvFocused = creditCardModel.isCvvFocused;
-  // }
 
   void changeDiscountPoints(int index) {
     enableDiscountPoints = index;
     emit(PaymentRefreshUi());
   }
 
-  void changeVoucher(int index) {
-    voucherTabTextIndexSelected = index;
-    emit(PaymentRefreshUi());
-  }
 
   void changePromoCode(int index) {
     usePromoCode = index;
@@ -68,7 +54,7 @@ class PaymentCubit extends Cubit<PaymentStates> {
     try {
       makeOrders = await paymentRepository.makeOrderData(
         addressId: addressId,
-        paymentMethod: isOnline ? 1 : 2,
+        paymentMethod: isOnline ? 2 : 1,
         // ignore: avoid_bool_literals_in_conditional_expressions
         usePoints: enableDiscountPoints == 0 ? true : false,
       );

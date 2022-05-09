@@ -9,7 +9,7 @@ import 'package:udemy_flutter/shared/components/custom_button.dart';
 class ProductDetailsButton extends StatelessWidget {
   final int productId;
 
-  const ProductDetailsButton({ required this.productId});
+  const ProductDetailsButton({required this.productId});
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +24,15 @@ class ProductDetailsButton extends StatelessWidget {
           );
           productDetailsCubit.productDetailsModel.data.inCart = true;
         } else if (state is BasketUpdateQuantitySuccess) {
-          showToast(
-            message: 'product updated successfully',
-            state: ToastStates.success,
-          );
+          if (productDetailsCubit.isProductInCart(
+            productDetailsCubit.productDetailsModel.data.id,
+            basketCubit.myBag.data.cartItems,
+          )) {
+            showToast(
+              message: 'product updated successfully',
+              state: ToastStates.success,
+            );
+          }
         } else if (state is AddToBasketError ||
             state is BasketUpdateQuantityError) {
           showToast(
@@ -57,9 +62,13 @@ class ProductDetailsButton extends StatelessWidget {
                           .productDetailsModel.data.inCart) {
                         basketCubit.addToBasketOrders(
                           productId: productId,
+                          productQuantity: productDetailsCubit.productQuantity,
                         );
                       } else {
-                        basketCubit.testIdea(productId);
+                        basketCubit.updateQuantityCart(
+                          productId,
+                          productDetailsCubit.productQuantity,
+                        );
                       }
                     },
                   ),

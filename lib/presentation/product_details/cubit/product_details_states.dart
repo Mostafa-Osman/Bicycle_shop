@@ -8,6 +8,8 @@ class RefreshUi extends ProductDetailsStates {}
 class ProductDetailsLoading extends ProductDetailsStates {}
 
 class ProductDetailsSuccess extends ProductDetailsStates {}
+class ProductDetailsRefreshUi extends ProductDetailsStates {}
+
 
 class ProductDetailsError extends ProductDetailsStates {
   final String message;

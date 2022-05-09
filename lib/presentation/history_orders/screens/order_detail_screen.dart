@@ -17,7 +17,7 @@ class OrderDetailsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
-        title: const CustomText(text: 'Details Order', textColor: mainColor),
+        title: const CustomText(text: 'Details Order', textColor: mainColor,fontSize: 20.0,),
         leading: IconButton(
           onPressed: () => Navigator.pop(context),
           icon: const Icon(Icons.arrow_back_ios_sharp, color: mainColor),
