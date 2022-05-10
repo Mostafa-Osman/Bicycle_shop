@@ -7,9 +7,14 @@ import 'package:udemy_flutter/shared/styles/color.dart';
 
 class CustomFavouriteIcon extends StatelessWidget {
   final double iconSize;
+  final bool? isFavouriteScreen;
   final int productId;
 
-  const CustomFavouriteIcon({this.iconSize = 25.0, required this.productId});
+  const CustomFavouriteIcon({
+    this.iconSize = 25.0,
+    required this.productId,
+    this.isFavouriteScreen,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +35,11 @@ class CustomFavouriteIcon extends StatelessWidget {
       likeBuilder: (_) => Icon(
         Icons.favorite,
         size: iconSize,
-        color: homeCubit.favourites[productId]! ? red : grey,
+        color: isFavouriteScreen != null
+            ? red
+            : homeCubit.favourites[productId]!
+                ? red
+                : grey,
       ),
     );
   }

@@ -1,7 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shimmer/shimmer.dart';
 
 import 'package:udemy_flutter/presentation/home/home_cubit/home_cubit.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
@@ -20,15 +22,30 @@ class BannerWidget extends StatelessWidget {
                   margin: const EdgeInsets.all(10.0),
                   decoration: const BoxDecoration(
                     borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(15.0),
-                        bottomRight: Radius.circular(15.0),
-                        bottomLeft: Radius.circular(15.0),),
+                      topLeft: Radius.circular(15.0),
+                      bottomRight: Radius.circular(15.0),
+                      bottomLeft: Radius.circular(15.0),
+                    ),
                   ),
                   clipBehavior: Clip.antiAliasWithSaveLayer,
-                  child: Image(
-                    image: NetworkImage(e.image),
-                    width: double.infinity,
+                  child: CachedNetworkImage(
+                    imageUrl: e.image,
                     fit: BoxFit.contain,
+                    placeholder: (context, url) => Container(
+                      height: 130.0,
+                      color: Colors.white,
+                      width: double.infinity,
+                      child: Shimmer.fromColors(
+                        baseColor: Colors.grey[100]!,
+                        highlightColor: Colors.grey[300]!,
+                        child: Image.asset(
+                          'assets/images/logo.png',
+                        ),
+                      ),
+                    ),
+                    errorWidget: (context, url, error) => const Icon(
+                      Icons.error,
+                    ),
                   ),
                 ),
               )

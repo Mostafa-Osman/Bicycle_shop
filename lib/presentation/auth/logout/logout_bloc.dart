@@ -24,9 +24,10 @@ class LogoutCubit extends Cubit<LogOutState> {
       emit(LogoutErrorState(e.toString()));
     }
   }
+
   void signOut() {
     CacheHelper.removeData(key: 'token');
-    token='';
+    token = null;
+    emit(LogoutRefreshUi());
   }
-
 }

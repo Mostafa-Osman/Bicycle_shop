@@ -58,9 +58,9 @@ Future<void> main() async {
 
   (onBoarding == null)
       ? widget = OnBoardingScreen()
-      : (token == '')
+      : (token == null)
       ? widget = LoginScreen()
-      : widget = ShopLayoutScreen();
+      :(token != null)? widget = ShopLayoutScreen():widget=const SizedBox();
 
   log(token!);
   BlocOverrides.runZoned(
@@ -108,8 +108,8 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) =>
-          FavouriteCubit(FavouriteRepository()),
-           // ..getFavouritesData(),
+          FavouriteCubit(FavouriteRepository())
+            ..getFavouritesData(),
         ),
 
 

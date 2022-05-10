@@ -8,7 +8,7 @@ import 'package:udemy_flutter/shared/styles/color.dart';
 class ShopLayoutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<FavouriteCubit>(context).getFavouritesData();
+    // BlocProvider.of<FavouriteCubit>(context).getFavouritesData();
     return BlocBuilder<LayoutCubit, LayoutStates>(
       builder: (context, state) {
         final layoutCubit = BlocProvider.of<LayoutCubit>(context);

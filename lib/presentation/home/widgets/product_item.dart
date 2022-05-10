@@ -1,6 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:udemy_flutter/presentation/home/home_cubit/home_cubit.dart';
 import 'package:udemy_flutter/presentation/product_details/cubit/product_details_cubit.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
@@ -22,7 +24,6 @@ class ProductItem extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
         onTap: () {
-
           BlocProvider.of<ProductDetailsCubit>(context)
               .getProductDetailsData(productId: data.id);
           navigateTo(
@@ -48,13 +49,25 @@ class ProductItem extends StatelessWidget {
             children: [
               Stack(
                 children: [
-                  Container(
-                    margin: const EdgeInsets.all(10.0),
+                  CachedNetworkImage(
                     height: 130.0,
                     width: double.infinity,
-                    child: Image(
-                      image: NetworkImage(data.image),
-                      fit: BoxFit.contain,
+                    imageUrl: data.image,
+                    fit: BoxFit.contain,
+                    placeholder: (context, url) => Container(
+                      height: 130.0,
+                      color: Colors.white,
+                      width: double.infinity,
+                      child: Shimmer.fromColors(
+                        baseColor: Colors.grey[100]!,
+                        highlightColor: Colors.grey[300]!,
+                        child: Image.asset(
+                          'assets/images/logo.png',
+                        ),
+                      ),
+                    ),
+                    errorWidget: (context, url, error) => const Icon(
+                      Icons.error,
                     ),
                   ),
                   if (data.discount != 0)

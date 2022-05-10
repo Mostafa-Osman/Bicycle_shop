@@ -48,7 +48,6 @@ class BasketScreen extends StatelessWidget {
               navigatorAndFinish(
                 context, RouteConstant.shopLayoutRoute,);
 
-
             },)
                 : Column(
                     children: [

@@ -14,9 +14,9 @@ class UpdateProfileSuccess extends UpdateProfileState {
 }
 
 class UpdateProfileError extends UpdateProfileState {
-  final String error;
+  final String message;
 
-  UpdateProfileError(this.error);
+  UpdateProfileError(this.message);
 }
 
 class GetCameraImageLoading extends UpdateProfileState {}

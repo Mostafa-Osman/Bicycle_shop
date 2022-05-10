@@ -84,13 +84,13 @@ class MyAddressScreen extends StatelessWidget {
                                     text:
                                         '${index + 1} - City : ${addressCubit.addressModel.data[index].city}',
                                     fontSize: 18,
-                                    textColor: Colors.blueGrey,
+                                    textColor: black,
                                   ),
                                   const Spacer(),
                                   IconButton(
                                     icon: const Icon(
                                       Icons.edit,
-                                      color: black,
+                                      color: Color(0XFF5AA0E0),
                                       size: 25.0,
                                     ),
                                     onPressed: () {

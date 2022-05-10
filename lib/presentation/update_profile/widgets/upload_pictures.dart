@@ -1,6 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:udemy_flutter/presentation/update_profile/edit_profile_cubit/update_profile_cubit.dart';
 import 'package:udemy_flutter/shared/components/constants.dart';
 import 'package:udemy_flutter/shared/components/custom_alert_dialog.dart';
@@ -35,11 +37,22 @@ class UploadPictures extends StatelessWidget {
                               width: 115,
                               fit: BoxFit.cover,
                             )
-                          : Image.network(
-                              userData.data.image,
+                          : CachedNetworkImage(
                               height: 115,
                               width: 115,
                               fit: BoxFit.cover,
+                              imageUrl: userData.data.image,
+                              placeholder: (context, url) => Shimmer.fromColors(
+                                baseColor: Colors.grey[100]!,
+                                highlightColor: Colors.grey[300]!,
+                                child: Image.asset(
+                                  'assets/images/logo.png',
+                                ),
+                              ),
+                              errorWidget: (context, url, error) => const Icon(
+                                Icons.error,
+                                size: 120,
+                              ),
                             ),
                     ),
                   ),

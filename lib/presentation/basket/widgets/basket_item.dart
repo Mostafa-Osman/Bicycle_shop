@@ -1,11 +1,13 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:udemy_flutter/presentation/basket/basket_cubit/basket_cubit.dart';
 import 'package:udemy_flutter/presentation/basket/widgets/alert__dialog.dart';
+import 'package:udemy_flutter/presentation/basket/widgets/change_quantity_product.dart';
 import 'package:udemy_flutter/presentation/product_details/cubit/product_details_cubit.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
-import 'package:udemy_flutter/shared/components/change_quantity_product.dart';
 import 'package:udemy_flutter/shared/components/custom_card.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/components/navigate.dart';
@@ -37,10 +39,24 @@ class BasketItem extends StatelessWidget {
               Stack(
                 alignment: AlignmentDirectional.bottomStart,
                 children: [
-                  Image(
-                    image: NetworkImage(data.product.image),
-                    width: 80,
-                    height: 80,
+                  CachedNetworkImage(
+                    height: 80.0,  width: 80.0,
+                    imageUrl:data.product.image,
+                    placeholder: (context, url) => Container(
+                      height: 80.0,  width: 80.0,
+                      color: Colors.white,
+
+                      child: Shimmer.fromColors(
+                        baseColor: Colors.grey[100]!,
+                        highlightColor: Colors.grey[300]!,
+                        child: Image.asset(
+                          'assets/images/logo.png',
+                        ),
+                      ),
+                    ),
+                    errorWidget: (context, url, error) => const Icon(
+                      Icons.error,
+                    ),
                   ),
                   if (data.product.discount != 0)
                     Positioned(

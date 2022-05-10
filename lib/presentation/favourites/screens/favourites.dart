@@ -38,17 +38,16 @@ class FavouritesScreen extends StatelessWidget {
                 },
               );
             } else {
-              return  ListView.separated(
+              return ListView.separated(
                 padding: const EdgeInsets.all(10.0),
                 itemBuilder: (context, index) => BuildItem(
-                  model: favouriteCubit
-                      .favouritesModel.data[index].product,
-                  itemId: favouriteCubit
-                      .favouritesModel.data[index].product.id,
+                  model: favouriteCubit.favouritesModel.data[index].product,
+                  itemId: favouriteCubit.favouritesModel.data[index].product.id,
+                  isFavouriteScreen: true,
                 ),
                 itemCount: favouriteCubit.favouritesModel.data.length,
                 separatorBuilder: (BuildContext context, int index) =>
-                const SizedBox(
+                    const SizedBox(
                   height: 5.0,
                 ),
               );

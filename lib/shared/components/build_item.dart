@@ -1,6 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:udemy_flutter/data/models/favourite_model/favourites_model.dart';
 import 'package:udemy_flutter/presentation/product_details/cubit/product_details_cubit.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
@@ -13,8 +15,13 @@ import 'package:udemy_flutter/shared/styles/color.dart';
 class BuildItem extends StatelessWidget {
   final FavouriteDataDetails model;
   final int itemId;
+  final bool? isFavouriteScreen;
 
-  const BuildItem({required this.model, required this.itemId});
+  const BuildItem({
+    required this.model,
+    required this.itemId,
+    this.isFavouriteScreen,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -32,10 +39,20 @@ class BuildItem extends StatelessWidget {
             Stack(
               alignment: AlignmentDirectional.bottomStart,
               children: [
-                Image(
-                  image: NetworkImage(model.image),
+                CachedNetworkImage(
                   width: 80,
                   height: 80,
+                  imageUrl: model.image,
+                  placeholder: (context, url) => Shimmer.fromColors(
+                    baseColor: Colors.grey[100]!,
+                    highlightColor: Colors.grey[300]!,
+                    child: Image.asset(
+                      'assets/images/logo.png',
+                    ),
+                  ),
+                  errorWidget: (context, url, error) => const Icon(
+                    Icons.error,
+                  ),
                 ),
                 if (model.discount != 0)
                   Positioned(
@@ -91,6 +108,7 @@ class BuildItem extends StatelessWidget {
                         const Spacer(),
                         CustomFavouriteIcon(
                           productId: model.id,
+                          isFavouriteScreen: isFavouriteScreen ,
                         ),
                       ],
                     ),

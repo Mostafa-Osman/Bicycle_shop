@@ -23,6 +23,7 @@ environment:
 dependencies:
 
   bloc: ^8.0.0
+  cached_network_image: ^3.2.0
   carousel_slider: ^4.0.0
   checkbox_grouped: ^1.8.0
   conditional_builder_null_safety:
@@ -48,6 +49,7 @@ dependencies:
   readmore: ^2.1.0
   rflutter_alert: ^2.0.4
   shared_preferences:
+  shimmer: 2.0.0
   smooth_page_indicator:
   sqflite: ^2.0.0+4
   streaming_shared_preferences: ^2.0.0
