@@ -9,7 +9,7 @@ import 'package:udemy_flutter/presentation/payment/widgets/bottom_nav.dart';
 import 'package:udemy_flutter/presentation/payment/widgets/discount_and_voucher.dart';
 import 'package:udemy_flutter/presentation/payment/widgets/select_payment__method.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
-import 'package:udemy_flutter/shared/components/component.dart';
+import 'package:udemy_flutter/shared/components/tosast.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/components/loading.dart';
 import 'package:udemy_flutter/shared/components/navigate.dart';

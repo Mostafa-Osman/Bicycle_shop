@@ -5,7 +5,7 @@ import 'package:udemy_flutter/data/data_sources/local/cache_helper.dart';
 import 'package:udemy_flutter/presentation/auth/login/login_cubit/login_cubit.dart';
 import 'package:udemy_flutter/presentation/layout/layout_cubit/layout_cubit.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
-import 'package:udemy_flutter/shared/components/component.dart';
+import 'package:udemy_flutter/shared/components/tosast.dart';
 import 'package:udemy_flutter/shared/components/constants.dart';
 import 'package:udemy_flutter/shared/components/custom_button.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';

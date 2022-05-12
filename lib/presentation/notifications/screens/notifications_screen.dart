@@ -30,6 +30,7 @@ class NotificationsScreen extends StatelessWidget {
                 )
               ],),
             child: ListView.separated(
+              padding: const EdgeInsets.only(bottom: 70.0),
               itemBuilder: (context, index) => NotificationItem(
                 model: notificationData.notifications.notificationData[index],
               ),

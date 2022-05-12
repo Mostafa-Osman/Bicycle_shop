@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/presentation/auth/logout/logout_bloc.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
-import 'package:udemy_flutter/shared/components/component.dart';
+import 'package:udemy_flutter/shared/components/tosast.dart';
 import 'package:udemy_flutter/shared/components/custom_card.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/components/navigate.dart';

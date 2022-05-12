@@ -4,7 +4,7 @@ import 'package:udemy_flutter/presentation/history_orders/history_orders_cubit/h
 import 'package:udemy_flutter/presentation/history_orders/widgets/cancel_order.dart';
 import 'package:udemy_flutter/presentation/history_orders/widgets/details_order.dart';
 import 'package:udemy_flutter/presentation/history_orders/widgets/products_order_details.dart';
-import 'package:udemy_flutter/shared/components/component.dart';
+import 'package:udemy_flutter/shared/components/tosast.dart';
 import 'package:udemy_flutter/shared/components/custom_card.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/components/dotted_line.dart';
@@ -17,13 +17,16 @@ class OrderDetailsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
-        title: const CustomText(text: 'Details Order', textColor: mainColor,fontSize: 20.0,),
+        title: const CustomText(
+          text: 'Details Order',
+          textColor: mainColor,
+          fontSize: 20.0,
+        ),
         leading: IconButton(
           onPressed: () => Navigator.pop(context),
           icon: const Icon(Icons.arrow_back_ios_sharp, color: mainColor),
         ),
       ),
-
       body: BlocConsumer<HistoryOrdersCubit, OrderDetailsState>(
         listener: (context, state) {
           if (state is OrderCancelSuccess) {
@@ -97,7 +100,9 @@ class OrderDetailsScreen extends StatelessWidget {
                               if (orderDetailsCubit.isAddressVisible)
                                 Column(
                                   children: [
-                                    const CustomDotedLine(),
+                                    const CustomDotedLine(
+                                        dashColor: lightMainColor,),
+                                    const SizedBox(height: 10.0),
                                     Row(
                                       children: [
                                         const CustomText(
@@ -105,15 +110,26 @@ class OrderDetailsScreen extends StatelessWidget {
                                           fontSize: 20,
                                           textColor: mainColor,
                                         ),
-                                        CustomText(
-                                          text: orderDetailsCubit
-                                              .orderDetailsModel
-                                              .orderDetails
-                                              .address
-                                              .city,
-                                          fontSize: 18,
+                                        SizedBox(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.7,
+                                          child: CustomText(
+                                            text: orderDetailsCubit
+                                                .orderDetailsModel
+                                                .orderDetails
+                                                .address
+                                                .city,
+                                            fontSize: 18,
+                                          ),
                                         ),
                                       ],
+                                    ),
+                                    const SizedBox(height: 10.0),
+                                    CustomDotedLine(
+                                      lineThickness: 1.0,
+                                      dashColor: Colors.grey[400]!,
                                     ),
                                     Row(
                                       children: [
@@ -122,16 +138,28 @@ class OrderDetailsScreen extends StatelessWidget {
                                           fontSize: 20,
                                           textColor: mainColor,
                                         ),
-                                        CustomText(
-                                          text: orderDetailsCubit
-                                              .orderDetailsModel
-                                              .orderDetails
-                                              .address
-                                              .region,
-                                          fontSize: 18,
+                                        Container(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.65,
+                                          padding: const EdgeInsets.only(top: 10.0,bottom: 10.0),
+                                          child: CustomText(
+                                            text: orderDetailsCubit
+                                                .orderDetailsModel
+                                                .orderDetails
+                                                .address
+                                                .region,
+                                            fontSize: 18,
+                                          ),
                                         ),
                                       ],
                                     ),
+                                    CustomDotedLine(
+                                      lineThickness: 1.0,
+                                      dashColor: Colors.grey[400]!,
+                                    ),
+                                    const SizedBox(height: 10.0),
                                     Row(
                                       children: [
                                         const CustomText(
@@ -139,13 +167,19 @@ class OrderDetailsScreen extends StatelessWidget {
                                           fontSize: 20,
                                           textColor: mainColor,
                                         ),
-                                        CustomText(
-                                          text: orderDetailsCubit
-                                              .orderDetailsModel
-                                              .orderDetails
-                                              .address
-                                              .details,
-                                          fontSize: 18,
+                                        SizedBox(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.5,
+                                          child: CustomText(
+                                            text: orderDetailsCubit
+                                                .orderDetailsModel
+                                                .orderDetails
+                                                .address
+                                                .details,
+                                            fontSize: 18,
+                                          ),
                                         ),
                                       ],
                                     ),

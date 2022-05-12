@@ -12,6 +12,9 @@ class CacheHelper {
 
   //get all data from SharedPreferences
   static dynamic getData({required String key}) => pref.get(key);
+  static String getUserToken(){
+    return pref.getString('token')?? '';
+  }
 
   //set and save data  object SharedPreferences (pref)
   static Future<bool> saveData({

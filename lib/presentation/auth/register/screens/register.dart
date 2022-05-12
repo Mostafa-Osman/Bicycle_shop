@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/presentation/auth/register/cubit/register_cubit.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
-import 'package:udemy_flutter/shared/components/component.dart';
+import 'package:udemy_flutter/shared/components/tosast.dart';
 import 'package:udemy_flutter/shared/components/custom_button.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/components/custom_text_form_field.dart';
@@ -198,7 +198,7 @@ class RegisterScreen extends StatelessWidget {
                           CustomTextFormField(
                             textHint: ' Rewrite password',
                             controller: registerConfirmPasswordControl,
-                            textInputAction: TextInputAction.next,
+                            textInputAction: TextInputAction.done,
                             obscureText: cubit.confirmNotVisible,
                             backgroundColor: const Color(0xfff2f2f2),
                             roundedRectangleBorder: 10.0,

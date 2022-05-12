@@ -27,18 +27,21 @@ class CardItem extends StatelessWidget {
             height: 1.7,
           ),
           const Spacer(),
-          FlutterToggleTab(
-              width: 25,
-              height: 30,
-              selectedBackgroundColors: const [mainColor],
-              borderRadius: 10,
-              selectedTextStyle: const TextStyle(
-                  color: white, fontSize: 14, fontWeight: FontWeight.w300,),
-              unSelectedTextStyle: const TextStyle(
-                  color: black, fontSize: 14, fontWeight: FontWeight.w300,),
-              labels: labels,
-              selectedIndex: selectedIndex,
-              selectedLabelIndex: selectedLabelIndex,),
+          Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: FlutterToggleTab(
+                width: 20,
+                height: 30,
+                selectedBackgroundColors: const [mainColor],
+                borderRadius: 10,
+                selectedTextStyle: const TextStyle(
+                    color: white, fontSize: 14, fontWeight: FontWeight.w300,),
+                unSelectedTextStyle: const TextStyle(
+                    color: black, fontSize: 14, fontWeight: FontWeight.w300,),
+                labels: labels,
+                selectedIndex: selectedIndex,
+                selectedLabelIndex: selectedLabelIndex,),
+          ),
         ],
       );
   }

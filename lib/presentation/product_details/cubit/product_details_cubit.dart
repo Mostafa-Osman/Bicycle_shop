@@ -14,6 +14,7 @@ class ProductDetailsCubit extends Cubit<ProductDetailsStates> {
 
   int indicatorIndex = 0;
   int productQuantity = 1;
+  bool isShowBasketIcon=true;
 
 
   ProductDetailsRepository productDetailsRepository;
@@ -36,6 +37,11 @@ class ProductDetailsCubit extends Cubit<ProductDetailsStates> {
 
   void changeSmallPhotoIndex(int index) {
     indicatorIndex = index;
+    emit(RefreshUi());
+  }
+  void changeShowBasketIcon({required bool isShow}) {
+    isShowBasketIcon = isShow;
+    log(isShowBasketIcon.toString());
     emit(RefreshUi());
   }
 

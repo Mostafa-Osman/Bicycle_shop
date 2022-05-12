@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/presentation/address/address_cubit/address_cubit.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
-import 'package:udemy_flutter/shared/components/component.dart';
+import 'package:udemy_flutter/shared/components/tosast.dart';
 import 'package:udemy_flutter/shared/components/custom_button.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/components/dotted_line.dart';
@@ -82,11 +82,20 @@ class MyAddressScreen extends StatelessWidget {
                                 children: [
                                   CustomText(
                                     text:
-                                        '${index + 1} - City : ${addressCubit.addressModel.data[index].city}',
+                                    '${index + 1} - City : ',
                                     fontSize: 18,
-                                    textColor: black,
+                                    textColor: mainColor,
                                   ),
-                                  const Spacer(),
+                                  SizedBox(
+                                    width: MediaQuery.of(context).size.width*0.5,
+                                    child: CustomText(
+                                      text:
+                                          ' ${addressCubit.addressModel.data[index].city}',
+                                      fontSize: 18,
+                                      textColor: black,
+                                    ),
+                                  ),
+
                                   IconButton(
                                     icon: const Icon(
                                       Icons.edit,

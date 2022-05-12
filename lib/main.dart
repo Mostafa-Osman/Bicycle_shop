@@ -42,7 +42,6 @@ import 'package:udemy_flutter/route/router.dart';
 import 'package:udemy_flutter/shared/components/constants.dart';
 import 'package:udemy_flutter/shared/styles/themes.dart';
 
-
 Future<void> main() async {
   // to ensure that all method  in project finish loading then open app
   WidgetsFlutterBinding.ensureInitialized();
@@ -53,26 +52,26 @@ Future<void> main() async {
     DeviceOrientation.portraitDown,
   ]);
   Widget widget;
-  onBoarding = CacheHelper.getData(key: 'onBoarding') ;
-  token = CacheHelper.getData(key: 'token').toString();
+  onBoarding = CacheHelper.getData(key: 'onBoarding');
+
+  token = CacheHelper.getUserToken();
 
   (onBoarding == null)
       ? widget = OnBoardingScreen()
-      : (token == null)
-      ? widget = LoginScreen()
-      :(token != null)? widget = ShopLayoutScreen():widget=const SizedBox();
+      : (token.isEmpty)
+          ? widget = LoginScreen()
+          : widget = ShopLayoutScreen();
 
-  log(token!);
+  log('token:$token');
   BlocOverrides.runZoned(
-        () {
-
-          runApp(
-          MyApp(
-            widget: widget,
-            appRoutes: AppRouter(),
-          ),
-        );
-        },
+    () {
+      runApp(
+        MyApp(
+          widget: widget,
+          appRoutes: AppRouter(),
+        ),
+      );
+    },
     blocObserver: MyBlocObserver(),
   );
 }
@@ -93,57 +92,42 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => SearchCubit(SearchRepository())),
         BlocProvider(
           create: (context) =>
-          BasketCubit(BasketRepository())
-            ..getMyBasketData(),
+              BasketCubit(BasketRepository())..getMyBasketData(),
         ),
-
-        BlocProvider(create: (context) =>
-        ProductDetailsCubit(ProductDetailsRepository())
-         ,),
+        BlocProvider(
+          create: (context) => ProductDetailsCubit(ProductDetailsRepository()),
+        ),
         BlocProvider(create: (context) => LayoutCubit()),
         BlocProvider(
-          create: (context) =>
-          HomeCubit(HomeRepository())
-            ..getHomeData(),
+          create: (context) => HomeCubit(HomeRepository())..getHomeData(),
         ),
         BlocProvider(
           create: (context) =>
-          FavouriteCubit(FavouriteRepository())
-            ..getFavouritesData(),
+              FavouriteCubit(FavouriteRepository())..getFavouritesData(),
         ),
-
-
         BlocProvider(
-          create: (context) =>
-          NotificationCubit(NotificationsRepository())
+          create: (context) => NotificationCubit(NotificationsRepository())
             ..getNotificationsData(),
         ),
         BlocProvider(
-          create: (context) =>
-          ProfileCubit(ProfileRepository())
-            ..getUserData(),
+          create: (context) => ProfileCubit(ProfileRepository())..getUserData(),
         ),
         BlocProvider(create: (context) => PaymentCubit(PaymentRepository())),
         BlocProvider(
-          create: (context) =>
-              UpdateProfileCubit(
-                ProfileRepository(),
-              ),
+          create: (context) => UpdateProfileCubit(
+            ProfileRepository(),
+          ),
         ),
         BlocProvider(
-          create: (context) =>
-          HistoryOrdersCubit(
+          create: (context) => HistoryOrdersCubit(
             OrdersRepository(),
-          )
-            ..getOrders(),
+          )..getOrders(),
         ),
         BlocProvider(
           create: (context) =>
-          AddressCubit(AddressRepository())
-            ..getMyAddressData(),
+              AddressCubit(AddressRepository())..getMyAddressData(),
         ),
         BlocProvider(create: (context) => LogoutCubit(LogoutRepository())),
-
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

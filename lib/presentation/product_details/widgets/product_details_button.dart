@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/presentation/basket/basket_cubit/basket_cubit.dart';
 import 'package:udemy_flutter/presentation/product_details/cubit/product_details_cubit.dart';
 import 'package:udemy_flutter/presentation/product_details/widgets/change_quantity_product.dart';
-import 'package:udemy_flutter/shared/components/component.dart';
 import 'package:udemy_flutter/shared/components/custom_button.dart';
+import 'package:udemy_flutter/shared/components/tosast.dart';
 
 class ProductDetailsButton extends StatelessWidget {
   final int productId;
@@ -43,37 +43,47 @@ class ProductDetailsButton extends StatelessWidget {
       },
       builder: (context, state) {
         return Positioned(
-          bottom: 8.0,
-          right: 8.0,
+          bottom: 0.0,
+          right: 0.0,
           left: 0.0,
           child: Container(
-            padding: const EdgeInsets.all(10.0),
-            child: Row(
-              children: [
-                ChangeQuantityProduct(),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: CustomButton(
-                    text: productDetailsCubit.productDetailsModel.data.inCart
-                        ? 'Update Quantity'
-                        : 'Add to basket',
-                    onPressed: () {
-                      if (!productDetailsCubit
-                          .productDetailsModel.data.inCart) {
-                        basketCubit.addToBasketOrders(
-                          productId: productId,
-                          productQuantity: productDetailsCubit.productQuantity,
-                        );
-                      } else {
-                        basketCubit.updateQuantityCart(
-                          productId,
-                          productDetailsCubit.productQuantity,
-                        );
-                      }
-                    },
+            color: Colors.white,
+            child: Container(
+              padding: const EdgeInsets.only(
+                top: 10.0,
+                left: 10.0,
+                right: 18.0,
+                bottom: 20.0,
+              ),
+              color: const Color(0xFFC4C4C4).withOpacity(0.2),
+              child: Row(
+                children: [
+                  ChangeQuantityProduct(),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: CustomButton(
+                      text: productDetailsCubit.productDetailsModel.data.inCart
+                          ? 'Update Quantity'
+                          : 'Add to basket',
+                      onPressed: () {
+                        if (!productDetailsCubit
+                            .productDetailsModel.data.inCart) {
+                          basketCubit.addToBasketOrders(
+                            productId: productId,
+                            productQuantity:
+                                productDetailsCubit.productQuantity,
+                          );
+                        } else {
+                          basketCubit.updateQuantityCart(
+                            productId,
+                            productDetailsCubit.productQuantity,
+                          );
+                        }
+                      },
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         );

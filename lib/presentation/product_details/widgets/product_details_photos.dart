@@ -48,15 +48,18 @@ class ProductDetailsPhotos extends StatelessWidget {
                   },
                 ),
               ),
-              const SizedBox(height: 20.0),
-              SizedBox(
-                height: 50.0,
+              Container(
+                height: 55.0,
+                padding:
+                    const EdgeInsets.only(top: 20.0, right: 5.0, left: 5.0),
                 child: ListView.separated(
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (_, index) => (index ==
                           productDetailsCubit.indicatorIndex)
                       ? Container(
+                          width: 50.0,
+                          padding: const EdgeInsets.all(2.0),
                           decoration: BoxDecoration(
                             borderRadius:
                                 const BorderRadius.all(Radius.circular(5.0)),
@@ -66,7 +69,7 @@ class ProductDetailsPhotos extends StatelessWidget {
                             imageUrl: productDetailsCubit
                                 .productDetailsModel.data.images[index]
                                 .toString(),
-                            fit: BoxFit.cover,
+                            fit: BoxFit.contain,
                             placeholder: (context, url) => Shimmer.fromColors(
                               baseColor: Colors.grey[100]!,
                               highlightColor: Colors.grey[300]!,
@@ -79,22 +82,22 @@ class ProductDetailsPhotos extends StatelessWidget {
                             ),
                           ),
                         )
-                      :  CachedNetworkImage(
-                    imageUrl: productDetailsCubit
-                        .productDetailsModel.data.images[index]
-                        .toString(),
-                    fit: BoxFit.fitWidth,
-                    placeholder: (context, url) => Shimmer.fromColors(
-                      baseColor: Colors.grey[100]!,
-                      highlightColor: Colors.grey[300]!,
-                      child: Image.asset(
-                        'assets/images/logo.png',
-                      ),
-                    ),
-                    errorWidget: (context, url, error) => const Icon(
-                      Icons.error,
-                    ),
-                  ),
+                      : CachedNetworkImage(
+                          imageUrl: productDetailsCubit
+                              .productDetailsModel.data.images[index]
+                              .toString(),
+                          fit: BoxFit.fitWidth,
+                          placeholder: (context, url) => Shimmer.fromColors(
+                            baseColor: Colors.grey[100]!,
+                            highlightColor: Colors.grey[300]!,
+                            child: Image.asset(
+                              'assets/images/logo.png',
+                            ),
+                          ),
+                          errorWidget: (context, url, error) => const Icon(
+                            Icons.error,
+                          ),
+                        ),
                   separatorBuilder: (_, index) => const SizedBox(width: 15),
                   itemCount: productDetailsCubit
                       .productDetailsModel.data.images.length,

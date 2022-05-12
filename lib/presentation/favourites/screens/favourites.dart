@@ -39,7 +39,7 @@ class FavouritesScreen extends StatelessWidget {
               );
             } else {
               return ListView.separated(
-                padding: const EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(10.0).copyWith(bottom: 70.0),
                 itemBuilder: (context, index) => BuildItem(
                   model: favouriteCubit.favouritesModel.data[index].product,
                   itemId: favouriteCubit.favouritesModel.data[index].product.id,

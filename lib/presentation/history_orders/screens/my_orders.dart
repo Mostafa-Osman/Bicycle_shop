@@ -29,21 +29,18 @@ class MyOrdersScreen extends StatelessWidget {
                     );
                   },
                 )
-              : Container(
-                  height: MediaQuery.of(context).size.height,
-                  padding: const EdgeInsets.only(
-                    bottom: 15.0,
-                    right: 10.0,
-                    left: 10.0,
-                  ),
-                  child: ListView.separated(
-                    itemBuilder: (context, index) => BuildOrderCard(
-                      order: myOrdersCubit.orders.data.listDoneOrders[index],
-                    ),
-                    itemCount: myOrdersCubit.orders.data.listDoneOrders.length,
-                    separatorBuilder: (BuildContext context, int index) => const SizedBox(height: 10),
-                  ),
-                );
+              : ListView.separated(
+                padding: const EdgeInsets.only(
+                  bottom: 70.0,
+                  right: 10.0,
+                  left: 10.0,
+                ),
+                itemBuilder: (context, index) => BuildOrderCard(
+                  order: myOrdersCubit.orders.data.listDoneOrders[index],
+                ),
+                itemCount: myOrdersCubit.orders.data.listDoneOrders.length,
+                separatorBuilder: (BuildContext context, int index) => const SizedBox(height: 10),
+              );
         }
       },
     );

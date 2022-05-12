@@ -27,8 +27,12 @@ class BasketItem extends StatelessWidget {
       child: InkWell(
         onTap: () {
           BlocProvider.of<ProductDetailsCubit>(context)
+              .changeSmallPhotoIndex(0);
+          BlocProvider.of<ProductDetailsCubit>(context)
               .getProductDetailsData(productId: data.product.id);
           navigateTo(context, RouteConstant.productDetailsRoute);
+          BlocProvider.of<ProductDetailsCubit>(context)
+              .changeShowBasketIcon(isShow: false);
         },
         child: CustomCard(
           height: 140,
@@ -40,12 +44,13 @@ class BasketItem extends StatelessWidget {
                 alignment: AlignmentDirectional.bottomStart,
                 children: [
                   CachedNetworkImage(
-                    height: 80.0,  width: 80.0,
-                    imageUrl:data.product.image,
+                    height: 80.0,
+                    width: 80.0,
+                    imageUrl: data.product.image,
                     placeholder: (context, url) => Container(
-                      height: 80.0,  width: 80.0,
+                      height: 80.0,
+                      width: 80.0,
                       color: Colors.white,
-
                       child: Shimmer.fromColors(
                         baseColor: Colors.grey[100]!,
                         highlightColor: Colors.grey[300]!,
