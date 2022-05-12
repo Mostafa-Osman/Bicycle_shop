@@ -5,9 +5,9 @@ Bicycle Shop_app
 <img src="screen_shots/1-splach_screen.jpeg" width="300" />
 </p>
 <p align="center">
-  <img src="screen_shots/2-onBoarding_screen.jpeg" width="300" />
-  <img src="screen_shots/3-onBoarding_screen.jpeg" width="300" /> 
-  <img src="screen_shots/4-onBoarding_screen.jpeg" width="300" />
+  <img src="screen_shots/2-onBoarding_screen.jpeg" width="200" />
+  <img src="screen_shots/3-onBoarding_screen.jpeg" width="200" /> 
+  <img src="screen_shots/4-onBoarding_screen.jpeg" width="200" />
 </p>
 
 <p align="center">
