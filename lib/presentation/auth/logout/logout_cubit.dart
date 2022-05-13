@@ -2,9 +2,8 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:udemy_flutter/data/data_sources/local/cache_helper.dart';
+import 'package:udemy_flutter/data/data_sources/local/pref/user_pref.dart';
 import 'package:udemy_flutter/data/repository/user_repo/logout.dart';
-import 'package:udemy_flutter/shared/components/constants.dart';
 
 part 'logout_state.dart';
 
@@ -26,8 +25,9 @@ class LogoutCubit extends Cubit<LogOutState> {
   }
 
   void signOut() {
-    CacheHelper.removeData(key: 'token');
-    token = '';
+    // CacheHelper.removeData(key: 'token');
+     UserPrefs().deleteUserToken();
+    // userToken = 'token';
     emit(LogoutRefreshUi());
   }
 }

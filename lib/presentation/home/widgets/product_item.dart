@@ -24,12 +24,14 @@ class ProductItem extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
         onTap: () {
-          BlocProvider.of<ProductDetailsCubit>(context).changeSmallPhotoIndex(0);
+          BlocProvider.of<ProductDetailsCubit>(context)
+              .changeSmallPhotoIndex(0);
           BlocProvider.of<ProductDetailsCubit>(context)
               .getProductDetailsData(productId: data.id);
-          navigateTo(
+          navigateWithArgument(
             context,
             RouteConstant.productDetailsRoute,
+            data.id,
           );
         },
         child: Container(

@@ -20,7 +20,7 @@ class ShowDetailsPrice extends StatelessWidget {
     final paymentCubit = BlocProvider.of<PaymentCubit>(context);
 
     return CustomAlertDialog(
-      height: MediaQuery.of(context).size.height * 0.27,
+      height: MediaQuery.of(context).size.height * 0.28,
       widget: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(

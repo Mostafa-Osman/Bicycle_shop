@@ -18,18 +18,18 @@ class CardItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          CustomText(
-            text: title,
-            fontSize: 14,
-            height: 1.7,
-          ),
-          const Spacer(),
-          Padding(
-            padding: const EdgeInsets.only(right: 8.0),
-            child: FlutterToggleTab(
+    return  Padding(
+      padding: const EdgeInsets.only(right: 10.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            CustomText(
+              text: title,
+              fontSize: 14,
+              height: 1.7,
+            ),
+            const Spacer(),
+            FlutterToggleTab(
                 width: 20,
                 height: 30,
                 selectedBackgroundColors: const [mainColor],
@@ -41,8 +41,8 @@ class CardItem extends StatelessWidget {
                 labels: labels,
                 selectedIndex: selectedIndex,
                 selectedLabelIndex: selectedLabelIndex,),
-          ),
-        ],
-      );
+          ],
+        ),
+    );
   }
 }

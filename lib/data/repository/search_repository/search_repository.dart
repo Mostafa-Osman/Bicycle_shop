@@ -8,7 +8,7 @@ class SearchRepository {
     final response = await DioHelper.postData(
       url: searchUrl,
       data: {'text': text},
-      token: token,
+      token: userToken,
     );
     final data = response.data as Map<String, dynamic>;
 

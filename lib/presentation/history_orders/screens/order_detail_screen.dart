@@ -4,14 +4,19 @@ import 'package:udemy_flutter/presentation/history_orders/history_orders_cubit/h
 import 'package:udemy_flutter/presentation/history_orders/widgets/cancel_order.dart';
 import 'package:udemy_flutter/presentation/history_orders/widgets/details_order.dart';
 import 'package:udemy_flutter/presentation/history_orders/widgets/products_order_details.dart';
-import 'package:udemy_flutter/shared/components/tosast.dart';
 import 'package:udemy_flutter/shared/components/custom_card.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/components/dotted_line.dart';
 import 'package:udemy_flutter/shared/components/loading.dart';
+import 'package:udemy_flutter/shared/components/network_disconnected.dart';
+import 'package:udemy_flutter/shared/components/toast.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 
 class OrderDetailsScreen extends StatelessWidget {
+  final int orderId;
+
+  const OrderDetailsScreen({Key? key, required this.orderId}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +56,12 @@ class OrderDetailsScreen extends StatelessWidget {
               child: CustomLoading(),
             );
           } else if (state is OrderDetailsError) {
-            return const Center(child: Text('Error'));
+            return NetworkDisconnected(
+              onPress: () {
+                BlocProvider.of<HistoryOrdersCubit>(context)
+                    .getOrderDetails(orderId);
+              },
+            );
           } else {
             return Padding(
               padding: const EdgeInsets.only(
@@ -101,7 +111,8 @@ class OrderDetailsScreen extends StatelessWidget {
                                 Column(
                                   children: [
                                     const CustomDotedLine(
-                                        dashColor: lightMainColor,),
+                                      dashColor: lightMainColor,
+                                    ),
                                     const SizedBox(height: 10.0),
                                     Row(
                                       children: [
@@ -143,7 +154,10 @@ class OrderDetailsScreen extends StatelessWidget {
                                                   .size
                                                   .width *
                                               0.65,
-                                          padding: const EdgeInsets.only(top: 10.0,bottom: 10.0),
+                                          padding: const EdgeInsets.only(
+                                            top: 10.0,
+                                            bottom: 10.0,
+                                          ),
                                           child: CustomText(
                                             text: orderDetailsCubit
                                                 .orderDetailsModel

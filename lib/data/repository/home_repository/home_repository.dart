@@ -8,7 +8,7 @@ class HomeRepository {
   // get Home
   Future<HomeModel> getHomeData() async {
     final response =
-        await DioHelper.getData(url: productsUrl, token: token);
+        await DioHelper.getData(url: productsUrl, token: userToken);
     final data = response.data as Map<String, dynamic>;
 
     if (data['status'] == true) {
@@ -18,7 +18,7 @@ class HomeRepository {
   }
 
   Future<BannerModel> getBannerData() async {
-    final response = await DioHelper.getData(url: bannerUrl, token: token);
+    final response = await DioHelper.getData(url: bannerUrl, token: userToken);
     final data = response.data as Map<String, dynamic>;
 
     if (data['status'] == true) {

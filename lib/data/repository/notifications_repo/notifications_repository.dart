@@ -6,7 +6,7 @@ import 'package:udemy_flutter/shared/components/constants.dart';
 class NotificationsRepository {
   Future<NotificationsModel> getNotificationsData() async {
     final response =
-    await DioHelper.getData(url: notificationsUrl, token: token);
+    await DioHelper.getData(url: notificationsUrl, token: userToken);
     final data = response.data as Map<String, dynamic>;
 
     if (data['status'] == true) {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:udemy_flutter/data/data_sources/local/pref/user_pref.dart';
 import 'package:udemy_flutter/data/repository/address_repo/address_repo.dart';
 import 'package:udemy_flutter/data/repository/basket_repo/basket_repo.dart';
 import 'package:udemy_flutter/data/repository/favourite_repo/favourite_repo.dart';
@@ -37,6 +38,8 @@ import 'package:udemy_flutter/presentation/update_profile/screens/update_profile
 import 'package:udemy_flutter/route/route_constants.dart';
 
 class AppRouter {
+  late UserPrefs userPrefs;
+
   late HomeRepository homeRepository;
   late NotificationsRepository notificationsRepository;
   late AddressRepository addressRepository;
@@ -52,19 +55,21 @@ class AppRouter {
   late LogoutRepository logoutRepository;
 
   void initAppSettings() {
+    userPrefs = UserPrefs();
+
     homeRepository = HomeRepository();
     notificationsRepository = NotificationsRepository();
-    addressRepository = AddressRepository();
-    basketRepository = BasketRepository();
-    favouriteRepository = FavouriteRepository();
+    addressRepository = AddressRepository(userPrefs);
+    basketRepository = BasketRepository(userPrefs);
+    favouriteRepository = FavouriteRepository(userPrefs);
     loginRepo = LoginRepository();
-    ordersRepo = OrdersRepository();
-    profileRepository = ProfileRepository();
+    ordersRepo = OrdersRepository(userPrefs);
+    profileRepository = ProfileRepository(userPrefs);
     registerRepository = RegisterRepository();
     searchRepository = SearchRepository();
-    paymentRepository = PaymentRepository();
+    paymentRepository = PaymentRepository(userPrefs);
     productDetailsRepository = ProductDetailsRepository();
-    logoutRepository = LogoutRepository();
+    logoutRepository = LogoutRepository(userPrefs);
   }
 
   Route? generateRoute(RouteSettings settings) {
@@ -115,14 +120,19 @@ class AppRouter {
         return MaterialPageRoute(
           settings: settings,
           builder: (_) {
-            return ProductDetailsScreen();
+            return ProductDetailsScreen(productId: settings.arguments! as int,);
           },
         );
       case RouteConstant.shopLayoutRoute:
-        return MaterialPageRoute(
-          builder: (_) => ShopLayoutScreen(),
-        );
-
+          if (userPrefs.isUserLoggedIn()) {
+          return   MaterialPageRoute(
+            builder: (_) => ShopLayoutScreen(),
+          );
+        } else {
+          return MaterialPageRoute(
+            builder: (_) => LoginScreen(),
+          );
+        }
       case RouteConstant.paymentRoute:
         return MaterialPageRoute(
           builder: (_) => PaymentScreen(),
@@ -135,7 +145,8 @@ class AppRouter {
         // final int arguments = settings.arguments as int;
         // final orderId = arguments;
         return MaterialPageRoute(
-          builder: (_) => OrderDetailsScreen(),
+          settings: settings,
+          builder: (_) => OrderDetailsScreen(orderId: settings.arguments! as int,),
         );
       case RouteConstant.updateProfileRoute:
         return MaterialPageRoute(
@@ -163,14 +174,17 @@ class AppRouter {
           builder: (_) => AddAddressScreen(),
         );
       case RouteConstant.updateAddressRoute:
+
         // final int arguments = settings.arguments as int;
         // final index = arguments;
         return MaterialPageRoute(
+          settings: settings,
           builder: (_) =>
               UpdateAddressScreen(index: settings.arguments! as int),
         );
       default:
         return MaterialPageRoute(
+          settings: settings,
           builder: (_) => Scaffold(
             body: Center(
               child: Text('No route defined for ${settings.name}'),

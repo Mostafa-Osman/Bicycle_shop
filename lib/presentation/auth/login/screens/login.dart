@@ -1,23 +1,20 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:udemy_flutter/data/data_sources/local/cache_helper.dart';
 import 'package:udemy_flutter/presentation/auth/login/login_cubit/login_cubit.dart';
 import 'package:udemy_flutter/presentation/layout/layout_cubit/layout_cubit.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
-import 'package:udemy_flutter/shared/components/tosast.dart';
-import 'package:udemy_flutter/shared/components/constants.dart';
 import 'package:udemy_flutter/shared/components/custom_button.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/components/custom_text_form_field.dart';
 import 'package:udemy_flutter/shared/components/loading.dart';
 import 'package:udemy_flutter/shared/components/navigate.dart';
+import 'package:udemy_flutter/shared/components/toast.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 
+
 class LoginScreen extends StatelessWidget {
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
+
 
   @override
   Widget build(BuildContext context) {
@@ -26,13 +23,14 @@ class LoginScreen extends StatelessWidget {
       listener: (context, state) {
         if (state is LoginSuccessState) {
           if (state.loginModel.status) {
-            CacheHelper.saveData(
-              key: 'token',
-              value: state.loginModel.data.token,
-            ).then((value) {
-              token = state.loginModel.data.token;
-              navigatorAndFinish(context, RouteConstant.shopLayoutRoute);
-            });
+            // CacheHelper.saveData(
+            //   key: 'token',
+            //   value: state.loginModel.data.token,
+            // ).then((value) {
+            //   userToken = state.loginModel.data.token;
+            //   navigatorAndFinish(context, RouteConstant.shopLayoutRoute);
+            // });
+            navigatorAndFinish(context, RouteConstant.shopLayoutRoute);
           }
         } else if (state is LoginErrorState) {
           showToast(state: ToastStates.error, message: state.error);
@@ -68,12 +66,12 @@ class LoginScreen extends StatelessWidget {
                     child: SizedBox(
                       height: MediaQuery.of(context).size.height / 2.3,
                       child: Form(
-                        key: _formKey,
+                        key: loginCubit.formKey,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             CustomTextFormField(
-                              controller: emailController,
+                              controller: loginCubit.emailController,
                               backgroundColor: const Color(0xfff2f2f2),
                               roundedRectangleBorder: 10.0,
                               textInputAction: TextInputAction.next,
@@ -81,8 +79,10 @@ class LoginScreen extends StatelessWidget {
                               validator: (value) {
                                 if (value!.isEmpty) {
                                   return 'Please Enter Your Email';
-                                } else if (!value.contains('@')) {
-                                  return 'Please Enter Valid Email';
+                                } else if (
+                                !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                    .hasMatch(value)) {
+                                  return 'Invalid email';
                                 }
                                 return null;
                               },
@@ -95,7 +95,7 @@ class LoginScreen extends StatelessWidget {
 
                             // TextFieldContainer to take password from user
                             CustomTextFormField(
-                              controller: passwordController,
+                              controller: loginCubit.passwordController,
                               backgroundColor: const Color(0xfff2f2f2),
                               roundedRectangleBorder: 10.0,
                               textInputAction: TextInputAction.done,
@@ -149,11 +149,8 @@ class LoginScreen extends StatelessWidget {
                                   onPressed: () {
                                     BlocProvider.of<LayoutCubit>(context)
                                         .changeCurrentIndex(2);
-                                    if (_formKey.currentState!.validate()) {
-                                      loginCubit.userLogin(
-                                        email: emailController.text,
-                                        password: passwordController.text,
-                                      );
+                                    if (loginCubit.formKey.currentState!.validate()) {
+                                      loginCubit.userLogin();
                                     }
                                   },
                                 ),

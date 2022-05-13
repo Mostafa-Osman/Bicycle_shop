@@ -24,12 +24,18 @@ class ProductsOrderDetails extends StatelessWidget {
           const SizedBox(height: 5.0),
       itemBuilder: (BuildContext context, int index) {
         return InkWell(
-          onTap: () {
-            BlocProvider.of<ProductDetailsCubit>(context).getProductDetailsData(
+          onTap: () async {
+            navigateWithArgument(
+              context,
+              RouteConstant.productDetailsRoute,
+              orderDetailsCubit
+                  .orderDetailsModel.orderDetails.products[index].id,
+            );
+            await BlocProvider.of<ProductDetailsCubit>(context)
+                .getProductDetailsData(
               productId: orderDetailsCubit
                   .orderDetailsModel.orderDetails.products[index].id,
             );
-            navigateTo(context, RouteConstant.productDetailsRoute);
           },
           child: CustomCard(
             paddingTop: 10.0,

@@ -6,7 +6,7 @@ import 'package:udemy_flutter/shared/components/constants.dart';
 class ProductDetailsRepository {
   Future<ProductDetailsModel> getProductDetailsData({required int productId}) async {
     final response =
-    await DioHelper.getData(url: productsDetailsUrl+productId.toString(), token: token);
+    await DioHelper.getData(url: productsDetailsUrl+productId.toString(), token: userToken);
     final data = response.data as Map<String, dynamic>;
 
     if (data['status'] == true) {

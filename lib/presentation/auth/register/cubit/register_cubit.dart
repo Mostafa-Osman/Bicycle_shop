@@ -6,25 +6,25 @@ import 'package:udemy_flutter/data/repository/user_repo/register_repo.dart';
 part 'register_states.dart';
 class RegisterCubit extends Cubit<RegisterStates> {
   RegisterCubit(this.registerRepo) : super(ShopRegisterInitialState());
-
+  final formKey = GlobalKey<FormState>();
+  final registerNameControl = TextEditingController();
+  final registerEmailControl = TextEditingController();
+  final registerPhoneControl = TextEditingController();
+  final registerPasswordControl = TextEditingController();
+  final registerConfirmPasswordControl = TextEditingController();
   late ShopLoginModel register;
 
   static RegisterCubit get(BuildContext context) => BlocProvider.of(context);
   final RegisterRepository registerRepo ;
 
-  Future<void> userRegister({
-    required String name,
-    required String email,
-    required String password,
-    required String phone,
-  }) async {
+  Future<void> userRegister() async {
     emit(ShopRegisterLoadingState());
     try {
       register = await registerRepo.userRegister(
-        name: name,
-        email: email,
-        password: password,
-        phone: phone,
+        name: registerNameControl.text,
+        email: registerEmailControl.text,
+        password: registerPasswordControl.text,
+        phone: registerPhoneControl.text,
       );
       emit(ShopRegisterSuccessState(register));
     } catch (error,s) {

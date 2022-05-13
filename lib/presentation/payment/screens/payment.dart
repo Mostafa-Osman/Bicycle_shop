@@ -9,10 +9,11 @@ import 'package:udemy_flutter/presentation/payment/widgets/bottom_nav.dart';
 import 'package:udemy_flutter/presentation/payment/widgets/discount_and_voucher.dart';
 import 'package:udemy_flutter/presentation/payment/widgets/select_payment__method.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
-import 'package:udemy_flutter/shared/components/tosast.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/components/loading.dart';
 import 'package:udemy_flutter/shared/components/navigate.dart';
+import 'package:udemy_flutter/shared/components/network_disconnected.dart';
+import 'package:udemy_flutter/shared/components/toast.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 
 class PaymentScreen extends StatelessWidget {
@@ -31,54 +32,64 @@ class PaymentScreen extends StatelessWidget {
           icon: const Icon(Icons.arrow_back_ios_sharp, color: mainColor),
         ),
       ),
-      body: BlocConsumer<PaymentCubit, PaymentStates>(
-        listener: (context, state) {
-          if (state is MakeOrderSuccess) {
-            showToast(
-              message: 'order completed successfully',
-              state: ToastStates.success,
-            );
-            BlocProvider.of<HistoryOrdersCubit>(context).getOrders();
-            BlocProvider.of<BasketCubit>(context).getMyBasketData();
-            BlocProvider.of<LayoutCubit>(context).changeCurrentIndex(3);
-            navigatorAndFinish(context, RouteConstant.shopLayoutRoute);
-          }
+      body: RefreshIndicator(
+        onRefresh: () async {
+          await Future.wait(
+              [BlocProvider.of<PaymentCubit>(context)
+              .estimateOrdersData()]);
         },
-        builder: (context, state) {
-          if (state is EstimateOrderError) {
-            return const Text('Error');
-          } else if (BlocProvider.of<PaymentCubit>(context).estimatePrice ==
-                  null
-              //state is EstimateOrderLoading
-              ) {
-            return const Center(child: CustomLoading());
-          } else {
-            return SafeArea(
-              child: Column(
-                children: [
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: Container(
-                        padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-                        child: Column(
-                          children: [
-                            SelectPaymentMethod(),
-                            const SizedBox(height: 10.0),
-                            DiscountAndVoucher(),
-                            const SizedBox(height: 10.0),
-                            AddressPayment(),
-                            const SizedBox(height: 30.0),
-                          ],
+        child: BlocConsumer<PaymentCubit, PaymentStates>(
+          listener: (context, state) {
+            if (state is MakeOrderSuccess) {
+              showToast(
+                message: 'order completed successfully',
+                state: ToastStates.success,
+              );
+              BlocProvider.of<HistoryOrdersCubit>(context).getOrders();
+              BlocProvider.of<BasketCubit>(context).getMyBasketData();
+              BlocProvider.of<LayoutCubit>(context).changeCurrentIndex(3);
+              navigatorAndFinish(context, RouteConstant.shopLayoutRoute);
+            }
+          },
+          builder: (context, state) {
+            if (state is EstimateOrderError) {
+              return NetworkDisconnected(onPress: (){
+                BlocProvider.of<PaymentCubit>(context)
+                    .estimateOrdersData();
+              },);
+            } else if (BlocProvider.of<PaymentCubit>(context).estimatePrice ==
+                    null
+                //state is EstimateOrderLoading
+                ) {
+              return const Center(child: CustomLoading());
+            } else {
+              return SafeArea(
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Container(
+                          padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+                          child: Column(
+                            children: [
+                              SelectPaymentMethod(),
+                              const SizedBox(height: 10.0),
+                              DiscountAndVoucher(),
+                              const SizedBox(height: 10.0),
+                              AddressPayment(),
+                              const SizedBox(height: 30.0),
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  PaymentBottomNavBar()
-                ],
-              ),
-            );
-          }
-        },
+                    PaymentBottomNavBar()
+                  ],
+                ),
+              );
+            }
+          },
+        ),
       ),
     );
   }

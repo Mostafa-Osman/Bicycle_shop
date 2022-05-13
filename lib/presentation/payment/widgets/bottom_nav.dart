@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/presentation/address/address_cubit/address_cubit.dart';
 import 'package:udemy_flutter/presentation/payment/payment_cubit/payment_cubit.dart';
 import 'package:udemy_flutter/presentation/payment/widgets/showd_details_price.dart';
-import 'package:udemy_flutter/shared/components/tosast.dart';
 import 'package:udemy_flutter/shared/components/custom_button.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
+import 'package:udemy_flutter/shared/components/toast.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 
 class PaymentBottomNavBar extends StatelessWidget {

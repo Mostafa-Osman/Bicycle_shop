@@ -81,16 +81,16 @@ class PaymentCubit extends Cubit<PaymentStates> {
     }
   }
 
-  Future<void> promoCode({required String code}) async {
-    emit(PromoCodeLoading());
-    try {
-      promoCodeModel = await PaymentRepository().promoCode(code: code);
-      emit(PromoCodeSuccess());
-    } catch (error, s) {
-      log('promo code data', error: error, stackTrace: s);
-      emit(PromoCodeError(error.toString()));
-    }
-  }
+  // Future<void> promoCode({required String code}) async {
+  //   emit(PromoCodeLoading());
+  //   try {
+  //     promoCodeModel = await PaymentRepository().promoCode(code: code);
+  //     emit(PromoCodeSuccess());
+  //   } catch (error, s) {
+  //     log('promo code data', error: error, stackTrace: s);
+  //     emit(PromoCodeError(error.toString()));
+  //   }
+  // }
 
   void changeAddressIndex(int index) {
     addressIndex = index;

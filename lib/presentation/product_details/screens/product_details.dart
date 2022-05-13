@@ -6,8 +6,13 @@ import 'package:udemy_flutter/presentation/product_details/widgets/product_descr
 import 'package:udemy_flutter/presentation/product_details/widgets/product_details_button.dart';
 import 'package:udemy_flutter/presentation/product_details/widgets/product_details_photos.dart';
 import 'package:udemy_flutter/shared/components/loading.dart';
+import 'package:udemy_flutter/shared/components/network_disconnected.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
+  final int productId;
+
+  const ProductDetailsScreen({required this.productId});
+
   @override
   Widget build(BuildContext context) {
     final productDetailsCubit = BlocProvider.of<ProductDetailsCubit>(context);
@@ -18,8 +23,11 @@ class ProductDetailsScreen extends StatelessWidget {
             if (state is ProductDetailsLoading) {
               return const Center(child: CustomLoading());
             } else if (state is ProductDetailsError) {
-              return const Center(
-                child: Text('Error'),
+              return NetworkDisconnected(
+                onPress: () {
+                  BlocProvider.of<ProductDetailsCubit>(context)
+                      .getProductDetailsData(productId: productId);
+                },
               );
             } else {
               return SizedBox(
@@ -33,6 +41,8 @@ class ProductDetailsScreen extends StatelessWidget {
                       children: [
                         const SizedBox(height: 80.0),
                         ProductDetailsPhotos(),
+                        //todo may be remove it after check apk
+                        const SizedBox(height: 10.0),
                         Expanded(
                           child: ProductDescription(),
                         ),

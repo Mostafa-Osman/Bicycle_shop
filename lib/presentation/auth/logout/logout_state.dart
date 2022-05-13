@@ -1,4 +1,4 @@
-part of 'logout_bloc.dart';
+part of 'logout_cubit.dart';
 
 @immutable
 abstract class LogOutState {}

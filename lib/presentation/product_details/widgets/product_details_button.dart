@@ -4,7 +4,7 @@ import 'package:udemy_flutter/presentation/basket/basket_cubit/basket_cubit.dart
 import 'package:udemy_flutter/presentation/product_details/cubit/product_details_cubit.dart';
 import 'package:udemy_flutter/presentation/product_details/widgets/change_quantity_product.dart';
 import 'package:udemy_flutter/shared/components/custom_button.dart';
-import 'package:udemy_flutter/shared/components/tosast.dart';
+import 'package:udemy_flutter/shared/components/toast.dart';
 
 class ProductDetailsButton extends StatelessWidget {
   final int productId;

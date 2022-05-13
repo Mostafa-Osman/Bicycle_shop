@@ -1,25 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:udemy_flutter/presentation/auth/exceptions/phone_validation.dart';
 import 'package:udemy_flutter/presentation/auth/register/cubit/register_cubit.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
-import 'package:udemy_flutter/shared/components/tosast.dart';
 import 'package:udemy_flutter/shared/components/custom_button.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/components/custom_text_form_field.dart';
 import 'package:udemy_flutter/shared/components/navigate.dart';
+import 'package:udemy_flutter/shared/components/toast.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 
 class RegisterScreen extends StatelessWidget {
-  final _formKey = GlobalKey<FormState>();
-  final registerNameControl = TextEditingController();
-  final registerEmailControl = TextEditingController();
-  final registerPhoneControl = TextEditingController();
-  final registerPasswordControl = TextEditingController();
-  final registerConfirmPasswordControl = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
-    final cubit = RegisterCubit.get(context);
+    final registerCubit = RegisterCubit.get(context);
     return BlocConsumer<RegisterCubit, RegisterStates>(
       listener: (context, state) {
         if (state is ShopRegisterErrorState) {
@@ -48,7 +42,7 @@ class RegisterScreen extends StatelessWidget {
               child: Column(
                 children: [
                   Form(
-                    key: _formKey,
+                    key: registerCubit.formKey,
                     child: Padding(
                       padding: const EdgeInsets.only(right: 10, left: 10),
                       child: Column(
@@ -67,7 +61,7 @@ class RegisterScreen extends StatelessWidget {
                           ),
                           // object of textFieldRegister to make text field (take name of user)
                           CustomTextFormField(
-                            controller: registerNameControl,
+                            controller: registerCubit.registerNameControl,
                             textInputAction: TextInputAction.next,
                             textHint: 'Enter your Name',
                             roundedRectangleBorder: 10.0,
@@ -94,7 +88,7 @@ class RegisterScreen extends StatelessWidget {
                             ),
                           ),
                           CustomTextFormField(
-                            controller: registerPhoneControl,
+                            controller: registerCubit.registerPhoneControl,
                             keyboardType: TextInputType.phone,
                             textInputAction: TextInputAction.next,
                             textHint: 'Enter your Phone Number',
@@ -106,10 +100,14 @@ class RegisterScreen extends StatelessWidget {
                             ),
                             validator: (value) {
                               return value!.isEmpty
-                                ? 'Please enter your phone number'
-                                : (value.length != 11)
-                                    ? 'your number invalid enter valid number'
-                                    : null;
+                                  ? 'Please enter your phone number'
+                                  : (value.length != 11)
+                                      ? 'your number invalid enter valid number'
+                                      : !checkPhoneValidate(
+                                          phoneNumber: value,
+                                        )
+                                          ? 'this is number is not Egyptian number'
+                                          : null;
                             },
                           ),
 
@@ -124,7 +122,7 @@ class RegisterScreen extends StatelessWidget {
                           ),
                           //another text field for email
                           CustomTextFormField(
-                            controller: registerEmailControl,
+                            controller: registerCubit.registerEmailControl,
                             backgroundColor: const Color(0xfff2f2f2),
                             roundedRectangleBorder: 10.0,
                             textInputAction: TextInputAction.next,
@@ -132,9 +130,10 @@ class RegisterScreen extends StatelessWidget {
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return 'Please Enter Your Email';
-                              } else if (!value.contains('@') ||
-                                  !value.contains('.com')) {
-                                return 'Please Enter Valid Email';
+                              } else if (!RegExp(
+                                      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",)
+                                  .hasMatch(value)) {
+                                return 'Invalid email';
                               }
                               return null;
                             },
@@ -158,7 +157,7 @@ class RegisterScreen extends StatelessWidget {
                             backgroundColor: const Color(0xfff2f2f2),
                             roundedRectangleBorder: 10.0,
                             textInputAction: TextInputAction.next,
-                            controller: registerPasswordControl,
+                            controller: registerCubit.registerPasswordControl,
                             validator: (value) => (value!.isEmpty)
                                 ? 'Please Enter Your password'
                                 : (value.length < 6)
@@ -197,9 +196,10 @@ class RegisterScreen extends StatelessWidget {
                           //  Text form field to confirm password
                           CustomTextFormField(
                             textHint: ' Rewrite password',
-                            controller: registerConfirmPasswordControl,
+                            controller:
+                                registerCubit.registerConfirmPasswordControl,
                             textInputAction: TextInputAction.done,
-                            obscureText: cubit.confirmNotVisible,
+                            obscureText: registerCubit.confirmNotVisible,
                             backgroundColor: const Color(0xfff2f2f2),
                             roundedRectangleBorder: 10.0,
                             prefix: const Icon(
@@ -208,14 +208,16 @@ class RegisterScreen extends StatelessWidget {
                             ),
                             suffixIcon: IconButton(
                               onPressed: () =>
-                                  cubit.confirmVisibilityPassword(),
-                              icon: cubit.confirmNotVisible
+                                  registerCubit.confirmVisibilityPassword(),
+                              icon: registerCubit.confirmNotVisible
                                   ? const Icon(Icons.visibility)
                                   : const Icon(Icons.visibility_off),
                             ),
                             validator: (value) => value!.isEmpty
                                 ? 'please confirm password'
-                                : (value != registerPasswordControl.text)
+                                : (value !=
+                                        registerCubit
+                                            .registerPasswordControl.text)
                                     ? 'Password does not match'
                                     : null,
                           ),
@@ -228,13 +230,9 @@ class RegisterScreen extends StatelessWidget {
                             child: CustomButton(
                               text: 'submit',
                               onPressed: () {
-                                if (_formKey.currentState!.validate()) {
-                                  RegisterCubit.get(context).userRegister(
-                                    name: registerNameControl.text,
-                                    email: registerEmailControl.text,
-                                    password: registerPasswordControl.text,
-                                    phone: registerPhoneControl.text,
-                                  );
+                                if (registerCubit.formKey.currentState!
+                                    .validate()) {
+                                  RegisterCubit.get(context).userRegister();
                                 }
                               },
                             ),
@@ -254,7 +252,6 @@ class RegisterScreen extends StatelessWidget {
                                     fontSize: 20,
                                     color: mainColor,
                                     fontFamily: 'RobotoSerif',
-
                                   ),
                                 ),
                                 onPressed: () => navigateTo(

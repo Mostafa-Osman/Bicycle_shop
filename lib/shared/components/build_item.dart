@@ -30,11 +30,16 @@ class BuildItem extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       widget: InkWell(
         onTap: () {
-          BlocProvider.of<ProductDetailsCubit>(context).changeSmallPhotoIndex(0);
+          BlocProvider.of<ProductDetailsCubit>(context)
+              .changeSmallPhotoIndex(0);
 
           BlocProvider.of<ProductDetailsCubit>(context)
               .getProductDetailsData(productId: itemId);
-          navigateTo(context, RouteConstant.productDetailsRoute);
+          navigateWithArgument(
+            context,
+            RouteConstant.productDetailsRoute,
+            itemId,
+          );
         },
         child: Row(
           children: [
@@ -110,7 +115,7 @@ class BuildItem extends StatelessWidget {
                         const Spacer(),
                         CustomFavouriteIcon(
                           productId: model.id,
-                          isFavouriteScreen: isFavouriteScreen ,
+                          isFavouriteScreen: isFavouriteScreen,
                         ),
                       ],
                     ),

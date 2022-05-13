@@ -25,14 +25,18 @@ class BasketItem extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 10.0, right: 10.0, left: 10.0),
       child: InkWell(
-        onTap: () {
+        onTap: () async {
           BlocProvider.of<ProductDetailsCubit>(context)
               .changeSmallPhotoIndex(0);
-          BlocProvider.of<ProductDetailsCubit>(context)
-              .getProductDetailsData(productId: data.product.id);
-          navigateTo(context, RouteConstant.productDetailsRoute);
+          navigateWithArgument(
+            context,
+            RouteConstant.productDetailsRoute,
+            data.product.id,
+          );
           BlocProvider.of<ProductDetailsCubit>(context)
               .changeShowBasketIcon(isShow: false);
+          await BlocProvider.of<ProductDetailsCubit>(context)
+              .getProductDetailsData(productId: data.product.id);
         },
         child: CustomCard(
           height: 140,
