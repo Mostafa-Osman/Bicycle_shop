@@ -15,6 +15,7 @@ class NotificationsAppBar extends StatelessWidget
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
+        automaticallyImplyLeading: false,
         title: const CustomText(
           text: 'Notifications',
           textColor: mainColor,
@@ -35,6 +36,7 @@ class FavouriteAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
+        automaticallyImplyLeading: false,
         title: const CustomText(
           text: 'Favourites',
           textColor: mainColor,
@@ -117,6 +119,8 @@ class OrdersAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
+        automaticallyImplyLeading: false,
+
         title: const CustomText(
           text: 'My Orders',
           textColor: mainColor,
@@ -138,6 +142,8 @@ class AccountAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
+        automaticallyImplyLeading: false,
+
         title: const CustomText(
           text: 'Account',
           fontSize: 20.0,

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:udemy_flutter/presentation/bottom_nav_bar/bottom_nav_bar_cubit/bottom_nav_bar_cubit.dart';
 import 'package:udemy_flutter/presentation/history_orders/history_orders_cubit/history_orders_cubit.dart';
 import 'package:udemy_flutter/presentation/history_orders/widgets/build_order_card.dart';
-import 'package:udemy_flutter/presentation/layout/layout_cubit/layout_cubit.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
 import 'package:udemy_flutter/shared/components/empty_screen.dart';
 import 'package:udemy_flutter/shared/components/loading.dart';
@@ -37,7 +37,7 @@ class MyOrdersScreen extends StatelessWidget {
                     height: MediaQuery.of(context).size.height,
                     child: EmptyScreen(
                         onPress: () {
-                          BlocProvider.of<LayoutCubit>(context)
+                          BlocProvider.of<BottomNavBarCubit>(context)
                               .changeCurrentIndex(2);
                           navigatorAndFinish(
                             context,

@@ -20,13 +20,13 @@ import 'package:udemy_flutter/presentation/address/screens/update_address_screen
 import 'package:udemy_flutter/presentation/auth/login/screens/login.dart';
 import 'package:udemy_flutter/presentation/auth/register/screens/register.dart';
 import 'package:udemy_flutter/presentation/basket/screens/basket_screen.dart';
+import 'package:udemy_flutter/presentation/bottom_nav_bar/screens/shop_layout.dart';
 import 'package:udemy_flutter/presentation/contacts/screens/contacts.dart';
 import 'package:udemy_flutter/presentation/favourites/screens/favourites.dart';
 import 'package:udemy_flutter/presentation/history_orders/screens/my_orders.dart';
 import 'package:udemy_flutter/presentation/history_orders/screens/order_detail_screen.dart';
 import 'package:udemy_flutter/presentation/home/screens/home.dart';
 import 'package:udemy_flutter/presentation/language/screens/language.dart';
-import 'package:udemy_flutter/presentation/layout/screens/shop_layout.dart';
 import 'package:udemy_flutter/presentation/notifications/screens/notifications_screen.dart';
 import 'package:udemy_flutter/presentation/on_boarding/screens/on_boarding.dart';
 import 'package:udemy_flutter/presentation/payment/screens/payment.dart';
@@ -39,7 +39,6 @@ import 'package:udemy_flutter/route/route_constants.dart';
 
 class AppRouter {
   late UserPrefs userPrefs;
-
   late HomeRepository homeRepository;
   late NotificationsRepository notificationsRepository;
   late AddressRepository addressRepository;
@@ -120,13 +119,15 @@ class AppRouter {
         return MaterialPageRoute(
           settings: settings,
           builder: (_) {
-            return ProductDetailsScreen(productId: settings.arguments! as int,);
+            return ProductDetailsScreen(
+              productId: settings.arguments! as int,
+            );
           },
         );
       case RouteConstant.shopLayoutRoute:
-          if (userPrefs.isUserLoggedIn()) {
-          return   MaterialPageRoute(
-            builder: (_) => ShopLayoutScreen(),
+        if (userPrefs.isUserLoggedIn()) {
+          return MaterialPageRoute(
+            builder: (_) => BottomNavBarScreen(),
           );
         } else {
           return MaterialPageRoute(
@@ -146,7 +147,9 @@ class AppRouter {
         // final orderId = arguments;
         return MaterialPageRoute(
           settings: settings,
-          builder: (_) => OrderDetailsScreen(orderId: settings.arguments! as int,),
+          builder: (_) => OrderDetailsScreen(
+            orderId: settings.arguments! as int,
+          ),
         );
       case RouteConstant.updateProfileRoute:
         return MaterialPageRoute(
@@ -174,7 +177,6 @@ class AppRouter {
           builder: (_) => AddAddressScreen(),
         );
       case RouteConstant.updateAddressRoute:
-
         // final int arguments = settings.arguments as int;
         // final index = arguments;
         return MaterialPageRoute(

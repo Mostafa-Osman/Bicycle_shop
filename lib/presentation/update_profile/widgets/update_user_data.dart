@@ -2,22 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/presentation/profile/cubit/profile_cubit.dart';
 import 'package:udemy_flutter/presentation/update_profile/edit_profile_cubit/update_profile_cubit.dart';
-import 'package:udemy_flutter/shared/components/constants.dart';
-import 'package:udemy_flutter/shared/components/custom_button.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
 import 'package:udemy_flutter/shared/components/custom_text_form_field.dart';
 import 'package:udemy_flutter/shared/components/toast.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 
 class UpdateUserData extends StatelessWidget {
-  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     final updateProfileCubit = BlocProvider.of<UpdateProfileCubit>(context);
-    final nameController = TextEditingController(text: userData.data.name);
-    final emailController = TextEditingController(text: userData.data.email);
-    final phoneController = TextEditingController(text: userData.data.phone);
     return BlocConsumer<UpdateProfileCubit, UpdateProfileState>(
       listener: (context, state) {
         if (state is UpdateProfileError) {
@@ -37,7 +31,7 @@ class UpdateUserData extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 30.0, bottom: 50.0),
               child: Form(
-                key: _formKey,
+                key: updateProfileCubit.formKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -48,7 +42,7 @@ class UpdateUserData extends StatelessWidget {
                     ),
                     const SizedBox(height: 5.0),
                     CustomTextFormField(
-                      controller: nameController,
+                      controller:updateProfileCubit.nameController,
                       roundedRectangleBorder: 10.0,
                       backgroundColor: const Color(0xfff2f2f2),
                       prefix: const Icon(
@@ -67,7 +61,7 @@ class UpdateUserData extends StatelessWidget {
                     ),
                     const SizedBox(height: 5.0),
                     CustomTextFormField(
-                      controller: phoneController,
+                      controller: updateProfileCubit.phoneController,
                       roundedRectangleBorder: 10.0,
                       backgroundColor: const Color(0xfff2f2f2),
                       prefix: const Icon(
@@ -89,7 +83,7 @@ class UpdateUserData extends StatelessWidget {
                     ),
                     const SizedBox(height: 5.0),
                     CustomTextFormField(
-                      controller: emailController,
+                      controller: updateProfileCubit.emailController,
                       roundedRectangleBorder: 10.0,
                       backgroundColor: const Color(0xfff2f2f2),
                       prefix: const Icon(
@@ -106,20 +100,7 @@ class UpdateUserData extends StatelessWidget {
                 ),
               ),
             ),
-            CustomButton(
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  updateProfileCubit.updateUserData(
-                    name: nameController.text,
-                    email: emailController.text,
-                    phone: phoneController.text,
-                    image: updateProfileCubit.imageProfile,
-                  );
-                }
-              },
-              text: 'save change',
-              radiusCircular: 5.0,
-            ),
+
           ],
         );
       },

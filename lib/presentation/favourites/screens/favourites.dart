@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:udemy_flutter/presentation/bottom_nav_bar/bottom_nav_bar_cubit/bottom_nav_bar_cubit.dart';
 import 'package:udemy_flutter/presentation/favourites/favourite_cubit/favourite_cubit.dart';
-import 'package:udemy_flutter/presentation/layout/layout_cubit/layout_cubit.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
 import 'package:udemy_flutter/shared/components/build_item.dart';
 import 'package:udemy_flutter/shared/components/empty_screen.dart';
@@ -16,7 +16,8 @@ class FavouritesScreen extends StatelessWidget {
     return RefreshIndicator(
       onRefresh: () async {
         await Future.wait(
-            [BlocProvider.of<FavouriteCubit>(context).getFavouritesData()],);
+          [BlocProvider.of<FavouriteCubit>(context).getFavouritesData()],
+        );
       },
       child: BlocBuilder<FavouriteCubit, FavouriteStates>(
         builder: (context, state) {
@@ -37,7 +38,7 @@ class FavouritesScreen extends StatelessWidget {
                     height: MediaQuery.of(context).size.height,
                     child: EmptyScreen(
                       onPress: () {
-                        BlocProvider.of<LayoutCubit>(context)
+                        BlocProvider.of<BottomNavBarCubit>(context)
                             .changeCurrentIndex(2);
                         navigatorAndFinish(
                           context,

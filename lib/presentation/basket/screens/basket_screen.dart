@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/presentation/basket/basket_cubit/basket_cubit.dart';
 import 'package:udemy_flutter/presentation/basket/widgets/basket_item.dart';
-import 'package:udemy_flutter/presentation/layout/layout_cubit/layout_cubit.dart';
+import 'package:udemy_flutter/presentation/bottom_nav_bar/bottom_nav_bar_cubit/bottom_nav_bar_cubit.dart';
 import 'package:udemy_flutter/presentation/payment/payment_cubit/payment_cubit.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
 import 'package:udemy_flutter/shared/components/custom_button.dart';
@@ -50,7 +50,7 @@ class BasketScreen extends StatelessWidget {
                   ? SingleChildScrollView(
                     child: EmptyScreen(
                         onPress: () {
-                          BlocProvider.of<LayoutCubit>(context)
+                          BlocProvider.of<BottomNavBarCubit>(context)
                               .changeCurrentIndex(2);
                           navigatorAndFinish(
                             context,

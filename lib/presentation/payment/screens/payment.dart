@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/presentation/basket/basket_cubit/basket_cubit.dart';
+import 'package:udemy_flutter/presentation/bottom_nav_bar/bottom_nav_bar_cubit/bottom_nav_bar_cubit.dart';
 import 'package:udemy_flutter/presentation/history_orders/history_orders_cubit/history_orders_cubit.dart';
-import 'package:udemy_flutter/presentation/layout/layout_cubit/layout_cubit.dart';
 import 'package:udemy_flutter/presentation/payment/payment_cubit/payment_cubit.dart';
 import 'package:udemy_flutter/presentation/payment/widgets/address.dart';
 import 'package:udemy_flutter/presentation/payment/widgets/bottom_nav.dart';
@@ -47,7 +47,7 @@ class PaymentScreen extends StatelessWidget {
               );
               BlocProvider.of<HistoryOrdersCubit>(context).getOrders();
               BlocProvider.of<BasketCubit>(context).getMyBasketData();
-              BlocProvider.of<LayoutCubit>(context).changeCurrentIndex(3);
+              BlocProvider.of<BottomNavBarCubit>(context).changeCurrentIndex(3);
               navigatorAndFinish(context, RouteConstant.shopLayoutRoute);
             }
           },

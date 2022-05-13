@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 
 class NetworkDisconnected extends StatelessWidget {
   final GestureTapCallback onPress;
-  const  NetworkDisconnected({Key? key,required this.onPress}) : super(key: key);
+
+  const NetworkDisconnected({Key? key, required this.onPress})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,16 +17,17 @@ class NetworkDisconnected extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          //todo change text error with photo not network
-          const Text(
-            'Error',
-            style: TextStyle(fontSize: 30, color: red),
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.3,
+            width: MediaQuery.of(context).size.width,
+            child:
+                LottieBuilder.asset('assets/lottie/disconnected_network.json'),
           ),
           const SizedBox(
             height: 20.0,
           ),
           InkWell(
-            onTap:onPress ,
+            onTap: onPress,
             child: Container(
               width: 60,
               height: 60,
@@ -39,8 +43,10 @@ class NetworkDisconnected extends StatelessWidget {
                 ],
                 color: Colors.white30,
               ),
-              child: const Icon(Icons.refresh,color: mainColor,),
-
+              child: const Icon(
+                Icons.refresh,
+                color: mainColor,
+              ),
             ),
           ),
         ],

@@ -13,6 +13,11 @@ part 'update_profile_state.dart';
 class UpdateProfileCubit extends Cubit<UpdateProfileState> {
   UpdateProfileCubit(this.updateProfileRepository)
       : super(UpdateProfileInitial());
+  final formKey = GlobalKey<FormState>();
+
+  final nameController = TextEditingController(text: userData.data.name);
+  final emailController = TextEditingController(text: userData.data.email);
+  final phoneController = TextEditingController(text: userData.data.phone);
 
   final ProfileRepository updateProfileRepository;
 
@@ -60,21 +65,14 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
   }
 
   // update profile
-  Future<void> updateUserData({
-    String? name,
-    String? email,
-    String? phone,
-    String? image,
-    String? password,
-  }) async {
+  Future<void> updateUserData() async {
     emit(UpdateProfileLoading());
     try {
       userData = await updateProfileRepository.updateUserData(
-        name: name,
-        email: email,
-        phone: phone,
-        image: image,
-        password: password,
+        name: nameController.text,
+        email: emailController.text,
+        phone: phoneController.text,
+        image: imageProfile,
       );
       emit(UpdateProfileSuccess(userData));
     } catch (error, s) {

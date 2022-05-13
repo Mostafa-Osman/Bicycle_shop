@@ -46,6 +46,7 @@ dependencies:
   intl: ^0.17.0
   like_button: ^2.0.4
   lint: ^1.0.0
+  lottie: ^1.2.1
   readmore: ^2.1.0
   rflutter_alert: ^2.0.4
   shared_preferences:
@@ -100,6 +101,8 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/lottie/
+
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

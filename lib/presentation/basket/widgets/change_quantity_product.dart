@@ -19,6 +19,7 @@ class ChangeQuantityProduct extends StatelessWidget {
           height: 40.0,
           child: ElevatedButton(
             onPressed: () {
+
               basketCubit.quantityItem(
                 isIncrement: false,
                 index: index,

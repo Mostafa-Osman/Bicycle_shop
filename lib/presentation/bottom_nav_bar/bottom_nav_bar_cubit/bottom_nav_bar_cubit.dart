@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/presentation/account/screens/account_screen.dart';
+import 'package:udemy_flutter/presentation/bottom_nav_bar/screens/app_bar.dart';
 import 'package:udemy_flutter/presentation/favourites/screens/favourites.dart';
 import 'package:udemy_flutter/presentation/history_orders/screens/my_orders.dart';
 import 'package:udemy_flutter/presentation/home/screens/home.dart';
-import 'package:udemy_flutter/presentation/layout/screens/app_bar.dart';
 import 'package:udemy_flutter/presentation/notifications/screens/notifications_screen.dart';
 import 'package:udemy_flutter/shared/styles/color.dart';
 
-part 'layout_states.dart';
-class LayoutCubit extends Cubit<LayoutStates> {
-  LayoutCubit() : super(LayoutInitialState());
+part 'bottom_nav_bar_states.dart';
+class BottomNavBarCubit extends Cubit<BottomNavBarStates> {
+  BottomNavBarCubit() : super(LayoutInitialState());
 
 
   int currentPageIndex = 2;

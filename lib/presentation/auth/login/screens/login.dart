@@ -2,7 +2,7 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter/presentation/auth/login/login_cubit/login_cubit.dart';
-import 'package:udemy_flutter/presentation/layout/layout_cubit/layout_cubit.dart';
+import 'package:udemy_flutter/presentation/bottom_nav_bar/bottom_nav_bar_cubit/bottom_nav_bar_cubit.dart';
 import 'package:udemy_flutter/route/route_constants.dart';
 import 'package:udemy_flutter/shared/components/custom_button.dart';
 import 'package:udemy_flutter/shared/components/custom_text.dart';
@@ -147,7 +147,7 @@ class LoginScreen extends StatelessWidget {
                                 builder: (context) => CustomButton(
                                   text: 'Login',
                                   onPressed: () {
-                                    BlocProvider.of<LayoutCubit>(context)
+                                    BlocProvider.of<BottomNavBarCubit>(context)
                                         .changeCurrentIndex(2);
                                     if (loginCubit.formKey.currentState!.validate()) {
                                       loginCubit.userLogin();

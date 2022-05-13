@@ -20,10 +20,10 @@ import 'package:udemy_flutter/presentation/auth/login/login_cubit/login_cubit.da
 import 'package:udemy_flutter/presentation/auth/logout/logout_cubit.dart';
 import 'package:udemy_flutter/presentation/auth/register/cubit/register_cubit.dart';
 import 'package:udemy_flutter/presentation/basket/basket_cubit/basket_cubit.dart';
+import 'package:udemy_flutter/presentation/bottom_nav_bar/bottom_nav_bar_cubit/bottom_nav_bar_cubit.dart';
 import 'package:udemy_flutter/presentation/favourites/favourite_cubit/favourite_cubit.dart';
 import 'package:udemy_flutter/presentation/history_orders/history_orders_cubit/history_orders_cubit.dart';
 import 'package:udemy_flutter/presentation/home/home_cubit/home_cubit.dart';
-import 'package:udemy_flutter/presentation/layout/layout_cubit/layout_cubit.dart';
 import 'package:udemy_flutter/presentation/notifications/notification_cubit/notification_cubit.dart';
 import 'package:udemy_flutter/presentation/on_boarding/on_boarding_cubit/on_boarding_cubit.dart';
 import 'package:udemy_flutter/presentation/payment/payment_cubit/payment_cubit.dart';
@@ -33,6 +33,7 @@ import 'package:udemy_flutter/presentation/search/cubit/search_cubit.dart';
 import 'package:udemy_flutter/presentation/update_profile/edit_profile_cubit/update_profile_cubit.dart';
 import 'package:udemy_flutter/route/router.dart';
 import 'package:udemy_flutter/shared/styles/themes.dart';
+
 
 class BicycleShopApp extends StatelessWidget {
   final AppRouter appRoutes;
@@ -59,13 +60,13 @@ class BicycleShopApp extends StatelessWidget {
         BlocProvider(
           create: (context) => ProductDetailsCubit(ProductDetailsRepository()),
         ),
-        BlocProvider(create: (context) => LayoutCubit()),
+        BlocProvider(create: (context) => BottomNavBarCubit()),
         BlocProvider(
           create: (context) => HomeCubit(HomeRepository())..getHomeData(),
         ),
         BlocProvider(
-          create: (context) =>
-              FavouriteCubit(FavouriteRepository(UserPrefs()))..getFavouritesData(),
+          create: (context) => FavouriteCubit(FavouriteRepository(UserPrefs()))
+            ..getFavouritesData(),
         ),
         BlocProvider(
           create: (context) => NotificationCubit(NotificationsRepository())
@@ -74,7 +75,9 @@ class BicycleShopApp extends StatelessWidget {
         BlocProvider(
           create: (context) => ProfileCubit(ProfileRepository(UserPrefs())),
         ),
-        BlocProvider(create: (context) => PaymentCubit(PaymentRepository(UserPrefs()))),
+        BlocProvider(
+          create: (context) => PaymentCubit(PaymentRepository(UserPrefs())),
+        ),
         BlocProvider(
           create: (context) => UpdateProfileCubit(
             ProfileRepository(UserPrefs()),
@@ -90,16 +93,22 @@ class BicycleShopApp extends StatelessWidget {
               AddressCubit(AddressRepository(UserPrefs()))..getMyAddressData(),
         ),
         BlocProvider(
-            create: (context) => LogoutCubit(LogoutRepository(UserPrefs())),),
+          create: (context) => LogoutCubit(LogoutRepository(UserPrefs())),
+        ),
       ],
-      child: MaterialApp(
-        title: 'Bicycle Shop',
-        debugShowCheckedModeBanner: false,
-        onGenerateRoute: appRoutes.generateRoute,
-        theme: lightTheme,
-        darkTheme: darkTheme,
-        themeMode: ThemeMode.light,
-        initialRoute: initialRoute,
+      child: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).requestFocus(FocusNode());
+        },
+        child: MaterialApp(
+          title: 'Bicycle Shop',
+          debugShowCheckedModeBanner: false,
+          onGenerateRoute: appRoutes.generateRoute,
+          theme: lightTheme,
+          darkTheme: darkTheme,
+          themeMode: ThemeMode.light,
+          initialRoute: initialRoute,
+        ),
       ),
     );
   }
