@@ -92,9 +92,13 @@ Bicycle Shop_app
   <img src="screen_shots/27-aboutUs_screen.jpeg" width="230" />
   </p>
   
-  <p align="center">
+</p>
+<p align="center">
   <img src="screen_shots/28-contactUS_screen.jpeg" width="230" />
-    </p>
+  ⚫
+  <img src="screen_shots/29-network_disconnected_screen.jpeg" width="230" />
+  
+</p>
 </div>
 
 
