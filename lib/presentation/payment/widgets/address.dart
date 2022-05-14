@@ -119,7 +119,7 @@ class AddressPayment extends StatelessWidget {
                                                 'City : ${addressCubit.addressModel.data[index].city}',
                                             fontSize: 15,
                                             height: 1.4,
-                                            fontWeight: FontWeight.w600,
+                                            fontWeight: FontWeight.w400,
                                             textColor: black,
                                           ),
                                           CustomText(
@@ -127,7 +127,7 @@ class AddressPayment extends StatelessWidget {
                                                 'region : ${addressCubit.addressModel.data[index].region}',
                                             fontSize: 15,
                                             height: 1.4,
-                                            fontWeight: FontWeight.w600,
+                                            fontWeight: FontWeight.w400,
                                             textColor: black,
                                           ),
                                           CustomText(
@@ -135,7 +135,7 @@ class AddressPayment extends StatelessWidget {
                                                 '${addressCubit.addressModel.data[index].details}',
                                             fontSize: 15,
                                             height: 1.4,
-                                            fontWeight: FontWeight.w600,
+                                            fontWeight: FontWeight.w400,
                                             textColor: black,
                                           ),
                                         ],

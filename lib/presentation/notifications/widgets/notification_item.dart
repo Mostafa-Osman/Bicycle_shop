@@ -25,7 +25,7 @@ class NotificationItem extends StatelessWidget {
           CustomText(
             text: model.title,
             fontSize: 15,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w400,
           ),
           const SizedBox(height: 5.0),
           CustomText(

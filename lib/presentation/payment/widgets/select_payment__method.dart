@@ -44,7 +44,7 @@ class SelectPaymentMethod extends StatelessWidget {
                       const CustomText(
                         text: 'Cash',
                         fontSize: 15,
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.w400,
                         textColor: black,
                       ),
                     ],
@@ -76,7 +76,7 @@ class SelectPaymentMethod extends StatelessWidget {
                       const CustomText(
                         text: 'Online',
                         fontSize: 15,
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.w400,
                         textColor: black,
                       ),
                     ],

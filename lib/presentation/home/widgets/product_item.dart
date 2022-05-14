@@ -118,7 +118,7 @@ class ProductItem extends StatelessWidget {
                               text: 'EGP ${data.price}',
                               fontSize: 14,
                               height: 1.3,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w400,
                               textColor: mainColor,
                             ),
                             if (data.discount != 0)

@@ -14,7 +14,6 @@ class RegisterCubit extends Cubit<RegisterStates> {
   final registerConfirmPasswordControl = TextEditingController();
   late ShopLoginModel register;
 
-  static RegisterCubit get(BuildContext context) => BlocProvider.of(context);
   final RegisterRepository registerRepo ;
 
   Future<void> userRegister() async {
