@@ -9,7 +9,7 @@ class LanguageScreen extends StatelessWidget {
       appBar: AppBar(
         elevation: 0.0,
         title: const CustomText(
-          text: 'Language',
+          text: '',//'Language',
           textColor: mainColor,
           fontSize: 20.0,
         ),

@@ -100,7 +100,6 @@ class RegisterForm extends StatelessWidget {
                   controller: registerCubit.registerPasswordControl,
                   backgroundColor: const Color(0xfff2f2f2),
                   roundedRectangleBorder: 10.0,
-                  textInputAction: TextInputAction.next,
                   textHint: "Your password",
                   obscureText: registerCubit.isVisibility,
                   validator: (value) => (value!.isEmpty)

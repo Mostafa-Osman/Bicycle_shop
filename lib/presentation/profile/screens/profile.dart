@@ -125,17 +125,22 @@ class ProfileScreen extends StatelessWidget {
                               ),
                             ),
                             const CustomDotedLine(),
-                            const ListTile(
-                              title: CustomText(
+                            //todo when to make user change password you must change navigate route
+                            ListTile(
+                              onTap: () => navigateTo(
+                                context,
+                                RouteConstant.languageRoute,
+                              ),
+                              title: const CustomText(
                                 text: 'change password',
                                 fontSize: 15,
                                 fontWeight: FontWeight.w400,
                               ),
-                              subtitle: CustomText(
+                              subtitle: const CustomText(
                                 text: 'Tap to reset password',
                                 fontSize: 12,
                               ),
-                              trailing: Icon(
+                              trailing: const Icon(
                                 Icons.arrow_forward_ios_outlined,
                                 color: mainColor,
                                 size: 25.0,
