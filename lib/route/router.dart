@@ -185,9 +185,7 @@ class AppRouter {
               UpdateAddressScreen(index: settings.arguments! as int),
         );
       default:
-        return MaterialPageRoute(
-          builder: (_) => LoginScreen(),
-        );
+        return null;
     }
   }
 }
